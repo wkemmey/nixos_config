@@ -131,7 +131,7 @@ nix-shell -p git vim
 2. Clone this repo & enter it:
 
 ```
-cd && git clone https://gitlab.com/zaney/zaneyos.git
+cd && git clone -b stable-2.3 --single-branch https://gitlab.com/zaney/zaneyos.git
 cd zaneyos
 ```
 
