@@ -8,6 +8,8 @@ has been improved.
 
 *** Most Recent Changes since v2.3 GA release ***
 
+- Fixed syntax error in `animations-dynamic.nix     Thx Brisingr05
+- Removed unneeded `home.mgr.enable` in `user.nix`  Thx Brisingr05
 - Updated FAQ.md with Hyprland Keybinds and how to change waybar 
 - Updated README with Hyprland keybinds 
 - Updated install script to pull from the most current release not the main branch
