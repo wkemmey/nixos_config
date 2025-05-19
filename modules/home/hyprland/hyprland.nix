@@ -79,7 +79,7 @@ in {
         workspace_swipe = 1;
         workspace_swipe_fingers = 3;
         workspace_swipe_distance = 500;
-        workspace_swipe_invert = 1;
+        workspace_swipe_invert= 1;
         workspace_swipe_min_speed_to_force = 30;
         workspace_swipe_cancel_ratio = 0.5;
         workspace_swipe_create_new = 1;
@@ -104,11 +104,15 @@ in {
         key_press_enables_dpms = false;
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
+        # Set threshold for ANR dialog
+        enable_anr_dialog = true; 
+        anr_missed_pings = 20;
       };
 
       dwindle = {
         pseudotile = true;
         preserve_split = true;
+        force_split = 2;
       };
 
       decoration = {
@@ -128,6 +132,11 @@ in {
         };
       };
 
+      environment = {
+        no_donation_nag = true;
+        no_update_news = false;
+      };
+      
       cursor = {
         sync_gsettings_theme = true;
         no_hardware_cursors = 2; # change to 1 if want to disable
