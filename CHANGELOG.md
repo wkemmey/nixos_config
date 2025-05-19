@@ -1,30 +1,73 @@
 ## 🗒️ Changelog
 
-
 **ZaneyOS v2.3**
 
-With this release there are improvements to Neovim and the entire file structure
-has been improved.
+- Restored diagnotic features inline as errors are detected
+- When you save a file the LSP will show hints if applicable
+- Updated `nvf.nix`to use a clipboard provider as "useSystemClipobard" is no
+  longer supported
+- Pinned `nixpkgs` and `homemanager` to 25.05 in `flake.nix`
+- Updated `flake.lock`to match changes
+- Hyprland updated to v0.49
+- Added `hyprlock.enable=true;` in system packages. This resolves issue with PAM
+  auth errors.
 
-*** Most Recent Changes since v2.3 GA release ***
+- Fixed syntax error in `animations-dynamic.nix Thx Brisingr05
 
-- Fixed syntax error in `animations-dynamic.nix     Thx Brisingr05
-- Removed unneeded `home.mgr.enable` in `user.nix`  Thx Brisingr05
-- Updated FAQ.md with Hyprland Keybinds and how to change waybar 
-- Updated README with Hyprland keybinds 
-- Updated install script to pull from the most current release not the main branch
-- Added `hm-find` script to find redundant backup files preventing rebuilds
+- Removed unneeded `home.mgr.enable` in `user.nix` Thx Brisingr05
 
-*** Changes Made at Release of v2.3 ***
+- **Updated** `zaneyos/modules/home/nvf.nix`
+- **A recent NeoVIM update:** disables `vim.lspines` (Part of LSP diagnostics)
+- **Because of that we enabled** `vim.diagnostics`
+- **As a result**, you have to toggle on diagnostic messages
+  - `leader dt` to toggle on/off
+  - **Keybindings for diagnostics:**
 
+```toml
+{
+          key = "<leader>dj";
+          mode = ["n"];
+          action = "<cmd>Lspsaga diagnostic_jump_next<CR>";
+          desc = "Go to next diagnostic";
+        }
+        {
+          key = "<leader>dk";
+          mode = ["n"];
+          action = "<cmd>Lspsaga diagnostic_jump_prev<CR>";
+          desc = "Go to previous diagnostic";
+        }
+        {
+          key = "<leader>dl";
+          mode = ["n"];
+          action = "<cmd>Lspsaga show_line_diagnostics<CR>";
+          desc = "Show diagnostic details";
+        }
+        {
+          key = "<leader>dt";
+          mode = ["n"];
+          action = "<cmd>Trouble diagnostics toggle<cr>";
+          desc = "Toggle diagnostics list";
+        }
+```
+
+- Updated FAQ.md with Hyprland Keybinds and how to change waybar.
+- Updated README with Hyprland keybinds.
+- Updated install script to pull from the most current release not the main
+  branch.
+- Added `hm-find` to find old backup files preventing rebuilds/updates from
+  completing.
+- Added how to fix yazi startup error to `FAQ.md`.
+- Fixed formatting in `FAQ.md` causing yazi info from being hidden.
+- With this release there are improvements to Neovim
+- The entire file structure has been improved.
 - Switched from nixvim to nvf for neovim configuration.
 - Improved bat config and includes extras now.
 - Added profiles for what kind of system you have based of GPU / VM.
 - Reduced the host specific files and made the entire flake more modular.
 - Fixed git getting set to wrong user settings.
 - Fixed hyprlock conflicting with stylix.
-- Setup `nh` in a better fashion.
-- Added support for qmk out of the box. 
+- Setup`nh` in a better fashion.
+- Added support for qmk out of the box.
 - Added usbutils for lsusb functionality.
 - Massive improvement to Hyprland window rules.
 - Removed broken support for Apple Silicon (this may return).
@@ -46,41 +89,10 @@ has been improved.
 - Made Thunar an optional thing, enabled by default. _But for me Yazi is
   enough._
 
-
-### Previous Versions Changelog ###
-
-**ZaneyOS v2.0**
-
-With this new update of ZaneyOS it is a big rewrite of how things are being
-done. This update fixes many issues that you guys were facing. As well as makes
-things a little easier to understand. You now have a lot being stored inside the
-specific host directory, making use of modules, condensing seperate files down,
-etc. My hope is that with this update your ability to grasp the flake and expand
-it to what you need is much improved. I want to thank everyone for being so
-supportive!
-
-- Most configuration put into specific hosts directories for the best
-  portability.
-- Using modules to condense configuration complexity.
-- Simplified options and the complexity around understanding their
-  implementation.
-- Rewrote the documentation for improved readability.
-
-**ZaneyOS v2.1**
-
-Simple bug fixes.
-
-- Fixed Waybar icons to make them look a bit better.
-- Centered the Wofi window always.
-- Should have fixed some Steam issues, but I have had some crashes due to Steam
-  so be aware of that.
-- The flake got an update, so all the packages are fresh.
-
 **ZaneyOS v2.2**
 
-This release has a big theming change as well as including the move back to
-rofi. It is a massive improvement in many ways.
-
+- This release has a big theming change
+- Move back to rofi. It is a massive improvement in many ways.
 - Revert the switch from rofi to wofi. Rofi is just better.
 - Switch from Nix Colors to Stylix. It can build colorschemes from a wallpaper.
 - Simplified the notification center.
@@ -104,4 +116,29 @@ rofi. It is a massive improvement in many ways.
 - Switching to Brave as the default to protect user privacy.
 - Replaced lsd with eza for a better looking experience.
 
+**ZaneyOS v2.1**
 
+Simple bug fixes.
+
+- Fixed Waybar icons to make them look a bit better.
+- Centered the Wofi window always.
+- Should have fixed some Steam issues, but I have had some crashes due to Steam
+  so be aware of that.
+- The flake got an update, so all the packages are fresh.
+
+**ZaneyOS v2.0**
+
+With this new update of ZaneyOS it is a big rewrite of how things are being
+done. This update fixes many issues that you guys were facing. As well as makes
+things a little easier to understand. You now have a lot being stored inside the
+specific host directory, making use of modules, condensing seperate files down,
+etc. My hope is that with this update your ability to grasp the flake and expand
+it to what you need is much improved. I want to thank everyone for being so
+supportive!
+
+- Most configuration put into specific hosts directories for the best
+  portability.
+- Using modules to condense configuration complexity.
+- Simplified options and the complexity around understanding their
+  implementation.
+- Rewrote the documentation for improved readability.
