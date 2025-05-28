@@ -2,7 +2,9 @@
 
 **ZaneyOS v2.3**
 
-- Disabled donation messages 
+- Merge PR from Daniel to fix Yazi plugin build errors. Thank you @daniel
+- `language.enableLSP` is now `vim.settings.lsp.enable` in `nvf.nix`
+- Disabled donation messages
 - Set Application Not Responding (ANR) dialog threshold to 20 (def 1)
 - Restored diagnotic features inline as errors are detected
 - When you save a file the LSP will show hints if applicable
