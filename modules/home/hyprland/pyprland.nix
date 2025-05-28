@@ -11,7 +11,7 @@
     animation = "fromTop"
     command = "kitty --class kitty-dropterm"
     class = "kitty-dropterm"
-    size = "75% 60%"
+    size = "70% 70%"
     max_size = "1920px 100%"
   '';
 }
