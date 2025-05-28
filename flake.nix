@@ -13,7 +13,7 @@
 
   outputs = {nixpkgs, ...} @ inputs: let
     system = "x86_64-linux";
-    host = "zaneyos-oem";
+    host = "zaneyos-23-vm";
     profile = "vm";
     username = "dwilliams";
   in {
