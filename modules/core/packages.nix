@@ -1,14 +1,10 @@
-{
-  pkgs,
-  inputs,
-  ...
-}: {
+{pkgs, ...}: {
   programs = {
     firefox.enable = false; # Firefox is not installed by default
     dconf.enable = true;
     seahorse.enable = true;
-    hyprland.enable = true;  #create desktop file and depedencies if you switch to GUI login MGR
-    hyprlock.enable = true;  #resolve pam issue https://gitlab.com/Zaney/zaneyos/-/issues/164
+    hyprland.enable = true; #create desktop file and depedencies if you switch to GUI login MGR
+    hyprlock.enable = true; #resolve pam issue https://gitlab.com/Zaney/zaneyos/-/issues/164
     fuse.userAllowOther = true;
     mtr.enable = true;
     adb.enable = true;
@@ -38,7 +34,7 @@
     gedit # Simple Graphical Text Editor
     gimp # Great Photo Editor
     glxinfo # Needed for inxi -G GPU info
-    gpijng #graphical ping 
+    gping #graphical ping
     greetd.tuigreet # The Login Manager (Sometimes Referred To As Display Manager)
     htop # Simple Terminal Based System Monitor
     hyprpicker # Color Picker
@@ -61,7 +57,7 @@
     rhythmbox
     ripgrep # Improved Grep
     socat # Needed For Screenshots
-    sox  # audio support for FFMPEG
+    sox # audio support for FFMPEG
     unrar # Tool For Handling .rar Files
     unzip # Tool For Handling .zip Files
     usbutils # Good Tools For USB Devices
