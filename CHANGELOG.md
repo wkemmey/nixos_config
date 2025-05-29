@@ -2,6 +2,7 @@
 
 **ZaneyOS v2.3**
 
+- Restored relartive line numbering as default
 - Removed old dev files
 - Stylix was set to unstable - set to 25.05 to stop warning
 - hyprland ENV variables set in two files, created `env.nix`
