@@ -5,8 +5,7 @@
 ** Updated: May 29th, 2025 **
 
 - Added Jerry's waybar `Jerry-waybar.nix`
-- Added option to enable blur on waybar on `hyprland.nix` Thanks to
-  SchotjeChrisman
+- Added option to enable blur on waybar in hyprland.nix Thx SchotjeChrisman
 - Added new Window animation option `animation-moving`from ML4W repo
 - Restored relative line numbering to nvim `lineNumberMode = "relNumber";`
 - Removed extraneous LUA code for diags w/debug messages from `nvf.nix`
