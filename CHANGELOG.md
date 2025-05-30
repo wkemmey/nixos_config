@@ -4,7 +4,9 @@
 
 ** Updated: May 29th, 2025 **
 
-- Added new animation option `animations-moving` from ML4W
+- Added option to enable blur on waybar on `hyprland.nix` Thanks to
+  SchotjeChrisman
+- Added new Window animation option `animation-moving`from ML4W repo
 - Restored relative line numbering to nvim `lineNumberMode = "relNumber";`
 - Removed extraneous LUA code for diags w/debug messages from `nvf.nix`
 - Fixed regression in `windowrules.nix`

@@ -19,7 +19,7 @@ in {
     swappy
     ydotool
     hyprpolkitagent
-    hyprland-qtutils  # Needed for banners and ANR messages
+    hyprland-qtutils # needed for banners and ANR messages
   ];
   systemd.user.targets.hyprland-session.Unit.Wants = [
     "xdg-desktop-autostart.target"
@@ -46,6 +46,8 @@ in {
     };
     settings = {
       exec-once = [
+        "wl-paste --type text --watch cliphist store # Stores only text data"
+        "wl-paste --type image --watch cliphist store # Stores only image data"
         "dbus-update-activation-environment --all --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"
         "systemctl --user start hyprpolkitagent"
@@ -79,7 +81,7 @@ in {
         workspace_swipe = 1;
         workspace_swipe_fingers = 3;
         workspace_swipe_distance = 500;
-        workspace_swipe_invert= 1;
+        workspace_swipe_invert = 1;
         workspace_swipe_min_speed_to_force = 30;
         workspace_swipe_cancel_ratio = 0.5;
         workspace_swipe_create_new = 1;
@@ -104,8 +106,14 @@ in {
         key_press_enables_dpms = false;
         disable_hyprland_logo = true;
         disable_splash_rendering = true;
-        # Set threshold for ANR dialog
-        enable_anr_dialog = true; 
+        enable_swallow = false;
+        vfr = true; # Variable Frame Rate
+        vrr = 2; #Variable Refresh Rate  Might need to set to 0 for NVIDIA/AQ_DRM_DEVICES
+        # Screen flashing to black momentarily or going black when app is fullscreen
+        # Try setting vrr to 0
+
+        #  Application not responding (ANR) settings
+        enable_anr_dialog = true;
         anr_missed_pings = 20;
       };
 
@@ -136,7 +144,7 @@ in {
         no_donation_nag = true;
         no_update_news = false;
       };
-      
+
       cursor = {
         sync_gsettings_theme = true;
         no_hardware_cursors = 2; # change to 1 if want to disable
@@ -156,30 +164,14 @@ in {
         new_on_top = 1;
         mfact = 0.5;
       };
-
-      env = [
-        "NIXOS_OZONE_WL, 1"
-        "NIXPKGS_ALLOW_UNFREE, 1"
-        "XDG_CURRENT_DESKTOP, Hyprland"
-        "XDG_SESSION_TYPE, wayland"
-        "XDG_SESSION_DESKTOP, Hyprland"
-        "GDK_BACKEND, wayland, x11"
-        "CLUTTER_BACKEND, wayland"
-        "QT_QPA_PLATFORM=wayland;xcb"
-        "QT_WAYLAND_DISABLE_WINDOWDECORATION, 1"
-        "QT_AUTO_SCREEN_SCALE_FACTOR, 1"
-        "SDL_VIDEODRIVER, x11"
-        "MOZ_ENABLE_WAYLAND, 1"
-        "AQ_DRM_DEVICES,/dev/dri/card0:/dev/dri/card1"
-        "GDK_SCALE,1"
-        "QT_SCALE_FACTOR,1"
-        "EDITOR,nvim"
-      ];
     };
 
     extraConfig = "
       monitor=,preferred,auto,auto
       ${extraMonitorSettings}
+      # To enable blur on waybar uncomment the line below
+      # Thanks to SchotjeChrisman
+      # layerrule = blur,waybar
     ";
   };
 }
