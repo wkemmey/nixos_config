@@ -2,8 +2,9 @@
 
 ## ZaneyOS v2.3 -- Post GA Release Notes
 
-** Updated: May 29th, 2025 **
+** Updated: May 30th, 2025 **
 
+- Updated `variable.nix` added example monitor configs
 - Added Jerry's waybar `Jerry-waybar.nix`
 - Added option to enable blur on waybar in hyprland.nix Thx SchotjeChrisman
 - Added new Window animation option `animation-moving`from ML4W repo
