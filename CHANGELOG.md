@@ -4,6 +4,7 @@
 
 ** Updated: May 30th, 2025 **
 
+- Added v2.3.1 to version to indicated post GA code
 - Added `waybar-ddubs-2.nix` Modified version of Jerry's waybar
 - Adjusted some colors in Jerry's waybar
 - Disabled the `df` command in the disk module. Doesn't work w/zaneyos
