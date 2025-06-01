@@ -4,6 +4,7 @@
 
 ** Updated: June 1st, 2025 **
 
+- Added `lazygit.nix` to theme, disable popup, etc lazygit
 - Added `fzf.nix` to customize fzf util
 - Added v2.3.1 to version to indicated post GA code
 - Added `waybar-ddubs-2.nix` Modified version of Jerry's waybar
