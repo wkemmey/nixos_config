@@ -41,7 +41,6 @@
     eog # For Image Viewing
     inxi # CLI System Information Tool
     killall # For Killing All Instances Of Programs
-    lazygit # Terminal Based Git GUI
     libnotify # For Notifications
     lm_sensors # Used For Getting Hardware Temps
     lolcat # Add Colors To Your Terminal Command Output
@@ -49,6 +48,7 @@
     mpv # Incredible Video Player
     ncdu # Disk Usage Analyzer With Ncurses Interface
     nixfmt-rfc-style # Nix Formatter
+    onefetch #shows current build info and stats
     pavucontrol # For Editing Audio Levels & Devices
     pciutils # Collection Of Tools For Inspecting PCI Devices
     picard # For Changing Music Metadata & Getting Cover Art

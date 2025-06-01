@@ -4,6 +4,10 @@
 
 ** Updated: June 1st, 2025 **
 
+- Added `eza.nix` to configure basic eza settings
+- Added `onefetch` to show current build info for zaneyos
+- Changed version to ZaneyOS v2.3.3 in fastfetch
+
 - Modified zsh config
 
 ```nix
