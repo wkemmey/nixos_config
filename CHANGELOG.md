@@ -2,8 +2,9 @@
 
 ## ZaneyOS v2.3 -- Post GA Release Notes
 
-** Updated: June 1st, 2025 **
+** Updated: June 2nd, 2025 **
 
+- Added preview to `fzf.nix` Enter to edit
 - Added `eza.nix` to configure basic eza settings
 - Added `onefetch` to show current build info for zaneyos
 - Changed version to ZaneyOS v2.3.3 in fastfetch
