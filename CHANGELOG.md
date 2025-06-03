@@ -2,8 +2,9 @@
 
 ## ZaneyOS v2.3 -- Post GA Release Notes
 
-** Updated: June 2nd, 2025 **
+** Updated: June 3rd, 2025 **
 
+- Set `Virtual-1` monitior default to 1920x1080
 - Added options and aliases to `git.nix`
 - Added preview to `fzf.nix` Enter to edit
 - Added `eza.nix` to configure basic eza settings
