@@ -4,6 +4,7 @@
 
 ** Updated: June 2nd, 2025 **
 
+- Added options and aliases to `git.nix`
 - Added preview to `fzf.nix` Enter to edit
 - Added `eza.nix` to configure basic eza settings
 - Added `onefetch` to show current build info for zaneyos
