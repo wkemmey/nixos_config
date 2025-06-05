@@ -2,8 +2,10 @@
 
 ## ZaneyOS v2.3 -- Post GA Release Notes
 
-** Updated: June 3rd, 2025 **
+** Updated: June 5th, 2025 **
 
+- Disabled AQ_DRM_DEVICES env variable Retuned to default auto
+- Updated flake
 - Set `Virtual-1` monitior default to 1920x1080
 - Added options and aliases to `git.nix`
 - Added preview to `fzf.nix` Enter to edit
