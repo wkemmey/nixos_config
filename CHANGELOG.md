@@ -2,8 +2,13 @@
 
 ## ZaneyOS v2.3 -- Post GA Release Notes
 
-** Updated: June 5th, 2025 **
+** Updated: June 7th, 2025 **
 
+- Enabled `neovim` and set it as `defaultEditor`
+- Moved aliases for `eza` to `eza.nix` Now regardless of shell they will be same
+- Added default features to `eza` in `eza.nix` Allowing default behavior to be
+  set on all shells
+- Added Shell integration for `eza` to `bash`, `zsh` and `fish`
 - Disabled AQ_DRM_DEVICES env variable Retuned to default auto
 - Updated flake
 - Set `Virtual-1` monitior default to 1920x1080
