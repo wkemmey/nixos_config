@@ -2,8 +2,10 @@
 
 ## ZaneyOS v2.3 -- Post GA Release Notes
 
-** Updated: June 7th, 2025 **
+** Updated: June 11th, 2025 **
 
+- Added three more `git`aliases `com` commit a, `gs` stash, and `gp` pull
+- Run `gs com`, `git gs` and `git gp` to use them
 - Enabled `neovim` and set it as `defaultEditor`
 - Moved aliases for `eza` to `eza.nix` Now regardless of shell they will be same
 - Added default features to `eza` in `eza.nix` Allowing default behavior to be
