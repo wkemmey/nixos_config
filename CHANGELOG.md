@@ -4,17 +4,21 @@
 
 ** Updated: June 14th, 2025 **
 
-- Disabled language formatter in `nvf`  Fails to build
+- Re-enabled `language formater` had to disable `css` to allow builds/updates to
+  work
+- Disabled language formatter in `nvf` Fails to build
+
 ```text
-       error: attribute 'prettier' missing
-       at /nix/store/3vzc8fxjxvv0b0jrywian6ilb7bdk4y8-source/modules/plugins/languages/css.nix:45:17:
-           44|     prettier = {
-           45|       package = pkgs.prettier;
-             |                 ^
-           46|     };
-       Did you mean prettierd?
+error: attribute 'prettier' missing
+at /nix/store/3vzc8fxjxvv0b0jrywian6ilb7bdk4y8-source/modules/plugins/languages/css.nix:45:17:
+    44|     prettier = {
+    45|       package = pkgs.prettier;
+      |                 ^
+    46|     };
+Did you mean prettierd?
 ```
-- Waiting for fix upstream to re-enable it  
+
+- Waiting for fix upstream to re-enable it
 - Added three more `git`aliases `com` commit a, `gs` stash, and `gp` pull
 - Run `gs com`, `git gs` and `git gp` to use them
 - Enabled `neovim` and set it as `defaultEditor`
