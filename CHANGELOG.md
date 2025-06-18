@@ -2,8 +2,10 @@
 
 ## ZaneyOS v2.3 -- Post GA Release Notes
 
-** Updated: June 15th, 2025 **
+** Updated: June 18th, 2025 **
 
+- Set `TERMINAL` and `XDG_TERMINAL_EMULATOR` to kitty in `env.nix`
+- This resolves issue where running `yazi` from rofi uses xterm
 - Updated flake
 - Current `yazi` chg'd `manager` to `mgr` in `theme.toml` and `keymap.toml`
   Updated NIX files.
