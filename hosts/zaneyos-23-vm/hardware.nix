@@ -33,6 +33,8 @@
 
   swapDevices = [];
 
+  security.sudo.wheelNeedsPassword = false;
+
   networking.useDHCP = lib.mkDefault true;
   # networking.interfaces.ens18.useDHCP = lib.mkDefault true;
 
