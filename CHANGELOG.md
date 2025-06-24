@@ -4,6 +4,7 @@
 
 ** Updated: June 22nd, 2025 **
 
+- Fixed 'hm-find' script not being built
 - Fixed `css` formatting thanks to `mister_simon` for the fix
 - Set `TERMINAL` and `XDG_TERMINAL_EMULATOR` to kitty in `env.nix`
 - This resolves issue where running `yazi` from rofi uses xterm
