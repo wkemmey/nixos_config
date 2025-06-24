@@ -29,6 +29,7 @@ in {
     ./swappy.nix
     ./swaync.nix
     ./virtmanager.nix
+    ./vscode.nix
     waybarChoice
     ./wezterm.nix
     ./wlogout

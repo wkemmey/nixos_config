@@ -2,8 +2,10 @@
 
 ## ZaneyOS v2.3.2 -- Post GA Release Notes
 
-** Updated: June 22nd, 2025 **
+** Updated: June 24nd, 2025 **
 
+- Added `vscode.nix` with configured plugins for nix, bash, json,toml and VIM
+  keybinds
 - Fixed 'hm-find' script not being built
 - Fixed `css` formatting thanks to `mister_simon` for the fix
 - Set `TERMINAL` and `XDG_TERMINAL_EMULATOR` to kitty in `env.nix`
