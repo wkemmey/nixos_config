@@ -1,9 +1,10 @@
 ## 🗒️ Changelog
 
-## ZaneyOS v2.3 -- Post GA Release Notes
+## ZaneyOS v2.3.2 -- Post GA Release Notes
 
-** Updated: June 18th, 2025 **
+** Updated: June 22nd, 2025 **
 
+- Fixed `css` formatting thanks to `mister_simon` for the fix
 - Set `TERMINAL` and `XDG_TERMINAL_EMULATOR` to kitty in `env.nix`
 - This resolves issue where running `yazi` from rofi uses xterm
 - Updated flake
