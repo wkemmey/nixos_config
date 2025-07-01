@@ -2,8 +2,11 @@
 
 ## ZaneyOS v2.3.2 -- Post GA Release Notes
 
-** Updated: June 24nd, 2025 **
+** Updated: June 30th, 2025 **
 
+- Created `zcli` command `modules/home/scripts/zcli`
+- `zcli` will update flake, rebuild, run diags, garbage collect and fstrim
+- `zcli <COMMAND>` Opts: `rebuild` `update` `cleanup` `diags` `trim`
 - Added `vscode.nix` with configured plugins
 - Thanks to `delciak` for the NIX code for `vscode.nix`
 - Fixed 'hm-find' script not being built

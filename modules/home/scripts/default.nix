@@ -1,6 +1,7 @@
 {
   pkgs,
   username,
+  profile,
   ...
 }: {
   home.packages = [
@@ -17,5 +18,14 @@
     (import ./rofi-launcher.nix {inherit pkgs;})
     (import ./screenshootin.nix {inherit pkgs;})
     (import ./hm-find.nix {inherit pkgs;})
+    (import ./default.nix {inherit pkgs profile;})
+    (import ./zcli.nix {
+      inherit pkgs profile;
+      backupFiles = [
+        ".config/mimeapps.list.backup"
+        # Add other backup files here, e.g.:
+        # ".config/some-other-app.conf.bak"
+      ];
+    })
   ];
 }
