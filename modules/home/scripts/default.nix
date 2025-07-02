@@ -18,7 +18,6 @@
     (import ./rofi-launcher.nix {inherit pkgs;})
     (import ./screenshootin.nix {inherit pkgs;})
     (import ./hm-find.nix {inherit pkgs;})
-    (import ./gemini.nix {inherit pkgs;})
     (import ./zcli.nix {
       inherit pkgs profile;
       backupFiles = [
