@@ -2,8 +2,11 @@
 
 ## ZaneyOS v2.3.2 -- Post GA Release Notes
 
-** Updated: June 30th, 2025 **
+** Updated: July 4th, 2025 **
 
+- Added `BASH/ZSH/FISH` integration to `yazi`
+- Set `shellWrapperName = "yy";`
+- `yy` will start `yazi` and on exit leave you in current directory
 - Created `zcli` command `modules/home/scripts/zcli`
 - `zcli` will update flake, rebuild, run diags, garbage collect and fstrim
 - `zcli <COMMAND>` Opts: `rebuild` `update` `cleanup` `diags` `trim`
