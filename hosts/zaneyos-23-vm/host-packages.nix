@@ -5,6 +5,5 @@
     audacity
     discord
     nodejs
-    obs-studio
   ];
 }

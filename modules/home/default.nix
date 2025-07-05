@@ -21,6 +21,7 @@ in {
     ./kitty.nix
     ./lazygit.nix
     ./nvf.nix
+    ./obs-studio.nix
     ./rofi
     ./qt.nix
     ./scripts
@@ -28,6 +29,7 @@ in {
     ./stylix.nix
     ./swappy.nix
     ./swaync.nix
+    ./tmux.nix
     ./virtmanager.nix
     ./vscode.nix
     waybarChoice

@@ -3,7 +3,6 @@
     audacity
     discord
     nodejs
-    obs-studio
     handbrake
     yt-dlp
     android-studio
