@@ -2,8 +2,9 @@
 
 ## ZaneyOS v2.3.2 -- Post GA Release Notes
 
-** Updated: July 5h, 2025 **
+** Updated: July 7h, 2025 **
 
+- Updated `zcli.nix`to 0.9 improved `cleanup` features
 - Updated `zcli.nix` to v0.8 `add-host` & `del-host`
 - Added `BASH/ZSH/FISH` integration to `yazi`
 - Set `shellWrapperName = "yy";`

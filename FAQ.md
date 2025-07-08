@@ -10,6 +10,65 @@
 - The SUPER key + K opens a searchable menu with the bindings
 - The "keys" icon on the right side of the waybar will also bring up this menu.
 
+<details>
+<summary><strong>🖥️  ZCLI:  What is it and how do I use it?</strong></summary>
+<div style="margin-left: 20px;">
+
+The `zcli` utility is a command-line tool designed to simplify the management of
+your ZanyeOS environment. It provides a set of commands to perform common tasks
+such as updating your system, managing hosts, and cleaning up old generations.
+
+To use it, open a terminal and type `zcli` followed by one of the commands
+listed below:
+
+- `cleanup`: Clean up old system generations. -- You can specify the number of
+  generations to keep.
+- `diag`: Create a system diagnostic report, saved to `~/diag.txt`.
+- `list-gens`: List user and system generations.
+- `rebuild`: Rebuild the NixOS system configuration.
+- `trim`: Trim filesystems to improve SSD performance.
+- `update`: Update the flake and rebuild the system.
+- `update-host`: Automatically set the host and profile in `flake.nix`. -- It
+  will get current hostname and run GPU detect code
+- `add-host`: Add a new host configuration. -- It runs hostname and GPU
+  auto-detect -- You can specify the `hostname` and GPU `profile`
+- `zcli add-host [hostname] [profile]` -- Profiles (GPU) are `amd`, `intel`,
+  `nvidia`, `nvidia-hybrid`, and `vm`
+- `del-host`: Delete a host configuration. `del-host [hostname]`
+- `help`: Show the help message.
+
+```text
+❯ zcli
+Error: No command provided.
+ZaneyOS CLI Utility -- version 0.9
+
+Usage: zcli [command]
+
+Commands:
+  cleanup         - Clean up old system generations. Can specify a number to keep.
+  diag            - Create a system diagnostic report.
+                    (Filename: homedir/diag.txt)
+  list-gens       - List user and system generations.
+  rebuild         - Rebuild the NixOS system configuration.
+  trim            - Trim filesystems to improve SSD performance.
+  update          - Update the flake and rebuild the system.
+  update-host     - Auto set host and profile in flake.nix.
+                    (Opt: zcli update-host [hostname] [profile])
+  add-host        - Adds a new host. (Opt: zcli add-host [hostname] [profile])
+  del-host        - Deletes a host. (Opt: zcli del-host [hostname])
+
+  help            - Show this help message.
+~
+❯
+
+ex: 
+>zcli add-host myhost amd 
+>zcli rebuild
+```
+
+</div>
+</details>
+
 ## Major Hyprland Keybindings
 
 Below are the keybindings for Hyprland, formatted for easy reference.
