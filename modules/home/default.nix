@@ -6,6 +6,7 @@ in {
     ./bash.nix
     ./bashrc-personal.nix
     ./bat.nix
+    ./bottom.nix
     ./btop.nix
     ./cava.nix
     ./emoji.nix
