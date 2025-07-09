@@ -51,6 +51,7 @@
     lshw # Detailed Hardware Information
     mpv # Incredible Video Player
     ncdu # Disk Usage Analyzer With Ncurses Interface
+    nitch # small fetch util
     nixfmt-rfc-style # Nix Formatter
     onefetch #shows current build info and stats
     pavucontrol # For Editing Audio Levels & Devices
