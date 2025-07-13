@@ -30,6 +30,7 @@ in {
     ./stylix.nix
     ./swappy.nix
     ./swaync.nix
+    ./tealdeer.nix
     ./tmux.nix
     ./virtmanager.nix
     ./vscode.nix

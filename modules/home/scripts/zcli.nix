@@ -14,7 +14,7 @@ in
     PROJECT="zaneyos"   #ddubos or zaneyos
     PROFILE="${profile}"
     BACKUP_FILES_STR="${backupFilesString}"
-    VERSION="0.9"
+    VERSION="1.0.1"
     FLAKE_NIX_PATH="$HOME/$PROJECT/flake.nix"
 
     read -r -a BACKUP_FILES <<< "$BACKUP_FILES_STR"
@@ -35,8 +35,6 @@ in
       echo "  update          - Update the flake and rebuild the system."
       echo "  update-host     - Auto set host and profile in flake.nix."
       echo "                    (Opt: zcli update-host [hostname] [profile])"
-      echo "  add-host        - Adds a new host. (Opt: zcli add-host [hostname] [profile])"
-      echo "  del-host        - Deletes a host. (Opt: zcli del-host [hostname])"
       echo ""
       echo "  help            - Show this help message."
     }
@@ -81,7 +79,7 @@ in
           if "$has_vm"; then
             detected_profile="vm"
           elif "$has_nvidia" && "$has_intel"; then
-            detected_profile="hybrid"
+            detec0.1ted_profile="nvidia-laptop"
           elif "$has_nvidia"; then
             detected_profile="nvidia"
           elif "$has_amd"; then
@@ -132,8 +130,8 @@ in
         echo "Cleaning up old log files..." >> "$LOG_FILE"
         find "$LOG_DIR" -type f -mtime +3 -name "*.log" -delete >> "$LOG_FILE" 2>&1
         echo "Cleanup process logged to $LOG_FILE"
-        ''';;
-            diag)
+        ;;
+      diag)
         echo "Generating system diagnostic report..."
         inxi --full > "$HOME/diag.txt"
         echo "Diagnostic report saved to $HOME/diag.txt"
