@@ -2,9 +2,15 @@
 
 ## ZaneyOS v2.3.2 -- Post GA Release Notes
 
-** Updated: July 13th, 2025 **
+** Updated: July 20th, 2025 **
 
 - `General Updates`
+  - `symbola` font disabled, waiting on fix upstream to be in stable branch
+    - You will get a `404 file not found` error during rebuilds if enabled
+  - Updated flake
+  - Update to `neovim` and `nvf` causes a prompt to download a dictionary
+    - Enter `yes` then run `:DirtytalkUpdate` (case sensitive) to resolve it
+      - No, I did not make up that command (nerd alert)
   - Changed version to ZaneyOS v2.3.3 in fastfetch
   - Updated flake
   - Added `tealdeer.nix` (TLDR)
