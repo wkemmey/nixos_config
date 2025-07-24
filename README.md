@@ -151,7 +151,7 @@ Simply copy this and run it:
 ![ZaneyOS First Install Command](img/first-install-cmd.jpg)
 
 ```
-nix-shell -p git curl
+nix-shell -p git curl pciutils 
 ```
 
 Then:
