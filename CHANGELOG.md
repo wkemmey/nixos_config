@@ -2,11 +2,14 @@
 
 ## ZaneyOS v2.3.2 -- Post GA Release Notes
 
-** Updated: July 20th, 2025 **
+** Updated: July 24th, 2025 **
 
+- `VirtualBox`
+  - After user requests I added VirtualBox
+  - It's in `~/zaneyos/modules/core/virtualisation.nix`
+  - It is disabled by default
 - `General Updates`
-  - `symbola` font disabled, waiting on fix upstream to be in stable branch
-    - You will get a `404 file not found` error during rebuilds if enabled
+  - `symbola` font re-enabled
   - Updated flake
   - Update to `neovim` and `nvf` causes a prompt to download a dictionary
     - Enter `yes` then run `:DirtytalkUpdate` (case sensitive) to resolve it
@@ -22,8 +25,6 @@
   - Disabled the `df` command in the disk module. Doesn't work w/zaneyos
 - `ZCLI Updates:`
   - Updated `zcli.nix` to v1.0 code cleanup, logging
-  - Updated `zcli.nix`to 0.9 improved `cleanup` features
-  - Updated `zcli.nix` to v0.8 `update-host`
   - Created `zcli` command `modules/home/scripts/zcli`
   - `zcli` will update flake, rebuild, run diags, garbage collect and fstrim
   - `zcli <COMMAND>` `rebuild` `update` `cleanup` `diags` `trim`

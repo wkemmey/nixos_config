@@ -30,11 +30,12 @@ in {
     extraGroups = [
       "adbusers"
       "docker"
-      "libvirtd"
+      "libvirtd" #For VirtManagerr
       "lp"
       "networkmanager"
       "scanner"
-      "wheel"
+      "wheel" # sudo access
+      "vboxusers" # For VirtualBox
     ];
     shell = pkgs.zsh;
     ignoreShellProgramCheck = true;
