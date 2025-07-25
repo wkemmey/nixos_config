@@ -611,9 +611,10 @@ stylixImage = ../../wallpapers/AnimeGirlNightSky.jpg;
 <summary><strong>  How do I add more wallpapers? </strong></summary>
 
 - Wallpapers are stored in the `~/zaneyos/wallpapers` directory.
-- Simply copy the new ones to that diretory.
+- Simply copy the new ones to that directory.
+- Run `git add .` To add them to the local GIT repo
 - You must do a rebuild after adding new wallpapers.
-- Run `fr` at the CLI.
+- Run `fr` or `zcli rebuild` at the CLI.
 
 </details>
 

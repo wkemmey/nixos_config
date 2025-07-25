@@ -31,6 +31,11 @@
 
   # Set Stylix Image
   stylixImage = ../../wallpapers/AnimeGirlNightSky.jpg;
+  #stylixImage = ../../wallpapers/nix-wallpaper-stripes-logo.png;
+  #stylixImage = ../../wallpapers/beautifulmountainscape.png;
+  #stylixImage = ../../wallpapers/mountainscapedark.jpg;
+  #stylixImage = ../../wallpapers/Rainnight.jpg;
+  #stylixImage = ../../wallpapers/zaney-wallpaper.jpg;
 
   # Set Waybar
   # Includes alternates such as:
