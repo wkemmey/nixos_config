@@ -9,11 +9,10 @@
     enable = true;
 
     settings.vim = {
-      lsp.enable = true;
       vimAlias = true;
       viAlias = true;
       withNodeJs = true;
-      lineNumberMode = "relNumber";
+      lineNumberMode = "number";
       enableLuaLoader = true;
       preventJunkFiles = true;
       options = {
@@ -26,8 +25,12 @@
         enable = true;
         registers = "unnamedplus";
         providers = {
-          wl-copy.enable = true;
-          xsel.enable = true;
+          wl-copy = {
+            enable = true;
+          };
+          xsel = {
+            enable = true;
+          };
         };
       };
 
@@ -43,7 +46,9 @@
       diagnostics = {
         enable = true;
         config = {
-          virtual_lines.enable = true;
+          virtual_lines = {
+            enable = true;
+          };
           underline = true;
         };
       };
@@ -127,123 +132,297 @@
           action = "<cmd>Trouble diagnostics toggle<cr>";
           desc = "Toggle diagnostics list";
         }
+        {
+          key = "<leader>t";
+          mode = ["n"];
+          action = "<cmd>ToggleTerm<CR>";
+          desc = "Toggle terminal";
+        }
+        {
+          key = "<leader>mp";
+          mode = ["n"];
+          action = ":MarkdownPreview<CR>";
+          desc = "Toggle Markdown Preview";
+        }
       ];
 
-      telescope.enable = true;
+      telescope = {
+        enable = true;
+      };
 
       spellcheck = {
         enable = true;
         languages = ["en"];
-        programmingWordlist.enable = true;
+        programmingWordlist = {
+          enable = true;
+        };
       };
 
       lsp = {
+        enable = true;
         formatOnSave = true;
-        lspkind.enable = false;
-        lightbulb.enable = false;
-        lspsaga.enable = false;
-        trouble.enable = true;
-        lspSignature.enable = true;
-        otter-nvim.enable = false;
-        nvim-docs-view.enable = false;
+        lspkind = {
+          enable = false;
+        };
+        lightbulb = {
+          enable = false; #even with this disabled enabling lspaga sets lightbulb on
+        };
+        lspsaga = {
+          enable = false; #when enabled getting annoying lightbulb
+        };
+        trouble = {
+          enable = true;
+        };
+        lspSignature = {
+          enable = false;
+        };
+        otter-nvim = {
+          enable = false;
+        };
+        nvim-docs-view = {
+          enable = false;
+        };
       };
 
       languages = {
         enableFormat = true;
         enableTreesitter = true;
         enableExtraDiagnostics = true;
-        nix.enable = true;
-        clang.enable = true;
-        zig.enable = true;
-        python.enable = true;
-        markdown.enable = true;
+        nix = {
+          enable = true;
+        };
+        clang = {
+          enable = true;
+        };
+        zig = {
+          enable = true;
+        };
+        python = {
+          enable = true;
+        };
+        markdown = {
+          enable = true;
+        };
         ts = {
           enable = true;
-          lsp.enable = true;
+          lsp = {
+            enable = true;
+          };
           format.type = "prettierd";
-          extensions.ts-error-translator.enable = true;
+          extensions.ts-error-translator = {
+            enable = true;
+          };
         };
-        html.enable = true;
-        lua.enable = true;
+        html = {
+          enable = true;
+        };
+        lua = {
+          enable = true;
+        };
         css = {
-          enable = false;
+          enable = true;
           format.type = "prettierd";
         };
-        typst.enable = true;
+        typst = {
+          enable = true;
+        };
         rust = {
           enable = true;
-          crates.enable = true;
+          crates = {
+            enable = true;
+          };
         };
       };
-      visuals = {
-        nvim-web-devicons.enable = true;
-        nvim-cursorline.enable = true;
-        cinnamon-nvim.enable = true;
-        fidget-nvim.enable = true;
-        highlight-undo.enable = true;
-        indent-blankline.enable = true;
-        rainbow-delimiters.enable = true;
-      };
 
+      visuals = {
+        nvim-web-devicons = {
+          enable = true;
+        };
+        nvim-cursorline = {
+          enable = true;
+        };
+        cinnamon-nvim = {
+          enable = true;
+        };
+        fidget-nvim = {
+          enable = true;
+        };
+        highlight-undo = {
+          enable = true;
+        };
+        indent-blankline = {
+          enable = true;
+        };
+        rainbow-delimiters = {
+          enable = true;
+        };
+      };
       statusline.lualine = {
         enable = true;
         theme = "base16";
       };
 
-      autopairs.nvim-autopairs.enable = true;
-      autocomplete.nvim-cmp.enable = true;
-      snippets.luasnip.enable = true;
-      tabline.nvimBufferline.enable = true;
-      treesitter.context.enable = false;
-      binds = {
-        whichKey.enable = true;
-        cheatsheet.enable = true;
+      autopairs = {
+        nvim-autopairs = {
+          enable = true;
+        };
       };
+
+      autocomplete = {
+        nvim-cmp = {
+          enable = false;
+        };
+        blink-cmp = {
+          enable = true;
+          friendly-snippets.enable = true;
+          setupOpts = {
+            completion.documentation.auto_show_delay_ms = 50;
+          };
+        };
+      };
+
+      snippets = {
+        luasnip = {
+          enable = true;
+        };
+      };
+
+      tabline = {
+        nvimBufferline = {
+          enable = true;
+        };
+      };
+
+      treesitter = {
+        context = {
+          enable = false;
+        };
+      };
+
+      binds = {
+        whichKey = {
+          enable = true;
+        };
+        cheatsheet = {
+          enable = true;
+        };
+      };
+
       git = {
         enable = true;
-        gitsigns.enable = true;
-        gitsigns.codeActions.enable = false;
+        gitsigns = {
+          enable = true;
+          codeActions = {
+            enable = false;
+          };
+        };
       };
-      projects.project-nvim.enable = true;
-      dashboard.dashboard-nvim.enable = true;
-      filetree.neo-tree.enable = true;
+
+      projects = {
+        project-nvim = {
+          enable = true;
+        };
+      };
+
+      dashboard = {
+        dashboard-nvim = {
+          enable = true;
+        };
+        alpha = {
+          enable = false;
+        };
+      };
+
+      filetree = {
+        neo-tree = {
+          enable = true;
+        };
+      };
+
       notify = {
-        nvim-notify.enable = true;
-        nvim-notify.setupOpts.background_colour = "#${config.lib.stylix.colors.base01}";
+        nvim-notify = {
+          enable = true;
+          setupOpts.background_colour = "#${config.lib.stylix.colors.base01}";
+        };
       };
+
       utility = {
-        preview.markdownPreview.enable = true;
-        ccc.enable = false;
-        vim-wakatime.enable = false;
-        icon-picker.enable = true;
-        surround.enable = true;
-        diffview-nvim.enable = true;
+        preview.markdownPreview = {
+          enable = true;
+        };
+        ccc = {
+          enable = false;
+        };
+        vim-wakatime = {
+          enable = false;
+        };
+        icon-picker = {
+          enable = true;
+        };
+        surround = {
+          enable = true;
+        };
+        diffview-nvim = {
+          enable = true;
+        };
         motion = {
-          hop.enable = true;
-          leap.enable = true;
-          precognition.enable = false;
+          hop = {
+            enable = true;
+          };
+          leap = {
+            enable = true;
+          };
+          precognition = {
+            enable = false;
+          };
         };
         images = {
-          image-nvim.enable = false;
+          image-nvim = {
+            enable = false;
+          };
         };
       };
+
       ui = {
-        borders.enable = true;
-        noice.enable = true;
-        colorizer.enable = true;
-        illuminate.enable = true;
+        borders = {
+          enable = true;
+        };
+        noice = {
+          enable = true;
+        };
+        colorizer = {
+          enable = true;
+        };
+        illuminate = {
+          enable = true;
+        };
         breadcrumbs = {
           enable = false;
-          navbuddy.enable = false;
+          navbuddy = {
+            enable = false;
+          };
         };
         smartcolumn = {
           enable = true;
         };
-        fastaction.enable = true;
+        fastaction = {
+          enable = true;
+        };
+      };
+
+      terminal = {
+        toggleterm = {
+          enable = true;
+          lazygit = {
+            enable = true;
+          };
+        };
       };
 
       session = {
-        nvim-session-manager.enable = false;
+        nvim-session-manager = {
+          enable = false;
+        };
       };
       comments = {
         comment-nvim.enable = true;
@@ -251,29 +430,10 @@
     };
   };
 
-  # Source custom Lua explicitly
-  home.file.".config/nvim/init.lua" = {
-    text = ''
-      vim.notify("Main init.lua loaded", vim.log.levels.INFO)
-      pcall(require, "custom.init")
-    '';
-  };
-
-  home.file.".config/nvim/lua/custom/init.lua" = {
-    text = ''
-      -- Debug notification
-      vim.notify("Custom Lua loaded", vim.log.levels.INFO)
-      -- Diagnostics configuration (fallback)
-      vim.diagnostic.config({
-        virtual_text = {
-          spacing = 4,
-          prefix = "●"
-        },
-        signs = true,
-        underline = true,
-        update_in_insert = false,
-        severity_sort = true
-      })
+  home.activation = {
+    dirtytalkUpdate = ''
+      ${config.programs.nvf.finalPackage}/bin/nvim -c "DirtytalkUpdate" -c "qa!"
     '';
   };
 }
+
