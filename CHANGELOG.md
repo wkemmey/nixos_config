@@ -2,18 +2,20 @@
 
 ## ZaneyOS v2.3.2 -- Post GA Release Notes
 
-** Updated: July 24th, 2025 **
+** Updated: July 28th, 2025 **
 
 - `VirtualBox`
   - After user requests I added VirtualBox
   - It's in `~/zaneyos/modules/core/virtualisation.nix`
   - It is disabled by default
 - `General Updates`
-  - `symbola` font re-enabled
   - Updated flake
   - Update to `neovim` and `nvf` causes a prompt to download a dictionary
     - Enter `yes` then run `:DirtytalkUpdate` (case sensitive) to resolve it
       - No, I did not make up that command (nerd alert)
+      - ** Update: ** Added a home.activation to run command to resolve it
+  - Changed from `nvim-cmp` to `blink-cmp` for code completion
+    - works better has reputation for breaking time will tell
   - Changed version to ZaneyOS v2.3.3 in fastfetch
   - Updated flake
   - Added `tealdeer.nix` (TLDR)
