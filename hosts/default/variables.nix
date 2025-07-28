@@ -29,6 +29,9 @@
   # Enable Printing Support
   printEnable = true;
 
+  # Enable Thunar GUI File Manager
+  thunarEnable = true;
+
   # Set Stylix Image
   stylixImage = ../../wallpapers/AnimeGirlNightSky.jpg;
   #stylixImage = ../../wallpapers/nix-wallpaper-stripes-logo.png;
@@ -56,7 +59,8 @@
   # animations-moving.nix (ml4w project)
   # Just change the name after the - and rebuild
   animChoice = ../../modules/home/hyprland/animations-end4.nix;
-
-  # Enable Thunar GUI File Manager
-  thunarEnable = true;
+  #animChoice = ../../modules/home/hyprland/animations-def.nix;
+  #animChoice = ../../modules/home/hyprland/animations-dynamix.nix;
+  #  Note: Moving changes window resizing it shrinks then pops back
+  #animChoice = ../../modules/home/hyprland/animations-moving.nix;
 }
