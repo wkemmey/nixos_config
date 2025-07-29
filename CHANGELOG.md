@@ -15,9 +15,8 @@
       - No, I did not make up that command (nerd alert)
       - ** Update: ** Added a home.activation to run command to resolve it
   - Changed from `nvim-cmp` to `blink-cmp` for code completion
-    - works better has reputation for breaking time will tell
+    - works better but has reputation for breaking time will tell
   - Changed version to ZaneyOS v2.3.3 in fastfetch
-  - Updated flake
   - Added `tealdeer.nix` (TLDR)
   - Added `fzf.nix` to customize fzf util
   - Added preview to `fzf.nix` Enter to edit

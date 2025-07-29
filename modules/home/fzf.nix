@@ -25,7 +25,7 @@ in {
       "--border=none"
       "--info='hidden'"
       "--header=''"
-      "--prompt='/ '"
+      "--prompt='--> '"
       "-i"
       "--no-bold"
       "--bind='enter:execute(nvim {})'"
