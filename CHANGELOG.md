@@ -2,8 +2,10 @@
 
 ## ZaneyOS v2.3.2 -- Post GA Release Notes
 
-** Updated: July 28th, 2025 **
+** Updated: August 2nd, 2025 **
 
+- Added new waybar, `waybar-dwm.nix`
+  - Inspired by Matt @TheLinuxCast
 - `VirtualBox`
   - After user requests I added VirtualBox
   - It's in `~/zaneyos/modules/core/virtualisation.nix`
