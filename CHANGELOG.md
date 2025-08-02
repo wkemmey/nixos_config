@@ -4,7 +4,7 @@
 
 ** Updated: August 2nd, 2025 **
 
-- Added new waybar, `waybar-dwm.nix`
+- Added new waybars -`waybar-dwm.nix` -`waybar-dwm2.nix`
   - Inspired by Matt @TheLinuxCast
 - `VirtualBox`
   - After user requests I added VirtualBox
