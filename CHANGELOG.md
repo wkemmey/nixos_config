@@ -4,6 +4,11 @@
 
 ** Updated: August 2nd, 2025 **
 
+- Added `rebuild-boot` command to `zcli`
+  - New command rebuilds system and sets as boot default
+  - Changes activate on next restart instead of immediately
+  - Useful for testing configurations safely
+
 - Added new waybars -`waybar-dwm.nix` -`waybar-dwm2.nix`
   - Inspired by Matt @TheLinuxCast
 - `VirtualBox`

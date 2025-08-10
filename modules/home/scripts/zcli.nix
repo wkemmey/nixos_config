@@ -31,6 +31,7 @@ in
       echo "                    (Filename: homedir/diag.txt)"
       echo "  list-gens       - List user and system generations."
       echo "  rebuild         - Rebuild the NixOS system configuration."
+      echo "  rebuild-boot    - Rebuild and set as boot default (activates on next restart)."
       echo "  trim            - Trim filesystems to improve SSD performance."
       echo "  update          - Update the flake and rebuild the system."
       echo "  update-host     - Auto set host and profile in flake.nix."
@@ -79,7 +80,7 @@ in
           if "$has_vm"; then
             detected_profile="vm"
           elif "$has_nvidia" && "$has_intel"; then
-            detec0.1ted_profile="nvidia-laptop"
+            detected_profile="nvidia-laptop"
           elif "$has_nvidia"; then
             detected_profile="nvidia"
           elif "$has_amd"; then
@@ -146,13 +147,24 @@ in
         echo "--- System Generations ---"
         nix profile history --profile /nix/var/nix/profiles/system | cat || echo "Could not list system generations."
         ;;
-            rebuild)
+      rebuild)
         handle_backups
         echo "Starting NixOS rebuild for host: $(hostname)"
         if nh os switch --hostname "$PROFILE"; then
           echo "Rebuild finished successfully"
         else
           echo "Rebuild Failed" >&2
+          exit 1
+        fi
+        ;;
+      rebuild-boot)
+        handle_backups
+        echo "Starting NixOS rebuild with boot option for host: $(hostname)"
+        if nh os boot --hostname "$PROFILE"; then
+          echo "Rebuild with boot option finished successfully"
+          echo "Changes will activate on next restart"
+        else
+          echo "Rebuild with boot option Failed" >&2
           exit 1
         fi
         ;;
