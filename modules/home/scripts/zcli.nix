@@ -137,10 +137,10 @@ in
         inxi --full > "$HOME/diag.txt"
         echo "Diagnostic report saved to $HOME/diag.txt"
         ;;
-            help)
+      help)
         print_help
         ;;
-            list-gens)
+      list-gens)
         echo "--- User Generations ---"
         nix-env --list-generations | cat || echo "Could not list user generations."
         echo ""
@@ -168,7 +168,7 @@ in
           exit 1
         fi
         ;;
-            trim)
+      trim)
         echo "Running 'sudo fstrim -v /' may take a few minutes and impact system performance."
         read -p "Enter (y/Y) to run now or enter to exit (y/N): " -n 1 -r
         echo # move to a new line
@@ -180,7 +180,7 @@ in
           echo "Trim operation cancelled."
         fi
         ;;
-            update)
+      update)
         handle_backups
         echo "Updating flake and rebuilding system for host: $(hostname)"
         if nh os switch --hostname "$PROFILE" --update; then
@@ -190,7 +190,7 @@ in
           exit 1
         fi
         ;;
-            update-host)
+      update-host)
         target_hostname=""
         target_profile=""
 
