@@ -2,7 +2,13 @@
 
 ## ZaneyOS v2.3.2 -- Post GA Release Notes
 
-** Updated: August 2nd, 2025 **
+** Updated: August 11th, 2025 **
+
+- NeoVIM Enhancements:
+  - Enhanced DirtytalkUpdate automation with smart detection to skip if wordlist exists
+  - Added Nix LSP auto-eval-inputs support for better flake evaluation
+  - Improved home.activation script with better error handling and DAG ordering
+  - Programming wordlist is now automatically downloaded only when needed
 
 - Added `rebuild-boot` command to `zcli`
   - New command rebuilds system and sets as boot default

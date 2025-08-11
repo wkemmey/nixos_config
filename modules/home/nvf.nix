@@ -190,6 +190,10 @@
         enableExtraDiagnostics = true;
         nix = {
           enable = true;
+          lsp = {
+            package = inputs.nil.packages.${config.nixpkgs.hostPlatform.system}.nil;
+            server.settings.nil.auto-eval-inputs = true;
+          };
         };
         clang = {
           enable = true;
@@ -431,8 +435,19 @@
   };
 
   home.activation = {
-    dirtytalkUpdate = ''
-      ${config.programs.nvf.finalPackage}/bin/nvim -c "DirtytalkUpdate" -c "qa!"
+    dirtytalkUpdate = config.lib.dag.entryAfter ["writeBoundary"] ''
+      # Check if programmingWordlist file already exists to avoid unnecessary downloads
+      WORDLIST_FILE="$HOME/.config/nvim/spell/programming.utf-8.add"
+      if [ ! -f "$WORDLIST_FILE" ]; then
+        echo "Programming wordlist not found, downloading via DirtytalkUpdate..."
+        if ${config.programs.nvf.finalPackage}/bin/nvim -c "DirtytalkUpdate" -c "qa!" 2>/dev/null; then
+          echo "DirtytalkUpdate completed successfully"
+        else
+          echo "DirtytalkUpdate failed, but continuing..." >&2
+        fi
+      else
+        echo "Programming wordlist already exists at $WORDLIST_FILE, skipping download"
+      fi
     '';
   };
 }
