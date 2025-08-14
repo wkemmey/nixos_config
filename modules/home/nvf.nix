@@ -191,8 +191,7 @@
         nix = {
           enable = true;
           lsp = {
-            package = inputs.nil.packages.${config.nixpkgs.hostPlatform.system}.nil;
-            server.settings.nil.auto-eval-inputs = true;
+            server = "nil";
           };
         };
         clang = {
