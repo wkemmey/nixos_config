@@ -238,7 +238,7 @@ git config --global --unset-all user.email
 
 sed -i "/^[[:space:]]*host[[:space:]]*=[[:space:]]*\"/ s/\"[^\"]*\"/\"$hostName\"/" ./flake.nix
 sed -i "/^[[:space:]]*profile[[:space:]]*=[[:space:]]*\"/ s/\"[^\"]*\"/\"$profile\"/" ./flake.nix
-sed -i "/^[[:space:]]*timezone[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$timezone\"/" ./hosts/$hostName/variables.nix
+sed -i "/^[[:space:]]*timezone[[:space:]]*=[[:space:]]*\"/ s/\"[^\"]*\"/\"$timezone\"/" ./hosts/$hostName/variables.nix
 
 print_header "Keyboard Layout Configuration"
 echo "🌍 Common keyboard layouts:"
