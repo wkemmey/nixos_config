@@ -87,10 +87,29 @@ cd "$HOME" || exit 1
 echo -e "${GREEN}Current directory: $(pwd)${NC}"
 
 print_header "Hostname Configuration"
-read -rp "Enter Your New Hostname: [ default ] " hostName
+
+# Critical warning about using "default" as hostname
+echo -e "${RED}⚠️  IMPORTANT WARNING: Do NOT use 'default' as your hostname!${NC}"
+echo -e "${RED}   The 'default' hostname is a template and will be overwritten during updates.${NC}"
+echo -e "${RED}   This will cause you to lose your configuration!${NC}"
+echo ""
+echo -e "💡 Suggested hostnames: my-desktop, gaming-rig, workstation, nixos-laptop"
+read -rp "Enter Your New Hostname: [ my-desktop ] " hostName
 if [ -z "$hostName" ]; then
-  hostName="default"
+  hostName="my-desktop"
 fi
+
+# Double-check if user accidentally entered "default"
+if [ "$hostName" = "default" ]; then
+  echo -e "${RED}❌ Error: You cannot use 'default' as hostname. Please choose a different name.${NC}"
+  read -rp "Enter a different hostname: " hostName
+  if [ -z "$hostName" ] || [ "$hostName" = "default" ]; then
+    echo -e "${RED}Setting hostname to 'my-desktop' to prevent configuration loss.${NC}"
+    hostName="my-desktop"
+  fi
+fi
+
+echo -e "${GREEN}✓ Hostname set to: $hostName${NC}"
 
 print_header "GPU Profile Detection"
 
@@ -174,32 +193,84 @@ print_header "Cloning ZaneyOS Repository"
 git clone https://gitlab.com/zaney/zaneyos.git --depth=1 -b stable-2.3  ~/zaneyos
 cd ~/zaneyos || exit 1
 
+print_header "Git Configuration"
+echo "👤 Setting up git configuration for version control:"
+echo "  This is needed for system updates and configuration management."
+echo ""
+installusername=$(echo $USER)
+echo -e "Current username: ${GREEN}$installusername${NC}"
+read -rp "Enter your full name for git commits [ $installusername ]: " gitUsername
+if [ -z "$gitUsername" ]; then
+  gitUsername="$installusername"
+fi
+
+echo "📧 Examples: john@example.com, jane.doe@company.org"
+read -rp "Enter your email address for git commits [ $installusername@example.com ]: " gitEmail
+if [ -z "$gitEmail" ]; then
+  gitEmail="$installusername@example.com"
+fi
+
+echo -e "${GREEN}✓ Git name: $gitUsername${NC}"
+echo -e "${GREEN}✓ Git email: $gitEmail${NC}"
+
+print_header "Timezone Configuration"
+echo "🌎 Common timezones:"
+echo "  • US: America/New_York, America/Chicago, America/Denver, America/Los_Angeles"
+echo "  • Europe: Europe/London, Europe/Berlin, Europe/Paris, Europe/Rome"
+echo "  • Asia: Asia/Tokyo, Asia/Shanghai, Asia/Seoul, Asia/Kolkata"
+echo "  • Australia: Australia/Sydney, Australia/Melbourne"
+echo "  • UTC (Universal): UTC"
+read -rp "Enter your timezone [ America/New_York ]: " timezone
+if [ -z "$timezone" ]; then
+  timezone="America/New_York"
+fi
+echo -e "${GREEN}✓ Timezone set to: $timezone${NC}"
+
 print_header "Configuring Host and Profile"
 mkdir -p hosts/"$hostName"
 cp hosts/default/*.nix hosts/"$hostName"
 
-installusername=$(echo $USER)
-git config --global user.name "$installusername"
-git config --global user.email "$installusername@gmail.com"
+git config --global user.name "$gitUsername"
+git config --global user.email "$gitEmail"
 git add .
 git config --global --unset-all user.name
 git config --global --unset-all user.email
 
 sed -i "/^[[:space:]]*host[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$hostName\"/" ./flake.nix
 sed -i "/^[[:space:]]*profile[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$profile\"/" ./flake.nix
+sed -i "/^[[:space:]]*timezone[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$timezone\"/" ./hosts/$hostName/variables.nix
 
 print_header "Keyboard Layout Configuration"
+echo "🌍 Common keyboard layouts:"
+echo "  • us (US English) - default"
+echo "  • us-intl (US International)"
+echo "  • uk (UK English)"
+echo "  • de (German)"
+echo "  • fr (French)"
+echo "  • es (Spanish)"
+echo "  • it (Italian)"
+echo "  • ru (Russian)"
+echo "  • dvorak (Dvorak)"
 read -rp "Enter your keyboard layout: [ us ] " keyboardLayout
 if [ -z "$keyboardLayout" ]; then
   keyboardLayout="us"
 fi
+echo -e "${GREEN}✓ Keyboard layout set to: $keyboardLayout${NC}"
 sed -i "/^[[:space:]]*keyboardLayout[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$keyboardLayout\"/" ./hosts/$hostName/variables.nix
 
 print_header "Console Keymap Configuration"
-read -rp "Enter your console keymap: [ us ] " consoleKeyMap
-if [ -z "$consoleKeyMap" ]; then
-  consoleKeyMap="us"
+echo "⌨️  Console keymap (usually matches your keyboard layout):"
+echo "  Most common: us, uk, de, fr, es, it, ru"
+# Smart default: use keyboard layout as console keymap default if it's a common one
+defaultConsoleKeyMap="$keyboardLayout"
+if [[ ! "$keyboardLayout" =~ ^(us|uk|de|fr|es|it|ru|us-intl|dvorak)$ ]]; then
+  defaultConsoleKeyMap="us"
 fi
+read -rp "Enter your console keymap: [ $defaultConsoleKeyMap ] " consoleKeyMap
+if [ -z "$consoleKeyMap" ]; then
+  consoleKeyMap="$defaultConsoleKeyMap"
+fi
+echo -e "${GREEN}✓ Console keymap set to: $consoleKeyMap${NC}"
 sed -i "/^[[:space:]]*consoleKeyMap[[:space:]]*=[[:space:]]*\"/s/\"\(.*\)\"/\"$consoleKeyMap\"/" ./hosts/$hostName/variables.nix
 
 print_header "Username Configuration"
