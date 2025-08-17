@@ -14,8 +14,8 @@
   clock24h = false;
 
   # Program Options
-  browser = "google-chrome-stable"; # Set Default Browser (google-chrome-stable for google-chrome)
-  terminal = "ghostty"; # Set Default System Terminal
+  browser = "brave"; # Set Default Browser (google-chrome-stable for google-chrome)
+  terminal = "kitty"; # Set Default System Terminal
   keyboardLayout = "us";
   consoleKeyMap = "us";
 
@@ -27,10 +27,10 @@
   enableNFS = true;
 
   # Enable Printing Support
-  printEnable = true;
+  printEnable = false;
 
   # Enable Thunar GUI File Manager
-  thunarEnable = true;
+  thunarEnable = false;
 
   # Set Stylix Image
   stylixImage = ../../wallpapers/AnimeGirlNightSky.jpg;
@@ -46,10 +46,10 @@
 
   #waybarChoice = ../../modules/home/waybar/Jerry-waybars.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-simple.nix;
-  #waybarChoice = ../../modules/home/waybar/waybar-curved.nix;
+  waybarChoice = ../../modules/home/waybar/waybar-curved.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-nekodyke.nix;
   #waybarChoice = ../../modules/home/waybar/waybar-ddubs.nix;
-  waybarChoice = ../../modules/home/waybar/waybar-ddubs-2.nix;
+  #waybarChoice = ../../modules/home/waybar/waybar-ddubs-2.nix;
 
   # Set Animation style
   # Available options are:

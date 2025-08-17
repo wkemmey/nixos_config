@@ -236,9 +236,19 @@ git add .
 git config --global --unset-all user.name
 git config --global --unset-all user.email
 
-sed -i "s/host = \"[^\"]*\";/host = \"$hostName\";/g" ./flake.nix
-sed -i "s/profile = \"[^\"]*\";/profile = \"$profile\";/g" ./flake.nix
-sed -i "s/timezone = \"[^\"]*\";/timezone = \"$timezone\";/g" ./hosts/$hostName/variables.nix
+echo "Updating configuration files..."
+
+# Update flake.nix with correct patterns (at beginning of lines, with exact spacing)
+awk -v host="$hostName" '{gsub(/^  host = "[^"]*";/, "  host = \"" host "\";")); print}' ./flake.nix > ./flake.nix.tmp && mv ./flake.nix.tmp ./flake.nix
+awk -v prof="$profile" '{gsub(/^  profile = "[^"]*";/, "  profile = \"" prof "\";")); print}' ./flake.nix > ./flake.nix.tmp && mv ./flake.nix.tmp ./flake.nix
+awk -v user="$installusername" '{gsub(/^  username = "[^"]*";/, "  username = \"" user "\";")); print}' ./flake.nix > ./flake.nix.tmp && mv ./flake.nix.tmp ./flake.nix
+
+# Update system timezone in modules/core/system.nix
+awk -v tz="$timezone" '{gsub(/^  time\.timeZone = "[^"]*";/, "  time.timeZone = \"" tz "\";")); print}' ./modules/core/system.nix > ./modules/core/system.nix.tmp && mv ./modules/core/system.nix.tmp ./modules/core/system.nix
+
+# Update git configuration in the new host variables file
+awk -v user="$gitUsername" '{gsub(/^  gitUsername = "[^"]*";/, "  gitUsername = \"" user "\";")); print}' ./hosts/$hostName/variables.nix > ./hosts/$hostName/variables.nix.tmp && mv ./hosts/$hostName/variables.nix.tmp ./hosts/$hostName/variables.nix
+awk -v email="$gitEmail" '{gsub(/^  gitEmail = "[^"]*";/, "  gitEmail = \"" email "\";")); print}' ./hosts/$hostName/variables.nix > ./hosts/$hostName/variables.nix.tmp && mv ./hosts/$hostName/variables.nix.tmp ./hosts/$hostName/variables.nix
 
 print_header "Keyboard Layout Configuration"
 echo "🌍 Common keyboard layouts:"
@@ -256,7 +266,8 @@ if [ -z "$keyboardLayout" ]; then
   keyboardLayout="us"
 fi
 echo -e "${GREEN}✓ Keyboard layout set to: $keyboardLayout${NC}"
-sed -i "s/keyboardLayout = \"[^\"]*\";/keyboardLayout = \"$keyboardLayout\";/g" ./hosts/$hostName/variables.nix
+# Update keyboard layout in the new host variables file  
+awk -v kb="$keyboardLayout" '{gsub(/^  keyboardLayout = "[^"]*";/, "  keyboardLayout = \"" kb "\";")); print}' ./hosts/$hostName/variables.nix > ./hosts/$hostName/variables.nix.tmp && mv ./hosts/$hostName/variables.nix.tmp ./hosts/$hostName/variables.nix
 
 print_header "Console Keymap Configuration"
 echo "⌨️  Console keymap (usually matches your keyboard layout):"
@@ -271,10 +282,9 @@ if [ -z "$consoleKeyMap" ]; then
   consoleKeyMap="$defaultConsoleKeyMap"
 fi
 echo -e "${GREEN}✓ Console keymap set to: $consoleKeyMap${NC}"
-sed -i "s/consoleKeyMap = \"[^\"]*\";/consoleKeyMap = \"$consoleKeyMap\";/g" ./hosts/$hostName/variables.nix
+awk -v ckm="$consoleKeyMap" '{gsub(/^  consoleKeyMap = "[^"]*";/, "  consoleKeyMap = \"" ckm "\";")); print}' ./hosts/$hostName/variables.nix > ./hosts/$hostName/variables.nix.tmp && mv ./hosts/$hostName/variables.nix.tmp ./hosts/$hostName/variables.nix
 
-print_header "Username Configuration"
-sed -i "s/username = \"[^\"]*\";/username = \"$installusername\";/g" ./flake.nix
+echo "Configuration files updated successfully!"
 
 print_header "Generating Hardware Configuration -- Ignore ERROR: cannot access /bin"
 sudo nixos-generate-config --show-hardware-config > ./hosts/$hostName/hardware.nix
