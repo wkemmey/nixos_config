@@ -236,9 +236,9 @@ git add .
 git config --global --unset-all user.name
 git config --global --unset-all user.email
 
-sed -i "/^[[:space:]]*host[[:space:]]*=[[:space:]]*\"/ s/\"[^\"]*\"/\"$hostName\"/" ./flake.nix
-sed -i "/^[[:space:]]*profile[[:space:]]*=[[:space:]]*\"/ s/\"[^\"]*\"/\"$profile\"/" ./flake.nix
-sed -i "/^[[:space:]]*timezone[[:space:]]*=[[:space:]]*\"/ s/\"[^\"]*\"/\"$timezone\"/" ./hosts/$hostName/variables.nix
+sed -i "\|^[[:space:]]*host[[:space:]]*=[[:space:]]*\"\| s\|\"[^\"]*\"\|\"$hostName\"\|" ./flake.nix
+sed -i "\|^[[:space:]]*profile[[:space:]]*=[[:space:]]*\"\| s\|\"[^\"]*\"\|\"$profile\"\|" ./flake.nix
+sed -i "\|^[[:space:]]*timezone[[:space:]]*=[[:space:]]*\"\| s\|\"[^\"]*\"\|\"$timezone\"\|" ./hosts/$hostName/variables.nix
 
 print_header "Keyboard Layout Configuration"
 echo "🌍 Common keyboard layouts:"
@@ -256,7 +256,7 @@ if [ -z "$keyboardLayout" ]; then
   keyboardLayout="us"
 fi
 echo -e "${GREEN}✓ Keyboard layout set to: $keyboardLayout${NC}"
-sed -i "/^[[:space:]]*keyboardLayout[[:space:]]*=[[:space:]]*\"/ s/\"[^\"]*\"/\"$keyboardLayout\"/" ./hosts/$hostName/variables.nix
+sed -i "\|^[[:space:]]*keyboardLayout[[:space:]]*=[[:space:]]*\"\| s\|\"[^\"]*\"\|\"$keyboardLayout\"\|" ./hosts/$hostName/variables.nix
 
 print_header "Console Keymap Configuration"
 echo "⌨️  Console keymap (usually matches your keyboard layout):"
@@ -271,10 +271,10 @@ if [ -z "$consoleKeyMap" ]; then
   consoleKeyMap="$defaultConsoleKeyMap"
 fi
 echo -e "${GREEN}✓ Console keymap set to: $consoleKeyMap${NC}"
-sed -i "/^[[:space:]]*consoleKeyMap[[:space:]]*=[[:space:]]*\"/ s/\"[^\"]*\"/\"$consoleKeyMap\"/" ./hosts/$hostName/variables.nix
+sed -i "\|^[[:space:]]*consoleKeyMap[[:space:]]*=[[:space:]]*\"\| s\|\"[^\"]*\"\|\"$consoleKeyMap\"\|" ./hosts/$hostName/variables.nix
 
 print_header "Username Configuration"
-sed -i "/^[[:space:]]*username[[:space:]]*=[[:space:]]*\"/ s/\"[^\"]*\"/\"$installusername\"/" ./flake.nix
+sed -i "\|^[[:space:]]*username[[:space:]]*=[[:space:]]*\"\| s\|\"[^\"]*\"\|\"$installusername\"\|" ./flake.nix
 
 print_header "Generating Hardware Configuration -- Ignore ERROR: cannot access /bin"
 sudo nixos-generate-config --show-hardware-config > ./hosts/$hostName/hardware.nix
