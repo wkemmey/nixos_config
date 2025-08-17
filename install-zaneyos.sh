@@ -162,7 +162,14 @@ fi
 # If profile is still empty (either not detected or not confirmed), prompt manually
 if [ -z "$profile" ]; then
   echo -e "${RED}Automatic GPU detection failed or no specific profile found.${NC}"
-  read -rp "Enter Your Hardware Profile (GPU)\nOptions:\n[ amd ]\nnvidia\nnvidia-laptop\nintel\nvm\nPlease type out your choice: " profile
+  read -rp "Enter Your Hardware Profile (GPU)
+Options:
+[ amd ]
+nvidia
+nvidia-laptop
+intel
+vm
+Please type out your choice: " profile
   if [ -z "$profile" ]; then
     profile="amd"
   fi
@@ -226,30 +233,6 @@ if [ -z "$timezone" ]; then
 fi
 echo -e "${GREEN}✓ Timezone set to: $timezone${NC}"
 
-print_header "Configuring Host and Profile"
-mkdir -p hosts/"$hostName"
-cp hosts/default/*.nix hosts/"$hostName"
-
-git config --global user.name "$gitUsername"
-git config --global user.email "$gitEmail"
-git add .
-git config --global --unset-all user.name
-git config --global --unset-all user.email
-
-echo "Updating configuration files..."
-
-# Update flake.nix with correct patterns (at beginning of lines, with exact spacing)
-awk -v host="$hostName" '{gsub(/^  host = "[^"]*";/, "  host = \"" host "\";")); print}' ./flake.nix > ./flake.nix.tmp && mv ./flake.nix.tmp ./flake.nix
-awk -v prof="$profile" '{gsub(/^  profile = "[^"]*";/, "  profile = \"" prof "\";")); print}' ./flake.nix > ./flake.nix.tmp && mv ./flake.nix.tmp ./flake.nix
-awk -v user="$installusername" '{gsub(/^  username = "[^"]*";/, "  username = \"" user "\";")); print}' ./flake.nix > ./flake.nix.tmp && mv ./flake.nix.tmp ./flake.nix
-
-# Update system timezone in modules/core/system.nix
-awk -v tz="$timezone" '{gsub(/^  time\.timeZone = "[^"]*";/, "  time.timeZone = \"" tz "\";")); print}' ./modules/core/system.nix > ./modules/core/system.nix.tmp && mv ./modules/core/system.nix.tmp ./modules/core/system.nix
-
-# Update git configuration in the new host variables file
-awk -v user="$gitUsername" '{gsub(/^  gitUsername = "[^"]*";/, "  gitUsername = \"" user "\";")); print}' ./hosts/$hostName/variables.nix > ./hosts/$hostName/variables.nix.tmp && mv ./hosts/$hostName/variables.nix.tmp ./hosts/$hostName/variables.nix
-awk -v email="$gitEmail" '{gsub(/^  gitEmail = "[^"]*";/, "  gitEmail = \"" email "\";")); print}' ./hosts/$hostName/variables.nix > ./hosts/$hostName/variables.nix.tmp && mv ./hosts/$hostName/variables.nix.tmp ./hosts/$hostName/variables.nix
-
 print_header "Keyboard Layout Configuration"
 echo "🌍 Common keyboard layouts:"
 echo "  • us (US English) - default"
@@ -266,8 +249,6 @@ if [ -z "$keyboardLayout" ]; then
   keyboardLayout="us"
 fi
 echo -e "${GREEN}✓ Keyboard layout set to: $keyboardLayout${NC}"
-# Update keyboard layout in the new host variables file  
-awk -v kb="$keyboardLayout" '{gsub(/^  keyboardLayout = "[^"]*";/, "  keyboardLayout = \"" kb "\";")); print}' ./hosts/$hostName/variables.nix > ./hosts/$hostName/variables.nix.tmp && mv ./hosts/$hostName/variables.nix.tmp ./hosts/$hostName/variables.nix
 
 print_header "Console Keymap Configuration"
 echo "⌨️  Console keymap (usually matches your keyboard layout):"
@@ -282,7 +263,43 @@ if [ -z "$consoleKeyMap" ]; then
   consoleKeyMap="$defaultConsoleKeyMap"
 fi
 echo -e "${GREEN}✓ Console keymap set to: $consoleKeyMap${NC}"
-awk -v ckm="$consoleKeyMap" '{gsub(/^  consoleKeyMap = "[^"]*";/, "  consoleKeyMap = \"" ckm "\";")); print}' ./hosts/$hostName/variables.nix > ./hosts/$hostName/variables.nix.tmp && mv ./hosts/$hostName/variables.nix.tmp ./hosts/$hostName/variables.nix
+
+print_header "Configuring Host and Profile"
+mkdir -p hosts/"$hostName"
+cp hosts/default/*.nix hosts/"$hostName"
+
+git config --global user.name "$gitUsername"
+git config --global user.email "$gitEmail"
+git add .
+git config --global --unset-all user.name
+git config --global --unset-all user.email
+
+echo "Updating configuration files with working awk commands..."
+
+# Update flake.nix (simple pattern replacements that work)
+cp ./flake.nix ./flake.nix.bak
+awk -v newhost="$hostName" '/^  host = / { gsub(/"[^"]*"/, "\"" newhost "\""); } { print }' ./flake.nix.bak > ./flake.nix
+cp ./flake.nix ./flake.nix.bak 
+awk -v newprof="$profile" '/^  profile = / { gsub(/"[^"]*"/, "\"" newprof "\""); } { print }' ./flake.nix.bak > ./flake.nix
+cp ./flake.nix ./flake.nix.bak
+awk -v newuser="$installusername" '/^  username = / { gsub(/"[^"]*"/, "\"" newuser "\""); } { print }' ./flake.nix.bak > ./flake.nix
+rm ./flake.nix.bak
+
+# Update timezone in system.nix  
+cp ./modules/core/system.nix ./modules/core/system.nix.bak
+awk -v newtz="$timezone" '/^  time\.timeZone = / { gsub(/"[^"]*"/, "\"" newtz "\""); } { print }' ./modules/core/system.nix.bak > ./modules/core/system.nix
+rm ./modules/core/system.nix.bak
+
+# Update variables in host file
+cp ./hosts/$hostName/variables.nix ./hosts/$hostName/variables.nix.bak
+awk -v newuser="$gitUsername" '/^  gitUsername = / { gsub(/"[^"]*"/, "\"" newuser "\""); } { print }' ./hosts/$hostName/variables.nix.bak > ./hosts/$hostName/variables.nix
+cp ./hosts/$hostName/variables.nix ./hosts/$hostName/variables.nix.bak
+awk -v newemail="$gitEmail" '/^  gitEmail = / { gsub(/"[^"]*"/, "\"" newemail "\""); } { print }' ./hosts/$hostName/variables.nix.bak > ./hosts/$hostName/variables.nix
+cp ./hosts/$hostName/variables.nix ./hosts/$hostName/variables.nix.bak
+awk -v newkb="$keyboardLayout" '/^  keyboardLayout = / { gsub(/"[^"]*"/, "\"" newkb "\""); } { print }' ./hosts/$hostName/variables.nix.bak > ./hosts/$hostName/variables.nix
+cp ./hosts/$hostName/variables.nix ./hosts/$hostName/variables.nix.bak
+awk -v newckm="$consoleKeyMap" '/^  consoleKeyMap = / { gsub(/"[^"]*"/, "\"" newckm "\""); } { print }' ./hosts/$hostName/variables.nix.bak > ./hosts/$hostName/variables.nix
+rm ./hosts/$hostName/variables.nix.bak
 
 echo "Configuration files updated successfully!"
 
