@@ -236,9 +236,9 @@ git add .
 git config --global --unset-all user.name
 git config --global --unset-all user.email
 
-sed -i "/^[[:space:]]*host[[:space:]]*=/s/\"[^\"]*\"/\"$hostName\"/" ./flake.nix
-sed -i "/^[[:space:]]*profile[[:space:]]*=/s/\"[^\"]*\"/\"$profile\"/" ./flake.nix
-sed -i "/^[[:space:]]*timezone[[:space:]]*=/s/\"[^\"]*\"/\"${timezone//\//\/}\"/" ./hosts/$hostName/variables.nix
+sed -i "s/host = \"[^\"]*\";/host = \"$hostName\";/g" ./flake.nix
+sed -i "s/profile = \"[^\"]*\";/profile = \"$profile\";/g" ./flake.nix
+sed -i "s/timezone = \"[^\"]*\";/timezone = \"$timezone\";/g" ./hosts/$hostName/variables.nix
 
 print_header "Keyboard Layout Configuration"
 echo "🌍 Common keyboard layouts:"
@@ -256,7 +256,7 @@ if [ -z "$keyboardLayout" ]; then
   keyboardLayout="us"
 fi
 echo -e "${GREEN}✓ Keyboard layout set to: $keyboardLayout${NC}"
-sed -i "/^[[:space:]]*keyboardLayout[[:space:]]*=/s/\"[^\"]*\"/\"$keyboardLayout\"/" ./hosts/$hostName/variables.nix
+sed -i "s/keyboardLayout = \"[^\"]*\";/keyboardLayout = \"$keyboardLayout\";/g" ./hosts/$hostName/variables.nix
 
 print_header "Console Keymap Configuration"
 echo "⌨️  Console keymap (usually matches your keyboard layout):"
@@ -271,10 +271,10 @@ if [ -z "$consoleKeyMap" ]; then
   consoleKeyMap="$defaultConsoleKeyMap"
 fi
 echo -e "${GREEN}✓ Console keymap set to: $consoleKeyMap${NC}"
-sed -i "/^[[:space:]]*consoleKeyMap[[:space:]]*=/s/\"[^\"]*\"/\"$consoleKeyMap\"/" ./hosts/$hostName/variables.nix
+sed -i "s/consoleKeyMap = \"[^\"]*\";/consoleKeyMap = \"$consoleKeyMap\";/g" ./hosts/$hostName/variables.nix
 
 print_header "Username Configuration"
-sed -i "/^[[:space:]]*username[[:space:]]*=/s/\"[^\"]*\"/\"$installusername\"/" ./flake.nix
+sed -i "s/username = \"[^\"]*\";/username = \"$installusername\";/g" ./flake.nix
 
 print_header "Generating Hardware Configuration -- Ignore ERROR: cannot access /bin"
 sudo nixos-generate-config --show-hardware-config > ./hosts/$hostName/hardware.nix
