@@ -1,11 +1,15 @@
 ### 🗒️ Changelog
 
-## ZaneyOS v2.3.2 -- Post GA Release Notes
+## ZaneyOS v2.3.3 -- Release Notes
 
-** Updated: August 11th, 2025 **
+** Updated: August 18th, 2025 **
+
+- Fixed: Two issues in `install-zaneyos.sh` script prevented updating of
+  `flake.nix`
 
 - NeoVIM Enhancements:
-  - Enhanced DirtytalkUpdate automation with smart detection to skip if wordlist exists
+  - Enhanced DirtytalkUpdate automation with smart detection to skip if wordlist
+    exists
   - Added Nix LSP auto-eval-inputs support for better flake evaluation
   - Improved home.activation script with better error handling and DAG ordering
   - Programming wordlist is now automatically downloaded only when needed
