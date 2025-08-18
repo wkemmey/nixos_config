@@ -20,10 +20,10 @@ This includes the wallpaper, scripts, applications, config files, and more.
 
 #### 🍖 Requirements
 
-- You must be running on NixOS, version 23.11+. 
+- You must be running on NixOS, version 23.11+.
 - The zaneyos folder (this repo) is expected to be in your home directory.
-- Must have installed using **GPT** & **UEFI**. Systemd-boot is what is supported, for
-  GRUB you will have to brave the internet for a how-to. ☺️
+- Must have installed using **GPT** & **UEFI**. Systemd-boot is what is
+  supported, for GRUB you will have to brave the internet for a how-to. ☺️
 - Manually editing your host specific files. The host is the specific computer
   your installing on.
 
@@ -83,6 +83,7 @@ Please do yourself a favor and
 Below are the keybindings for Hyprland, formatted for easy reference.
 
 ## Application Launching
+
 - `$modifier + Return` → Launch `Terminal`
 - `$modifier + K` → List keybinds
 - `$modifier + Shift + Return` → Launch `rofi-launcher`
@@ -102,6 +103,7 @@ Below are the keybindings for Hyprland, formatted for easy reference.
 - `$modifier + M` → Open `pavucontrol`
 
 ## Window Management
+
 - `$modifier + Q` → Kill active window
 - `$modifier + P` → Toggle pseudo tiling
 - `$modifier + Shift + I` → Toggle split mode
@@ -111,16 +113,19 @@ Below are the keybindings for Hyprland, formatted for easy reference.
 - `$modifier + Shift + C` → Exit Hyprland
 
 ## Window Movement
+
 - `$modifier + Shift + ← / → / ↑ / ↓` → Move window left/right/up/down
 - `$modifier + Shift + H / L / K / J` → Move window left/right/up/down
 - `$modifier + Alt + ← / → / ↑ / ↓` → Swap window left/right/up/down
 - `$modifier + Alt + 43 / 46 / 45 / 44` → Swap window left/right/up/down
 
 ## Focus Movement
+
 - `$modifier + ← / → / ↑ / ↓` → Move focus left/right/up/down
 - `$modifier + H / L / K / J` → Move focus left/right/up/down
 
 ## Workspaces
+
 - `$modifier + 1-10` → Switch to workspace 1-10
 - `$modifier + Shift + Space` → Move window to special workspace
 - `$modifier + Space` → Toggle special workspace
@@ -128,11 +133,9 @@ Below are the keybindings for Hyprland, formatted for easy reference.
 - `$modifier + Control + → / ←` → Switch workspace forward/backward
 
 ## Window Cycling
+
 - `Alt + Tab` → Cycle to next window
 - `Alt + Tab` → Bring active window to top
-
-
-
 
 ## ⬇️ Install
 
@@ -151,7 +154,7 @@ Simply copy this and run it:
 ![ZaneyOS First Install Command](img/first-install-cmd.jpg)
 
 ```
-nix-shell -p git curl pciutils 
+nix-shell -p git curl pciutils
 ```
 
 Then:
@@ -197,6 +200,7 @@ cd zaneyos
 
 ```
 cp -r hosts/default hosts/<your-desired-hostname>
+git add .
 ```
 
 4. Edit `hosts/<your-desired-hostname>/variables.nix`.
