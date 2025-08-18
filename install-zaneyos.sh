@@ -137,7 +137,7 @@ if lspci | grep -qi 'vga\|3d'; then
   if $has_vm; then
     DETECTED_PROFILE="vm"
   elif $has_nvidia && $has_intel; then
-    DETECTED_PROFILE="hybrid"
+    DETECTED_PROFILE="nvidia-laptop"  # Hybrid systems typically use nvidia-laptop profile
   elif $has_nvidia; then
     DETECTED_PROFILE="nvidia"
   elif $has_amd; then
@@ -174,6 +174,14 @@ Please type out your choice: " profile
     profile="amd"
   fi
   echo -e "${GREEN}Selected GPU profile: $profile${NC}"
+fi
+
+# Validate profile is supported
+valid_profiles=("amd" "nvidia" "nvidia-laptop" "intel" "vm")
+if [[ ! " ${valid_profiles[@]} " =~ " ${profile} " ]]; then
+  print_error "Invalid profile '$profile'. Valid options are: ${valid_profiles[*]}"
+  echo -e "${RED}Please run the script again and select a valid profile.${NC}"
+  exit 1
 fi
 
 print_header "Backup Existing ZaneyOS (if any)"
@@ -276,14 +284,17 @@ git config --global --unset-all user.email
 
 echo "Updating configuration files with working awk commands..."
 
-# Update flake.nix (simple pattern replacements that work)
+# Update flake.nix (fix pattern matching to handle leading whitespace)
 # Create backup first, before any changes
 cp ./flake.nix ./flake.nix.bak
-# Use sed for hostname (more reliable)
-sed -i "/^[[:space:]]*host[[:space:]]*=[[:space:]]*\"/s/\"[^\"]*\"/\"$hostName\"/" ./flake.nix.bak
-awk -v newprof="$profile" '/^profile = / { gsub(/"[^"]*"/, "\"" newprof "\""); } { print }' ./flake.nix.bak > ./flake.nix
+# Update hostname with proper pattern matching
+awk -v newhost="$hostName" '/^[[:space:]]*host[[:space:]]*=/ { gsub(/"[^"]*"/, "\"" newhost "\""); } { print }' ./flake.nix.bak > ./flake.nix
 cp ./flake.nix ./flake.nix.bak
-awk -v newuser="$installusername" '/^username = / { gsub(/"[^"]*"/, "\"" newuser "\""); } { print }' ./flake.nix.bak > ./flake.nix
+# Update profile with proper pattern matching
+awk -v newprof="$profile" '/^[[:space:]]*profile[[:space:]]*=/ { gsub(/"[^"]*"/, "\"" newprof "\""); } { print }' ./flake.nix.bak > ./flake.nix
+cp ./flake.nix ./flake.nix.bak
+# Update username with proper pattern matching
+awk -v newuser="$installusername" '/^[[:space:]]*username[[:space:]]*=/ { gsub(/"[^"]*"/, "\"" newuser "\""); } { print }' ./flake.nix.bak > ./flake.nix
 rm ./flake.nix.bak
 
 # Update timezone in system.nix  
@@ -303,6 +314,14 @@ awk -v newckm="$consoleKeyMap" '/^  consoleKeyMap = / { gsub(/"[^"]*"/, "\"" new
 rm ./hosts/$hostName/variables.nix.bak
 
 echo "Configuration files updated successfully!"
+
+# Verify the updates worked
+echo -e "${GREEN}Verifying configuration updates:${NC}"
+echo -e "  Host: $(grep -E '^[[:space:]]*host[[:space:]]*=' ./flake.nix | head -1 | sed 's/.*"\([^"]*\)".*/\1/')"
+echo -e "  Profile: $(grep -E '^[[:space:]]*profile[[:space:]]*=' ./flake.nix | head -1 | sed 's/.*"\([^"]*\)".*/\1/')"
+echo -e "  Username: $(grep -E '^[[:space:]]*username[[:space:]]*=' ./flake.nix | head -1 | sed 's/.*"\([^"]*\)".*/\1/')"
+echo -e "  Build target: ${GREEN}${profile}${NC} (flake configuration)"
+echo -e "  Host directory: ${GREEN}./hosts/${hostName}/${NC}"
 
 print_header "Generating Hardware Configuration -- Ignore ERROR: cannot access /bin"
 sudo nixos-generate-config --show-hardware-config > ./hosts/$hostName/hardware.nix
