@@ -1,302 +1,163 @@
-# A Guide to Customizing Hyprland in ddubsOS
+# A Guide to Customizing Hyprland in ZaneyOS
 
-This guide provides a more detailed look at how to customize your Hyprland experience in ddubsOS. We'll go through the most important configuration files, explaining what they do and how you can edit them.
+This guide provides a practical overview for customizing your Hyprland experience in ZaneyOS. We’ll cover the most relevant files, what they do, and small, safe edits you can make.
 
-**A Word of Caution:** The configuration files are written in the Nix language. Nix has a very specific syntax, and any mistakes can prevent your system from building successfully. Always be careful when editing these files, and make sure to follow the examples closely.
+Note: These files are written in Nix. A small syntax error can break builds. Make one change at a time and keep your edits under version control.
 
-## Applying Your Changes
+## Applying your changes
 
-After making any changes to these files, you'll need to apply them. Open a terminal and run:
+Preferred (ZaneyOS-specific):
+- `zcli rebuild`
+  - Note: The `fr` alias is deprecated.
 
-```bash
-zcli rebuild
-```
-
-This command will rebuild your system with the new configuration. If there are any errors in your configuration, this command will fail.
+Manual backup method (works anywhere):
+- From the repo root, replace PROFILE with your profile (intel, nvidia, nvidia-laptop, vm):
+  - `sudo nixos-rebuild switch --flake .#PROFILE`
 
 ---
 
-### `binds.nix` - Keybindings
+### `binds.nix` — Keybindings
 
-This file controls all of your keyboard and mouse shortcuts in Hyprland.
+Controls keyboard and mouse shortcuts.
 
-**Location:** `modules/home/hyprland/binds.nix`
+Location: `modules/home/hyprland/binds.nix`
 
-You can change existing keybindings or add new ones. The format is a string with comma-separated values: `MODIFIER, KEY, DISPATCHER, VALUE`.
+Format: `MODIFIER, KEY, DISPATCHER, VALUE`
 
-**Example:**
-
-Let's say you want to change the keybinding for opening a terminal from `SUPER + Return` to `SUPER + T`.
-
-**Original:**
+Example: Change terminal from Super+Return to Super+T
 
 ```nix
 # ...
-    bind = [
-      # ...
-      "$modifier,Return,exec, ${terminal}"
-      # ...
-    ];
-# ...
-```
-
-**Modified:**
-
-```nix
-# ...
-    bind = [
-      # ...
-      "$modifier,T,exec, ${terminal}"
-      # ...
-    ];
+  bind = [
+    # ...
+    "$modifier,T,exec, ${terminal}"
+    # ...
+  ];
 # ...
 ```
 
 ---
 
-### `exec-once.nix` - Startup Applications
+### `exec-once.nix` — Startup applications
 
-This file lists the applications and commands that run automatically when you start Hyprland.
+Commands that start automatically with Hyprland.
 
-**Location:** `modules/home/hyprland/exec-once.nix`
+Location: `modules/home/hyprland/exec-once.nix`
 
-You can add or remove commands from this list. Each command is a string.
-
-**Example:**
-
-If you want to start the `copyq` application every time you log in, you can add it to the list.
-
-**Original:**
+Example: Add copyq to autostart
 
 ```nix
 # ...
-    exec-once = [
-      # ...
-      "pypr &" # pyprland for drop down term SUPERSHIFT + T
-    ];
-# ...
-```
-
-**Modified:**
-
-```nix
-# ...
-    exec-once = [
-      # ...
-      "pypr &" # pyprland for drop down term SUPERSHIFT + T
-      "copyq"
-    ];
+  exec-once = [
+    # ...
+    "pypr &"
+    "copyq"
+  ];
 # ...
 ```
 
 ---
 
-### `decoration.nix` - Window Decorations
+### `decoration.nix` — Borders, shadows, blur
 
-This file controls the appearance of window borders, shadows, and blur effects.
+Location: `modules/home/hyprland/decoration.nix`
 
-**Location:** `modules/home/hyprland/decoration.nix`
-
-You can change values like `rounding` for rounded corners, or adjust the `blur` and `shadow` settings.
-
-**Example:**
-
-To increase the rounding of window corners from `0` to `10`.
-
-**Original:**
+Example: Rounded corners
 
 ```nix
 # ...
-      decoration = {
-        rounding = 0;
-# ...
-```
-
-**Modified:**
-
-```nix
-# ...
-      decoration = {
-        rounding = 10;
+  decoration = {
+    rounding = 10;
+  };
 # ...
 ```
 
 ---
 
-### `env.nix` - Environment Variables
+### `env.nix` — Environment variables
 
-This file sets environment variables for your Hyprland session. These can affect how applications behave.
+Location: `modules/home/hyprland/env.nix`
 
-**Location:** `modules/home/hyprland/env.nix`
-
-You can add or change environment variables in this list.
-
-**Example:**
-
-To set the `MOZ_ENABLE_WAYLAND` variable to `1`, which forces Firefox to run in Wayland mode.
-
-**Original:**
+Example: Enable Wayland for Firefox
 
 ```nix
 # ...
-    env = [
-      # ...
-      "SDL_VIDEODRIVER, wayland"
-      # ...
-    ];
-# ...
-```
-
-**Modified:**
-
-```nix
-# ...
-    env = [
-      # ...
-      "SDL_VIDEODRIVER, wayland"
-      "MOZ_ENABLE_WAYLAND, 1"
-      # ...
-    ];
+  env = [
+    "SDL_VIDEODRIVER, wayland"
+    "MOZ_ENABLE_WAYLAND, 1"
+  ];
 # ...
 ```
 
 ---
 
-### `gestures.nix` - Touchpad Gestures
+### `gestures.nix` — Touchpad gestures
 
-This file controls touchpad gestures, like swiping between workspaces.
+Location: `modules/home/hyprland/gestures.nix`
 
-**Location:** `modules/home/hyprland/gestures.nix`
-
-You can enable or disable gestures and change their behavior.
-
-**Example:**
-
-To disable workspace swiping.
-
-**Original:**
+Example: Disable workspace swipe
 
 ```nix
 # ...
-      gestures = {
-        workspace_swipe = 1;
-# ...
-```
-
-**Modified:**
-
-```nix
-# ...
-      gestures = {
-        workspace_swipe = 0;
+  gestures = {
+    workspace_swipe = 0;
+  };
 # ...
 ```
 
 ---
 
-### `misc.nix` - Miscellaneous Settings
+### `misc.nix` — Misc settings
 
-This file contains various settings that don't fit into the other categories.
+Location: `modules/home/hyprland/misc.nix`
 
-**Location:** `modules/home/hyprland/misc.nix`
-
-You can change settings like `vrr` (Variable Refresh Rate) or `disable_hyprland_logo`.
-
-**Example:**
-
-To enable Variable Refresh Rate.
-
-**Original:**
+Example: Enable Variable Refresh Rate
 
 ```nix
 # ...
-      misc = {
-        # ...
-        vrr = 0;
-        # ...
-      };
-# ...
-```
-
-**Modified:**
-
-```nix
-# ...
-      misc = {
-        # ...
-        vrr = 1;
-        # ...
-      };
+  misc = {
+    vrr = 1;
+  };
 # ...
 ```
 
 ---
 
-### `hyprland.nix` - Main Configuration
+### `hyprland.nix` — Main configuration
 
-This is the main Hyprland configuration file. It sets up general settings, input devices, and the window layout.
+Location: `modules/home/hyprland/hyprland.nix`
 
-**Location:** `modules/home/hyprland/hyprland.nix`
-
-You can change things like the keyboard layout, touchpad settings, and the layout engine.
-
-**Example:**
-
-To change the keyboard layout from the default to `us`.
-
-**Original:**
+Example: Keyboard layout
 
 ```nix
 # ...
-      input = {
-        kb_layout = "${keyboardLayout}";
-# ...
-```
-
-**Modified:**
-
-```nix
-# ...
-      input = {
-        kb_layout = "us";
+  input = {
+    kb_layout = "us";
+  };
 # ...
 ```
 
 ---
 
-### `windowrules.nix` - Window Rules
+### `windowrules.nix` — Window rules
 
-This file defines rules for how specific windows should behave. You can make certain applications always float, open on a specific workspace, or have a certain opacity.
+Location: `modules/home/hyprland/windowrules.nix`
 
-**Location:** `modules/home/hyprland/windowrules.nix`
-
-You can add new rules to the `windowrule` list.
-
-**Example:**
-
-To make the `thunar` file manager always float.
-
-**Original:**
+Example: Float Thunar always
 
 ```nix
 # ...
-      windowrule = [
-        # ...
-        "float, class:^(foot-floating)$"
-        # ...
-      ];
+  windowrule = [
+    "float, class:^(foot-floating)$"
+    "float, class:^(Thunar)$"
+  ];
 # ...
 ```
 
-**Modified:**
+---
 
-```nix
-# ...
-      windowrule = [
-        # ...
-        "float, class:^(foot-floating)$"
-        "float, class:^(Thunar)$"
-        # ...
-      ];
-# ...
-```
+## Helpful tips
+
+- Make one change at a time and rebuild to validate.
+- Keep a terminal open during experiments in case your launcher keybind changes.
+- If something breaks, reboot and choose a previous generation in the boot menu.
