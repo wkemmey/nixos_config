@@ -14,6 +14,7 @@ Black Don OS is a personalized NixOS configuration that supports multiple host c
 - 🎨 **Stylix Integration** - System-wide theming and styling
 - 📦 **Flake-based Configuration** - Reproducible and declarative system management
 - 🔧 **Easy Host Setup** - Automated script for adding new computers
+- ⚡ **dcli Tool** - Custom CLI utility for multi-host system management
 
 ## Current Hosts
 
@@ -39,10 +40,12 @@ This will guide you through:
 ### Building for a Specific Host
 
 ```bash
-# Build configuration for a specific host
-nixos-rebuild build --flake .#nix-desktop
+# Using dcli (recommended)
+dcli build nix-desktop      # Build only (no activation)
+dcli deploy nix-desktop     # Build and switch
 
-# Switch to a host configuration
+# Using standard nix commands
+nixos-rebuild build --flake .#nix-desktop
 sudo nixos-rebuild switch --flake .#nix-desktop
 ```
 
@@ -167,6 +170,13 @@ Each host has its own directory under `hosts/` containing:
 Simply switch to a different host configuration:
 
 ```bash
+# Using dcli (recommended)
+dcli deploy nix-desktop
+
+# Using interactive switcher
+./switch-host.sh
+
+# Using standard nix commands
 sudo nixos-rebuild switch --flake ~/black-don-os#nix-desktop
 ```
 
@@ -182,8 +192,8 @@ sudo nixos-rebuild switch --flake ~/black-don-os#nix-desktop
 ### Updating Existing Hosts
 
 1. Edit host-specific files in `hosts/HOST-NAME/`
-2. Test changes: `nixos-rebuild build --flake .#HOST-NAME`
-3. Apply: `sudo nixos-rebuild switch --flake .#HOST-NAME`
+2. Test changes: `dcli build HOST-NAME`
+3. Apply: `dcli deploy HOST-NAME` or `dcli rebuild` (for current host)
 
 ### Adding System Packages
 
@@ -196,6 +206,30 @@ sudo nixos-rebuild switch --flake ~/black-don-os#nix-desktop
 - Waybar themes: Choose in `variables.nix` `waybarChoice`
 - Animations: Select in `variables.nix` `animChoice`
 - Colors: Stylix handles theming from wallpaper
+
+## dcli - Don CLI Utility
+
+Black Don OS includes `dcli`, a custom command-line utility for managing your multi-host setup:
+
+### Common Commands
+```bash
+dcli help           # Show all commands
+dcli list-hosts     # List available hosts
+dcli rebuild        # Rebuild current host
+dcli update         # Update and rebuild current host
+dcli build HOST     # Build specific host (no activation)
+dcli deploy HOST    # Deploy to specific host
+dcli cleanup        # Clean old generations
+dcli switch-host    # Interactive host switcher
+```
+
+### Shell Aliases
+- `fr` - Fast rebuild (`dcli rebuild`)
+- `fu` - Fast update (`dcli update`) 
+- `hosts` - List hosts (`dcli list-hosts`)
+- `switch` - Host switcher (`dcli switch-host`)
+
+See [dcli.md](dcli.md) for complete documentation.
 
 ## Development
 
@@ -210,7 +244,8 @@ This is a fork of ZaneyOS with personal customizations:
 
 ```bash
 # Fetch updates from original ZaneyOS
-git fetch upstream
+dcli pull           # Pull from your fork
+git fetch upstream  # Fetch from original ZaneyOS
 
 # Merge updates (be careful with conflicts)
 git merge upstream/stable-2.3
@@ -219,20 +254,23 @@ git merge upstream/stable-2.3
 ### Contributing Changes
 
 1. Make changes in feature branch
-2. Test on multiple hosts
+2. Test on multiple hosts: `dcli build HOST-NAME`
 3. Update documentation
-4. Push to your fork
+4. Commit and push: `dcli commit "message"` && `dcli push`
 
 ## Troubleshooting
 
 ### Build Failures
 
 ```bash
-# Show detailed error trace
+# Generate diagnostic report
+dcli diag
+
+# Show detailed error trace  
 nixos-rebuild build --flake .#HOST-NAME --show-trace
 
 # Clean build cache
-nix-collect-garbage -d
+dcli cleanup
 ```
 
 ### Hardware Detection
