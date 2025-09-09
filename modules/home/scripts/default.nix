@@ -1,6 +1,7 @@
 {
   pkgs,
   username,
+  host,
   profile,
   ...
 }: {
@@ -18,8 +19,8 @@
     (import ./rofi-launcher.nix {inherit pkgs;})
     (import ./screenshootin.nix {inherit pkgs;})
     (import ./hm-find.nix {inherit pkgs;})
-    (import ./zcli.nix {
-      inherit pkgs profile;
+    (import ./dcli.nix {
+      inherit pkgs host profile;
       backupFiles = [
         ".config/mimeapps.list.backup"
       ];

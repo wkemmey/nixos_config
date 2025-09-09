@@ -54,12 +54,16 @@
       sv = "sudo nvim";
       v = "nvim";
       c = "clear";
-      fr = "nh os switch --hostname ${profile}";
-      fu = "nh os switch --hostname ${profile} --update";
-      zu = "sh <(curl -L https://gitlab.com/Zaney/zaneyos/-/releases/latest/download/install-zaneyos.sh)";
+      fr = "dcli rebuild";
+      fu = "dcli update";
+      rebuild = "dcli rebuild";
+      update = "dcli update";
+      cleanup = "dcli cleanup";
       ncg = "nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
       cat = "bat";
       man = "batman";
+      hosts = "dcli list-hosts";
+      switch = "dcli switch-host";
     };
   };
 }
