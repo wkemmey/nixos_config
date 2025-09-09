@@ -59,6 +59,5 @@
       nixosConfigurations.nixos-flakes-btw = nixpkgs.lib.nixosSystem {
           modules = [ ./configuration.nix ];
       };
-    };
   };
 }
