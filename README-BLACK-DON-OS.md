@@ -21,6 +21,8 @@ Black Don OS is a personalized NixOS configuration that supports multiple host c
 - **nixos-leno** - NVIDIA laptop (hybrid graphics)
 - **nix-desktop** - NVIDIA desktop (dedicated GPU)
 
+*Note: Cleaned up from original ZaneyOS - removed unused nixstation and zaneyos-23-vm hosts*
+
 ## Quick Start
 
 ### Setting Up a New Host
