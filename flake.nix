@@ -1,5 +1,5 @@
 {
-  description = "ZaneyOS";
+  description = "Black Don OS (Based on ZaneyOS)";
 
   inputs = {
     home-manager = {
@@ -7,7 +7,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable"; # Unstable branch
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nvf.url = "github:notashelf/nvf";
     stylix.url = "github:danth/stylix/release-25.05";
     flake-utils.url = "github:numtide/flake-utils";
@@ -15,71 +15,35 @@
 
   outputs = {nixpkgs, nixpkgs-unstable, flake-utils, ...} @ inputs: let
     system = "x86_64-linux";
-    host = "nixos-leno";
-    profile = "nvidia-laptop";
-    username = "don";
-    pkgs = nixpkgs.legacyPackages.x86_64-linux;
-    pkgs-unstable = import nixpkgs-unstable {
-      system = "x86_64-linux";
-      config.allowUnfree = true;
+
+    # Helper function to create a host configuration
+    mkHost = {hostname, profile, username}: nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = {
+        inherit inputs;
+        host = hostname;
+        inherit profile;
+        inherit username;
+        pkgs-unstable = import nixpkgs-unstable {
+          system = "x86_64-linux";
+          config.allowUnfree = true;
+        };
+      };
+      modules = [./profiles/${profile}];
     };
+
   in {
     nixosConfigurations = {
-      amd = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit inputs;
-          inherit username;
-          inherit host;
-          inherit profile;
-          inherit pkgs-unstable;
-        };
-        modules = [./profiles/amd];
-      };
-      nvidia = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit inputs;
-          inherit username;
-          inherit host;
-          inherit profile;
-          inherit pkgs-unstable;
-        };
-        modules = [./profiles/nvidia];
-      };
-      nvidia-laptop = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit inputs;
-          inherit username;
-          inherit host;
-          inherit profile;
-          inherit pkgs-unstable;
-        };
-        modules = [./profiles/nvidia-laptop];
-      };
-      intel = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit inputs;
-          inherit username;
-          inherit host;
-          inherit profile;
-          inherit pkgs-unstable;
-        };
-        modules = [./profiles/intel];
-      };
-      vm = nixpkgs.lib.nixosSystem {
-        inherit system;
-        specialArgs = {
-          inherit inputs;
-          inherit username;
-          inherit host;
-          inherit profile;
-          inherit pkgs-unstable;
-        };
-        modules = [./profiles/vm];
-      };
+      # GPU-based configurations (legacy)
+      amd = mkHost { hostname = "nixos-leno"; profile = "amd"; username = "don"; };
+      nvidia = mkHost { hostname = "nixos-leno"; profile = "nvidia"; username = "don"; };
+      nvidia-laptop = mkHost { hostname = "nixos-leno"; profile = "nvidia-laptop"; username = "don"; };
+      intel = mkHost { hostname = "nixos-leno"; profile = "intel"; username = "don"; };
+      vm = mkHost { hostname = "nixos-leno"; profile = "vm"; username = "don"; };
+
+      # Host-specific configurations
+      nixos-leno = mkHost { hostname = "nixos-leno"; profile = "nvidia-laptop"; username = "don"; };
+      nix-desktop = mkHost { hostname = "nix-desktop"; profile = "nvidia"; username = "don"; };
     };
 
     # Flutter development environment
