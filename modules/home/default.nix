@@ -41,5 +41,6 @@ in {
     ./yazi
     ./zoxide.nix
     ./zsh
+    ./environment.nix
   ];
 }

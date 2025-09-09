@@ -5,7 +5,7 @@ pkgs.writeShellScriptBin "list-keybinds" ''
     pkill rofi
   fi
 
-  msg='☣️ NOTE ☣️: Clicking with Mouse or Pressing ENTER will have NO function'
+  msg='NOTE: Update Keybinds in Modules/home/hyprland/binds.nix'
   keybinds=$(cat ~/.config/hypr/hyprland.conf | grep -E '^bind')
   
   # replace #modifier with SUPER in the displayed keybinds for rofi

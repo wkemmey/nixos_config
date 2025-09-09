@@ -1,8 +1,8 @@
-{pkgs, ...}: {
+{pkgs, pkgs-unstable, lib, ...}: {
   programs = {
     neovim = {
-      enable = true;
-      defaultEditor = true;
+      enable = false;
+      defaultEditor = false;
     };
     firefox.enable = false; # Firefox is not installed by default
     dconf.enable = true;
@@ -19,12 +19,18 @@
   };
 
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
+    "cursor"
+    "zed"
+    "flutter"
+    "jdk"
+    "claude"
+  ];
 
   environment.systemPackages = with pkgs; [
     amfora # Fancy Terminal Browser For Gemini Protocol
     appimage-run # Needed For AppImage Support
     bottom # btop like util
-    brave # Brave Browser
     brightnessctl # For Screen Brightness Control
     cmatrix # Matrix Movie Effect In Terminal
     cowsay # Great Fun Terminal Program
@@ -52,7 +58,10 @@
     mpv # Incredible Video Player
     ncdu # Disk Usage Analyzer With Ncurses Interface
     nitch # small fetch util
+    # Nix Language Packages
     nixfmt-rfc-style # Nix Formatter
+    nixd # Nix Language Server
+    nil # Nix Language Server
     onefetch #shows current build info and stats
     pavucontrol # For Editing Audio Levels & Devices
     pciutils # Collection Of Tools For Inspecting PCI Devices
@@ -70,5 +79,33 @@
     waypaper # backup wallpaper GUI
     wget # Tool For Fetching Files With Links
     ytmdl # Tool For Downloading Audio From YouTube
+    # My apps
+    nwg-displays # Manage Displays
+    vivaldi # Browser
+    # Unstable Packages
+    pkgs-unstable.code-cursor # AI IDE
+    pkgs-unstable.zed-editor # Another AI IDE
+    pkgs-unstable.flutter # Flutter SDK
+    pkgs-unstable.jdk # Java Development Kit
+    pkgs-unstable.claude-code    # For native development
+    pkgs-unstable.nwg-dock-hyprland
+    teams-for-linux # Video Meetings
+    zoom-us # Video Meetings
+    telegram-desktop # Messaging App
+    android-studio # Android Studio
+    chromium # Browser
+    google-chrome # Browser
+    # Dev Packages
+    androidenv.androidPkgs.platform-tools  # This includes adb
+    androidenv.androidPkgs.emulator        # For Android emulator
+    androidenv.androidPkgs.ndk-bundle
+    # Firebase CLI
+    firebase-tools
+    quick-webapps
+    gum
+    gtk3
+    gtk4
+    localsend
+    pkgs-unstable.lightworks
   ];
 }

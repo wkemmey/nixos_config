@@ -12,7 +12,7 @@
       };
 
       logo = {
-        source = ./nixos.png;
+        source = ./blackdontrans.png;
         type = "kitty-direct";
         height = 10;
         width = 20;

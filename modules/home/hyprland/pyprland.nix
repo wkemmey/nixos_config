@@ -5,6 +5,7 @@
     [pyprland]
     plugins = [
       "scratchpads",
+      "magnify",
     ]
 
     [scratchpads.term]
@@ -13,5 +14,10 @@
     class = "kitty-dropterm"
     size = "70% 70%"
     max_size = "1920px 100%"
+
+    [magnify]
+    scale = 2.0
+    width = 500
+    height = 500
   '';
 }

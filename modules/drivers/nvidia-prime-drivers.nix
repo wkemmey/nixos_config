@@ -1,8 +1,7 @@
-{
-  lib,
-  pkgs,
-  config,
-  ...
+{ lib
+, pkgs
+, config
+, ...
 }:
 with lib;
 let
@@ -20,7 +19,6 @@ in
       default = "PCI:0:2:0";
     };
   };
-
   config = mkIf cfg.enable {
     hardware.nvidia = {
       prime = {

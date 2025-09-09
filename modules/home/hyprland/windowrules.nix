@@ -43,6 +43,17 @@ in {
         "idleinhibit fullscreen, class:^(*)$"
         "idleinhibit fullscreen, title:^(*)$"
         "idleinhibit fullscreen, fullscreen:1"
+        # Moonlight
+        "center, class:^(Moonlight)$"
+        # Web Apps
+        "tile, class:^(dev.heppen.webapps.Github8240)$"
+        "tile, class:^(dev.heppen.webapps.Claude.ai9362)$"
+        "tile, class:^(dev.heppen.webapps.Mimiri8495)$"
+        "tile, class:^(dev.heppen.webapps.NixPackages5244)$"
+        "tile, class:^(dev.heppen.webapps.Messages4146)$"
+        "tile, class:^(dev.heppen.webapps.JitsiMeet9763)$"
+        "tile, class:^(dev.heppen.webapps.Restream8099)$"
+        "float, class:^(Emulator)$"
         "float, tag:settings*"
         "float, class:^([Ff]erdium)$"
         "float, title:^(Picture-in-Picture)$"

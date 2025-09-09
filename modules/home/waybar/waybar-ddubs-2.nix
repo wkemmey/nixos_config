@@ -41,11 +41,14 @@ in
               active = " ";
               urgent = " ";
             };
-            on-scroll-up = "hyprctl dispatch workspace e+1";
-            on-scroll-down = "hyprctl dispatch workspace e-1";
+            persistent_workspaces = {
+              "*" = 5;  # Show 5 workspaces by default
+            };
+            on-scroll-up = "hyprctl dispatch workspace r+1";
+            on-scroll-down = "hyprctl dispatch workspace r-1";
           };
           "clock" = {
-            format = '' {:%H:%M}'';
+            format = '' {:%I:%M %p}''; 
             /*
             ''{: %I:%M %p}'';
             */
