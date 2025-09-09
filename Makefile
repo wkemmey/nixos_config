@@ -5,6 +5,9 @@ update:
 nix:
 	sudo nixos-rebuild switch --flake . --impure
 
+whit:
+	sudo nixos-rebuild switch --flake /etc/nixos#whit_2022
+
 macos:
 	sudo darwin-rebuild switch --flake .#
 
