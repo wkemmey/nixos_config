@@ -7,6 +7,14 @@ let
   inherit (import ../../hosts/${host}/variables.nix) hostId;
 in
 {
+  # Defensive assertion for hostname validity (clearer message at eval time)
+  assertions = [
+    {
+      assertion = builtins.match "^[[:alnum:]]([[:alnum:]_-]{0,61}[[:alnum:]])?$" host != null;
+      message = "Invalid hostname '${host}'. Must be 1-63 chars, start/end alphanumeric; allowed middle chars: letters, digits, '-' or '_'.";
+    }
+  ];
+
   networking = {
     hostName = "${host}";
     hostId = hostId;

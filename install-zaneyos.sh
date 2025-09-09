@@ -18,6 +18,43 @@ LOG_FILE="${LOG_DIR}/install_$(date +"%Y-%m-%d_%H-%M-%S").log"
 mkdir -p "$LOG_DIR"
 exec > >(tee -a "$LOG_FILE") 2>&1
 
+# Hostname validation and sanitization helpers
+HOSTNAME_REGEX='^[[:alnum:]]([[:alnum:]_-]{0,61}[[:alnum:]])?$'
+
+is_valid_hostname() {
+  local hn="$1"
+  [[ "$hn" =~ $HOSTNAME_REGEX ]]
+}
+
+sanitize_hostname() {
+  local hn="$1"
+  # Lowercase
+  hn=$(printf '%s' "$hn" | tr '[:upper:]' '[:lower:]')
+  # Replace invalid chars (including dots/spaces) with '-'
+  hn=$(printf '%s' "$hn" | sed -E 's/[^[:alnum:]_-]+/-/g')
+  # Collapse consecutive - or _ to a single -
+  hn=$(printf '%s' "$hn" | sed -E 's/[-_]{2,}/-/g')
+  # Trim leading/trailing non-alnum
+  hn=$(printf '%s' "$hn" | sed -E 's/^[^[:alnum:]]+//; s/[^[:alnum:]]+$//')
+  # Truncate to 63 characters (hostname label limit)
+  hn=${hn:0:63}
+  # Ensure start/end are alnum in case truncation left a non-alnum at edges
+  hn=$(printf '%s' "$hn" | sed -E 's/^[^[:alnum:]]+//; s/[^[:alnum:]]+$//')
+  printf '%s' "$hn"
+}
+
+ensure_safe_hostname() {
+  # Usage: ensure_safe_hostname <input> <default>
+  local input="$1"; local def="$2"
+  local candidate="$input"
+  if [ -z "$candidate" ]; then candidate="$def"; fi
+  local sanitized
+  sanitized=$(sanitize_hostname "$candidate")
+  if [ -z "$sanitized" ]; then sanitized="$def"; fi
+  if ! is_valid_hostname "$sanitized"; then return 1; fi
+  printf '%s' "$sanitized"
+}
+
 # Function to print a section header
 print_header() {
   echo -e "${GREEN}╔═══════════════════════════════════════════════════════════════════════╗${NC}"
@@ -109,6 +146,25 @@ if [ "$hostName" = "default" ]; then
   fi
 fi
 
+# Validate and sanitize hostname to meet NixOS constraints
+safeHost=$(ensure_safe_hostname "$hostName" "my-desktop")
+if [ "$safeHost" != "$hostName" ]; then
+  echo -e "${RED}The hostname '$hostName' is not compliant (letters, numbers, '-', '_' only; 1-63 chars; start/end alnum).${NC}"
+  echo -e "It will be adjusted to: ${GREEN}$safeHost${NC}"
+  read -p "Use '$safeHost'? (Y/n): " -n 1 -r; echo
+  if [[ $REPLY =~ ^[Nn]$ ]]; then
+    read -rp "Enter a hostname (letters, numbers, hyphens/underscores; 1-63 chars): " hostName
+    safeHost=$(ensure_safe_hostname "$hostName" "my-desktop")
+  fi
+fi
+
+if ! is_valid_hostname "$safeHost"; then
+  print_error "Hostname '$hostName' is invalid even after sanitization."
+  echo "Please rerun and choose a compliant hostname (letters, numbers, hyphens, underscores; 1-63 chars, start/end alphanumeric)."
+  exit 1
+fi
+
+hostName="$safeHost"
 echo -e "${GREEN}✓ Hostname set to: $hostName${NC}"
 
 print_header "GPU Profile Detection"
