@@ -8,11 +8,6 @@
   #
   extraMonitorSettings = ''
   monitor=eDP-1,2560x1600@165.02,6770x1558,1.33
-  monitor=HDMI-A-1,3440x1440@100.0,3330x1444,1.0
-  monitor=DP-5,1920x1080@60.0,1410x1444,1.0
-  workspace=1,monitor:HDMI-A-1
-  workspace=2,monitor:eDP-1
-  workspace=3,monitor:DP-5
   '';
 
   # Waybar Settings
