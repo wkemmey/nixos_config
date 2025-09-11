@@ -25,7 +25,7 @@
 
   #### networking ####
 
-  networking.hostName = "whit_nixos";
+  networking.hostName = "nixos";  # NOTE: host name must match here and flake.nix
   networking.networkmanager.enable = true;
   #networking.wireless.enable = true;  # enables wireless support via wpa_supplicant
 
@@ -66,7 +66,7 @@
   services.xserver.xkb = {
     layout = "us";
     variant = "";
-  }
+  };
 
   #services.printing.enable = true;
 
