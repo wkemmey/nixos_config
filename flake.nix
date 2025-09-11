@@ -56,7 +56,7 @@
   #      modules = [./machines/gawain];
 
   outputs = { self, nixpkgs }: {
-      nixosConfigurations.nixos-flakes-btw = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.whit_nixos = nixpkgs.lib.nixosSystem {
           modules = [ ./configuration.nix ];
       };
   };
