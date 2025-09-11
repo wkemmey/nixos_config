@@ -6,18 +6,43 @@
       /etc/nixos/hardware-configuration.nix
     ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  networking.hostName = "nixos-flakes-btw";
-  networking.networkmanager.enable = true;
+  #### nixos settings ####
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nixpkgs.config.allowUnfree = true;
+  # this value determines the nixos release from which default settings on this system
+  # were taken (file locations, database versions, etc.)--don't change without understanding
+  # the impacts
+  system.stateVersion = "25.05";
 
-  time.timeZone = "America/Los_Angeles";
+  #### boot loader ####
 
+  #boot.loader.systemd-boot.enable = true;
+  #boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/sda";
+  boot.loader.grub.useOSProber = true;
+
+  #### networking ####
+
+  networking.hostName = "nixos";
+  networking.networkmanager.enable = true;
+  #networking.wireless.enable = true;  # enables wireless support via wpa_supplicant
+
+  # configure network proxy if necessary
+  # networking.proxy.default = "http://user:password@proxy:port/";
+  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+  # open firewall ports
+  #networking.firewall.allowedTCPPorts = [ ... ];
+  #networking.firewall.allowedUDPPorts = [ ... ];
+  # or disable the firewall altogether
+  #networking.firewall.enable = false;
+
+  #### system settings ####
+
+  time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -30,57 +55,55 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  services.xserver.enable = true;
+  #### services ####
 
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  #services.xserver.enable = true;
 
+  #services.displayManager.sddm.enable = true;
+  #services.desktopManager.plasma6.enable = true;
+
+  # configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "";
-  };
+  }
 
-  services.printing.enable = true;
+  #services.printing.enable = true;
 
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
+  #services.pulseaudio.enable = false;
+  #security.rtkit.enable = true;
+  #services.pipewire = {
+  #  enable = true;
+  #  alsa.enable = true;
+  #  alsa.support32Bit = true;
+  #  pulse.enable = true;
+  #};
 
-  users.users.tony = {
+  #### user accounts ####
+
+  # define a user account (don't forget to set a password with "passwd")
+  users.users.whit = {
     isNormalUser = true;
-    description = "tony";
+    description = "Whit Kemmey";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-      tree
-    ];
+    packages = with pkgs; [];
   };
 
-  programs.firefox.enable = true;
-
-  nixpkgs.config.allowUnfree = true;
+  #### system packages
 
   environment.systemPackages = with pkgs; [
-    vim
     ghostty
     git
-    tealdeer
-    xclip
-    bat
   ];
 
+  #### programs ####
+
+  #programs.firefox.enable = true;
 
   programs.bash = {
     promptInit = ''
       export PS1='\[\e[38;5;76m\]\u\[\e[0m\] in \[\e[38;5;32m\]\w\[\e[0m\] \\$ '
     '';
   };
-
-  system.stateVersion = "25.05";
 
 }
