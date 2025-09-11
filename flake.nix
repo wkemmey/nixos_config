@@ -56,7 +56,7 @@
   #      modules = [./machines/gawain];
 
   outputs = { self, nixpkgs }: {
-      nixosConfigurations.whit_nixos = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
           modules = [ ./configuration.nix ];
       };
   };
