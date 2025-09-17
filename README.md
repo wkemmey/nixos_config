@@ -31,12 +31,12 @@ If you want to install Black Don OS on a fresh NixOS system:
 
 1. **Boot from NixOS ISO** and ensure you have network access
 2. **Install git and pciutils** (for hardware detection):
-   ```bash
+   ```shell
    nix-shell -p git pciutils
    ```
 3. **Run the installation script**:
-   ```bash
-   bash <(curl -s https://gitlab.com/theblackdon/black-don-os/-/raw/bdos-1.0/install-black-don-os.sh)
+   ```shell
+   sh <(curl -sL https://gitlab.com/theblackdon/black-don-os/-/raw/bdos-1.0/install-black-don-os.sh)
    ```
 
 The installer will:
