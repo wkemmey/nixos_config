@@ -46,6 +46,11 @@ The installer will:
 - Build and install Black Don OS
 - Create a personalized setup for your computer
 
+**After Installation**: You may need to customize monitor settings and GPU IDs in your `hosts/YOUR-HOST/variables.nix` file:
+- **Monitor Configuration**: Update `extraMonitorSettings` with your actual monitor setup
+- **NVIDIA Prime**: Update `intelID` and `nvidiaID` with your actual GPU PCI IDs (find with `lspci | grep VGA`)
+- **Wallpapers**: Choose your preferred wallpaper from the `wallpapers/` directory
+
 ### For Existing Black Don OS Users
 
 If you already have Black Don OS and want to add a new computer:
