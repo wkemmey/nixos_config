@@ -1,32 +1,32 @@
-# Project Guide — ZaneyOS
+# Project Guide — Black Don OS
 
 Scope
 - A reproducible NixOS flake tailored for desktop systems with per-host overrides, GPU/VM profiles, and an integrated Home Manager layer (Hyprland, Waybar, shells, scripts).
-- Repo location is expected at ~/zaneyos. If you place it elsewhere, update modules/core/nh.nix (programs.nh.flake) to the new path.
+- Repo location is expected at ~/black-don-os. If you place it elsewhere, update modules/core/nh.nix (programs.nh.flake) to the new path.
 
 Quick commands
-- Build and switch (preferred: nh/zcli)
+- Build and switch (preferred: nh/dcli)
   - fr  → nh os switch --hostname <profile>    # alias provided by zsh/bash modules
   - fu  → nh os switch --hostname <profile> --update
-  - zcli rebuild
-  - zcli update
+  - dcli rebuild
+  - dcli update
 - Build for next boot (safer for larger changes)
-  - zcli rebuild-boot
+  - dcli rebuild-boot
   - or: sudo nixos-rebuild boot --flake .#<profile>
-- Direct NixOS (if you prefer without nh/zcli)
+- Direct NixOS (if you prefer without nh/dcli)
   - sudo nixos-rebuild switch --flake .#<profile>
 - Validate the flake
   - nix flake check
 - Format Nix files (nixfmt-rfc-style is included)
   - find . -name "*.nix" -print0 | xargs -0 nixfmt
 - Host management
-  - zcli update-host [hostname] [profile]   # edits flake.nix host/profile
-  - zcli add-host <hostname> [profile]      # copies hosts/default and guides hardware.nix
+  - dcli update-host [hostname] [profile]   # edits flake.nix host/profile
+  - dcli add-host <hostname> [profile]      # copies hosts/default and guides hardware.nix
 - Diagnostics and maintenance
-  - zcli diag        # writes ~/diag.txt
-  - zcli cleanup     # prunes older generations (prompts for retention)
+  - dcli diag        # writes ~/diag.txt
+  - dcli cleanup     # prunes older generations (prompts for retention)
 
-zcli advanced options (for rebuild/update)
+dcli advanced options (for rebuild/update)
 - --dry (-n)    preview only
 - --ask (-a)    confirm before proceeding
 - --cores N     cap build CPU usage
@@ -61,14 +61,14 @@ High-level architecture
 - modules/core
   - default.nix composes focused NixOS modules: boot, flatpak, fonts, hardware, network, nfs, nh, packages, printing, display manager (conditional greetd/sddm), security, services (PipeWire, SSH, Bluetooth, fstrim; smartd conditional on profile), steam, stylix, syncthing, system (nix settings, locales, env vars), thunar, user (Home Manager), virtualisation, xserver
   - user.nix integrates Home Manager and creates users.${username}; passes extraSpecialArgs { inputs, username, host, profile } to the home layer
-  - nh.nix enables nh, configures GC, and pins programs.nh.flake = /home/${username}/zaneyos
+  - nh.nix enables nh, configures GC, and pins programs.nh.flake = /home/${username}/black-don-os
 - modules/drivers
   - Aggregates AMD, Intel, NVIDIA, NVIDIA Prime, and VM guest services
   - nvidia-prime-drivers.nix exposes options.drivers.nvidia-prime.{enable,intelBusID,nvidiaBusID} consumed by the nvidia-laptop profile
   - vm-guest-services.nix enables qemu-guest, spice agents when vm.guest-services.enable = true
 - modules/home
   - default.nix composes the user environment (Hyprland, Waybar via waybarChoice, Rofi, Yazi, Kitty/WezTerm/Ghostty/Alacritty toggles, Zsh/Bash config, Git, NVF/Neovim, OBS, swaync, scripts, Stylix, optional Doom Emacs/VSCodium/Helix)
-  - scripts/default.nix installs user-space tools including zcli; zcli wraps rebuild/update/boot builds, cleanup, diagnostics, host management, and Doom Emacs lifecycle
+  - scripts/default.nix installs user-space tools including dcli; dcli wraps rebuild/update/boot builds, cleanup, diagnostics, host management, and Doom Emacs lifecycle
 
 Where to change what
 - flake.nix: set username, host, profile; add inputs; wire outputs
@@ -78,16 +78,16 @@ Where to change what
 
 Common workflows
 - Small UX tweaks: edit hosts/<hostname>/variables.nix → fr
-- Theme swap: edit stylixImage/waybarChoice in variables.nix → fr (or zcli rebuild-boot)
-- GPU/VM switch: choose nixos-rebuild/nh profile (e.g., nh os switch --hostname vm) and optionally update host/profile constants with zcli update-host
+- Theme swap: edit stylixImage/waybarChoice in variables.nix → fr (or dcli rebuild-boot)
+- GPU/VM switch: choose nixos-rebuild/nh profile (e.g., nh os switch --hostname vm) and optionally update host/profile constants with dcli update-host
 
 Validation and troubleshooting
 - nix flake check for a quick sanity test
-- zcli diag to produce a detailed hardware/system report
-- If the repo is not under ~/zaneyos, update modules/core/nh.nix so zcli/nh operate on the correct path
+- dcli diag to produce a detailed hardware/system report
+- If the repo is not under ~/black-don-os, update modules/core/nh.nix so dcli/nh operate on the correct path
 
 Documentation pointers
 - README.md: requirements, first-time install methods, upgrade overview
-- zcli.md: full CLI documentation, commands, options, and examples
+- dcli.md: full CLI documentation, commands, options, and examples
 - cheatsheets/: quick-reference guides for Hyprland, terminals, editors, etc.
 

@@ -1,4 +1,4 @@
-# Hyprland Window Rules — ddubsOS
+# Hyprland Window Rules — Black Don OS
 
 ## 🧩 Tags and Classification
 - file-manager — Thunar, Nautilus, PCManFM-Qt

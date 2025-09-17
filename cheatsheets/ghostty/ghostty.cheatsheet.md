@@ -1,4 +1,4 @@
-# Ghostty on ddubsOS — Summary & Cheatsheet
+# Ghostty on Black Don OS — Summary & Cheatsheet
 
 ## 🚀 Summary of modules/home/terminals/ghostty.nix
 
@@ -8,7 +8,7 @@
   - clearDefaultKeybinds = true (all bindings are explicitly defined below)
 
 - Appearance
-  - Title: ddubsOS-GhosTTY
+  - Title: Black-Don-OS-GhosTTY
   - TERM: xterm-256color
   - Theme: dark: catppuccin-mocha; light: catppuccin-mocha
   - Window theme: dark

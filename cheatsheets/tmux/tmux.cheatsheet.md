@@ -1,4 +1,4 @@
-# Tmux on ddubsOS — Summary & Cheatsheet
+# Tmux on Black Don OS — Summary & Cheatsheet
 
 ## 🚀 Summary of modules/home/terminals/tmux.nix
 
@@ -68,18 +68,18 @@ Popups (display-popup)
 - Prefix C-n — prompt for session name; create and switch
 - Prefix C-j — switch session via fzf
 - Prefix C-r — yazi (90%x90% at cwd)
-- Prefix C-z — nvim ~/ddubsos/flake.nix (90%x90%)
+- Prefix C-z — nvim ~/black-don-os/flake.nix (90%x90%)
 - Prefix C-t — zsh (75%x75% at cwd)
 
 Menu (display-menu)
 - Prefix d — Dotfiles menu with quick-open entries:
-  - f: flake.nix (ddubsOS)
-  - c: core packages (ddubsOS)
-  - g: global packages (ddubsOS)
+  - f: flake.nix (Black Don OS)
+  - c: core packages (Black Don OS)
+  - g: global packages (Black Don OS)
   - k: keybinds (Hyprland)
   - w: window rules (Hyprland)
-  - z: ZaneyOS flake.nix
-  - p: ZaneyOS packages
+  - z: Black Don OS flake.nix
+  - p: Black Don OS packages
   - q: Exit
 
 Notes

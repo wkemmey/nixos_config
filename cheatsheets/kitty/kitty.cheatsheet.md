@@ -1,4 +1,4 @@
-# Kitty on ddubsOS — Summary & Cheatsheet
+# Kitty on Black Don OS — Summary & Cheatsheet
 
 ## 🚀 Summary of modules/home/terminals/kitty.nix
 

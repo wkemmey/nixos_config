@@ -1,9 +1,9 @@
-# Cheatsheets Index (ddubsOS)
+# Cheatsheets Index (Black Don OS)
 
-These documents cover both general usage and the specific configuration as defined in the NixOS configuration "ddubsOS".
+These documents cover both general usage and the specific configuration as defined in the NixOS configuration "Black Don OS".
 
 - General use: Practical, task-focused tips and top workflows.
-- ddubsOS specifics: Notes reflecting how tools are configured in this repository (modules/home/*) so behavior matches your system.
+- Black Don OS specifics: Notes reflecting how tools are configured in this repository (modules/home/*) so behavior matches your system.
 
 ## 🔗 Quick Links
 - Emacs
@@ -61,6 +61,6 @@ cheatsheets/
 ```
 
 ## 🛠️ Notes
-- Ghostty cheatsheet reflects bindings from modules/home/terminals/ghostty.nix (ddubsOS).
+- Ghostty cheatsheet reflects bindings from modules/home/terminals/ghostty.nix (Black Don OS).
 - Emacs docs follow the same markdown style for consistency and quick scanning.
 

@@ -1,4 +1,4 @@
-# WezTerm on ddubsOS — Summary & Cheatsheet
+# WezTerm on Black Don OS — Summary & Cheatsheet
 
 ## 🚀 Summary of modules/home/terminals/wezterm.nix
 

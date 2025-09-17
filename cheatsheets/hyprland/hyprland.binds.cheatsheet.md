@@ -1,4 +1,4 @@
-# Hyprland Keybindings — ddubsOS
+# Hyprland Keybindings — Black Don OS
 
 ## 🗝️ Conventions
 - SUPERKEY = Mod key (Hyprland `$modifier`)

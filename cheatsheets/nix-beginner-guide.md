@@ -1,10 +1,10 @@
-# ZaneyOS Beginner’s Guide to Customization
+# Black Don OS Beginner's Guide to Customization
 
-Welcome! This guide is for users who are new to Nix and want to make common, safe customizations to their ZaneyOS setup. We’ll keep it simple and focus on essentials.
+Welcome! This guide is for users who are new to Nix and want to make common, safe customizations to their Black Don OS setup. We'll keep it simple and focus on essentials.
 
 ## Repository layout (where to change things)
 
-- `flake.nix`: Entry point for the whole system. You generally don’t need to edit this for day‑to‑day tweaks.
+- `flake.nix`: Entry point for the whole system. You generally don't need to edit this for day‑to‑day tweaks.
 - `hosts/`: Per‑machine configuration.
   - `hosts/<your-hostname>/`
     - `variables.nix`: Your main control panel (enable/disable features, set options).
@@ -52,8 +52,8 @@ Edit `modules/home/hyprland/binds.nix`. For example, change terminal from Super+
 
 ## Apply and test your changes
 
-Preferred (ZaneyOS-specific):
-- `zcli rebuild`
+Preferred (Black Don OS-specific):
+- `dcli rebuild`
   - Note: The `fr` alias is deprecated.
 
 Manual backup method (works anywhere):
@@ -62,6 +62,6 @@ Manual backup method (works anywhere):
 
 Tips
 - If a rebuild fails, read the error near the bottom of the output—it usually points to the exact file/line.
-- If a change breaks your session after a reboot, pick an older “generation” from the boot menu to roll back.
+- If a change breaks your session after a reboot, pick an older "generation" from the boot menu to roll back.
 - Use Git to track your edits so you can revert easily.
 

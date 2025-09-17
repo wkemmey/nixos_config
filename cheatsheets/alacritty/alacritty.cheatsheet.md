@@ -1,4 +1,4 @@
-# Alacritty on ddubsOS — Summary & Cheatsheet
+# Alacritty on Black Don OS — Summary & Cheatsheet
 
 ## 🚀 Summary of modules/home/terminals/alacritty.nix
 

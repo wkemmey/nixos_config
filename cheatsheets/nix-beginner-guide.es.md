@@ -1,6 +1,6 @@
-# Guía para Principiantes de ZaneyOS: Personalización Básica
+# Guía para Principiantes de Black Don OS: Personalización Básica
 
-¡Bienvenido! Esta guía es para quienes son nuevos en Nix y quieren realizar personalizaciones comunes y seguras en su instalación de ZaneyOS. Mantendremos todo simple y al grano.
+¡Bienvenido! Esta guía es para quienes son nuevos en Nix y quieren realizar personalizaciones comunes y seguras en su instalación de Black Don OS. Mantendremos todo simple y al grano.
 
 ## Diseño del repositorio (dónde cambiar las cosas)
 
@@ -52,8 +52,8 @@ Edita `modules/home/hyprland/binds.nix`. Por ejemplo, cambiar la terminal de Sup
 
 ## Aplicar y probar tus cambios
 
-Preferido (específico de ZaneyOS):
-- `zcli rebuild`
+Preferido (específico de Black Don OS):
+- `dcli rebuild`
   - Nota: el alias `fr` está obsoleto.
 
 Método manual de respaldo (funciona en cualquier instalación):
