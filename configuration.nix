@@ -10,10 +10,7 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nixpkgs.config.allowUnfree = true;
-  # this value determines the nixos release from which default settings on this system
-  # were taken (file locations, database versions, etc.)--don't change without understanding
-  # the impacts
-  system.stateVersion = "25.05";
+  system.stateVersion = "25.05";  # don't change without understanding impacts
 
   #### boot loader ####
 
