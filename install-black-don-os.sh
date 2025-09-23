@@ -234,7 +234,8 @@ fi
 
 print_header "Cloning Black-Don-OS Repository"
 echo -e "Cloning from: ${BLUE}https://gitlab.com/theblackdon/black-don-os.git${NC}"
-git clone https://gitlab.com/theblackdon/black-don-os.git --depth=1 -b main ~/black-don-os
+echo -e "Using beta branch: ${GREEN}bdos-beta-0.1${NC}"
+git clone https://gitlab.com/theblackdon/black-don-os.git --depth=1 -b bdos-beta-0.1 ~/black-don-os
 if [ $? -ne 0 ]; then
   print_error "Failed to clone Black-Don-OS repository"
   exit 1
@@ -322,26 +323,11 @@ fi
 
 mkdir -p hosts/"$hostName"
 
-# Check if we have a suitable source to copy from
-if [[ -d "hosts/nixos-leno" ]]; then
-  sourceHost="nixos-leno"
-elif [[ -d "hosts/nix-desktop" ]]; then
-  sourceHost="nix-desktop"
-else
-  # Find any host that's not default
-  sourceHost=""
-  for host_dir in hosts/*/; do
-    host_name=$(basename "$host_dir")
-    if [[ "$host_name" != "default" ]]; then
-      sourceHost="$host_name"
-      break
-    fi
-  done
-
-  if [[ -z "$sourceHost" ]]; then
-    print_error "No suitable source host configuration found"
-    exit 1
-  fi
+# Use the default host as template
+sourceHost="default"
+if [[ ! -d "hosts/default" ]]; then
+  print_error "Default host template not found. Please ensure you're using the correct Black-Don-OS version."
+  exit 1
 fi
 
 echo -e "${GREEN}Using $sourceHost as template${NC}"
@@ -381,9 +367,14 @@ cat > hosts/"$hostName"/variables.nix << EOF
   nvidiaID = "PCI:1:0:0";  # Update this with your actual NVIDIA GPU ID
 
   # Enable/Disable Features
-  enableNFS = true;
+  enableNFS = false;
   printEnable = false;
   thunarEnable = true;
+  controllerSupportEnable = true;
+  flutterdevEnable = false;
+  stylixEnable = true;
+  vicinaeEnable = true;
+  syncthingEnable = false;
 
   # Styling
   stylixImage = ../../wallpapers/Valley.jpg;
