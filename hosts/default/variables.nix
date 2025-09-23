@@ -25,7 +25,7 @@
   nvidiaID = "PCI:1:0:0"; # NVIDIA discrete GPU
 
   # Enable NFS
-  enableNFS = false;
+  enableNFS = true;
 
   # Enable Printing Support
   printEnable = false;
