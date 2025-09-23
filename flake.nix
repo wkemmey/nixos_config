@@ -44,6 +44,9 @@
 
       # Default host configuration
       default = mkHost { hostname = "default"; profile = "nvidia-laptop"; username = "user"; };
+
+      # Host-specific configurations
+      # Add new hosts here during installation
     };
 
     # Flutter development environment (conditional per host)
