@@ -1,32 +1,31 @@
 {
   # Git Configuration ( For Pulling Software Repos )
-  gitUsername = "username";
-  gitEmail = "email@gmail.com";
+  gitUsername = "your-username";
+  gitEmail = "your-email@example.com";
 
   # Hyprland Settings
   # ex "monitor=HDMI-A-1, 1920x1080@60,auto,1"
   #
-  extraMonitorSettings = "
-    monitor = Virtual-1, 1920x1080@60,auto,1
-    ";
+  extraMonitorSettings = ''
+  monitor=,preferred,auto,1
+  '';
 
   # Waybar Settings
   clock24h = false;
 
   # Program Options
-  browser = "vivaldi"; # Set Default Browser (google-chrome-stable for google-chrome)
+  browser = "firefox"; # Set Default Browser
   terminal = "kitty"; # Set Default System Terminal
   keyboardLayout = "us";
   consoleKeyMap = "us";
 
-  # For Nvidia Prime support
-  intelID = "PCI:1:0:0";
-  nvidiaID = "PCI:0:2:0";
-
-  ## Enable Features Here ##
+  # For Nvidia Prime support - update these with your GPU PCI IDs
+  # Use 'lspci | grep VGA' to find your GPU IDs
+  intelID = "PCI:0:2:0";  # Intel/AMD integrated GPU
+  nvidiaID = "PCI:1:0:0"; # NVIDIA discrete GPU
 
   # Enable NFS
-  enableNFS = true;
+  enableNFS = false;
 
   # Enable Printing Support
   printEnable = false;
@@ -35,7 +34,7 @@
   thunarEnable = true;
 
   # Enable Controller Support For Gaming
-  controllerSupportEnable = false;
+  controllerSupportEnable = true;
 
   # Enable Flutter Development Environment
   flutterdevEnable = false;
@@ -47,19 +46,14 @@
   vicinaeEnable = true;
 
   # Enable Syncthing File Synchronization
-  syncthingEnable = true;
+  syncthingEnable = false;
 
   # Display Manager Options (choose one - add to host's default.nix)
   # services.greetd.enable = true;           # greetd with tuigreet (default)
   # services.displayManager.ly.enable = true; # ly with matrix animation
 
   # Set Stylix Image
-  #stylixImage = ../../wallpapers/AnimeGirlNightSky.jpg;
-  stylixImage = ../../wallpapers/nix-wallpaper-stripes-logo.png;
-  #stylixImage = ../../wallpapers/beautifulmountainscape.png;
-  #stylixImage = ../../wallpapers/mountainscapedark.jpg;
-  #stylixImage = ../../wallpapers/Rainnight.jpg;
-  #stylixImage = ../../wallpapers/zaney-wallpaper.jpg;
+  stylixImage = ../../wallpapers/Valley.jpg;
 
   # Set Waybar
   # Includes alternates such as:

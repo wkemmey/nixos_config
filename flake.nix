@@ -35,16 +35,15 @@
 
   in {
     nixosConfigurations = {
-      # GPU-based configurations (legacy)
-      amd = mkHost { hostname = "nixos-leno"; profile = "amd"; username = "don"; };
-      nvidia = mkHost { hostname = "nixos-leno"; profile = "nvidia"; username = "don"; };
-      nvidia-laptop = mkHost { hostname = "nixos-leno"; profile = "nvidia-laptop"; username = "don"; };
-      intel = mkHost { hostname = "nixos-leno"; profile = "intel"; username = "don"; };
-      vm = mkHost { hostname = "nixos-leno"; profile = "vm"; username = "don"; };
+      # GPU-based configurations for default host
+      amd = mkHost { hostname = "default"; profile = "amd"; username = "user"; };
+      nvidia = mkHost { hostname = "default"; profile = "nvidia"; username = "user"; };
+      nvidia-laptop = mkHost { hostname = "default"; profile = "nvidia-laptop"; username = "user"; };
+      intel = mkHost { hostname = "default"; profile = "intel"; username = "user"; };
+      vm = mkHost { hostname = "default"; profile = "vm"; username = "user"; };
 
-      # Host-specific configurations
-      nixos-leno = mkHost { hostname = "nixos-leno"; profile = "nvidia-laptop"; username = "don"; };
-      nix-desktop = mkHost { hostname = "nix-desktop"; profile = "nvidia"; username = "don"; };
+      # Default host configuration
+      default = mkHost { hostname = "default"; profile = "nvidia-laptop"; username = "user"; };
     };
 
     # Flutter development environment (conditional per host)
@@ -82,7 +81,7 @@
         };
       in
       {
-        default = if (hostHasFlutter "nix-desktop" || hostHasFlutter "nixos-leno")
+        default = if (hostHasFlutter "default")
                   then flutterShell
                   else pkgs.mkShell { buildInputs = []; };
       });
