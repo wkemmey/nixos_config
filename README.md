@@ -53,7 +53,7 @@ The installer will:
 ### For Existing Black Don OS Users
 If you already have Black Don OS and want to add a new computer:
 
-```bash
+```shell
 ./setup-new-host.sh
 ```
 
