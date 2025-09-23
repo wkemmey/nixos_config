@@ -440,23 +440,32 @@ print_header "Updating Flake Configuration"
 cp flake.nix flake.nix.backup
 
 # Check if the host is already in the flake
-if grep -q "\"$hostName\"" flake.nix; then
+if grep -q "$hostName = mkHost" flake.nix; then
   echo -e "${GREEN}Host $hostName already exists in flake.nix${NC}"
 else
   # Add the new host to flake.nix
   echo -e "${GREEN}Adding $hostName to flake.nix...${NC}"
 
-  # Create a temporary file with the new host entry
-  awk -v hostname="$hostName" -v profile="$profile" -v username="$newUsername" '
-    /^      # Host-specific configurations/ {
-      print $0
-      getline
-      print $0
-      print "      " hostname " = mkHost { hostname = \"" hostname "\"; profile = \"" profile "\"; username = \"" username "\"; };"
-      next
-    }
-    { print $0 }
-  ' flake.nix.backup > flake.nix
+  # Use sed to add the new host after the comment line
+  sed -i "/# Add new hosts here during installation/a\\      $hostName = mkHost { hostname = \"$hostName\"; profile = \"$profile\"; username = \"$newUsername\"; };" flake.nix
+
+  if grep -q "$hostName = mkHost" flake.nix; then
+    echo -e "${GREEN}✓ Successfully added $hostName to flake.nix${NC}"
+  else
+    echo -e "${RED}✗ Failed to add $hostName to flake.nix${NC}"
+    echo -e "${RED}Attempting manual addition...${NC}"
+
+    # Fallback: append before the closing brace
+    sed -i '/^    };$/i\      '"$hostName"' = mkHost { hostname = "'"$hostName"'"; profile = "'"$profile"'"; username = "'"$newUsername"'"; };' flake.nix
+
+    if grep -q "$hostName = mkHost" flake.nix; then
+      echo -e "${GREEN}✓ Successfully added $hostName using fallback method${NC}"
+    else
+      echo -e "${RED}✗ Failed to add $hostName to flake.nix even with fallback${NC}"
+      echo -e "${RED}You may need to manually add this line to flake.nix:${NC}"
+      echo -e "${YELLOW}      $hostName = mkHost { hostname = \"$hostName\"; profile = \"$profile\"; username = \"$newUsername\"; };${NC}"
+    fi
+  fi
 fi
 
 # Update timezone in system.nix
@@ -477,6 +486,15 @@ echo -e "  Host: ${GREEN}$hostName${NC}"
 echo -e "  Profile: ${GREEN}$profile${NC}"
 echo -e "  Username: ${GREEN}$newUsername${NC}"
 echo -e "  Host directory: ${GREEN}./hosts/${hostName}/${NC}"
+
+# Verify the host was added to flake.nix
+if grep -q "$hostName = mkHost" flake.nix; then
+  echo -e "  Flake entry: ${GREEN}✓ Added to flake.nix${NC}"
+else
+  echo -e "  Flake entry: ${RED}✗ Missing from flake.nix${NC}"
+  print_error "Host $hostName was not properly added to flake.nix"
+  exit 1
+fi
 
 print_header "Generating Hardware Configuration"
 echo -e "${YELLOW}Note: You may see 'ERROR: cannot access /bin' - this is normal${NC}"
