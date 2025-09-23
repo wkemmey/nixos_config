@@ -8,6 +8,9 @@
     #home-manager.url = "github:nix-community/home-manager/release-25.05";
     #home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.inputs.nixpkgs.follows = "nixpkgs";
+
     #nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     #nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     #nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
@@ -25,6 +28,9 @@
     #  inputs.nixpkgs.follows = "nixpkgs";
     #};
   };
+
+  https://librephoenix.com/2024-01-28-program-a-modular-control-center-for-your-config-using-special-args-in-nixos-flakes.html
+  https://librephoenix.com/2023-12-26-nixos-conditional-config-and-custom-options
 
   #outputs = {
   #  self,
@@ -55,20 +61,15 @@
   #      specialArgs = {inherit inputs outputs;};
   #      modules = [./machines/gawain];
 
-  outputs = { self, nixpkgs }: {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-          modules = [ ./configuration.nix ];
-      };
+  outputs = { self, nixpkgs, hyprland, ... }: {
+    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./configuration.nix
+        hyprland.nixosModules.default
+      ];
+    };
   };
-
-  #outputs = inputs: {
-  #    nixosConfigurations.nixos = inputs.lib.nixosSystem {
-  #        modules = [
-  #          { nix.settings.experimental-features = ["nix-command" "flakes"]; };
-  #          ./configuration.nix
-  #        ];
-  #    };
-  #};
 }
 To set up Hyprland on NixOS using flakes, you'll need to modify two files: flake.nix and configuration.nix.
 
