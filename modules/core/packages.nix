@@ -84,32 +84,31 @@
     nemo-fileroller # Archive Manager Integration For Nemo
     nwg-displays # Manage Displays
     vivaldi # Browser
-    youtube-music
+    #youtube-music
     # Unstable Packages
-    pkgs-unstable.code-cursor # AI IDE
+    #pkgs-unstable.code-cursor # AI IDE
     pkgs-unstable.zed-editor # Another AI IDE
-    pkgs-unstable.flutter # Flutter SDK
-    pkgs-unstable.jdk # Java Development Kit
+    #pkgs-unstable.flutter # Flutter SDK
+    #pkgs-unstable.jdk # Java Development Kit
     pkgs-unstable.claude-code # For native development
     pkgs-unstable.nwg-dock-hyprland
-    teams-for-linux # Video Meetings
-    zoom-us # Video Meetings
+    #teams-for-linux # Video Meetings
+    #zoom-us # Video Meetings
     telegram-desktop # Messaging App
-    android-studio # Android Studio
+    #android-studio # Android Studio
     chromium # Browser
     google-chrome # Browser
     # Dev Packages
-    androidenv.androidPkgs.platform-tools  # This includes adb
-    androidenv.androidPkgs.emulator        # For Android emulator
-    androidenv.androidPkgs.ndk-bundle
+    #androidenv.androidPkgs.platform-tools  # This includes adb
+    #androidenv.androidPkgs.emulator        # For Android emulator
+    #androidenv.androidPkgs.ndk-bundle
     # Firebase CLI
-    firebase-tools
+    #firebase-tools
     quick-webapps
     gum
     gtk3
     gtk4
     localsend
     obsidian
-
   ];
 }

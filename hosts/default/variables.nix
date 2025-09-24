@@ -39,6 +39,12 @@
   # Enable Flutter Development Environment
   flutterdevEnable = false;
 
+  # Android Development Packages (uncomment in packages.nix to enable)
+  #pkgs-unstable.flutter # Flutter SDK
+  #androidenv.androidPkgs.platform-tools  # This includes adb
+  #androidenv.androidPkgs.emulator        # For Android emulator
+  #androidenv.androidPkgs.ndk-bundle
+
   # Enable Stylix System Theming
   stylixEnable = true;
 
