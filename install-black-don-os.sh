@@ -370,10 +370,10 @@ cat > hosts/"$hostName"/variables.nix << EOF
   enableNFS = false;
   printEnable = false;
   thunarEnable = true;
-  controllerSupportEnable = true;
+  controllerSupportEnable = false;
   flutterdevEnable = false;
   stylixEnable = true;
-  vicinaeEnable = true;
+  vicinaeEnable = false;
   syncthingEnable = false;
 
   # Styling

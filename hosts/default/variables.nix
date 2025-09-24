@@ -14,7 +14,7 @@
   clock24h = false;
 
   # Program Options
-  browser = "firefox"; # Set Default Browser
+  browser = "brave"; # Set Default Browser
   terminal = "kitty"; # Set Default System Terminal
   keyboardLayout = "us";
   consoleKeyMap = "us";
@@ -34,7 +34,7 @@
   thunarEnable = true;
 
   # Enable Controller Support For Gaming
-  controllerSupportEnable = true;
+  controllerSupportEnable = false;
 
   # Enable Flutter Development Environment
   flutterdevEnable = false;
@@ -49,7 +49,7 @@
   stylixEnable = true;
 
   # Enable Vicinae Launcher
-  vicinaeEnable = true;
+  vicinaeEnable = false;
 
   # Enable Syncthing File Synchronization
   syncthingEnable = false;
