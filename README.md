@@ -6,3 +6,8 @@ My NixOS configuration using flakes and home manager.
 - cd nixos_config
 - make sure hostname on machine matches configuration files
 - sudo nixos-rebuild switch --impure --flake .
+
+
+# references
+  https://librephoenix.com/2024-01-28-program-a-modular-control-center-for-your-config-using-special-args-in-nixos-flakes.html
+  https://librephoenix.com/2023-12-26-nixos-conditional-config-and-custom-options

@@ -1,5 +1,6 @@
 {
   description = "whit's nix config";
+  
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     #nixpkgs-master.url = "github:NixOS/nixpkgs/master";
@@ -28,9 +29,6 @@
     #  inputs.nixpkgs.follows = "nixpkgs";
     #};
   };
-
-  https://librephoenix.com/2024-01-28-program-a-modular-control-center-for-your-config-using-special-args-in-nixos-flakes.html
-  https://librephoenix.com/2023-12-26-nixos-conditional-config-and-custom-options
 
   #outputs = {
   #  self,
