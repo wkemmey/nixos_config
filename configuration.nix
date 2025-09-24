@@ -54,7 +54,7 @@
 
   #### services ####
 
-  #services.xserver.enable = true;
+  services.xserver.enable = false;
 
   #services.displayManager.sddm.enable = true;
   #services.desktopManager.plasma6.enable = true;
@@ -63,6 +63,17 @@
   services.xserver.xkb = {
     layout = "us";
     variant = "";
+  };
+
+  # enable a display manager for login
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd Hyprland";
+        user = "whit";
+      };
+    };
   };
 
   #services.printing.enable = true;
@@ -91,9 +102,14 @@
   environment.systemPackages = with pkgs; [
     ghostty
     git
+    hyprland
+    wayland-utils
+    rofi
   ];
 
   #### programs ####
+
+  programs.hyprland.enable = true;
 
   #programs.firefox.enable = true;
 
@@ -102,5 +118,52 @@
       export PS1='\[\e[38;5;76m\]\u\[\e[0m\] in \[\e[38;5;32m\]\w\[\e[0m\] \\$ '
     '';
   };
+
+  # Set up a basic Hyprland configuration
+  # This section provides a minimal working config. You should customize it.
+  # The configuration is written in the Hyprland format, not Nix.
+  environment.etc."hypr/hyprland.conf".text = ''
+    # Monitor setup
+    monitor=,preferred,auto,1
+
+    # Main keyboard and mouse binds
+    $mainMod = SUPER
+
+    bind = $mainMod, Q, exec, kitty
+    bind = $mainMod, C, killactive,
+    bind = $mainMod, M, exit,
+    bind = $mainMod, E, exec, rofi -show drun
+    bind = $mainMod, V, togglefloating,
+
+    # Window management
+    bind = $mainMod, P, pseudo, # dwindle
+    bind = $mainMod, J, togglesplit, # dwindle
+
+    # Move focus
+    bind = $mainMod, H, movefocus, l
+    bind = $mainMod, L, movefocus, r
+    bind = $mainMod, K, movefocus, u
+    bind = $mainMod, J, movefocus, d
+
+    # Move windows
+    bind = $mainMod SHIFT, H, movewindow, l
+    bind = $mainMod SHIFT, L, movewindow, r
+    bind = $mainMod SHIFT, K, movewindow, u
+    bind = $mainMod SHIFT, J, movewindow, d
+    
+    # Workspace switching
+    bind = $mainMod, 1, workspace, 1
+    bind = $mainMod, 2, workspace, 2
+    bind = $mainMod, 3, workspace, 3
+    bind = $mainMod, 4, workspace, 4
+
+    # Move windows to workspaces
+    bind = $mainMod SHIFT, 1, movetoworkspace, 1
+    bind = $mainMod SHIFT, 2, movetoworkspace, 2
+    bind = $mainMod SHIFT, 3, movetoworkspace, 3
+    bind = $mainMod SHIFT, 4, movetoworkspace, 4
+
+    # ... and many more
+  '';
 
 }
