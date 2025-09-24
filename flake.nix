@@ -3,11 +3,11 @@
   
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-    #nixpkgs-master.url = "github:NixOS/nixpkgs/master";
+    #nixpkgs-master.url = "github:nixos/nixpkgs/master";
     #nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
-    #home-manager.url = "github:nix-community/home-manager/release-25.05";
-    #home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.url = "github:nix-community/home-manager/release-25.05";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
@@ -59,8 +59,10 @@
   #      specialArgs = {inherit inputs outputs;};
   #      modules = [./machines/gawain];
 
-  outputs = { self, nixpkgs, hyprland, ... }:
+  outputs = { self, nixpkgs, home-manager, hyprland, ... }:
     let
+      system = "x86_64-linux";
+      pkgs = nixpkgs.legacyPackages.${system};
       # custom settings that I can refer to elsewhere in my config
       mySettings = {
         system = "x86_64-linux"; # system arch
@@ -110,11 +112,9 @@
       };
     in {
       homeConfigurations = {
-        user = home-manager.lib.homeManagerConfiguration {
+        whit = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [
-            (./. + "/profiles" + ("/" + systemSettings.profile) + "/home.nix") # load home.nix from selected PROFILE
-          ];
+          modules = [ ./home.nix ];
           extraSpecialArgs = {
             inherit mySettings;
             #inherit inputs;

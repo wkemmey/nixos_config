@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, mySettings, ... }:
 
 {
   imports =
@@ -112,6 +112,11 @@
   programs.hyprland.enable = true;
 
   #programs.firefox.enable = true;
+
+  # I use zsh btw
+  environment.shells = with pkgs; [ zsh ];
+  users.defaultUserShell = pkgs.zsh;
+  programs.zsh.enable = true;
 
   programs.bash = {
     promptInit = ''

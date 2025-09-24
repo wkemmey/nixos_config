@@ -18,3 +18,12 @@ gc:
 fmt:
 	# format the nix files in this repo
 	nix fmt ./
+
+
+
+git add file1 file2 (etc..) to stage commits
+git commit -m "commit message" to commit changes
+git push remote-name branch-name to push to the remote
+
+
+https://github.com/cideM/dotfiles
