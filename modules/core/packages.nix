@@ -79,10 +79,11 @@
     waypaper # backup wallpaper GUI
     wget # Tool For Fetching Files With Links
     ytmdl # Tool For Downloading Audio From YouTube
-    # My apps
-    nemo # File Manager
-    nemo-fileroller # Archive Manager Integration For Nemo
+    # Other apps (Uncomment any you want to enable)
+    #nemo # File Manager
+    #nemo-fileroller # Archive Manager Integration For Nemo
     nwg-displays # Manage Displays
+    nwg-drawer # Application Drawer
     vivaldi # Browser
     #youtube-music
     # Unstable Packages
@@ -96,6 +97,8 @@
     #zoom-us # Video Meetings
     telegram-desktop # Messaging App
     #android-studio # Android Studio
+    # Browsers
+    brave # Browser
     chromium # Browser
     google-chrome # Browser
     # Dev Packages
