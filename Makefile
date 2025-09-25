@@ -28,6 +28,9 @@ git push remote-name branch-name to push to the remote
 
 https://github.com/cideM/dotfiles
 
+terminal emulator:  alacritty, kitty, or foot
+shell:  fish
+
 
 This is a **vast improvement**\! The fixes related to variable passing and Home Manager integration are excellent. Your configuration is now correct and portable.
 
