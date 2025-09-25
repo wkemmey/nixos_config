@@ -1,16 +1,19 @@
-{ config, pkgs, ... }:
+{ config, pkgs, mySettings, ... }:
 
 {
-  # ... all your other stuff
-
-  programs.bash = {
-    enable = true;
-    shellAliases = {
-      ll = "ls -l";
-      .. = "cd ..";
-    };
-  };
-  programs.zsh = {
+  # Set the home directory and state directory
+  home.username = "${mySettings.username}";
+  home.homeDirectory = "/home/${mySettings.username}";
+  home.stateVersion = "25.05"; # Match your NixOS state version
+  
+  #programs.bash = {
+  #  enable = true;
+  #  shellAliases = {
+  #    ll = "ls -l";
+  #    .. = "cd ..";
+  #  };
+  #};
+  programs.fish = {
     enable = true;
     shellAliases = {
       ll = "ls -l";
@@ -20,12 +23,11 @@
 
   programs.git = {
     enable = true;
-    userName = "Your Name";
-    userEmail = "youremail@example.com";
+    userName = ${mySettings.name};
+    userEmail = ${mySettings.email};
     extraConfig = {
       init.defaultBranch = "main";
-      safe.directory = "/etc/nixos";
-      safe.directory = "/home/yourusername/.dotfiles";
+      safe.directory = [ "/etc/nixos" "${mySettings.dotfilesDir}" ];
     };
   };
 

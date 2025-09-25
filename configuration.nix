@@ -1,4 +1,4 @@
-{ config, pkgs, mySettings, ... }:
+{ config, pkgs, mySettings, hostname, bootMode ... }:
 
 {
   imports =
@@ -22,7 +22,7 @@
 
   #### networking ####
 
-  networking.hostName = "nixos";  # NOTE: host name must match here and flake.nix
+  networking.hostName = ${hostname};
   networking.networkmanager.enable = true;
   #networking.wireless.enable = true;  # enables wireless support via wpa_supplicant
 
@@ -71,7 +71,7 @@
     settings = {
       default_session = {
         command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd Hyprland";
-        user = "whit";
+        user = ${mySettings.username};
       };
     };
   };
@@ -90,19 +90,19 @@
   #### user accounts ####
 
   # define a user account (don't forget to set a password with "passwd")
-  users.users.whit = {
+  users.users.${mySettings.username} = {
     isNormalUser = true;
-    description = "Whit Kemmey";
+    description = ${mySettings.name};
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [];
+    shell = pkgs.fish;
+    #packages = with pkgs; [];
   };
 
   #### system packages
 
   environment.systemPackages = with pkgs; [
-    ghostty
+    fish
     git
-    hyprland
     wayland-utils
     rofi
   ];
@@ -114,15 +114,15 @@
   #programs.firefox.enable = true;
 
   # I use zsh btw
-  environment.shells = with pkgs; [ zsh ];
-  users.defaultUserShell = pkgs.zsh;
-  programs.zsh.enable = true;
+  #environment.shells = with pkgs; [ fish ];
+  #users.defaultUserShell = pkgs.fish;
+  #programs.fish.enable = true;
 
-  programs.bash = {
-    promptInit = ''
-      export PS1='\[\e[38;5;76m\]\u\[\e[0m\] in \[\e[38;5;32m\]\w\[\e[0m\] \\$ '
-    '';
-  };
+  #programs.bash = {
+  #  promptInit = ''
+  #    export PS1='\[\e[38;5;76m\]\u\[\e[0m\] in \[\e[38;5;32m\]\w\[\e[0m\] \\$ '
+  #  '';
+  #};
 
   # Set up a basic Hyprland configuration
   # This section provides a minimal working config. You should customize it.
@@ -134,7 +134,7 @@
     # Main keyboard and mouse binds
     $mainMod = SUPER
 
-    bind = $mainMod, Q, exec, kitty
+    bind = $mainMod, Q, exec, fish
     bind = $mainMod, C, killactive,
     bind = $mainMod, M, exit,
     bind = $mainMod, E, exec, rofi -show drun
