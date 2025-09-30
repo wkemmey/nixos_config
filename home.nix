@@ -27,7 +27,8 @@
     userEmail = "${mySettings.email}";
     extraConfig = {
       init.defaultBranch = "main";
-      safe.directory = [ "/etc/nixos" "${mySettings.dotfilesDir}" ];
+      #safe.directory = [ "/etc/nixos" "${mySettings.dotfilesDir}" ];
+      safe.directory = [ "/etc/nixos" "~/.dotfiles" ];
     };
   };
 
