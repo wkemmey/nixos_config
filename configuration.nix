@@ -80,7 +80,7 @@
     settings = {
       default_session = {
         command = "${pkgs.greetd.tuigreet}/bin/tuigreet --cmd Hyprland";
-        user = ${mySettings.username};
+        user = "${mySettings.username}";
       };
     };
   };
@@ -104,7 +104,7 @@
   # define a user account (don't forget to set a password with "passwd")
   users.users.${mySettings.username} = {
     isNormalUser = true;
-    description = ${mySettings.name};
+    description = "${mySettings.name}";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.fish;
     #packages = with pkgs; [];
