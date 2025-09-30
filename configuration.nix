@@ -22,7 +22,7 @@
 
   #### networking ####
 
-  networking.hostName = ${hostname};
+  networking.hostName = "${hostname}";
   networking.networkmanager.enable = true;
   #networking.wireless.enable = true;  # enables wireless support via wpa_supplicant
 
