@@ -23,8 +23,8 @@
 
   programs.git = {
     enable = true;
-    userName = "${mySettings.name}";
-    userEmail = "${mySettings.email}";
+    userName = "whit"; #"${mySettings.name}";
+    userEmail = "whit@fastmail.com"; #"${mySettings.email}";
     extraConfig = {
       init.defaultBranch = "main";
       #safe.directory = [ "/etc/nixos" "${mySettings.dotfilesDir}" ];
