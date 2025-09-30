@@ -188,7 +188,7 @@
   # I use zsh btw
   #environment.shells = with pkgs; [ fish ];
   #users.defaultUserShell = pkgs.fish;
-  #programs.fish.enable = true;
+  programs.fish.enable = true;
 
   #programs.bash = {
   #  promptInit = ''
