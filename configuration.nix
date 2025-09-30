@@ -1,4 +1,4 @@
-{ config, pkgs, mySettings, hostname, bootMode ... }:
+{ config, pkgs, mySettings, hostname, bootMode, ... }:
 
 {
   imports =
