@@ -58,7 +58,7 @@
                 imports = [ ./home.nix ];
                 extraSpecialArgs = { inherit mySettings; };
               };
-            }
+            };
             hyprland.nixosModules.default
           ];
           specialArgs = {
@@ -67,7 +67,7 @@
             bootMode = "uefi";  # uefi or bios
             #inherit inputs;
           };
-        }
+        };
 
         nix_vm = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
@@ -80,7 +80,7 @@
                 imports = [ ./home.nix ];
                 extraSpecialArgs = { inherit mySettings; };
               };
-            }
+            };
             hyprland.nixosModules.default
           ];
           specialArgs = {
@@ -89,7 +89,7 @@
             bootMode = "bios";  # uefi or bios
             #inherit inputs;
           };
-        }
+        };
       };
     };
 }
