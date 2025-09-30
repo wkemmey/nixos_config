@@ -129,7 +129,7 @@
     pamixer
     playerctl
     #gnome-themes-extra
-    pavucntrol
+    #pavucntrol got an error with this
 
     # for system
     foot
