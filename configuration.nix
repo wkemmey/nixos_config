@@ -106,7 +106,7 @@
   #### user accounts ####
 
   # define a user account (don't forget to set a password with "passwd")
-  users.users.${mySettings.username} = {
+  users.users."${mySettings.username}" = {
     isNormalUser = true;
     description = "${mySettings.name}";
     extraGroups = [ "networkmanager" "wheel" ];
