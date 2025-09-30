@@ -58,7 +58,7 @@
                 imports = [ ./home.nix ];
                 extraSpecialArgs = { inherit mySettings; };
               };
-            };
+            }
             hyprland.nixosModules.default
           ];
           specialArgs = {
@@ -80,7 +80,7 @@
                 imports = [ ./home.nix ];
                 extraSpecialArgs = { inherit mySettings; };
               };
-            };
+            }
             hyprland.nixosModules.default
           ];
           specialArgs = {
