@@ -128,6 +128,7 @@
     pavucntrol
 
     # for system
+    foot
     libnotify
     nautilus
     alejandra
@@ -200,8 +201,11 @@
 
     # main keyboard and mouse binds
     $mainMod = SUPER
+    $terminal = kitty
+    $browser = chromium
+    $fileManager = nautilus
 
-    bind = $mainMod, Q, exec, fish
+    bind = $mainMod, Q, exec, $terminal
     bind = $mainMod, C, killactive,
     bind = $mainMod, M, exit,
     bind = $mainMod, E, exec, rofi -show drun

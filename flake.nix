@@ -56,7 +56,7 @@
               home-manager.useUserPackages = true;
               home-manager.users.${mySettings.username} = {
                 imports = [ ./home.nix ];
-                extraSpecialArgs = { inherit mySettings; };
+                #extraSpecialArgs = { inherit mySettings; };
               };
             }
             hyprland.nixosModules.default
@@ -78,7 +78,7 @@
               home-manager.useUserPackages = true;
               home-manager.users.${mySettings.username} = {
                 imports = [ ./home.nix ];
-                extraSpecialArgs = { inherit mySettings; };
+                #extraSpecialArgs = { inherit mySettings; };
               };
             }
             hyprland.nixosModules.default
