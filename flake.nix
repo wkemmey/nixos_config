@@ -54,7 +54,7 @@
             home-manager.nixosModules.home-manager {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.${mySettings.username} = {
+              home-manager.users."${mySettings.username}" = {
                 imports = [ ./home.nix ];
                 #extraSpecialArgs = { inherit mySettings; };
               };
@@ -76,7 +76,7 @@
             home-manager.nixosModules.home-manager {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.${mySettings.username} = {
+              home-manager.users."${mySettings.username}" = {
                 imports = [ ./home.nix ];
                 #extraSpecialArgs = { inherit mySettings; };
               };
