@@ -14,13 +14,16 @@
 
   #### boot loader ####
 
-  #boot.loader.systemd-boot.enable = true;
-  #boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  # if bootMode = uefi
+  boot.loader.systemd-boot.enable = bootMode == "uefi";
+  boot.loader.efi.canTouchEfiVariables = bootMode == "uefi";
 
-  #### networking ####
+  # if bootMode = bios
+  boot.loader.grub.enable = bootMode == "bios";
+  boot.loader.grub.device = if bootMode == "bios" then "/dev/sda" else null;
+  boot.loader.grub.useOSProber = true;
+  
+   #### networking ####
 
   networking.hostName = "${hostname}";
   networking.networkmanager.enable = true;
@@ -97,6 +100,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     jack.enable = true;
+    wireplumber.enable = true;
   };
 
   #### user accounts ####
@@ -204,6 +208,8 @@
     $terminal = kitty
     $browser = chromium
     $fileManager = nautilus
+    $music = vlc
+    $passwordManager = 1password
 
     bind = $mainMod, Q, exec, $terminal
     bind = $mainMod, C, killactive,
