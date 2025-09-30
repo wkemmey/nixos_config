@@ -17,7 +17,7 @@
     enable = true;
     shellAliases = {
       ll = "ls -l";
-      .. = "cd ..";
+      #.. = "cd ..";
     };
   };
 
