@@ -2,8 +2,8 @@
 
 {
   # Set the home directory and state directory
-  home.username = "${mySettings.username}";
-  home.homeDirectory = "/home/${mySettings.username}";
+  home.username = "whit"; #"${mySettings.username}";
+  home.homeDirectory = "/home/whit"; #"/home/${mySettings.username}";
   home.stateVersion = "25.05"; # Match your NixOS state version
   
   #programs.bash = {
