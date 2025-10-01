@@ -161,8 +161,8 @@
     vlc
     #signal-desktop
     dropbox
-    onepassword-cli 
-    onepassword-gui
+    #onepassword-cli 
+    #onepassword-gui
 
     # development tools
     github-desktop
@@ -211,7 +211,7 @@
     $browser = chromium
     $fileManager = nautilus
     $music = vlc
-    $passwordManager = onepassword-gui
+    #$passwordManager = onepassword-gui
 
     bind = $mainMod, Q, exec, $terminal
     bind = $mainMod, C, killactive,
@@ -266,7 +266,7 @@
     bind = $mainMod, D, exec, $terminal -e lazydocker"
     bind = $mainMod, G, exec, $messenger"
     bind = $mainMod, O, exec, obsidian -disable-gpu"
-    bind = $mainMod, slash, exec, $passwordManager"
+    #bind = $mainMod, slash, exec, $passwordManager"
   '';
 
 }
