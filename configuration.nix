@@ -161,6 +161,8 @@
     vlc
     #signal-desktop
     dropbox
+    onepassword-cli 
+    onepassword-gui
 
     # development tools
     github-desktop
@@ -179,11 +181,11 @@
 
   #programs.firefox.enable = true;
 
-  programs._1password.enable = true;
-  programs._1password-gui = {
-    enable = true;
-    polkitPolicyOwners = ["${mySettings.username}"];
-  };
+  #programs._1password.enable = true;
+  #programs._1password-gui = {
+  #  enable = true;
+  #  polkitPolicyOwners = ["${mySettings.username}"];
+  #};
 
   # I use zsh btw
   #environment.shells = with pkgs; [ fish ];
@@ -209,7 +211,7 @@
     $browser = chromium
     $fileManager = nautilus
     $music = vlc
-    $passwordManager = 1password
+    $passwordManager = onepassword-gui
 
     bind = $mainMod, Q, exec, $terminal
     bind = $mainMod, C, killactive,
