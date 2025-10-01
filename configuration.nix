@@ -119,7 +119,7 @@
   environment.systemPackages = with pkgs; [
     git
     wayland-utils
-    #rofi-wayland
+    rofi-wayland
 
     # for hyprland
     # for hyprland (using unstable where needed)
@@ -202,12 +202,18 @@
   # This section provides a minimal working config. You should customize it.
   # The configuration is written in the Hyprland format, not Nix.
   environment.etc."hypr/hyprland.conf".text = ''
+    # environment variables
+    env = XDG_CURRENT_DESKTOP,Hyprland
+    env = XDG_SESSION_TYPE,wayland
+    env = XDG_SESSION_DESKTOP,Hyprland
+    env = GDK_BACKEND,wayland
+
     # monitor setup
     monitor=,preferred,auto,1
 
-    # main keyboard and mouse binds
+    # main variables for keybinds
     $mainMod = SUPER
-    $terminal = foot
+    $terminal = foot 
     $browser = chromium
     $fileManager = nautilus
     $music = vlc
