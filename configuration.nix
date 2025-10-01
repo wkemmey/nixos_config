@@ -1,4 +1,4 @@
-{ config, pkgs, mySettings, hostname, bootMode, ... }:
+{ config, pkgs, mySettings, hostname, bootMode, unstablePkgs, ... }:
 
 {
   imports =
@@ -122,14 +122,14 @@
     #rofi-wayland
 
     # for hyprland
-    hyprshot
-    hyprpicker
-    #hyprsunset
-    brightnessctl
-    pamixer
-    playerctl
-    #gnome-themes-extra
-    #pavucntrol got an error with this
+    # for hyprland (using unstable where needed)
+    unstablePkgs.hyprshot # FIX: Moved to unstable
+    unstablePkgs.hyprpicker # FIX: Moved to unstable
+    # hyprsunset (still commented out, but would use unstablePkgs.hyprsunset)
+    unstablePkgs.brightnessctl # FIX: Moved to unstable
+    unstablePkgs.pamixer # FIX: Moved to unstable
+    unstablePkgs.playerctl # FIX: Moved to unstable
+    # pavucntrol (still commented out)
 
     # for system
     foot
@@ -138,22 +138,22 @@
     alejandra
     blueberry
     clipse
-    fzf
-    zoxide
+    #fzf
+    #zoxide
     ripgrep
-    eza
-    fd
+    #eza
+    #fd
     curl
     unzip
     wget
     gnumake
 
     # tuis
-    lazygit
+    #lazygit
     #lazydocker
     btop
     powertop
-    fastfetch
+    #fastfetch
 
     # guis
     chromium
@@ -264,7 +264,7 @@
     bind = $mainMod, N, exec, $terminal -e nvim
     bind = $mainMod, T, exec, $terminal -e btop
     bind = $mainMod, D, exec, $terminal -e lazydocker
-    bind = $mainMod, G, exec, $messenger
+    #bind = $mainMod, G, exec, $messenger
     bind = $mainMod, O, exec, obsidian -disable-gpu
     #bind = $mainMod, slash, exec, $passwordManager
   '';
