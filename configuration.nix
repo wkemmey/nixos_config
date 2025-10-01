@@ -124,7 +124,7 @@
     # for hyprland
     hyprshot
     hyprpicker
-    hyprsunset
+    #hyprsunset
     brightnessctl
     pamixer
     playerctl
@@ -207,7 +207,7 @@
 
     # main keyboard and mouse binds
     $mainMod = SUPER
-    $terminal = kitty
+    $terminal = foot
     $browser = chromium
     $fileManager = nautilus
     $music = vlc
@@ -248,25 +248,25 @@
     bind = $mainMod SHIFT, 4, movetoworkspace, 4
 
     # applications
-    bind = $mainMod, A, exec, $webapp=https://chatgpt.com"
-    bind = $mainMod SHIFT, A, exec, $webapp=https://grok.com"
-    bind = $mainMod, C, exec, $webapp=https://app.hey.com/calendar/weeks/"
-    bind = $mainMod, E, exec, $webapp=https://app.hey.com"
-    bind = $mainMod, Y, exec, $webapp=https://youtube.com/"
-    bind = $mainMod SHIFT, G, exec, $webapp=https://web.whatsapp.com/"
-    bind = $mainMod, X, exec, $webapp=https://x.com/"
-    bind = $mainMod SHIFT, X, exec, $webapp=https://x.com/compose/post"
+    bind = $mainMod, A, exec, $browser https://chatgpt.com
+    bind = $mainMod SHIFT, A, exec, $browser https://grok.com
+    bind = $mainMod, C, exec, $browser https://app.hey.com/calendar/weeks/
+    bind = $mainMod, E, exec, $browser https://app.hey.com
+    bind = $mainMod, Y, exec, $browser https://youtube.com/
+    bind = $mainMod SHIFT, G, exec, $browser https://web.whatsapp.com/
+    bind = $mainMod, X, exec, $browser https://x.com/
+    bind = $mainMod SHIFT, X, exec, $browser https://x.com/compose/post
 
-    bind = $mainMod, return, exec, $terminal"
-    bind = $mainMod, F, exec, $fileManager"
-    bind = $mainMod, B, exec, $browser"
-    bind = $mainMod, M, exec, $music"
-    bind = $mainMod, N, exec, $terminal -e nvim"
-    bind = $mainMod, T, exec, $terminal -e btop"
-    bind = $mainMod, D, exec, $terminal -e lazydocker"
-    bind = $mainMod, G, exec, $messenger"
-    bind = $mainMod, O, exec, obsidian -disable-gpu"
-    #bind = $mainMod, slash, exec, $passwordManager"
+    bind = $mainMod, return, exec, $terminal
+    bind = $mainMod, F, exec, $fileManager
+    bind = $mainMod, B, exec, $browser
+    bind = $mainMod, M, exec, $music
+    bind = $mainMod, N, exec, $terminal -e nvim
+    bind = $mainMod, T, exec, $terminal -e btop
+    bind = $mainMod, D, exec, $terminal -e lazydocker
+    bind = $mainMod, G, exec, $messenger
+    bind = $mainMod, O, exec, obsidian -disable-gpu
+    #bind = $mainMod, slash, exec, $passwordManager
   '';
 
 }
