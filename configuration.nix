@@ -213,7 +213,7 @@
 
     # main variables for keybinds
     $mainMod = SUPER
-    $terminal = foot 
+    $terminal = ${pkgs.foot}/bin/foot # FIX: Use absolute path to ensure foot is found by Hyprland
     $browser = chromium
     $fileManager = nautilus
     $music = vlc
