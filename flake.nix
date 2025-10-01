@@ -38,6 +38,7 @@
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
+      unstablePkgs = nixpkgs-unstable.legacyPackages.${system};
       # custom settings that I can refer to elsewhere in my config
       mySettings = {
         username = "whit";
@@ -62,7 +63,7 @@
             hyprland.nixosModules.default
           ];
           specialArgs = {
-            inherit mySettings;
+            inherit mySettings unstablePkgs;
             hostname = "whit2023";
             bootMode = "uefi";  # uefi or bios
             #inherit inputs;
@@ -84,7 +85,7 @@
             hyprland.nixosModules.default
           ];
           specialArgs = {
-            inherit mySettings;
+            inherit mySettings unstablePkgs;
             hostname = "nix_vm";
             bootMode = "bios";  # uefi or bios
             #inherit inputs;
