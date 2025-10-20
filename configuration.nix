@@ -1,4 +1,4 @@
-{ config, pkgs, mySettings, hostname, bootMode, unstablePkgs, ... }:
+{ config, pkgs, lib, mySettings, hostname, bootMode, unstablePkgs, ... }:
 
 {
   imports =
@@ -21,9 +21,9 @@
   # if bootMode = bios
   boot.loader.grub.enable = bootMode == "bios";
   boot.loader.grub.device = if bootMode == "bios" then "/dev/sda" else null;
-  boot.loader.grub.useOSProber = true;
+  boot.loader.grub.useOSProber = bootMode == "bios";
   
-   #### networking ####
+  #### networking ####
 
   networking.hostName = "${hostname}";
   networking.networkmanager.enable = true;
@@ -131,6 +131,16 @@
     unstablePkgs.playerctl # FIX: Moved to unstable
     # pavucntrol (still commented out)
 
+#You may also be interested in the Hypr project's collection of tools:
+
+#hyprlock: Hyprland's GPU-accelerated screen locking utility.
+#hypridle: Hyprland's idle daemon.
+#hyprpaper: Hyprland's wallpaper utility.
+#hyprsunset: Application to enable a blue-light filter on Hyprland.
+#hyprpicker: Wayland color picker that does not suck.
+#hyprpolkitagent: Polkit authentication agent written in QT/QML.
+
+
     # for system
     foot
     libnotify
@@ -177,7 +187,13 @@
 
   #### programs ####
 
-  programs.hyprland.enable = true;
+  #programs.hyprland.enable = true;
+
+  programs.hyprland = {
+    enable = true;
+    withUWSM = true; # recommended for most users
+    xwayland.enable = true; # Xwayland can be disabled.
+  };
 
   #programs.firefox.enable = true;
 
