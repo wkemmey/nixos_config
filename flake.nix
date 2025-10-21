@@ -11,11 +11,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      #inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs.follows = "nixpkgs-unstable"; 
-    };
+    #hyprland = {
+    #  url = "github:hyprwm/Hyprland";
+    #  #inputs.nixpkgs.follows = "nixpkgs";
+    #  inputs.nixpkgs.follows = "nixpkgs-unstable"; 
+    #};
 
     #nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     #nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
@@ -35,7 +35,7 @@
     #};
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, nixpkgs-unstable, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, hyprland, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};

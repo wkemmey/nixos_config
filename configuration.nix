@@ -1,4 +1,4 @@
-{ config, pkgs, lib, mySettings, hostname, bootMode, unstablePkgs, ... }:
+{ config, pkgs, unstablePkgs, lib, mySettings, hostname, bootMode, ... }:
 
 {
   imports =
@@ -72,10 +72,10 @@
   #services.desktopManager.plasma6.enable = true;
 
   # configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
+  #services.xserver.xkb = {
+  #  layout = "us";
+  #  variant = "";
+  #};
 
   # enable a display manager for login
   services.greetd = {
@@ -123,12 +123,12 @@
 
     # for hyprland
     # for hyprland (using unstable where needed)
-    unstablePkgs.hyprshot # FIX: Moved to unstable
-    unstablePkgs.hyprpicker # FIX: Moved to unstable
+    #unstablePkgs.hyprshot # FIX: Moved to unstable
+    #unstablePkgs.hyprpicker # FIX: Moved to unstable
     # hyprsunset (still commented out, but would use unstablePkgs.hyprsunset)
-    unstablePkgs.brightnessctl # FIX: Moved to unstable
-    unstablePkgs.pamixer # FIX: Moved to unstable
-    unstablePkgs.playerctl # FIX: Moved to unstable
+    #unstablePkgs.brightnessctl # FIX: Moved to unstable
+    #unstablePkgs.pamixer # FIX: Moved to unstable
+    #unstablePkgs.playerctl # FIX: Moved to unstable
     # pavucntrol (still commented out)
 
 #You may also be interested in the Hypr project's collection of tools:
@@ -143,16 +143,16 @@
 
     # for system
     foot
-    libnotify
+    #libnotify
     nautilus
-    alejandra
-    blueberry
-    clipse
-    #fzf
-    #zoxide
-    ripgrep
-    #eza
-    #fd
+    #alejandra
+    #blueberry
+    #clipse
+    ##fzf
+    ##zoxide
+    #ripgrep
+    ##eza
+    ##fd
     curl
     unzip
     wget
@@ -176,7 +176,7 @@
 
     # development tools
     github-desktop
-    gh
+    gh # official github cli
 
     # containers
     #docker-compose
@@ -192,7 +192,7 @@
   programs.hyprland = {
     enable = true;
     withUWSM = true; # recommended for most users
-    xwayland.enable = true; # Xwayland can be disabled.
+    #xwayland.enable = true; # Xwayland can be disabled.
   };
 
   #programs.firefox.enable = true;
@@ -217,7 +217,7 @@
   # Set up a basic Hyprland configuration
   # This section provides a minimal working config. You should customize it.
   # The configuration is written in the Hyprland format, not Nix.
-  environment.etc."hypr/hyprland.conf".text = ''
+  environment.etc."hypr/dummy.conf".text = ''
     # environment variables
     env = XDG_CURRENT_DESKTOP,Hyprland
     env = XDG_SESSION_TYPE,wayland
