@@ -35,7 +35,7 @@
     #};
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, hyprland, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
