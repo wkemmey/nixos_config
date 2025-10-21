@@ -61,7 +61,7 @@
                 #extraSpecialArgs = { inherit mySettings; };
               };
             }
-            hyprland.nixosModules.default
+            pkgs.hyprland.nixosModules.default
           ];
           specialArgs = {
             inherit mySettings unstablePkgs;
@@ -83,7 +83,7 @@
                 #extraSpecialArgs = { inherit mySettings; };
               };
             }
-            hyprland.nixosModules.default
+            pkgs.hyprland.nixosModules.default
           ];
           specialArgs = {
             inherit mySettings unstablePkgs;
