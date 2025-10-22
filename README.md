@@ -11,3 +11,8 @@ My NixOS configuration using flakes and home manager.
 # references
   https://librephoenix.com/2024-01-28-program-a-modular-control-center-for-your-config-using-special-args-in-nixos-flakes.html
   https://librephoenix.com/2023-12-26-nixos-conditional-config-and-custom-options
+
+
+  https://github.com/XNM1/linux-nixos-hyprland-config-dotfiles
+
+  https://www.tonybtw.com/tutorial/nixos-hyprland/
