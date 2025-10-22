@@ -62,7 +62,8 @@
               };
             }
             #pkgs.hyprland.nixosModules.default
-            ({ pkgs, ... }: {
+            ({ ... }: {
+              inherit pkgs;
               imports = [ pkgs.hyprland.nixosModules.default ];
             })
           ];
@@ -88,7 +89,8 @@
             }
             #pkgs.hyprland.nixosModules.default
             # CORRECT WAY to import the Hyprland module from Nixpkgs
-            ({ pkgs, ... }: {
+            ({ ... }: {
+              inherit pkgs;
               imports = [ pkgs.hyprland.nixosModules.default ];
             })
           ];
