@@ -62,6 +62,9 @@
               };
             }
             #pkgs.hyprland.nixosModules.default
+            ({ pkgs, ... }: {
+              imports = [ pkgs.hyprland.nixosModules.default ];
+            })
           ];
           specialArgs = {
             inherit mySettings unstablePkgs;
@@ -85,9 +88,9 @@
             }
             #pkgs.hyprland.nixosModules.default
             # CORRECT WAY to import the Hyprland module from Nixpkgs
-            #({ pkgs, ... }: {
-            #  imports = [ pkgs.hyprland.nixosModules.default ];
-            #})
+            ({ pkgs, ... }: {
+              imports = [ pkgs.hyprland.nixosModules.default ];
+            })
           ];
           specialArgs = {
             inherit mySettings unstablePkgs;

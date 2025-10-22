@@ -103,7 +103,7 @@
   };
 
   # You can keep the plugins list as-is:
-  wayland.windowManager.hyprland.plugins = [
-    pkgs.hyprlandPlugins.PLUGIN_NAME
-  ];
+  #wayland.windowManager.hyprland.plugins = [
+  #  pkgs.hyprlandPlugins.PLUGIN_NAME
+  #];
 }
