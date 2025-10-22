@@ -16,3 +16,5 @@ My NixOS configuration using flakes and home manager.
   https://github.com/XNM1/linux-nixos-hyprland-config-dotfiles
 
   https://www.tonybtw.com/tutorial/nixos-hyprland/
+
+  https://discourse.nixos.org/t/minimal-hyprland-waybar-setup/63304
