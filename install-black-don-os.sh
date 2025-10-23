@@ -307,6 +307,88 @@ if [ -z "$consoleKeyMap" ]; then
 fi
 echo -e "${GREEN}✓ Console keymap set to: $consoleKeyMap${NC}"
 
+print_header "Window Manager Configuration"
+echo "🪟 Select your window manager:"
+echo "  • hyprland - Dynamic tiling Wayland compositor (default, stable)"
+echo "  • niri     - Scrollable tiling Wayland compositor (experimental)"
+echo ""
+read -rp "Enter your window manager [ hyprland ]: " windowManager
+if [ -z "$windowManager" ]; then
+  windowManager="hyprland"
+fi
+
+# Validate window manager choice
+if [[ ! "$windowManager" =~ ^(hyprland|niri)$ ]]; then
+  print_warning "Invalid window manager '$windowManager', defaulting to hyprland"
+  windowManager="hyprland"
+fi
+echo -e "${GREEN}✓ Window manager set to: $windowManager${NC}"
+
+print_header "Bar/Shell Configuration"
+echo "🎨 Select your desktop bar/shell:"
+echo "  • waybar   - Traditional status bar (stable, recommended)"
+echo "  • dms      - Dank Material Shell (modern, feature-rich)"
+echo "  • noctalia - Noctalia Shell (alternative)"
+echo ""
+echo -e "${YELLOW}Note: DMS requires running 'dms-install' after first boot${NC}"
+read -rp "Enter your bar choice [ waybar ]: " barChoice
+if [ -z "$barChoice" ]; then
+  barChoice="waybar"
+fi
+
+# Validate bar choice
+if [[ ! "$barChoice" =~ ^(waybar|dms|noctalia)$ ]]; then
+  print_warning "Invalid bar choice '$barChoice', defaulting to waybar"
+  barChoice="waybar"
+fi
+echo -e "${GREEN}✓ Bar choice set to: $barChoice${NC}"
+
+# Waybar style selection (only if waybar is chosen)
+if [ "$barChoice" = "waybar" ]; then
+  echo ""
+  echo "📊 Select waybar style:"
+  echo "  1. waybar-ddubs     - Default style (recommended)"
+  echo "  2. waybar-jerry     - Jerry's style"
+  echo "  3. waybar-simple    - Minimalist style"
+  echo "  4. waybar-curved    - Curved edges"
+  echo "  5. waybar-nekodyke  - Nekodyke style"
+  echo "  6. waybar-ddubs-2   - Alternative ddubs style"
+  read -rp "Select waybar style (1-6) [ 1 ]: " waybarStyleChoice
+  if [ -z "$waybarStyleChoice" ]; then
+    waybarStyleChoice="1"
+  fi
+
+  case $waybarStyleChoice in
+    1) waybarStyle="waybar-ddubs" ;;
+    2) waybarStyle="waybar-jerry" ;;
+    3) waybarStyle="waybar-simple" ;;
+    4) waybarStyle="waybar-curved" ;;
+    5) waybarStyle="waybar-nekodyke" ;;
+    6) waybarStyle="waybar-ddubs-2" ;;
+    *) waybarStyle="waybar-ddubs" ;;
+  esac
+  echo -e "${GREEN}✓ Waybar style set to: $waybarStyle${NC}"
+else
+  waybarStyle="waybar-ddubs"  # Default for non-waybar configs
+fi
+
+print_header "Shell Configuration"
+echo "🐚 Select your default shell:"
+echo "  • fish - Friendly interactive shell (user-friendly, auto-suggestions)"
+echo "  • zsh  - Z shell with Powerlevel10k theme (powerful, customizable)"
+echo ""
+read -rp "Enter your shell choice [ zsh ]: " defaultShell
+if [ -z "$defaultShell" ]; then
+  defaultShell="zsh"
+fi
+
+# Validate shell choice
+if [[ ! "$defaultShell" =~ ^(fish|zsh)$ ]]; then
+  print_warning "Invalid shell choice '$defaultShell', defaulting to zsh"
+  defaultShell="zsh"
+fi
+echo -e "${GREEN}✓ Default shell set to: $defaultShell${NC}"
+
 print_header "Configuring Host and Profile"
 
 # Check if hostname already exists
@@ -376,14 +458,27 @@ cat > hosts/"$hostName"/variables.nix << EOF
   vicinaeEnable = false;
   syncthingEnable = false;
 
+  # Window Manager Choice
+  windowManager = "$windowManager"; # Options: "niri" or "hyprland"
+
+  # Bar/Shell Choice
+  barChoice = "$barChoice"; # Options: "dms", "noctalia", or "waybar"
+
+  # Shell Choice
+  defaultShell = "$defaultShell"; # Options: "fish" or "zsh"
+
   # Styling
   stylixImage = ../../wallpapers/Valley.jpg;
 
-  # Waybar Choice
-  waybarChoice = ../../modules/home/waybar/waybar-ddubs.nix;
+  # Waybar Choice (only used if barChoice = "waybar")
+  waybarChoice = ../../modules/home/waybar/${waybarStyle}.nix;
 
   # Animation Choice
   animChoice = ../../modules/home/hyprland/animations-end4.nix;
+
+  # Startup Applications
+  startupApps = [
+  ];
 }
 EOF
 
@@ -510,6 +605,12 @@ echo -e "  🎮  GPU Profile: ${GREEN}$profile${NC}"
 echo -e "  👤  Username: ${GREEN}$newUsername${NC}"
 echo -e "  🌍  Timezone: ${GREEN}$timezone${NC}"
 echo -e "  ⌨️   Keyboard: ${GREEN}$keyboardLayout${NC}"
+echo -e "  🪟  Window Manager: ${GREEN}$windowManager${NC}"
+echo -e "  🎨  Bar/Shell: ${GREEN}$barChoice${NC}"
+if [ "$barChoice" = "waybar" ]; then
+  echo -e "  📊  Waybar Style: ${GREEN}$waybarStyle${NC}"
+fi
+echo -e "  🐚  Default Shell: ${GREEN}$defaultShell${NC}"
 echo ""
 echo -e "${YELLOW}This will build and apply your Black-Don-OS configuration.${NC}"
 echo -e "${YELLOW}The build process may take 10-30 minutes depending on your hardware.${NC}"
@@ -542,9 +643,47 @@ if sudo nixos-rebuild boot --flake .#$hostName; then
   echo ""
   echo -e "${BLUE}What's next:${NC}"
   echo -e "1. ${GREEN}Reboot your system${NC} to load Black-Don-OS"
+  echo ""
+
+  # DMS-specific post-install instructions
+  if [ "$barChoice" = "dms" ]; then
+    echo -e "${YELLOW}📦 Dank Material Shell (DMS) Setup:${NC}"
+    echo -e "   After rebooting, run these commands to complete DMS installation:"
+    echo -e "   ${GREEN}dms-install${NC}     # Install DMS from GitHub"
+    echo -e "   ${GREEN}dms run${NC}         # Start DMS (or reboot again)"
+    echo ""
+    echo -e "   DMS configuration: ${GREEN}~/.config/dms/${NC}"
+    echo -e "   Learn more: ${GREEN}~/black-don-os/modules/home/dank-material-shell/README.md${NC}"
+    echo ""
+  fi
+
+  # Noctalia-specific post-install instructions
+  if [ "$barChoice" = "noctalia" ]; then
+    echo -e "${YELLOW}🌙 Noctalia Shell Setup:${NC}"
+    echo -e "   Noctalia is configured and ready to use after reboot!"
+    echo -e "   Learn more: ${GREEN}~/black-don-os/modules/home/noctalia-shell/README.md${NC}"
+    echo ""
+  fi
+
+  # Shell-specific instructions
+  if [ "$defaultShell" = "zsh" ]; then
+    echo -e "${YELLOW}🐚 Zsh with Powerlevel10k:${NC}"
+    echo -e "   On first terminal launch, you may see the Powerlevel10k configuration wizard."
+    echo -e "   Follow the prompts to customize your prompt."
+    echo ""
+  fi
+
+  echo -e "${BLUE}General information:${NC}"
   echo -e "2. Your configuration is in: ${GREEN}~/black-don-os${NC}"
-  echo -e "3. To update later: ${GREEN}cd ~/black-don-os && sudo nixos-rebuild switch --flake .#$hostName${NC}"
-  echo -e "4. Read the documentation: ${GREEN}~/black-don-os/README-BLACK-DON-OS.md${NC}"
+  echo -e "3. To rebuild/update: ${GREEN}dcli rebuild${NC} or ${GREEN}dcli update${NC}"
+  echo -e "4. To switch hosts: ${GREEN}dcli switch-host${NC}"
+  echo -e "5. Read the documentation: ${GREEN}~/black-don-os/README-BLACK-DON-OS.md${NC}"
+  echo ""
+  echo -e "${BLUE}Your Configuration Summary:${NC}"
+  echo -e "   Window Manager: ${GREEN}$windowManager${NC}"
+  echo -e "   Bar/Shell: ${GREEN}$barChoice${NC}"
+  echo -e "   Default Shell: ${GREEN}$defaultShell${NC}"
+  echo -e "   GPU Profile: ${GREEN}$profile${NC}"
   echo ""
   echo -e "${YELLOW}Enjoy your Black-Don-OS experience!${NC}"
 

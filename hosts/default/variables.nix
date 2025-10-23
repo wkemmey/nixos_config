@@ -7,7 +7,7 @@
   # ex "monitor=HDMI-A-1, 1920x1080@60,auto,1"
   #
   extraMonitorSettings = ''
-  monitor=,preferred,auto,1
+    monitor=,preferred,auto,1
   '';
 
   # Waybar Settings
@@ -21,7 +21,7 @@
 
   # For Nvidia Prime support - update these with your GPU PCI IDs
   # Use 'lspci | grep VGA' to find your GPU IDs
-  intelID = "PCI:0:2:0";  # Intel/AMD integrated GPU
+  intelID = "PCI:0:2:0"; # Intel/AMD integrated GPU
   nvidiaID = "PCI:1:0:0"; # NVIDIA discrete GPU
 
   # Enable NFS
@@ -53,6 +53,15 @@
 
   # Enable Syncthing File Synchronization
   syncthingEnable = false;
+
+  # Window Manager Choice
+  windowManager = "hyprland"; # Options: "niri" or "hyprland"
+
+  # Bar/Shell Choice
+  barChoice = "waybar"; # Options: "dms", "noctalia", or "waybar"
+
+  # Shell Choice
+  defaultShell = "zsh"; # Options: "fish" or "zsh"
 
   # Display Manager Options (choose one - add to host's default.nix)
   # services.greetd.enable = true;           # greetd with tuigreet (default)
