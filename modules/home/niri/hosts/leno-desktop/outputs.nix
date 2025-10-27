@@ -7,7 +7,6 @@
       scale 1.0
       transform "normal"
       position x=2740 y=1455
-      variable-refresh-rate
   }
 
   // Left monitor

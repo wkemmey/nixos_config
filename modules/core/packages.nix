@@ -130,7 +130,6 @@
     androidenv.androidPkgs.ndk-bundle
     # Firebase CLI
     # firebase-tools # Temporarily disabled due to build issues with missing package-lock.json
-    webapp-manager
     gum
     gtk3
     gtk4

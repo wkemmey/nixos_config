@@ -99,7 +99,6 @@ in
 
       // NVIDIA Gaming Optimizations
       __GL_GSYNC_ALLOWED "1"
-      __GL_VRR_ALLOWED "1"
       PROTON_ENABLE_NVAPI "1"
       PROTON_HIDE_NVIDIA_GPU "0"
       PROTON_ENABLE_NGX_UPDATER "1"

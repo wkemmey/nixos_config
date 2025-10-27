@@ -230,15 +230,7 @@ in
 
       // === Custom Application Launchers ===
       Mod+G { spawn "Telegram"; }
-      Mod+Shift+G { spawn "gtk-launch" "WebApp-Github3829"; }
-      Ctrl+Mod+M { spawn "gtk-launch" "WebApp-Messages8512"; }
-      Mod+Alt+R { spawn "gtk-launch" "WebApp-Restream9853"; }
-      Mod+E { spawn "gtk-launch" "WebApp-ProtonMail2575"; }
-      Mod+Shift+D { spawn "gtk-launch" "WebApp-Descript2748"; }
-      Mod+Shift+C { spawn "gtk-launch" "WebApp-Claude7860"; }
-      Mod+Ctrl+G { spawn "gtk-launch" "WebApp-GoogleMeet8814"; }
       Mod+Shift+Ctrl+C { spawn "${terminal}" "claude"; }
-      Mod+Alt+G { spawn "gtk-launch" "WebApp-GitLabBlackDonOS4386"; }
       Ctrl+Mod+N { spawn "obsidian"; }
       Mod+B { spawn "${browser}"; }
       Mod+D { spawn "vesktop"; }
