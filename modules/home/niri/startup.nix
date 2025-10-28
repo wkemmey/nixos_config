@@ -3,14 +3,17 @@
   stylixImage,
   startupApps,
   barChoice,
+  config,
   ...
 }:
 let
+  # Full path to dms binary for use in niri (systemd service has limited PATH)
+  dmsPath = "${config.home.homeDirectory}/.local/bin/dms";
+
   # Determine which bar to launch
   barStartupCommand =
     if barChoice == "dms" then
-      # ''spawn-at-startup "${builtins.getEnv "HOME"}/.local/bin/dms" "run"''
-      ''spawn-at-startup "dms" "run"''
+      ''spawn-at-startup "${dmsPath}" "run"''
     else if barChoice == "noctalia" then
       ''spawn-at-startup "noctalia-shell"''
     else

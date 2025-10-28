@@ -28,6 +28,7 @@ let
       browser
       barChoice
       hostKeybinds
+      config
       ;
   };
   windowrulesModule = import ./windowrules.nix { inherit host; };
@@ -38,6 +39,7 @@ let
       stylixImage
       startupApps
       barChoice
+      config
       ;
   };
 
