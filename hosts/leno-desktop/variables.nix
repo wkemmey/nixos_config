@@ -68,7 +68,7 @@
   stylixImage = ../../wallpapers/55.png;
 
   # Bar/Shell Choice
-  barChoice = "noctalia"; # Options: "dms", "noctalia", or "waybar"
+  barChoice = "dms"; # Options: "dms", "noctalia", or "waybar"
 
   # Waybar Theme (used when barChoice = "waybar")
   waybarChoice = ../../modules/home/waybar/waybar-jerry.nix;
