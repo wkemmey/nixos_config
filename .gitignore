@@ -1,0 +1,5 @@
+# Claude Code configuration (local only)
+.claude/
+
+# Claude conversation logs
+claude/

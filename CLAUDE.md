@@ -71,10 +71,25 @@ dcli trim
 
 ### Key Directories
 - `hosts/`: Host-specific configurations (hardware.nix, variables.nix, host-packages.nix)
+  - `nixos-leno/`, `leno-desktop/`, `nix-desktop/`, `nix-deck/`, `nix-lab/` - Active host configs
+  - `default/` - Template for new hosts
 - `modules/core/`: Core system configuration modules
-- `modules/drivers/`: Hardware driver configurations
+  - `packages.nix` - System-wide packages
+  - `flatpak.nix` - Flatpak configuration
+  - `default.nix` - Core imports
+- `modules/drivers/`: Hardware driver configurations (nvidia, amd, intel)
 - `modules/home/`: Home-manager user environment configs
+  - `hyprland/` - Hyprland WM configuration with per-host customization
+  - `niri/` - Niri WM configuration with per-host customization
+  - `waybar/` - Waybar themes and configuration
+  - `dank-material-shell/` - DMS (Dank Material Shell) module
+  - `noctalia-shell/` - Noctalia Shell module
+  - `scripts/` - Custom scripts (dcli, webapp-install, etc.)
+  - `editors/`, `rofi/`, `wlogout/`, `yazi/`, etc.
 - `profiles/`: Hardware-specific profiles that import appropriate modules
+  - `nvidia/`, `nvidia-laptop/`, `amd/`, `intel/`, `vm/`
+- `claude/`: Preserved development conversations and solutions
+- `wallpapers/`: Desktop wallpaper collection
 
 ### Configuration Flow
 1. `flake.nix` defines hosts and their profiles
@@ -93,17 +108,45 @@ Each host under `hosts/` contains:
 
 ### Host Variables (`hosts/*/variables.nix`)
 Important settings to understand when working with host configurations:
-- `extraMonitorSettings`: Monitor configuration for Hyprland
-- `intelID`/`nvidiaID`: PCI IDs for NVIDIA Prime support
-- `browser`, `terminal`: Default applications
+
+**Window Manager & Desktop**:
+- `windowManager`: Choose between "niri" (scrollable-tiling) or "hyprland" (dynamic-tiling)
+- `barChoice`: Choose desktop bar - "dms" (Dank Material Shell), "noctalia" (Noctalia Shell), or "waybar"
+- `extraMonitorSettings`: Monitor configuration (works for both Hyprland and Niri)
+
+**Hardware & Graphics**:
+- `intelID`/`nvidiaID`: PCI IDs for NVIDIA Prime support (laptop configs)
+
+**Applications & Theming**:
+- `browser`, `terminal`, `defaultShell`: Default applications
 - `stylixImage`: Wallpaper for system theming
-- `waybarChoice`, `animChoice`: Desktop customization options
+- `stylixEnable`: Enable/disable Stylix system-wide theming
+
+**Bar-Specific Options**:
+- `waybarChoice`: Waybar theme selection (only used when `barChoice = "waybar"`)
+- `animChoice`: Hyprland animation preset (only used when `windowManager = "hyprland"`)
+
+**Feature Toggles** (per-host):
+- `enableNFS`: NFS client support
+- `printEnable`: Printing support
+- `thunarEnable`: Thunar file manager
+- `controllerSupportEnable`: Gaming controller support
+- `flutterdevEnable`: Flutter development environment
+- `syncthingEnable`: Syncthing file synchronization
 
 ### Flake Configuration (`flake.nix`)
-- Defines input sources (nixpkgs, home-manager, stylix, etc.)
+- Uses **nixos-unstable** channel for latest features
+- Defines input sources: nixpkgs, home-manager, stylix, hyprland, niri, quickshell, noctalia, dankMaterialShell, zen-browser, helium-browser
 - Creates host configurations using `mkHost` helper function
 - Maps hostnames to hardware profiles
 - Includes Flutter development shell for mobile development
+
+**Active Hosts** (as of October 2025):
+- `nixos-leno`: Laptop (nvidia-laptop) - Niri + Noctalia
+- `leno-desktop`: Desktop (nvidia) - Niri + DMS
+- `nix-desktop`: Desktop (nvidia) - Niri + DMS
+- `nix-deck`: Steam Deck (amd) - Hyprland + Waybar
+- `nix-lab`: Lab machine (intel) - Hyprland + Waybar
 
 ## dcli Command Line Tool
 
@@ -146,12 +189,42 @@ Black Don OS includes a custom CLI utility (`dcli`) for system management:
 - Host-specific: Edit `hosts/HOST/host-packages.nix`
 
 ### Desktop Customization
-- Wallpapers: Add to `wallpapers/` and reference in `variables.nix`
-- Waybar themes: Located in `modules/home/waybar/`
-- Hyprland configs: Located in `modules/home/hyprland/`
+
+**Window Manager Selection**:
+- Edit `windowManager` in `variables.nix` to choose "niri" or "hyprland"
+- Each WM has per-host customization in `modules/home/{niri,hyprland}/hosts/HOST-NAME/`
+- Per-host keybinds, outputs, and windowrules for both WMs
+
+**Bar/Shell Selection**:
+- Edit `barChoice` in `variables.nix`: "dms", "noctalia", or "waybar"
+- **Dank Material Shell (DMS)**: 20+ widgets, auto-theming, Quickshell-based
+  - See `modules/home/dank-material-shell/README.md`
+  - Control via `dms` CLI and IPC commands
+- **Noctalia Shell**: Material Design 3, deep Stylix integration, GUI-configurable
+  - See `modules/home/noctalia-shell/README.md`
+  - Settings persist via `~/.config/noctalia/settings.json`
+- **Waybar**: Traditional bar with multiple themes
+  - Choose theme via `waybarChoice` in variables.nix
+  - Located in `modules/home/waybar/`
+
+**Theming**:
+- Wallpapers: Add to `wallpapers/` and reference in `stylixImage` variable
+- Stylix: System-wide theming from wallpaper (enable with `stylixEnable = true`)
+- Hyprland animations: Select via `animChoice` in variables.nix
+
+**Niri Configuration**:
+- Main config: `modules/home/niri/niri.nix`
+- Per-host keybinds: `modules/home/niri/hosts/HOST-NAME/keybinds.nix`
+- Per-host outputs: `modules/home/niri/hosts/HOST-NAME/outputs.nix`
+- Per-host windowrules: `modules/home/niri/hosts/HOST-NAME/windowrules.nix`
+
+**Hyprland Configuration**:
+- Main config: `modules/home/hyprland/hyprland.nix`
+- Per-host binds: `modules/home/hyprland/hosts/HOST-NAME/binds.nix`
+- Per-host windowrules: `modules/home/hyprland/hosts/HOST-NAME/windowrules.nix`
 
 ### Hardware Configuration Updates
-- Monitor setup: Update `extraMonitorSettings` in `variables.nix`
+- Monitor setup: Update `extraMonitorSettings` in `variables.nix` (works for both WMs)
 - GPU IDs: Use `lspci | grep VGA` to find correct PCI IDs for NVIDIA Prime
 
 ## Troubleshooting
@@ -164,13 +237,17 @@ Black Don OS includes a custom CLI utility (`dcli`) for system management:
 
 ### Hardware Detection
 - Find GPU IDs: `lspci | grep VGA`
-- Monitor detection: `hyprctl monitors`
+- Monitor detection (Hyprland): `hyprctl monitors`
+- Monitor detection (Niri): `niri msg outputs`
 - Generate new hardware config if needed
 
 ### Common Issues
 - **Host not found**: Check hostname matches directory in `hosts/`
 - **Monitor issues**: Update `extraMonitorSettings` in `variables.nix`
 - **Build cache issues**: Run `dcli cleanup` to clear old generations
+- **Bar not starting**: Check `barChoice` matches your desired bar ("dms", "noctalia", or "waybar")
+- **Niri screen sharing not working**: Ensure XDG portal is properly configured (see `claude/20251026-211904-niri-xdg-portal-gnome-setup.md`)
+- **DMS not launching**: Verify symlink exists at `~/.config/quickshell/dms` (see `claude/dms-niri-startup-fix.md`)
 
 ## Development Workflow
 
@@ -182,8 +259,59 @@ Black Don OS includes a custom CLI utility (`dcli`) for system management:
 
 ## Repository Structure Notes
 
-- Based on ZaneyOS but customized for multi-host management
-- Uses NixOS 25.05 stable with some unstable packages
-- Integrates Stylix for system theming
+- Based on ZaneyOS but heavily customized for multi-host management
+- Uses **NixOS unstable** channel (as of October 2025)
+- Supports two window managers: **Niri** (scrollable-tiling) and **Hyprland** (dynamic-tiling)
+- Supports three bar options: **DMS** (Dank Material Shell), **Noctalia Shell**, and **Waybar**
+- Integrates Stylix for system-wide theming
 - Home-manager for user environment management
 - Flake-utils for development environments (Flutter)
+- Modular feature system with per-host toggles
+
+## Additional Tools & Scripts
+
+### Web App Installer
+Create desktop entries for web applications using Helium browser:
+```bash
+# Interactive mode (recommended)
+webapp-install
+
+# Direct mode
+webapp-install "App Name" "https://example.com" "icon-url.png"
+
+# Remove webapp
+webapp-remove "App Name"
+```
+See `modules/home/scripts/webapp-install-README.md` for full documentation.
+
+### Bar-Specific Tools
+
+**DMS Commands** (when using `barChoice = "dms"`):
+```bash
+dms run                    # Launch DMS manually
+dms kill                   # Stop DMS
+dms ipc call [module] [command]  # Control DMS via IPC
+```
+
+**Noctalia Configuration** (when using `barChoice = "noctalia"`):
+- Settings GUI: Built into the bar (click control center)
+- Settings persist at `~/.config/noctalia/settings.json`
+- See `claude/noctalia-persistent-settings.md` for configuration details
+
+## Important Documentation Files
+
+### Conversation Logs (`claude/` directory)
+Preserved development conversations and solutions:
+- `20251030-documentation-sync-october-2025.md` - Major changes summary (October 2025)
+- `dms-niri-startup-fix.md` - DMS startup configuration for Niri
+- `noctalia-persistent-settings.md` - Noctalia settings persistence solution
+- `noctalia-gui-editable-config.md` - GUI configuration for Noctalia
+- `20251026-211904-niri-xdg-portal-gnome-setup.md` - Niri screen sharing setup
+- `20251026-215800-obs-flatpak-screen-sharing-fix.md` - OBS Flatpak screen sharing
+- `zed-fix-niri-working-solution.md` - Zed editor fixes for Niri
+
+### Module Documentation
+- `modules/home/dank-material-shell/README.md` - DMS setup and features
+- `modules/home/noctalia-shell/README.md` - Noctalia configuration
+- `modules/home/scripts/webapp-install-README.md` - Web app installer guide
+- `dcli.md` - Complete dcli command reference

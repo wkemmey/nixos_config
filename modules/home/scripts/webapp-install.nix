@@ -109,12 +109,16 @@ pkgs.writeShellScriptBin "webapp-install" ''
       fi
     fi
 
+    # Create a unique profile directory for this web app
+    PROFILE_DIR="$HOME/.local/share/webapp-profiles/$ICON_NAME"
+    mkdir -p "$PROFILE_DIR"
+
     # Use custom exec if provided, otherwise use Chromium in app mode
     if [[ -n $CUSTOM_EXEC ]]; then
       EXEC_COMMAND="$CUSTOM_EXEC"
     else
-      # Chromium browser in app mode - creates a standalone window without browser UI
-      EXEC_COMMAND="${pkgs.chromium}/bin/chromium --app=\"$APP_URL\""
+      # Chromium browser in app mode with separate profile - creates a standalone window without browser UI
+      EXEC_COMMAND="${pkgs.chromium}/bin/chromium --user-data-dir=\"$PROFILE_DIR\" --app=\"$APP_URL\""
     fi
 
     # Create application .desktop file
