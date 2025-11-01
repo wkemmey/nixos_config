@@ -11,10 +11,6 @@
     stylix.url = "github:danth/stylix";
     flake-utils.url = "github:numtide/flake-utils";
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
-      inputs.hyprland.follows = "hyprland";
-    };
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
     quickshell = {
       url = "github:outfoxxed/quickshell";
@@ -120,14 +116,9 @@
           profile = "nvidia";
           username = "don";
         };
-        nix-deck = mkHost {
-          hostname = "nix-deck";
-          profile = "amd";
-          username = "don";
-        };
         nix-lab = mkHost {
           hostname = "nix-lab";
-          profile = "intel";
+          profile = "amd";
           username = "don";
         };
       };

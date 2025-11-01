@@ -13,8 +13,6 @@ let
     stylixImage
     startupApps
     ;
-  # Plugin settings with defaults
-  hyprexpoSettings = variables.hyprexpoSettings or { };
   barChoice = variables.barChoice or "waybar";
   # Legacy support
   enableDMSLegacy = variables.enableDankMaterialShell or false;
@@ -58,9 +56,6 @@ in
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-    ];
     systemd = {
       enable = true;
       enableXdgAutostart = true;
@@ -70,10 +65,6 @@ in
       enable = true;
     };
     settings = {
-      # Plugin configuration
-      plugin = {
-        hyprexpo = hyprexpoSettings;
-      };
 
       exec-once = [
         "wl-paste --type text --watch cliphist store # Stores only text data"

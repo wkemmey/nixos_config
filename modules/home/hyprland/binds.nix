@@ -33,7 +33,6 @@
       "$modifier,G,exec,telegram-desktop"
       "$modifier SHIFT,T,exec,pypr toggle term"
       "$modifier,M,exec,pavucontrol"
-      "$modifier,E,exec,hyprctl dispatch hyprexpo:expo toggle"
       "$modifier,R,layoutmsg,colresize +conf"
       "$modifier SHIFT,R,layoutmsg,colresize -conf"
       "$modifier CTRL,R,layoutmsg,colresize 0.5"

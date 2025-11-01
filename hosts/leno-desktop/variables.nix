@@ -16,19 +16,6 @@
     workspace=3,monitor:DP-3
   '';
 
-  # Hyprland Plugin Settings
-  hyprexpoSettings = {
-    columns = 2;
-    gap_size = 5;
-    bg_col = "rgb(111111)";
-    workspace_method = "center current";
-    skip_empty = true;
-    enable_gesture = true;
-    gesture_fingers = 3;
-    gesture_distance = 300;
-    gesture_positive = true;
-  };
-
   # Waybar Settings
   clock24h = false;
 
