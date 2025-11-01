@@ -110,10 +110,10 @@ in
       Mod+Shift+Down  { move-window-down; }
       Mod+Shift+Up    { move-window-up; }
       Mod+Shift+Right { move-column-right; }
-      Mod+Shift+H     { move-column-left; }
-      Mod+Shift+J     { move-window-down; }
-      Mod+Shift+K     { move-window-up; }
-      Mod+Shift+L     { move-column-right; }
+      //Mod+Shift+H     { move-column-left; }
+      //Mod+Shift+J     { move-window-down; }
+      //Mod+Shift+K     { move-window-up; }
+      //Mod+Shift+L     { move-column-right; }
 
       // === Column Navigation ===
       Mod+Home { focus-column-first; }
@@ -237,7 +237,8 @@ in
       Mod+Shift+Ctrl+C { spawn "${terminal}" "claude"; }
       Ctrl+Mod+N { spawn "obsidian"; }
       Mod+B { spawn "${browser}"; }
-      Mod+D { spawn "vesktop"; }
+      Mod+D { spawn "discord"; }
+      Mod+Shift+L { spawn "lightworks"; }
       Mod+S { spawn "steam"; }
       Mod+Shift+O { spawn "obs"; }
       Mod+Z { spawn "zed-fix"; }

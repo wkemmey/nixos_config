@@ -25,9 +25,9 @@
       opacity 0.9
   }
 
-  // Launch vesktop and Telegram on DP-3 monitor
+  // Launch Discord and Telegram on DP-3 monitor
   window-rule {
-      match app-id=r#"^(vesktop|org\.telegram\.desktop)$"#
+      match app-id=r#"^(discord|org\.telegram\.desktop)$"#
       open-on-output "DP-3"
   }
 

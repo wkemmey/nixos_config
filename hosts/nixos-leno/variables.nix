@@ -64,6 +64,9 @@
   # Enable Syncthing File Synchronization
   syncthingEnable = true;
 
+  # Enable DaVinci Resolve Video Editor
+  davinciResolveEnable = true;
+
   # Window Manager Choice
   windowManager = "niri"; # Options: "niri" or "hyprland"
 

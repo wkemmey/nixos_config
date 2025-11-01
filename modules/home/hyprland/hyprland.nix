@@ -6,15 +6,15 @@
   ...
 }:
 let
-  inherit (import ../../../hosts/${host}/variables.nix)
+  variables = import ../../../hosts/${host}/variables.nix;
+  inherit (variables)
     extraMonitorSettings
     keyboardLayout
     stylixImage
     startupApps
-    hyprexpoSettings
-    hyprscrollingSettings
     ;
-  variables = import ../../../hosts/${host}/variables.nix;
+  # Plugin settings with defaults
+  hyprexpoSettings = variables.hyprexpoSettings or { };
   barChoice = variables.barChoice or "waybar";
   # Legacy support
   enableDMSLegacy = variables.enableDankMaterialShell or false;
@@ -60,7 +60,6 @@ in
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     plugins = [
       inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprscrolling
     ];
     systemd = {
       enable = true;
@@ -74,7 +73,6 @@ in
       # Plugin configuration
       plugin = {
         hyprexpo = hyprexpoSettings;
-        hyprscrolling = hyprscrollingSettings;
       };
 
       exec-once = [
@@ -89,7 +87,7 @@ in
         if actualBarChoice == "dms" then
           [
             # Launch Dank Material Shell via quickshell
-            "killall -q quickshell;sleep .5 && quickshell -c DankMaterialShell"
+            "killall -q quickshell;sleep .5 && dms run"
           ]
         else if actualBarChoice == "noctalia" then
           [
@@ -130,7 +128,7 @@ in
 
       general = {
         "$modifier" = "SUPER";
-        layout = "scrolling";
+        layout = "dwindle";
         gaps_in = 5;
         gaps_out = 7;
         border_size = 3;

@@ -1,6 +1,11 @@
-{username, ...}: {
+{ username, host, ... }:
+let
+  variables = import ../../../hosts/${host}/variables.nix;
+  windowManager = variables.windowManager or "hyprland";
+in
+{
   programs.hyprlock = {
-    enable = true;
+    enable = windowManager == "hyprland";
     settings = {
       general = {
         disable_loading_bar = true;

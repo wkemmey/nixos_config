@@ -1,15 +1,18 @@
-{ ... }:
-
+{ host, ... }:
+let
+  variables = import ../../../hosts/${host}/variables.nix;
+  windowManager = variables.windowManager or "hyprland";
+in
 {
   services = {
     hypridle = {
-      enable = true;
+      enable = windowManager == "hyprland";
       settings = {
         general = {
           after_sleep_cmd = "hyprctl dispatch dpms on";
           ignore_dbus_inhibit = false;
           lock_cmd = "hyprlock";
-          };
+        };
         listener = [
           {
             timeout = 900;

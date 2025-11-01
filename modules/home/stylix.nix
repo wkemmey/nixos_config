@@ -12,7 +12,7 @@ lib.mkIf stylixEnable {
     hyprland.enable = false;
     hyprlock.enable = false;
     ghostty.enable = false;
-    qt.enable = true;
+    qt.enable = false;  # Disabled to fix DaVinci Resolve Qt conflicts
   };
 
   services.nwg-drawer-stylix.enable = true;

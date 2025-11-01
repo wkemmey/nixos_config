@@ -29,13 +29,6 @@
     gesture_positive = true;
   };
 
-  hyprscrollingSettings = {
-    column_default_width = "onehalf";
-    column_widths = "onehalf one";
-    fullscreen_on_one_column = true;
-    focus_fit_method = 1;
-  };
-
   # Waybar Settings
   clock24h = false;
 
@@ -58,6 +51,7 @@
   controllerSupportEnable = true;
   flutterdevEnable = true;
   syncthingEnable = false;
+  davinciResolveEnable = true;
 
   # Window Manager Choice
   windowManager = "niri"; # Options: "niri" or "hyprland"
@@ -65,7 +59,7 @@
   # Enable Stylix System Theming
   stylixEnable = true;
   # Set Stylix Image
-  stylixImage = ../../wallpapers/55.png;
+  stylixImage = ../../wallpapers/gambit-sorcerer-rl.jpg;
 
   # Bar/Shell Choice
   barChoice = "dms"; # Options: "dms", "noctalia", or "waybar"

@@ -11,6 +11,8 @@
     (import ./keybinds.nix { inherit pkgs; })
     (import ./task-waybar.nix { inherit pkgs; })
     (import ./nvidia-offload.nix { inherit pkgs; })
+    (import ./davinci-resolve-prime.nix { inherit pkgs; })
+    (import ./ffmpeg-convert-for-resolve.nix { inherit pkgs; })
     (import ./wallsetter.nix {
       inherit pkgs;
       inherit username;

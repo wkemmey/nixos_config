@@ -133,6 +133,7 @@ Important settings to understand when working with host configurations:
 - `controllerSupportEnable`: Gaming controller support
 - `flutterdevEnable`: Flutter development environment
 - `syncthingEnable`: Syncthing file synchronization
+- `davinciResolveEnable`: DaVinci Resolve video editor
 
 ### Flake Configuration (`flake.nix`)
 - Uses **nixos-unstable** channel for latest features
@@ -297,6 +298,139 @@ dms ipc call [module] [command]  # Control DMS via IPC
 - Settings GUI: Built into the bar (click control center)
 - Settings persist at `~/.config/noctalia/settings.json`
 - See `claude/noctalia-persistent-settings.md` for configuration details
+
+### DaVinci Resolve Video Editor
+
+DaVinci Resolve is available as an optional package on Black Don OS. Enable it per-host using the `davinciResolveEnable` feature toggle.
+
+**Enabling DaVinci Resolve**:
+```nix
+# hosts/HOST-NAME/variables.nix
+davinciResolveEnable = true;
+```
+
+**Launching DaVinci Resolve**:
+```bash
+# Desktop NVIDIA hosts (leno-desktop, nix-desktop)
+davinci-resolve
+
+# Laptop with NVIDIA Prime (nixos-leno)
+davinci-resolve-prime       # Uses dedicated GPU
+# or
+nvidia-offload davinci-resolve  # Alternative method
+```
+
+**Helper Scripts**:
+- `davinci-resolve-prime` - Prime launcher for laptop GPU offload (automatically sets NVIDIA environment variables)
+- `ffmpeg-convert-for-resolve` - Convert H.264/H.265 videos to DNxHR format for compatibility
+
+**Video Conversion for Free Version**:
+The free version of DaVinci Resolve on Linux has limited H.264/H.265 codec support. Use the conversion helper:
+```bash
+# Interactive conversion
+ffmpeg-convert-for-resolve input-video.mp4
+
+# Specify output filename
+ffmpeg-convert-for-resolve input-video.mp4 output.mov
+```
+
+**GPU Support**:
+- **NVIDIA Desktop** (leno-desktop, nix-desktop): Full CUDA support, excellent performance (✓✓✓)
+- **NVIDIA Prime Laptop** (nixos-leno): Full support with Prime offload, use `davinci-resolve-prime` launcher (✓✓✓)
+- **AMD** (nix-deck): Good support with OpenCL via Rusticl (✓✓) - requires `RUSTICL_ENABLE=radeonsi`
+- **Intel** (nix-lab): Limited support, video timeline issues may occur (✓)
+
+**Currently Enabled On**:
+- leno-desktop (NVIDIA desktop)
+- nixos-leno (NVIDIA laptop)
+
+**Documentation**:
+- Research: `claude/Research/20251030-davinci-resolve-research.md`
+- NVIDIA driver config already includes CUDA support
+- Prime offload command already enabled for nixos-leno
+
+## Claude Code Agents
+
+Black Don OS includes specialized Claude Code agents to assist with specific development tasks. These agents are configured in `.claude/agents/` and provide expert assistance for different scenarios.
+
+### Available Agents
+
+**Debug Donnie** (`debug-donnie`)
+- **Purpose**: Systematic diagnosis and troubleshooting of build failures, runtime errors, and configuration issues
+- **When to use**:
+  - Build failures when running `dcli rebuild` or `nixos-rebuild`
+  - Desktop components not launching (waybar, DMS, Noctalia)
+  - Hardware issues (GPU detection, NVIDIA Prime, monitor configuration)
+  - Runtime errors and unexpected system behavior
+- **Capabilities**:
+  - Runs `dcli diag` for comprehensive diagnostics
+  - Executes builds with `--show-trace` for detailed error analysis
+  - Checks systemd service status and journal logs
+  - Validates hardware configuration and PCI IDs
+  - Provides structured diagnostic reports with root cause analysis
+- **Color**: Cyan
+
+**QA Donnie** (`qa-donnie`)
+- **Purpose**: Quality assurance testing before deploying configuration changes
+- **When to use**:
+  - After modifying host configurations (variables.nix, hardware.nix)
+  - When adding new features or modules
+  - Before committing changes to ensure builds succeed
+  - Testing multi-host compatibility
+- **Capabilities**:
+  - Isolated test builds using `nixos-rebuild build --flake .#HOST`
+  - Multi-host validation across all 5 active hosts
+  - Dependency conflict detection
+  - Hardware profile compatibility checking
+  - Creates detailed test reports in `claude/QA/`
+- **Color**: Pink
+
+**Research Donnie** (`research-donnie`)
+- **Purpose**: Investigate implementation options for new features before adding them
+- **When to use**:
+  - Exploring new window manager features or effects
+  - Considering new status bars or shell alternatives
+  - Adding hardware support (Bluetooth, audio, peripherals)
+  - Setting up new development environments
+- **Capabilities**:
+  - Web research for NixOS-specific implementations
+  - Evaluates options against Black Don OS architecture
+  - Multi-host compatibility analysis
+  - Creates structured research reports in `claude/Research/`
+  - Provides code examples and integration guidance
+- **Color**: Blue
+
+**Project Documentation Updater** (`ProjectUpdate-donnie`)
+- **Purpose**: Maintain CLAUDE.md accuracy and archive development conversations
+- **When to use**:
+  - After completing significant development work
+  - When requesting "update the project documentation"
+  - New features, hosts, or architectural changes
+  - Removing deprecated features
+- **Capabilities**:
+  - Reviews git commits and identifies changes
+  - Updates CLAUDE.md to reflect current codebase state
+  - Archives important conversations in `claude/` directory
+  - Ensures all commands, paths, and configurations are current
+  - Documents deprecated features appropriately
+- **Color**: Yellow
+
+### Using Agents
+
+Agents are invoked automatically by Claude Code when appropriate, or you can explicitly request them:
+```
+"Use debug-donnie to investigate this build failure"
+"Have qa-donnie test these changes across all hosts"
+"Ask research-donnie to find the best way to add window blur"
+"Update the project documentation"
+```
+
+### Agent Reports
+
+Agents create structured reports in subdirectories:
+- `claude/QA/` - Quality assurance test reports
+- `claude/Research/` - Feature implementation research
+- `claude/` - General conversations and solutions
 
 ## Important Documentation Files
 
