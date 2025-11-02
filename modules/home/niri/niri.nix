@@ -135,8 +135,8 @@ in
       Install.WantedBy = [ "graphical-session.target" ];
     };
   }
-  // lib.optionalAttrs (windowManager == "niri") {
-    # XDG Desktop Portal services - only enabled when using Niri to prevent conflicts with Hyprland
+  // {
+    # XDG Desktop Portal services - always enabled since both WMs are available
     xdg-desktop-portal = {
       Unit = {
         Description = "Portal service";
