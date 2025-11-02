@@ -6,8 +6,14 @@ let
     barChoice
     ;
 
-  # Import host-specific binds
-  hostBinds = import ./hosts/${host}/binds.nix { inherit host; };
+  # Try to import host-specific binds, fallback to default if doesn't exist
+  hostBindsPath = ./hosts/${host}/binds.nix;
+  defaultBindsPath = ./hosts/default/binds.nix;
+  hostBinds =
+    if builtins.pathExists hostBindsPath then
+      import hostBindsPath { inherit host; }
+    else
+      import defaultBindsPath { inherit host; };
 
   # Determine launcher command based on barChoice
   launcherCommand =
