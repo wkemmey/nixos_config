@@ -59,8 +59,7 @@ in
     ./environment.nix
   ]
 
-  # Window Managers - both Niri and Hyprland are always available
-  # windowManager variable still used for per-host customization paths
+  # Window Managers - Both always available, user selects at login
   ++ [
     ./niri
     ./hyprland

@@ -2,7 +2,7 @@
   pkgs,
   lib,
   zen-browser,
-  helium-browser,
+  host,
   ...
 }:
 {
@@ -14,12 +14,13 @@
     firefox.enable = false; # Firefox is not installed by default
     dconf.enable = true;
     seahorse.enable = true;
+    # Hyprland always enabled - both WMs available at login
     hyprland = {
-      enable = true; # Create desktop file and dependencies if you switch to GUI login MGR
-      package = pkgs.hyprland; # Using unstable nixpkgs for latest version
-      portalPackage = pkgs.xdg-desktop-portal-hyprland; # Use matching portal version
+      enable = true; # Create desktop file and dependencies
+      package = pkgs.hyprland;
+      portalPackage = pkgs.xdg-desktop-portal-hyprland;
     };
-    hyprlock.enable = true; # resolve pam issue https://gitlab.com/Zaney/zaneyos/-/issues/164
+    hyprlock.enable = true; # Resolve pam issue, can be disabled per-host via enableHyprlock
     fuse.userAllowOther = true;
     mtr.enable = true;
     adb.enable = true;
@@ -36,11 +37,7 @@
   nixpkgs.config.allowUnfreePredicate =
     pkg:
     builtins.elem (lib.getName pkg) [
-      "cursor"
       "zed"
-      "flutter"
-      "jdk"
-      "claude"
     ];
 
   environment.systemPackages = with pkgs; [
@@ -51,7 +48,6 @@
     cmatrix # Matrix Movie Effect In Terminal
     cowsay # Great Fun Terminal Program
     docker-compose # Allows Controlling Docker From A Single File
-    distrobox # Run containerized apps with desktop integration
     duf # Utility For Viewing Disk Usage In Terminal
     dysk # disk usage util
     eza # Beautiful ls Replacement
@@ -99,47 +95,19 @@
     wget # Tool For Fetching Files With Links
     xwayland-satellite # Xwayland outside your Wayland compositor
     ytmdl # Tool For Downloading Audio From YouTube
-    # Apps
-    nemo # File Manager
-    nemo-fileroller # Archive Manager Integration For Nemo
     nwg-displays # Manage Displays
     nwg-drawer # drawer GUI
     nwg-look # Look GUI
     rofi-emoji # rofi-emoji-wayland merged into rofi-emoji in nixpkgs-unstable
-    vivaldi # Browser
     youtube-music
+    zen-browser # Default browser
     # Development Tools
-    #code-cursor # AI IDE
-    zed-editor # Another AI IDE
-    flutter # Flutter SDK
-    jdk # Java Development Kit
-    claude-code # For native development
-    nwg-dock-hyprland
+    zed-editor # Code editor with AI features
     popsicle
-    zen-browser # Zen Browser
-    helium-browser # Helium Browser
-    teams-for-linux # Video Meetings
-    zoom-us # Video Meetings
-    telegram-desktop # Messaging App
-    vesktop # Discord Alternative
-    android-studio # Android Studio
-    chromium # Browser
-    google-chrome # Browser
-    # Dev Packages
-    androidenv.androidPkgs.platform-tools # This includes adb
-    androidenv.androidPkgs.emulator # For Android emulator
-    androidenv.androidPkgs.ndk-bundle
-    # Firebase CLI
-    # firebase-tools # Temporarily disabled due to build issues with missing package-lock.json
+    # AI code editors (cursor, claude-code, gemini-cli) moved to modules/core/ai-code-editors.nix
     gum
     gtk3
     gtk4
     localsend
-    obsidian
-    gamescope
-    protonup-qt
-    gnome-boxes # Simple VM manager
-    quickemu # Fast VM creation tool
-    quickgui # Optional GUI for quickemu
   ];
 }

@@ -73,11 +73,12 @@
     in
     {
       nixosConfigurations = {
-        # GPU-based configurations (legacy)
-        amd = mkHost {
-          hostname = "nixos-leno";
+        # Default template configuration
+        # Users will create their own host configurations during installation
+        default = mkHost {
+          hostname = "default";
           profile = "amd";
-          username = "don";
+          username = "user";
         };
         nvidia = mkHost {
           hostname = "nixos-leno";
@@ -114,6 +115,11 @@
         nix-desktop = mkHost {
           hostname = "nix-desktop";
           profile = "nvidia";
+          username = "don";
+        };
+        nix-deck = mkHost {
+          hostname = "nix-deck";
+          profile = "amd";
           username = "don";
         };
         nix-lab = mkHost {

@@ -27,13 +27,19 @@
   enableNFS = false; # Disabled for portable gaming device
   printEnable = false; # Disabled for portable gaming device
   thunarEnable = true;
-  controllerSupportEnable = true; # Enable Controller Support For Gaming
+  gamingSupportEnable = true; # Renamed from controllerSupportEnable
   flutterdevEnable = false; # Enable Flutter Development Environment
   stylixEnable = true; # Enable Stylix System Theming
   syncthingEnable = true; # Enable Syncthing File Synchronization
+  enableHyprlock = false; # Disable hyprlock on this host
 
-  # Window Manager Choice
-  windowManager = "hyprland"; # Options: "niri" or "hyprland"
+  # New modularized features from main branch
+  aiCodeEditorsEnable = false; # Disabled for lab/test machine
+  enableExtraBrowsers = false; # Disabled for lab/test machine
+  enableCommunicationApps = false; # Disabled for lab/test machine
+  enableProductivityApps = false; # Disabled for lab/test machine
+
+  # Both WMs available at login - select via display manager
 
   # Bar/Shell Choice
   barChoice = "waybar"; # Options: "dms", "noctalia", or "waybar"

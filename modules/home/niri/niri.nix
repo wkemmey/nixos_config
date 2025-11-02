@@ -2,6 +2,7 @@
   host,
   config,
   pkgs,
+  lib,
   ...
 }:
 let
@@ -11,6 +12,7 @@ let
     terminal
     stylixImage
     startupApps
+    windowManager
     ;
 
   barChoice = variables.barChoice or "waybar";
@@ -115,85 +117,88 @@ in
     screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
   '';
 
-  # XWayland satellite service for X11 app support
-  systemd.user.services.xwayland-satellite = {
-    Unit = {
-      Description = "Xwayland outside Wayland";
-      BindsTo = "graphical-session.target";
-      After = "graphical-session.target";
+  # Systemd user services for Niri
+  systemd.user.services = {
+    # XWayland satellite service for X11 app support
+    xwayland-satellite = {
+      Unit = {
+        Description = "Xwayland outside Wayland";
+        BindsTo = "graphical-session.target";
+        After = "graphical-session.target";
+      };
+      Service = {
+        Type = "notify";
+        NotifyAccess = "all";
+        ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
+        StandardOutput = "journal";
+        Restart = "on-failure";
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
     };
-    Service = {
-      Type = "notify";
-      NotifyAccess = "all";
-      ExecStart = "${pkgs.xwayland-satellite}/bin/xwayland-satellite";
-      StandardOutput = "journal";
-      Restart = "on-failure";
+  } // lib.optionalAttrs (windowManager == "niri") {
+    # XDG Desktop Portal services - only enabled when using Niri to prevent conflicts with Hyprland
+    xdg-desktop-portal = {
+      Unit = {
+        Description = "Portal service";
+        After = [
+          "graphical-session.target"
+          "pipewire.service"
+        ];
+        PartOf = [ "graphical-session.target" ];
+      };
+      Service = {
+        Type = "dbus";
+        BusName = "org.freedesktop.portal.Desktop";
+        ExecStart = "${pkgs.xdg-desktop-portal}/libexec/xdg-desktop-portal";
+        Restart = "on-failure";
+        Environment = [
+          "XDG_CURRENT_DESKTOP=niri"
+          "WAYLAND_DISPLAY=wayland-1"
+        ];
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
     };
-    Install.WantedBy = [ "graphical-session.target" ];
-  };
 
-  # XDG Desktop Portal services - properly configured for screen sharing
-  systemd.user.services.xdg-desktop-portal = {
-    Unit = {
-      Description = "Portal service";
-      After = [
-        "graphical-session.target"
-        "pipewire.service"
-      ];
-      PartOf = [ "graphical-session.target" ];
+    xdg-desktop-portal-gnome = {
+      Unit = {
+        Description = "Portal service (GNOME implementation)";
+        After = [
+          "graphical-session.target"
+          "pipewire.service"
+          "xdg-desktop-portal.service"
+        ];
+        PartOf = [ "graphical-session.target" ];
+        Requires = [ "pipewire.service" ];
+      };
+      Service = {
+        Type = "dbus";
+        BusName = "org.freedesktop.impl.portal.desktop.gnome";
+        ExecStart = "${pkgs.xdg-desktop-portal-gnome}/libexec/xdg-desktop-portal-gnome";
+        Restart = "on-failure";
+        Environment = [
+          "XDG_CURRENT_DESKTOP=niri"
+        ];
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
     };
-    Service = {
-      Type = "dbus";
-      BusName = "org.freedesktop.portal.Desktop";
-      ExecStart = "${pkgs.xdg-desktop-portal}/libexec/xdg-desktop-portal";
-      Restart = "on-failure";
-      Environment = [
-        "XDG_CURRENT_DESKTOP=niri"
-        "WAYLAND_DISPLAY=wayland-1"
-      ];
-    };
-    Install.WantedBy = [ "graphical-session.target" ];
-  };
 
-  systemd.user.services.xdg-desktop-portal-gnome = {
-    Unit = {
-      Description = "Portal service (GNOME implementation)";
-      After = [
-        "graphical-session.target"
-        "pipewire.service"
-        "xdg-desktop-portal.service"
-      ];
-      PartOf = [ "graphical-session.target" ];
-      Requires = [ "pipewire.service" ];
+    xdg-desktop-portal-gtk = {
+      Unit = {
+        Description = "Portal service (GTK/GNOME implementation)";
+        After = [
+          "graphical-session.target"
+          "xdg-desktop-portal.service"
+        ];
+        PartOf = [ "graphical-session.target" ];
+      };
+      Service = {
+        Type = "dbus";
+        BusName = "org.freedesktop.impl.portal.desktop.gtk";
+        ExecStart = "${pkgs.xdg-desktop-portal-gtk}/libexec/xdg-desktop-portal-gtk";
+        Restart = "on-failure";
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
     };
-    Service = {
-      Type = "dbus";
-      BusName = "org.freedesktop.impl.portal.desktop.gnome";
-      ExecStart = "${pkgs.xdg-desktop-portal-gnome}/libexec/xdg-desktop-portal-gnome";
-      Restart = "on-failure";
-      Environment = [
-        "XDG_CURRENT_DESKTOP=niri"
-      ];
-    };
-    Install.WantedBy = [ "graphical-session.target" ];
-  };
-
-  systemd.user.services.xdg-desktop-portal-gtk = {
-    Unit = {
-      Description = "Portal service (GTK/GNOME implementation)";
-      After = [
-        "graphical-session.target"
-        "xdg-desktop-portal.service"
-      ];
-      PartOf = [ "graphical-session.target" ];
-    };
-    Service = {
-      Type = "dbus";
-      BusName = "org.freedesktop.impl.portal.desktop.gtk";
-      ExecStart = "${pkgs.xdg-desktop-portal-gtk}/libexec/xdg-desktop-portal-gtk";
-      Restart = "on-failure";
-    };
-    Install.WantedBy = [ "graphical-session.target" ];
   };
 
   # Place wallpapers in home directory

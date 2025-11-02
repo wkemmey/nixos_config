@@ -1,9 +1,13 @@
 { inputs, ... }:
 {
   imports = [
+    ./ai-code-editors.nix
     ./boot.nix
-    ./controller-support.nix
+    ./browsers-extra.nix
+    ./communication.nix
+    ./gaming-support.nix
     ./flatpak.nix
+    ./flutter-dev.nix
     ./fonts.nix
     ./greetd.nix
     ./ly.nix
@@ -15,6 +19,7 @@
     ./nh.nix
     ./packages.nix
     ./printing.nix
+    ./productivity.nix
     ./security.nix
     ./services.nix
     ./starfish.nix

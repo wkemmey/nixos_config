@@ -4,104 +4,89 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-Black Don OS is a customized NixOS configuration based on ZaneyOS, designed for multi-host setups with extensive hardware support. This is a flake-based NixOS configuration that manages multiple computers with different hardware profiles.
+Black Don OS is a user-friendly NixOS configuration based on ZaneyOS, designed for newcomers and experienced users. It features a simplified installation process with sensible defaults and easy customization.
 
 ## Common Development Commands
+
+### Building and Deployment
+```bash
+# Build and switch configuration
+sudo nixos-rebuild switch --flake .#HOSTNAME
+
+# Build without switching (test)
+sudo nixos-rebuild build --flake .#HOSTNAME
+
+# Show detailed error trace
+sudo nixos-rebuild build --flake .#HOSTNAME --show-trace
+```
+
+### Git Workflow
+```bash
+# Check current branch
+git branch
+
+# Commit changes
+git add .
+git commit -m "description"
+
+# Push to repository
+git push origin BRANCH-NAME
+```
 
 ## Do's and Don'ts
 - Don't add unnecessary dependencies
 - Don't modify core system files without understanding their purpose
 - Don't add code that doesn't serve a purpose for the current task
-- Don't add anything extra with out asking first.
-- Do use dcli commands when possible
+- Don't add anything extra without asking first
+- Do test changes before committing
+- Do keep the configuration user-friendly for newcomers
 
-## Gitlab Repository
+## Repository Information
 
-https://gitlab.com/theblackdon/black-don-os
+**GitLab Repository**: https://gitlab.com/theblackdon/black-don-os
 
-### Building and Deployment
-```bash
-# Build configuration for current host
-dcli rebuild
-
-# Update flake inputs and rebuild
-dcli update
-
-# Build specific host (no activation)
-dcli build nix-desktop
-
-# Deploy to specific host
-dcli deploy nix-desktop
-
-# Interactive host switcher
-dcli switch-host
-```
-
-### Testing and Validation
-```bash
-# Build configuration to test changes (no activation)
-nixos-rebuild build --flake .#HOST-NAME
-
-# Show detailed error trace for debugging
-nixos-rebuild build --flake .#HOST-NAME --show-trace
-
-# Generate system diagnostic report
-dcli diag
-```
-
-### Maintenance
-```bash
-# Clean old generations
-dcli cleanup
-
-# List available hosts
-dcli list-hosts
-
-# Trim SSD for performance
-dcli trim
-```
+### Branch Strategy
+- **main**: Public-facing simplified configuration for distribution
+- **bdos-beta-0.4**: Development branch for new features
+- **dons-personal**: Don's personal hosts and settings (not public-facing)
 
 ## Architecture Overview
 
+### Key Design Principles
+1. **Dual Window Managers**: Both Hyprland and Niri always available - user selects at login
+2. **Simple Installation**: Minimal questions, sensible defaults
+3. **Easy Customization**: All settings in `hosts/HOSTNAME/variables.nix`
+4. **Modular Features**: Enable only what you need
+5. **Newcomer Friendly**: Great defaults that work out of the box
+
 ### Multi-Host Configuration System
-- **Flake-based**: Uses Nix flakes for reproducible builds and dependency management
+- **Flake-based**: Uses Nix flakes for reproducible builds
 - **Host-specific configs**: Each computer has its own directory under `hosts/`
-- **Hardware profiles**: GPU-specific configurations in `profiles/` (nvidia, nvidia-laptop, amd, intel, vm)
-- **Modular design**: Core system modules, drivers, and home-manager configs are separated
+- **Hardware profiles**: GPU-specific configurations in `profiles/`
+- **Modular design**: Core system, drivers, and home-manager configs separated
 
 ### Key Directories
 - `hosts/`: Host-specific configurations (hardware.nix, variables.nix, host-packages.nix)
-  - `nixos-leno/`, `leno-desktop/`, `nix-desktop/`, `nix-deck/`, `nix-lab/` - Active host configs
-  - `default/` - Template for new hosts
 - `modules/core/`: Core system configuration modules
-  - `packages.nix` - System-wide packages
-  - `flatpak.nix` - Flatpak configuration
-  - `default.nix` - Core imports
-- `modules/drivers/`: Hardware driver configurations (nvidia, amd, intel)
+- `modules/drivers/`: Hardware driver configurations (NVIDIA, AMD, Intel)
 - `modules/home/`: Home-manager user environment configs
-  - `hyprland/` - Hyprland WM configuration with per-host customization
-  - `niri/` - Niri WM configuration with per-host customization
-  - `waybar/` - Waybar themes and configuration
-  - `dank-material-shell/` - DMS (Dank Material Shell) module
-  - `noctalia-shell/` - Noctalia Shell module
-  - `scripts/` - Custom scripts (dcli, webapp-install, etc.)
-  - `editors/`, `rofi/`, `wlogout/`, `yazi/`, etc.
+- `modules/home/hyprland/`: Hyprland window manager configuration
+- `modules/home/niri/`: Niri window manager configuration
 - `profiles/`: Hardware-specific profiles that import appropriate modules
-  - `nvidia/`, `nvidia-laptop/`, `amd/`, `intel/`, `vm/`
-- `claude/`: Preserved development conversations and solutions
-- `wallpapers/`: Desktop wallpaper collection
+- `wallpapers/`: System wallpapers for theming
 
 ### Configuration Flow
 1. `flake.nix` defines hosts and their profiles
 2. Profiles import appropriate driver and core modules
 3. Host directories contain hardware-specific settings
 4. `variables.nix` in each host defines customization options
+5. Both Hyprland and Niri are always imported (user selects at login)
 
 ### Host Configuration Structure
 Each host under `hosts/` contains:
 - `default.nix`: Imports hardware.nix and host-packages.nix
 - `hardware.nix`: Generated by nixos-generate-config, hardware-specific settings
-- `variables.nix`: Host-specific variables (monitors, GPU IDs, preferences)
+- `variables.nix`: Host-specific variables (monitors, GPU IDs, preferences, feature toggles)
 - `host-packages.nix`: Host-specific package installations
 
 ## Key Configuration Files
@@ -109,63 +94,95 @@ Each host under `hosts/` contains:
 ### Host Variables (`hosts/*/variables.nix`)
 Important settings to understand when working with host configurations:
 
-**Window Manager & Desktop**:
-- `windowManager`: Choose between "niri" (scrollable-tiling) or "hyprland" (dynamic-tiling)
-- `barChoice`: Choose desktop bar - "dms" (Dank Material Shell), "noctalia" (Noctalia Shell), or "waybar"
-- `extraMonitorSettings`: Monitor configuration (works for both Hyprland and Niri)
+#### Window Manager Settings
+- **NO windowManager variable** - Both Hyprland and Niri are always available
+- User selects which one at SDDM login screen
+- No rebuild needed to switch between them
 
-**Hardware & Graphics**:
-- `intelID`/`nvidiaID`: PCI IDs for NVIDIA Prime support (laptop configs)
+#### Lock Screen Settings
+- `enableHyprlock`: Controls whether hyprlock and hypridle are enabled
+- Set to `false` if using DMS or Noctalia lock screens
+- Defaults to `true` for backwards compatibility
 
-**Applications & Theming**:
-- `browser`, `terminal`, `defaultShell`: Default applications
+#### Display Settings
+- `extraMonitorSettings`: Monitor configuration for Hyprland
+- `intelID`/`nvidiaID`: PCI IDs for NVIDIA Prime support on hybrid laptops
+- `clock24h`: 24-hour or 12-hour clock format
+
+#### Application Defaults
+- `browser`: Default browser (zen, firefox, vivaldi, brave, chromium)
+- `terminal`: Default terminal (kitty, alacritty, ghostty)
+- `defaultShell`: Default shell (zsh, fish)
+- `keyboardLayout`: Keyboard layout (us, uk, de, fr, etc.)
+
+#### Desktop Environment
+- `barChoice`: Status bar choice (waybar, dms, noctalia)
+- `waybarChoice`: Waybar theme file path
+- `animChoice`: Hyprland animation style
 - `stylixImage`: Wallpaper for system theming
-- `stylixEnable`: Enable/disable Stylix system-wide theming
+- `stylixEnable`: Enable/disable Stylix theming
 
-**Bar-Specific Options**:
-- `waybarChoice`: Waybar theme selection (only used when `barChoice = "waybar"`)
-- `animChoice`: Hyprland animation preset (only used when `windowManager = "hyprland"`)
-
-**Feature Toggles** (per-host):
-- `enableNFS`: NFS client support
+#### Feature Toggles
+All optional features default to `false` for faster installation:
+- `enableNFS`: NFS file sharing
 - `printEnable`: Printing support
 - `thunarEnable`: Thunar file manager
 - `controllerSupportEnable`: Gaming controller support
 - `flutterdevEnable`: Flutter development environment
 - `syncthingEnable`: Syncthing file synchronization
-- `davinciResolveEnable`: DaVinci Resolve video editor
+- `enableCommunicationApps`: Discord, Teams, Zoom, Telegram
+- `enableExtraBrowsers`: Chromium, Google Chrome, Firefox
+- `enableProductivityApps`: Obsidian, GNOME Boxes, QuickEmu
 
 ### Flake Configuration (`flake.nix`)
-- Uses **nixos-unstable** channel for latest features
-- Defines input sources: nixpkgs, home-manager, stylix, hyprland, niri, quickshell, noctalia, dankMaterialShell, zen-browser, helium-browser
+- Defines input sources (nixpkgs, home-manager, stylix, hyprland, niri, etc.)
 - Creates host configurations using `mkHost` helper function
 - Maps hostnames to hardware profiles
 - Includes Flutter development shell for mobile development
 
-**Active Hosts** (as of October 2025):
-- `nixos-leno`: Laptop (nvidia-laptop) - Niri + Noctalia
-- `leno-desktop`: Desktop (nvidia) - Niri + DMS
-- `nix-desktop`: Desktop (nvidia) - Niri + DMS
-- `nix-deck`: Steam Deck (amd) - Hyprland + Waybar
-- `nix-lab`: Lab machine (intel) - Hyprland + Waybar
+### Window Manager Implementation
 
-## dcli Command Line Tool
+#### Both Always Available
+`modules/home/default.nix` always imports both:
+```nix
+++ [
+  ./niri
+  ./hyprland
+]
+```
 
-Black Don OS includes a custom CLI utility (`dcli`) for system management:
+Previously this was conditional based on `windowManager` variable, but now both are always loaded.
 
-### Essential Commands
-- `dcli rebuild`: Rebuild current host
-- `dcli update`: Update and rebuild current host
-- `dcli build HOST`: Build specific host configuration
-- `dcli deploy HOST`: Build and switch to host configuration
-- `dcli list-hosts`: Show available hosts
-- `dcli cleanup`: Remove old generations
+#### Hyprlock Optional
+`modules/home/hyprland/default.nix` conditionally imports hyprlock:
+```nix
+++ lib.optionals enableHyprlock [
+  ./hypridle.nix
+  ./hyprlock.nix
+];
+```
 
-### Shell Aliases
-- `fr`: Fast rebuild (`dcli rebuild`)
-- `fu`: Fast update (`dcli update`)
-- `hosts`: List hosts (`dcli list-hosts`)
-- `switch`: Interactive host switcher (`dcli switch-host`)
+This allows users to disable hyprlock if using alternative lock screens (DMS, Noctalia).
+
+## Installation Script
+
+### Simple Installer (`install.sh`)
+The simplified installer asks only essential questions:
+1. **Hostname** (with warning about not using "default")
+2. **Username** (defaults to current user)
+3. **GPU Profile** (auto-detected, confirms with user)
+
+Everything else uses sensible defaults:
+- Git config: username@hostname
+- Timezone: America/New_York
+- Keyboard: us
+- Browser: zen
+- Terminal: kitty
+- Shell: zsh
+- Bar: waybar
+- All optional features: false (faster install)
+
+Users can customize everything later via `variables.nix`.
 
 ## Hardware Support
 
@@ -177,11 +194,19 @@ Black Don OS includes a custom CLI utility (`dcli`) for system management:
 - **vm**: Virtual machine optimized
 
 ### Adding New Hosts
-1. Run `./setup-new-host.sh` to create host template
-2. Generate hardware config: `nixos-generate-config --show-hardware-config > ./hosts/NEW-HOST/hardware.nix`
-3. Customize `variables.nix` for the new host
-4. Update `flake.nix` to include new host configuration
-5. Test build: `dcli build NEW-HOST`
+New hosts can be added by:
+1. Running `./install.sh` on target hardware
+2. Script auto-generates hardware config
+3. Script creates host directory and variables.nix
+4. Script adds host to flake.nix
+5. Script builds and switches to new configuration
+
+Manual process:
+1. `mkdir -p hosts/NEW-HOST`
+2. `nixos-generate-config --show-hardware-config > hosts/NEW-HOST/hardware.nix`
+3. Create `hosts/NEW-HOST/variables.nix` based on template
+4. Update `flake.nix` to include new host
+5. Build: `sudo nixos-rebuild switch --flake .#NEW-HOST`
 
 ## Common Development Tasks
 
@@ -190,262 +215,63 @@ Black Don OS includes a custom CLI utility (`dcli`) for system management:
 - Host-specific: Edit `hosts/HOST/host-packages.nix`
 
 ### Desktop Customization
+- Wallpapers: Add to `wallpapers/` and reference in `variables.nix`
+- Waybar themes: Located in `modules/home/waybar/`, select in `variables.nix`
+- Hyprland configs: Located in `modules/home/hyprland/`
+- Niri configs: Located in `modules/home/niri/`
 
-**Window Manager Selection**:
-- Edit `windowManager` in `variables.nix` to choose "niri" or "hyprland"
-- Each WM has per-host customization in `modules/home/{niri,hyprland}/hosts/HOST-NAME/`
-- Per-host keybinds, outputs, and windowrules for both WMs
-
-**Bar/Shell Selection**:
-- Edit `barChoice` in `variables.nix`: "dms", "noctalia", or "waybar"
-- **Dank Material Shell (DMS)**: 20+ widgets, auto-theming, Quickshell-based
-  - See `modules/home/dank-material-shell/README.md`
-  - Control via `dms` CLI and IPC commands
-- **Noctalia Shell**: Material Design 3, deep Stylix integration, GUI-configurable
-  - See `modules/home/noctalia-shell/README.md`
-  - Settings persist via `~/.config/noctalia/settings.json`
-- **Waybar**: Traditional bar with multiple themes
-  - Choose theme via `waybarChoice` in variables.nix
-  - Located in `modules/home/waybar/`
-
-**Theming**:
-- Wallpapers: Add to `wallpapers/` and reference in `stylixImage` variable
-- Stylix: System-wide theming from wallpaper (enable with `stylixEnable = true`)
-- Hyprland animations: Select via `animChoice` in variables.nix
-
-**Niri Configuration**:
-- Main config: `modules/home/niri/niri.nix`
-- Per-host keybinds: `modules/home/niri/hosts/HOST-NAME/keybinds.nix`
-- Per-host outputs: `modules/home/niri/hosts/HOST-NAME/outputs.nix`
-- Per-host windowrules: `modules/home/niri/hosts/HOST-NAME/windowrules.nix`
-
-**Hyprland Configuration**:
-- Main config: `modules/home/hyprland/hyprland.nix`
-- Per-host binds: `modules/home/hyprland/hosts/HOST-NAME/binds.nix`
-- Per-host windowrules: `modules/home/hyprland/hosts/HOST-NAME/windowrules.nix`
+### Window Manager Changes
+- Both Hyprland and Niri are ALWAYS imported
+- Do NOT add conditional imports based on windowManager variable
+- Do NOT add `windowManager` variable to new hosts
+- User selects WM at login screen via SDDM
 
 ### Hardware Configuration Updates
-- Monitor setup: Update `extraMonitorSettings` in `variables.nix` (works for both WMs)
+- Monitor setup: Update `extraMonitorSettings` in `variables.nix`
 - GPU IDs: Use `lspci | grep VGA` to find correct PCI IDs for NVIDIA Prime
 
 ## Troubleshooting
 
 ### Build Failures
-1. Check git status: `dcli status`
-2. Generate diagnostic: `dcli diag`
+1. Check syntax: `nix flake check`
+2. Show metadata: `nix flake metadata`
 3. Build with trace: `nixos-rebuild build --flake .#HOST --show-trace`
-4. Verify host exists: `dcli list-hosts`
+4. Verify host exists in flake.nix
 
 ### Hardware Detection
 - Find GPU IDs: `lspci | grep VGA`
-- Monitor detection (Hyprland): `hyprctl monitors`
-- Monitor detection (Niri): `niri msg outputs`
+- Monitor detection: `hyprctl monitors` (in Hyprland)
 - Generate new hardware config if needed
 
 ### Common Issues
 - **Host not found**: Check hostname matches directory in `hosts/`
 - **Monitor issues**: Update `extraMonitorSettings` in `variables.nix`
-- **Build cache issues**: Run `dcli cleanup` to clear old generations
-- **Bar not starting**: Check `barChoice` matches your desired bar ("dms", "noctalia", or "waybar")
-- **Niri screen sharing not working**: Ensure XDG portal is properly configured (see `claude/20251026-211904-niri-xdg-portal-gnome-setup.md`)
-- **DMS not launching**: Verify symlink exists at `~/.config/quickshell/dms` (see `claude/dms-niri-startup-fix.md`)
+- **Hyprlock conflicts**: Set `enableHyprlock = false` if using DMS/Noctalia
+- **Window manager not showing**: Both should always be available; check SDDM session list
 
 ## Development Workflow
 
-1. Make configuration changes
-2. Test build: `dcli build HOST-NAME`
-3. If successful, deploy: `dcli deploy HOST-NAME`
-4. Commit changes: `dcli commit "description"`
-5. Push to repository: `dcli push`
+1. Make configuration changes on appropriate branch
+2. Test build: `sudo nixos-rebuild build --flake .#HOST`
+3. If successful, switch: `sudo nixos-rebuild switch --flake .#HOST`
+4. Commit changes: `git add . && git commit -m "description"`
+5. Push to repository: `git push origin BRANCH`
 
 ## Repository Structure Notes
 
-- Based on ZaneyOS but heavily customized for multi-host management
-- Uses **NixOS unstable** channel (as of October 2025)
-- Supports two window managers: **Niri** (scrollable-tiling) and **Hyprland** (dynamic-tiling)
-- Supports three bar options: **DMS** (Dank Material Shell), **Noctalia Shell**, and **Waybar**
-- Integrates Stylix for system-wide theming
+- Based on ZaneyOS but heavily simplified for newcomers
+- Uses NixOS unstable for latest features
+- Integrates Stylix for system theming
 - Home-manager for user environment management
+- Both Hyprland and Niri always available
 - Flake-utils for development environments (Flutter)
-- Modular feature system with per-host toggles
 
-## Additional Tools & Scripts
+## Important Reminders for Claude
 
-### Web App Installer
-Create desktop entries for web applications using Helium browser:
-```bash
-# Interactive mode (recommended)
-webapp-install
-
-# Direct mode
-webapp-install "App Name" "https://example.com" "icon-url.png"
-
-# Remove webapp
-webapp-remove "App Name"
-```
-See `modules/home/scripts/webapp-install-README.md` for full documentation.
-
-### Bar-Specific Tools
-
-**DMS Commands** (when using `barChoice = "dms"`):
-```bash
-dms run                    # Launch DMS manually
-dms kill                   # Stop DMS
-dms ipc call [module] [command]  # Control DMS via IPC
-```
-
-**Noctalia Configuration** (when using `barChoice = "noctalia"`):
-- Settings GUI: Built into the bar (click control center)
-- Settings persist at `~/.config/noctalia/settings.json`
-- See `claude/noctalia-persistent-settings.md` for configuration details
-
-### DaVinci Resolve Video Editor
-
-DaVinci Resolve is available as an optional package on Black Don OS. Enable it per-host using the `davinciResolveEnable` feature toggle.
-
-**Enabling DaVinci Resolve**:
-```nix
-# hosts/HOST-NAME/variables.nix
-davinciResolveEnable = true;
-```
-
-**Launching DaVinci Resolve**:
-```bash
-# Desktop NVIDIA hosts (leno-desktop, nix-desktop)
-davinci-resolve
-
-# Laptop with NVIDIA Prime (nixos-leno)
-davinci-resolve-prime       # Uses dedicated GPU
-# or
-nvidia-offload davinci-resolve  # Alternative method
-```
-
-**Helper Scripts**:
-- `davinci-resolve-prime` - Prime launcher for laptop GPU offload (automatically sets NVIDIA environment variables)
-- `ffmpeg-convert-for-resolve` - Convert H.264/H.265 videos to DNxHR format for compatibility
-
-**Video Conversion for Free Version**:
-The free version of DaVinci Resolve on Linux has limited H.264/H.265 codec support. Use the conversion helper:
-```bash
-# Interactive conversion
-ffmpeg-convert-for-resolve input-video.mp4
-
-# Specify output filename
-ffmpeg-convert-for-resolve input-video.mp4 output.mov
-```
-
-**GPU Support**:
-- **NVIDIA Desktop** (leno-desktop, nix-desktop): Full CUDA support, excellent performance (✓✓✓)
-- **NVIDIA Prime Laptop** (nixos-leno): Full support with Prime offload, use `davinci-resolve-prime` launcher (✓✓✓)
-- **AMD** (nix-deck): Good support with OpenCL via Rusticl (✓✓) - requires `RUSTICL_ENABLE=radeonsi`
-- **Intel** (nix-lab): Limited support, video timeline issues may occur (✓)
-
-**Currently Enabled On**:
-- leno-desktop (NVIDIA desktop)
-- nixos-leno (NVIDIA laptop)
-
-**Documentation**:
-- Research: `claude/Research/20251030-davinci-resolve-research.md`
-- NVIDIA driver config already includes CUDA support
-- Prime offload command already enabled for nixos-leno
-
-## Claude Code Agents
-
-Black Don OS includes specialized Claude Code agents to assist with specific development tasks. These agents are configured in `.claude/agents/` and provide expert assistance for different scenarios.
-
-### Available Agents
-
-**Debug Donnie** (`debug-donnie`)
-- **Purpose**: Systematic diagnosis and troubleshooting of build failures, runtime errors, and configuration issues
-- **When to use**:
-  - Build failures when running `dcli rebuild` or `nixos-rebuild`
-  - Desktop components not launching (waybar, DMS, Noctalia)
-  - Hardware issues (GPU detection, NVIDIA Prime, monitor configuration)
-  - Runtime errors and unexpected system behavior
-- **Capabilities**:
-  - Runs `dcli diag` for comprehensive diagnostics
-  - Executes builds with `--show-trace` for detailed error analysis
-  - Checks systemd service status and journal logs
-  - Validates hardware configuration and PCI IDs
-  - Provides structured diagnostic reports with root cause analysis
-- **Color**: Cyan
-
-**QA Donnie** (`qa-donnie`)
-- **Purpose**: Quality assurance testing before deploying configuration changes
-- **When to use**:
-  - After modifying host configurations (variables.nix, hardware.nix)
-  - When adding new features or modules
-  - Before committing changes to ensure builds succeed
-  - Testing multi-host compatibility
-- **Capabilities**:
-  - Isolated test builds using `nixos-rebuild build --flake .#HOST`
-  - Multi-host validation across all 5 active hosts
-  - Dependency conflict detection
-  - Hardware profile compatibility checking
-  - Creates detailed test reports in `claude/QA/`
-- **Color**: Pink
-
-**Research Donnie** (`research-donnie`)
-- **Purpose**: Investigate implementation options for new features before adding them
-- **When to use**:
-  - Exploring new window manager features or effects
-  - Considering new status bars or shell alternatives
-  - Adding hardware support (Bluetooth, audio, peripherals)
-  - Setting up new development environments
-- **Capabilities**:
-  - Web research for NixOS-specific implementations
-  - Evaluates options against Black Don OS architecture
-  - Multi-host compatibility analysis
-  - Creates structured research reports in `claude/Research/`
-  - Provides code examples and integration guidance
-- **Color**: Blue
-
-**Project Documentation Updater** (`ProjectUpdate-donnie`)
-- **Purpose**: Maintain CLAUDE.md accuracy and archive development conversations
-- **When to use**:
-  - After completing significant development work
-  - When requesting "update the project documentation"
-  - New features, hosts, or architectural changes
-  - Removing deprecated features
-- **Capabilities**:
-  - Reviews git commits and identifies changes
-  - Updates CLAUDE.md to reflect current codebase state
-  - Archives important conversations in `claude/` directory
-  - Ensures all commands, paths, and configurations are current
-  - Documents deprecated features appropriately
-- **Color**: Yellow
-
-### Using Agents
-
-Agents are invoked automatically by Claude Code when appropriate, or you can explicitly request them:
-```
-"Use debug-donnie to investigate this build failure"
-"Have qa-donnie test these changes across all hosts"
-"Ask research-donnie to find the best way to add window blur"
-"Update the project documentation"
-```
-
-### Agent Reports
-
-Agents create structured reports in subdirectories:
-- `claude/QA/` - Quality assurance test reports
-- `claude/Research/` - Feature implementation research
-- `claude/` - General conversations and solutions
-
-## Important Documentation Files
-
-### Conversation Logs (`claude/` directory)
-Preserved development conversations and solutions:
-- `20251030-documentation-sync-october-2025.md` - Major changes summary (October 2025)
-- `dms-niri-startup-fix.md` - DMS startup configuration for Niri
-- `noctalia-persistent-settings.md` - Noctalia settings persistence solution
-- `noctalia-gui-editable-config.md` - GUI configuration for Noctalia
-- `20251026-211904-niri-xdg-portal-gnome-setup.md` - Niri screen sharing setup
-- `20251026-215800-obs-flatpak-screen-sharing-fix.md` - OBS Flatpak screen sharing
-- `zed-fix-niri-working-solution.md` - Zed editor fixes for Niri
-
-### Module Documentation
-- `modules/home/dank-material-shell/README.md` - DMS setup and features
-- `modules/home/noctalia-shell/README.md` - Noctalia configuration
-- `modules/home/scripts/webapp-install-README.md` - Web app installer guide
-- `dcli.md` - Complete dcli command reference
+1. **Never add `windowManager` variable** - it's been removed
+2. **Both WMs always imported** - don't make it conditional
+3. **Keep it simple** - this is for NixOS newcomers
+4. **Test changes** - build before committing
+5. **Document everything** - users need to understand changes
+6. **Respect the architecture** - dual WM support is a key feature
+7. **Backwards compatibility** - use `or` defaults for new variables

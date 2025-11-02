@@ -4,22 +4,87 @@
   browser,
   barChoice,
   hostKeybinds ? "",
-  config,
   ...
 }:
 let
-  # Full path to dms binary for use in niri (systemd service has limited PATH)
-  dmsPath = "${config.home.homeDirectory}/.local/bin/dms";
-
   # Determine launcher command based on barChoice
   launcherCommand =
     if barChoice == "noctalia" then
       ''"noctalia-shell" "ipc" "call" "launcher" "toggle"''
     else if barChoice == "dms" then
-      ''"${dmsPath}" "ipc" "call" "spotlight" "toggle"''
+      ''"dms" "ipc" "call" "spotlight" "toggle"''
     # waybar or default
     else
       ''"rofi" "-show" "drun"'';
+
+  # Noctalia-specific keybinds
+  noctaliaKeybinds =
+    if barChoice == "noctalia" then
+      ''
+        // === Noctalia Controls ===
+        Mod+Comma {
+            spawn "noctalia-shell" "ipc" "call" "settings" "toggle";
+        }
+        Mod+Alt+S {
+            spawn "noctalia-shell" "ipc" "call" "settings" "toggle";
+        }
+        Mod+Shift+C {
+            spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle";
+        }
+      ''
+    else
+      "";
+
+  # DMS-specific keybinds
+  dmsKeybinds =
+    if barChoice == "dms" then
+      ''
+        // === DMS Controls ===
+        Mod+Comma { spawn "ignis" "open-window" "Settings"; }
+        Mod+Shift+V {
+            spawn "dms" "ipc" "call" "clipboard" "toggle";
+        }
+        Mod+M {
+            spawn "dms" "ipc" "call" "processlist" "toggle";
+        }
+        Mod+Alt+S {
+            spawn "dms" "ipc" "call" "settings" "toggle";
+        }
+        Mod+N { spawn "dms" "ipc" "call" "notifications" "toggle"; }
+        Mod+Shift+N { spawn "dms" "ipc" "call" "notepad" "toggle"; }
+
+        // === Security ===
+        Mod+Alt+L {
+            spawn "dms" "ipc" "call" "lock" "lock";
+        }
+        Ctrl+Alt+Delete {
+            spawn "dms" "ipc" "call" "processlist" "toggle";
+        }
+
+        // === Audio Controls ===
+        XF86AudioRaiseVolume allow-when-locked=true {
+            spawn "dms" "ipc" "call" "audio" "increment" "3";
+        }
+        XF86AudioLowerVolume allow-when-locked=true {
+            spawn "dms" "ipc" "call" "audio" "decrement" "3";
+        }
+        XF86AudioMute allow-when-locked=true {
+            spawn "dms" "ipc" "call" "audio" "mute";
+        }
+        XF86AudioMicMute allow-when-locked=true {
+            spawn "dms" "ipc" "call" "audio" "micmute";
+        }
+
+        // === Monitor Brightness Controls ===
+        XF86MonBrightnessUp allow-when-locked=true {
+           spawn "dms" "ipc" "call" "brightness" "increment" "5" "";
+        }
+        XF86MonBrightnessDown allow-when-locked=true {
+           spawn "dms" "ipc" "call" "brightness" "decrement" "5" "";
+        }
+      ''
+    else
+      "";
 in
 ''
   binds {
@@ -29,47 +94,17 @@ in
       Mod+Shift+Slash { show-hotkey-overlay; }
 
       // === Application Launchers ===
-      Mod+T hotkey-overlay-title="Open Terminal" { spawn "${terminal}"; }
-      Mod+Y hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-      Mod+Space hotkey-overlay-title="Application Launcher" { spawn ${launcherCommand}; }
+      Mod+T { spawn "${terminal}"; }
+      Mod+Enter { spawn "${terminal}"; }
+      Mod+Y { spawn "fuzzel"; }
+      Mod+Space { spawn ${launcherCommand}; }
 
-      // === DMS Controls ===
-      Mod+Comma hotkey-overlay-title="DMS Settings" { spawn "ignis" "open-window" "Settings"; }
-      Mod+Shift+V hotkey-overlay-title="Clipboard Manager" {
-          spawn "${dmsPath}" "ipc" "call" "clipboard" "toggle";
-      }
-      Mod+M hotkey-overlay-title="Task Manager" {
-          spawn "${dmsPath}" "ipc" "call" "processlist" "toggle";
-      }
-      Mod+Alt+S hotkey-overlay-title="Settings" {
-          spawn "${dmsPath}" "ipc" "call" "settings" "toggle";
-      }
-      Mod+N hotkey-overlay-title="Notification Center" { spawn "${dmsPath}" "ipc" "call" "notifications" "toggle"; }
-      Mod+Shift+N hotkey-overlay-title="Notepad" { spawn "${dmsPath}" "ipc" "call" "notepad" "toggle"; }
+      ${noctaliaKeybinds}
+      ${dmsKeybinds}
 
       // === Security ===
-      Mod+Alt+L hotkey-overlay-title="Lock Screen" {
-          spawn "${dmsPath}" "ipc" "call" "lock" "lock";
-      }
-      Super+L hotkey-overlay-title="Hyprlock" { spawn "hyprlock"; }
+      Super+L { spawn "hyprlock"; }
       Mod+Shift+Q { quit; }
-      Ctrl+Alt+Delete hotkey-overlay-title="Task Manager" {
-          spawn "${dmsPath}" "ipc" "call" "processlist" "toggle";
-      }
-
-      // === Audio Controls ===
-      XF86AudioRaiseVolume allow-when-locked=true {
-          spawn "${dmsPath}" "ipc" "call" "audio" "increment" "3";
-      }
-      XF86AudioLowerVolume allow-when-locked=true {
-          spawn "${dmsPath}" "ipc" "call" "audio" "decrement" "3";
-      }
-      XF86AudioMute allow-when-locked=true {
-          spawn "${dmsPath}" "ipc" "call" "audio" "mute";
-      }
-      XF86AudioMicMute allow-when-locked=true {
-          spawn "${dmsPath}" "ipc" "call" "audio" "micmute";
-      }
 
       // === Keyboard Brightness Controls ===
       XF86KbdBrightnessUp allow-when-locked=true {
@@ -77,14 +112,6 @@ in
       }
       XF86KbdBrightnessDown allow-when-locked=true {
           spawn "kbdbrite.sh" "down";
-      }
-
-      // === Monitor Brightness Controls ===
-      XF86MonBrightnessUp allow-when-locked=true {
-         spawn "${dmsPath}" "ipc" "call" "brightness" "increment" "5" "";
-      }
-      XF86MonBrightnessDown allow-when-locked=true {
-         spawn "${dmsPath}" "ipc" "call" "brightness" "decrement" "5" "";
       }
 
       // === Window Management ===
@@ -110,10 +137,10 @@ in
       Mod+Shift+Down  { move-window-down; }
       Mod+Shift+Up    { move-window-up; }
       Mod+Shift+Right { move-column-right; }
-      //Mod+Shift+H     { move-column-left; }
-      //Mod+Shift+J     { move-window-down; }
-      //Mod+Shift+K     { move-window-up; }
-      //Mod+Shift+L     { move-column-right; }
+      Mod+Shift+H     { move-column-left; }
+      Mod+Shift+J     { move-window-down; }
+      Mod+Shift+K     { move-window-up; }
+      Mod+Shift+L     { move-column-right; }
 
       // === Column Navigation ===
       Mod+Home { focus-column-first; }
@@ -219,17 +246,17 @@ in
       Alt+Print { screenshot-window; }
 
       // === Ignis Screen Recording ===
-      Mod+Alt+Shift+R hotkey-overlay-title="Record Screen" { spawn "ignis" "run-command" "recorder-record-screen"; }
-      Mod+Alt+Shift+S hotkey-overlay-title="Record Region" { spawn "ignis" "run-command" "recorder-record-region"; }
-      Mod+Alt+Shift+W hotkey-overlay-title="Record Portal" { spawn "ignis" "run-command" "recorder-record-portal"; }
+      Mod+Alt+Shift+R { spawn "ignis" "run-command" "recorder-record-screen"; }
+      Mod+Alt+Shift+S { spawn "ignis" "run-command" "recorder-record-region"; }
+      Mod+Alt+Shift+W { spawn "ignis" "run-command" "recorder-record-portal"; }
 
       // === Noctalia Config Sync ===
-      Ctrl+Shift+S hotkey-overlay-title="Sync Noctalia GUI to Nix" {
+      Ctrl+Shift+S {
           spawn "sh" "-c" "/home/don/black-don-os/modules/home/noctalia-shell/sync-from-gui.py && notify-send 'Noctalia Config' 'Settings synced to Nix template' -i preferences-system";
       }
 
       // === System Controls ===
-      Mod+Escape hotkey-overlay-title="Ignis Power Menu" { spawn "ignis" "open-window" "PowerMenu"; }
+      Mod+Escape { spawn "ignis" "open-window" "PowerMenu"; }
       Mod+Alt+P { power-off-monitors; }
 
       // === Custom Application Launchers ===
@@ -237,8 +264,7 @@ in
       Mod+Shift+Ctrl+C { spawn "${terminal}" "claude"; }
       Ctrl+Mod+N { spawn "obsidian"; }
       Mod+B { spawn "${browser}"; }
-      Mod+D { spawn "discord"; }
-      Mod+Shift+L { spawn "lightworks"; }
+      Mod+D { spawn "vesktop"; }
       Mod+S { spawn "steam"; }
       Mod+Shift+O { spawn "obs"; }
       Mod+Z { spawn "zed-fix"; }

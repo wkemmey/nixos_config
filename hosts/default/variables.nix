@@ -1,13 +1,13 @@
 {
   # Git Configuration ( For Pulling Software Repos )
-  gitUsername = "theblackdon";
-  gitEmail = "rj.jones@flosstech.com";
+  gitUsername = "user";
+  gitEmail = "user@example.com";
 
   # Hyprland Settings
   # ex "monitor=HDMI-A-1, 1920x1080@60,auto,1"
-  #
+  # Configure your monitors here - this is host-specific
   extraMonitorSettings = ''
-    monitor=eDP-1,2560x1600@165.02,6770x1558,1.33
+    monitor=,preferred,auto,1
   '';
 
   # Waybar Settings
@@ -19,9 +19,10 @@
   keyboardLayout = "us";
   consoleKeyMap = "us";
 
-  # For Nvidia Prime support with AMD
-  intelID = "PCI:34:0:0"; # AMD integrated GPU (renamed variable kept for compatibility)
-  nvidiaID = "PCI:1:0:0"; # NVIDIA discrete GPU
+  # For Nvidia Prime support
+  # Run 'lspci | grep VGA' to find your actual GPU IDs
+  intelID = "PCI:0:2:0"; # Update with your integrated GPU ID
+  nvidiaID = "PCI:1:0:0"; # Update with your NVIDIA GPU ID
 
   # Enable NFS
   enableNFS = true;
@@ -32,8 +33,8 @@
   # Enable Thunar GUI File Manager
   thunarEnable = true;
 
-  # Enable Controller Support For Gaming
-  controllerSupportEnable = true;
+  # Enable Gaming Support (controllers, gamescope, protonup-qt)
+  gamingSupportEnable = false;
 
   # Enable Flutter Development Environment
   flutterdevEnable = false;
@@ -42,20 +43,29 @@
   stylixEnable = true;
 
   # Enable Syncthing File Synchronization
-  syncthingEnable = true;
+  syncthingEnable = false;
 
-  # Window Manager Choice
-  windowManager = "niri"; # Options: "niri" or "hyprland"
+  # Enable Communication Apps (Teams, Zoom, Telegram, Discord)
+  enableCommunicationApps = false;
+
+  # Enable Extra Browsers (Chromium, Google Chrome)
+  enableExtraBrowsers = false;
+
+  # Enable Productivity Apps (Obsidian, GNOME Boxes, QuickEmu)
+  enableProductivityApps = false;
+
+  # Enable AI Code Editors (cursor, claude-code, gemini-cli)
+  aiCodeEditorsEnable = false;
+
+  # Enable Hyprlock (Hyprland lock screen)
+  # Set to false if using DMS or Noctalia lock screens
+  enableHyprlock = true;
 
   # Bar/Shell Choice
-  barChoice = "noctalia"; # Options: "dms", "noctalia", or "waybar"
+  barChoice = "dms"; # Options: "dms", "noctalia", or "waybar"
 
   # Shell Choice
   defaultShell = "zsh"; # Options: "fish" or "zsh"
-
-  # Display Manager Options (choose one - add to host's default.nix)
-  # services.greetd.enable = true;           # greetd with tuigreet (default)
-  # services.displayManager.ly.enable = true; # ly with matrix animation
 
   # Set Stylix Image
   #stylixImage = ../../wallpapers/AnimeGirlNightSky.jpg;

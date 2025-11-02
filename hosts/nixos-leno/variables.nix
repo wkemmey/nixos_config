@@ -32,8 +32,8 @@
   # Enable Thunar GUI File Manager
   thunarEnable = true;
 
-  # Enable Controller Support For Gaming
-  controllerSupportEnable = true;
+  # Enable Gaming Support (renamed from controllerSupportEnable)
+  gamingSupportEnable = true;
 
   # Enable Flutter Development Environment
   flutterdevEnable = false;
@@ -47,8 +47,16 @@
   # Enable DaVinci Resolve Video Editor
   davinciResolveEnable = true;
 
-  # Window Manager Choice
-  windowManager = "niri"; # Options: "niri" or "hyprland"
+  # Disable Hyprlock on this host
+  enableHyprlock = false;
+
+  # New modularized features from main branch
+  aiCodeEditorsEnable = false; # Disabled on laptop to save space
+  enableExtraBrowsers = false; # Disabled on laptop to save space
+  enableCommunicationApps = true; # teams, zoom, telegram, vesktop
+  enableProductivityApps = true; # obsidian, gnome-boxes
+
+  # Both WMs available at login - select via display manager
 
   # Bar/Shell Choice
   barChoice = "noctalia"; # Options: "dms", "noctalia", or "waybar"

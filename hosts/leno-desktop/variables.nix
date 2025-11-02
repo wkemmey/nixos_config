@@ -35,13 +35,19 @@
   enableNFS = true;
   printEnable = false;
   thunarEnable = true;
-  controllerSupportEnable = true;
+  gamingSupportEnable = true; # Renamed from controllerSupportEnable
   flutterdevEnable = true;
   syncthingEnable = false;
   davinciResolveEnable = true;
+  enableHyprlock = false; # Disable hyprlock on this host
 
-  # Window Manager Choice
-  windowManager = "niri"; # Options: "niri" or "hyprland"
+  # New modularized features from main branch
+  aiCodeEditorsEnable = true; # cursor, claude-code, gemini-cli
+  enableExtraBrowsers = true; # vivaldi, brave, chromium, chrome, firefox
+  enableCommunicationApps = true; # teams, zoom, telegram, vesktop
+  enableProductivityApps = true; # obsidian, gnome-boxes
+
+  # Both WMs available at login - select via display manager
 
   # Enable Stylix System Theming
   stylixEnable = true;

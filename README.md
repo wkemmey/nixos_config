@@ -1,300 +1,331 @@
-# ❄️BlackDonOS Powered by NixOS❄️
+# ❄️ Black Don OS - Powered by NixOS ❄️
 
-A customized NixOS configuration based on [ZaneyOS](https://gitlab.com/zaney/zaneyos) by Tyler Kelley, tailored for multiple host setups with NVIDIA GPU support.
+A user-friendly NixOS configuration based on [ZaneyOS](https://gitlab.com/zaney/zaneyos), designed for newcomers and experienced users alike.
 
 ![Black Don OS Desktop](img/desktop-screenshot.png)
 
-## Overview
+## 🌟 What is Black Don OS?
 
-Black Don OS is a personalized NixOS configuration that supports multiple host computers with different hardware profiles. It features a modern minimal desktop environment with Hyprland, extensive customization options, and easy multi-host management.
+Black Don OS is a pre-configured NixOS setup that makes it easy to get started with NixOS. It features:
 
-The configuration is built with modularity in mind - each host can have different features enabled or disabled (like NFS, printing, gaming controller support, Flutter development environment, etc.), custom keybinds and window rules, and personalized theming. It includes the Vicinae launcher by default for a smooth application launching experience.
+- 🪟 **Dual Window Managers** - Both Hyprland and Niri available at login (no rebuild needed!)
+- 🎨 **Beautiful Desktop** - Modern Wayland compositors with smooth animations
+- 📦 **Modular Design** - Enable only the features you need
+- 🎮 **Multi-GPU Support** - NVIDIA, AMD, Intel, and hybrid laptop configurations
+- 🚀 **Quick Installation** - Simple installer with sensible defaults
+- 📚 **Great for Learning** - Perfect for NixOS newcomers
 
-## Features
+## ⚡ Quick Start
 
-- 🖥️ **Multi-Host Support** - Easy configuration management for multiple computers
-- 🎮 **NVIDIA GPU Optimized** - Full support for NVIDIA graphics with proper drivers
-- 📊 **Modular Bar System** - Choose between Waybar, Dank Material Shell (DMS), or Noctalia Shell for your desktop bar
-- 🌊 **Hyprland Desktop** - Modern Wayland compositor with beautiful animations
-- 🪟 **Niri Desktop** - Scrollable-tiling Wayland compositor as an alternative to Hyprland
-- 🎨 **Stylix Integration** - System-wide theming and styling
-- 📦 **Flake-based Configuration** - Reproducible and declarative system management
-- 🔧 **Easy Host Setup** - Automated script for adding new computers
-- ⚡ **dcli Tool** - Custom CLI utility for multi-host system management
-- 🎛️ **Modular Features** - Toggle features per host (NFS, printing, gaming controllers, etc.)
-- ⌨️ **Per-Host Customization** - Host-specific keybinds and window rules for Hyprland
+### System Requirements
 
+**Minimum Requirements:**
+- **CPU**: 64-bit processor (x86_64)
+- **RAM**: 4 GB (8 GB recommended)
+- **Storage**: 30 GB free space (50 GB+ recommended)
+- **Graphics**: Any GPU with basic 3D acceleration
+- **Display**: 1280x720 or higher resolution
+- **Boot**: UEFI or Legacy BIOS support
+- **Internet**: Required during installation
 
-## Installation
+**Recommended for Best Experience:**
+- **CPU**: Modern quad-core processor (Intel i5/Ryzen 5 or better)
+- **RAM**: 16 GB or more
+- **Storage**: 100 GB+ SSD
+- **Graphics**: Dedicated GPU (NVIDIA/AMD) for best compositor performance
+- **Display**: 1920x1080 or higher, multi-monitor supported
 
-### For New Users
+> **💡 Note:** Black Don OS works great on older hardware too! The minimal install is lightweight, and you can enable heavier features only if you want them.
 
-If you want to install Black Don OS on a fresh NixOS system:
+### Installation
 
-1. **Boot from NixOS ISO** and ensure you have network access
-2. **Install git and pciutils** (for hardware detection):
-   ```shell
+Black Don OS installs directly on your hardware, replacing or dual-booting with your existing system.
+
+> **📝 Note:** Don't be intimidated by the steps below! The process is straightforward:
+> 1. Boot NixOS ISO → Install base NixOS → Reboot
+> 2. Run Black Don OS installer → Reboot
+> 3. Done! The whole process takes about 30-45 minutes.
+
+#### Step 1: Create NixOS Installation Media
+1. Download the **GNOME ISO** from [nixos.org/download](https://nixos.org/download)
+   - Choose "GNOME, 64-bit Intel/AMD" under "Graphical ISO image"
+2. Create a bootable USB drive with the ISO using:
+   - [Etcher](https://etcher.balena.io/) (Windows/Mac/Linux)
+   - [Rufus](https://rufus.ie/) (Windows)
+   - `dd` command (Linux)
+3. Boot your computer from the USB drive
+
+#### Step 2: Install Base NixOS System
+1. **Boot from the NixOS ISO** - you'll see the GNOME desktop
+2. **Connect to WiFi** (if needed) using the network icon in the top-right corner
+3. **Open the NixOS installer**:
+   - Double-click the "Install NixOS" icon on the desktop
+   - Or search for "Calamares" in the application menu
+
+4. **Follow the graphical installer**:
+   - **Welcome**: Select your language
+   - **Location**: Choose your timezone
+   - **Keyboard**: Select your keyboard layout
+   - **Partitions**: Choose how to set up your disk
+     - "Erase disk" for a clean install (recommended for beginners)
+     - "Manual partitioning" for advanced users or dual-boot
+   - **Users**: Create your username and password
+   - **Summary**: Review your choices
+   - **Install**: Click "Install" and wait (takes 10-15 minutes)
+
+5. **Reboot into your new NixOS system**:
+   - Click "Restart now" when installation completes
+   - Remove the USB drive when prompted
+
+#### Step 3: Install Black Don OS
+1. **Log in to your new NixOS system** with the user you created
+
+2. **Open a terminal** (press `Super` key and type "terminal")
+
+3. **Install required tools**:
+   ```bash
    nix-shell -p git pciutils
    ```
-3. **Run the installation script**:
-   ```shell
-   sh <(curl -sL https://gitlab.com/theblackdon/black-don-os/-/raw/bdos-beta-0.4/install-black-don-os.sh)
+
+4. **Clone and run the Black Don OS installer**:
+   ```bash
+   git clone https://gitlab.com/theblackdon/black-don-os
+   cd black-don-os
+   ./install.sh
    ```
 
 The installer will:
-- Detect your hardware (GPU, etc.)
-- Guide you through hostname and user configuration
-- Clone the repository and set up your configuration
-- Build and install Black Don OS
-- Create a personalized setup for your computer
+- ✅ Detect your hardware automatically
+- ✅ Ask for hostname and username (only 3 questions!)
+- ✅ Generate hardware configuration
+- ✅ Build and install Black Don OS
+- ✅ Set up both Hyprland and Niri window managers
 
-**After Installation**: You may need to customize monitor settings and GPU IDs in your `hosts/YOUR-HOST/variables.nix` file:
-- **Monitor Configuration**: Update `extraMonitorSettings` with your actual monitor setup
-- **NVIDIA Prime**: Update `intelID` and `nvidiaID` with your actual GPU PCI IDs (find with `lspci | grep VGA`)
-- **Wallpapers**: Choose your preferred wallpaper from the `wallpapers/` directory
+5. **Reboot to complete installation**:
+   ```bash
+   reboot
+   ```
 
-### For Existing Black Don OS Users
+**That's it!** After the final reboot, you'll see the SDDM login screen where you can:
+- Log in with your username
+- Choose between Hyprland or Niri from the session menu
+- Enjoy your new Black Don OS desktop!
 
-If you already have Black Don OS and want to add a new computer:
+### What You Get Out of the Box
+
+- **Browser**: Zen Browser
+- **Terminal**: Kitty
+- **Shell**: Zsh with starship prompt
+- **Bar**: Waybar with beautiful themes
+- **File Manager**: Thunar
+- **Window Managers**: Both Hyprland and Niri
+- **Theming**: Stylix for system-wide color coordination
+
+## 🎨 Customization
+
+After installation, customize your system by editing:
 
 ```bash
-./setup-new-host.sh
+~/black-don-os/hosts/YOUR-HOSTNAME/variables.nix
 ```
 
-This will guide you through:
-- Choosing a hostname
-- Selecting GPU profile (nvidia, nvidia-laptop, amd, intel, vm)
-- Configuring user settings
-- Creating installation guide for the new computer
+### Common Customizations
 
-### Building for a Specific Host
+#### Change Your Wallpaper
+```nix
+stylixImage = ../../wallpapers/Valley.jpg;  # Choose from wallpapers/ directory
+```
 
+#### Enable Optional Features
+```nix
+enableCommunicationApps = true;  # Discord, Teams, Zoom, Telegram
+enableExtraBrowsers = true;      # Chromium, Firefox, Brave
+enableProductivityApps = true;   # Obsidian, GNOME Boxes
+controllerSupportEnable = true;  # Gaming controllers
+```
+
+#### Change Default Apps
+```nix
+browser = "firefox";    # or "vivaldi", "brave", "chromium"
+terminal = "alacritty"; # or "ghostty", "kitty"
+defaultShell = "fish";  # or "zsh"
+```
+
+#### Configure Your Monitors
+```nix
+extraMonitorSettings = ''
+  monitor=HDMI-A-1,1920x1080@60,0x0,1
+  monitor=DP-1,2560x1440@144,1920x0,1
+'';
+```
+
+After making changes, rebuild:
 ```bash
-# Using dcli (recommended)
-dcli build nix-desktop      # Build only (no activation)
-dcli deploy nix-desktop     # Build and switch
-
-# Using standard nix commands
-nixos-rebuild build --flake .#nix-desktop
+dcli rebuild
+# or simply use the alias:
+fr
 ```
 
-### Installing on New Hardware
+## 🪟 Window Managers
 
-1. Boot NixOS installer ISO on target computer
-2. Follow the host-specific installation guide (e.g., `INSTALL-nix-desktop.md`)
-3. Clone this repository and run the installation commands
+Both window managers are always available - just select which one you want at login!
 
-## Directory Structure
+### Hyprland
+- Modern Wayland compositor
+- Beautiful animations
+- Tiling window management
+- Great for productivity
+
+### Niri
+- Scrollable tiling compositor
+- Unique workflow
+- Smooth animations
+- Innovative window management
+
+**No rebuild needed to switch!** Just log out and select the other at the login screen.
+
+## 🎮 GPU Support
+
+Black Don OS automatically detects and configures:
+
+- **NVIDIA Desktop** - Full NVIDIA driver support
+- **NVIDIA Laptop** - Hybrid Intel/NVIDIA with Prime
+- **AMD** - Open-source AMDGPU drivers
+- **Intel** - Integrated graphics
+- **Virtual Machines** - Optimized for VMs
+
+## 📁 Project Structure
 
 ```
 black-don-os/
-├── hosts/                    # Host-specific configurations
-│   ├── nixos-leno/          # Laptop configuration
-│   ├── nix-desktop/         # Desktop configuration
-│   └── default/             # Template host
-├── profiles/                 # Hardware profiles
-│   ├── nvidia/              # Desktop NVIDIA
-│   ├── nvidia-laptop/       # Laptop NVIDIA/Intel hybrid
-│   ├── amd/                 # AMD graphics
-│   ├── intel/               # Intel graphics
-│   └── vm/                  # Virtual machine
-├── modules/                  # System modules
-│   ├── core/                # Core system configuration
-│   ├── drivers/             # Hardware drivers
-│   └── home/                # Home manager configuration
-├── wallpapers/              # Desktop wallpapers
-├── setup-new-host.sh        # New host setup script
-├── flake.nix               # Main flake configuration
-└── INSTALL-*.md            # Host-specific install guides
+├── hosts/              # Your host configurations
+│   ├── YOUR-HOST/      # Your computer's config
+│   └── default/        # Template for new hosts
+├── modules/
+│   ├── core/          # System configuration
+│   ├── drivers/       # GPU drivers
+│   └── home/          # User environment (Hyprland, Niri, etc.)
+├── profiles/          # Hardware profiles (nvidia, amd, intel, vm)
+├── wallpapers/        # Desktop wallpapers
+└── install.sh         # Simple installer
 ```
 
-## Host Configuration
+## 🔧 Advanced Usage
 
-Each host has its own directory under `hosts/` containing:
+### Adding a New Computer
 
-- `default.nix` - Main host imports
-- `hardware.nix` - Hardware-specific configuration (generated by nixos-generate-config)
-- `variables.nix` - Host-specific settings (monitors, GPU IDs, preferences)
-- `host-packages.nix` - Host-specific package list
+To install Black Don OS on another computer:
 
-### Key Settings in `variables.nix`
+1. Clone the repo on the new machine
+2. Run `./install.sh` with a different hostname
+3. Your configurations are kept separate in `hosts/`
 
-```nix
-{
-  # Monitor configuration (host-specific)
-  extraMonitorSettings = ''
-    monitor=HDMI-A-1,3440x1440@100.0,3330x1444,1.0
-    monitor=eDP-1,2560x1600@165.02,6770x1558,1.33
-  '';
+### Multiple Hosts
 
-  # GPU IDs for NVIDIA Prime
-  intelID = "PCI:34:0:0";
-  nvidiaID = "PCI:1:0:0";
+Each computer gets its own directory under `hosts/`:
+- `hosts/my-desktop/` - Your desktop configuration  
+- `hosts/my-laptop/` - Your laptop configuration
 
-  # Desktop preferences
-  browser = "vivaldi";
-  terminal = "kitty";
-  stylixImage = ../../wallpapers/Valley.jpg;
+They can have completely different settings, packages, and features enabled.
 
-  # Modular Features (enable/disable per host)
-  enableNFS = true;
-  printEnable = false;
-  thunarEnable = true;
-  controllerSupportEnable = true;
-  flutterdevEnable = false;
-  stylixEnable = true;
-}
-```
-
-## GPU Profiles
-
-### NVIDIA Desktop (`nvidia`)
-- Dedicated NVIDIA GPU
-- No hybrid graphics
-- Best for gaming desktops
-
-### NVIDIA Laptop (`nvidia-laptop`)
-- NVIDIA + Intel hybrid graphics
-- NVIDIA Prime support
-- Power-efficient for laptops
-
-### AMD (`amd`)
-- AMD Radeon graphics
-- Open-source AMDGPU drivers
-
-### Intel (`intel`)
-- Intel integrated graphics
-- Lightweight and efficient
-
-### VM (`vm`)
-- Virtual machine optimized
-- Minimal graphics requirements
-
-## Customization
-
-### Adding a New Host
-
-1. Run the setup script: `./setup-new-host.sh`
-2. Customize `hosts/NEW-HOST/variables.nix`
-3. Test build: `nixos-rebuild build --flake .#NEW-HOST`
-4. Commit changes and follow installation guide
-
-### Updating Existing Hosts
-
-1. Edit host-specific files in `hosts/HOST-NAME/`
-2. Test changes: `dcli build HOST-NAME`
-3. Apply: `dcli deploy HOST-NAME` or `dcli rebuild` (for current host)
-
-### Adding System Packages
-
-- Edit `modules/core/packages.nix` for system-wide packages
-- Edit `hosts/HOST/host-packages.nix` for host-specific packages
-
-### Desktop Customization
-
-- Wallpapers: Add to `wallpapers/` and reference in `variables.nix`
-- Waybar themes: Choose in `variables.nix` `waybarChoice`
-- Animations: Select in `variables.nix` `animChoice`
-- Colors: Stylix handles theming from wallpaper
-
-## dcli - Don CLI Utility
-
-Black Don OS includes `dcli`, a custom command-line utility for managing your multi-host setup:
-
-### Common Commands
-```bash
-dcli help           # Show all commands
-dcli list-hosts     # List available hosts
-dcli rebuild        # Rebuild current host
-dcli update         # Update and rebuild current host
-dcli build HOST     # Build specific host (no activation)
-dcli deploy HOST    # Deploy to specific host
-dcli cleanup        # Clean old generations
-dcli switch-host    # Interactive host switcher
-```
-
-### Shell Aliases
-- `fr` - Fast rebuild (`dcli rebuild`)
-- `fu` - Fast update (`dcli update`)
-- `hosts` - List hosts (`dcli list-hosts`)
-- `switch` - Host switcher (`dcli switch-host`)
-
-See [dcli.md](dcli.md) for complete documentation.
-
-## Development
-
-### Repository Management
-
-This is a fork of ZaneyOS with personal customizations:
-
-- **Origin**: Your fork at https://gitlab.com/theblackdon/black-don-os.git
-- **Upstream**: Original ZaneyOS at https://gitlab.com/zaney/zaneyos.git
-
-### Updating from Upstream
+### Updating Your System
 
 ```bash
-# Fetch updates from original ZaneyOS
-dcli pull           # Pull from your fork
-git fetch upstream  # Fetch from original ZaneyOS
-
-# Merge updates (be careful with conflicts)
-git merge upstream/stable-2.3
+cd ~/black-don-os
+dcli pull      # Pull latest changes
+dcli update    # Update flake inputs and rebuild
+# or use the alias:
+fu             # Fast update
 ```
 
-## Troubleshooting
+## 🆘 Troubleshooting
 
 ### Build Failures
 
+If the build fails, try:
 ```bash
 # Generate diagnostic report
 dcli diag
 
-# Show detailed error trace
-nixos-rebuild build --flake .#HOST-NAME --show-trace
-
-# Clean build cache
-dcli cleanup
+# Rebuild with detailed output
+sudo nixos-rebuild switch --flake ~/black-don-os#YOUR-HOSTNAME --show-trace
 ```
 
-### Hardware Detection
+### Monitor Not Working
 
+Update your monitor settings in `hosts/YOUR-HOSTNAME/variables.nix`:
 ```bash
-# Find GPU IDs for NVIDIA Prime
+# Find your monitors
+hyprctl monitors  # (after first login)
+
+# Update extraMonitorSettings with correct output names
+```
+
+### NVIDIA Prime Not Working
+
+For hybrid laptops, find your GPU IDs:
+```bash
 lspci | grep VGA
 
-# Generate new hardware config
-sudo nixos-generate-config --show-hardware-config
+# Update intelID and nvidiaID in variables.nix
 ```
 
-### Monitor Configuration
+### Hyprlock Conflicting with Other Lock Screens
 
+If using DMS or Noctalia lock screens:
+```nix
+enableHyprlock = false;  # in variables.nix
+```
+
+## 🛠️ dcli - Don's CLI Tool
+
+Black Don OS includes `dcli`, a powerful command-line utility for managing your system:
+
+### Quick Commands
 ```bash
-# List available outputs
-hyprctl monitors
+dcli rebuild      # Rebuild current system
+dcli update       # Update and rebuild
+dcli list-hosts   # List available configurations
+dcli cleanup      # Remove old generations
+dcli diag         # Generate diagnostic report
 
-# Test monitor setup
-hyprctl keyword monitor "HDMI-A-1,1920x1080@60,0x0,1"
+# Convenient aliases
+fr                # Fast rebuild (dcli rebuild)
+fu                # Fast update (dcli update)
 ```
 
-## Credits
+See [dcli.md](dcli.md) for complete documentation.
 
-- **ZaneyOS**: Original configuration by Tyler Kelley
-- **NixOS**: The foundation of this configuration
-- **Hyprland**: Wayland compositor
-- **Stylix**: System theming
-- **Home Manager**: User environment management
+## 💡 Tips for NixOS Newcomers
 
-## License
+- **Use dcli commands** - Simpler than remembering nixos-rebuild syntax
+- **Everything is declarative** - Your entire system is defined in text files
+- **Rebuilding is safe** - If something breaks, boot into the previous generation
+- **No reinstall needed** - Just edit files and rebuild with `fr`
+- **Git is your friend** - Use `dcli commit` to track your configuration changes
+- **Read the variables** - Most customization happens in `variables.nix`
 
-Based on ZaneyOS, following the same license terms. See [LICENSE](LICENSE) file for details.
+## 🤝 Getting Help
 
-## Support
+- Check `hosts/default/variables.nix` for all available options
+- Read the [NixOS Wiki](https://nixos.wiki/)
+- Visit [NixOS Discourse](https://discourse.nixos.org/)
+- Check original [ZaneyOS documentation](https://gitlab.com/zaney/zaneyos)
 
-For issues specific to Black Don OS customizations:
-- Check host-specific installation guides
-- Review the troubleshooting section
-- Refer to the original ZaneyOS documentation for base functionality
+## 📜 Credits
+
+- **ZaneyOS** - Original configuration by Tyler Kelley
+- **NixOS** - The amazing Linux distribution
+- **Hyprland** - Modern Wayland compositor  
+- **Niri** - Innovative scrollable compositor
+- **Stylix** - System-wide theming
+
+## 📄 License
+
+Based on ZaneyOS. See [LICENSE](LICENSE) for details.
 
 ---
 
-*Happy computing with Black Don OS! 🚀*
+**Enjoy your Black Don OS experience!** 🚀
+
+*Made with ❤️ for the NixOS community*
