@@ -12,7 +12,6 @@ let
     terminal
     stylixImage
     startupApps
-    windowManager
     ;
 
   barChoice = variables.barChoice or "waybar";
@@ -135,7 +134,8 @@ in
       };
       Install.WantedBy = [ "graphical-session.target" ];
     };
-  } // lib.optionalAttrs (windowManager == "niri") {
+  }
+  // lib.optionalAttrs (windowManager == "niri") {
     # XDG Desktop Portal services - only enabled when using Niri to prevent conflicts with Hyprland
     xdg-desktop-portal = {
       Unit = {
