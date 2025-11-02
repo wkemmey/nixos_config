@@ -42,7 +42,7 @@
   # Both WMs available at login - select via display manager
 
   # Bar/Shell Choice
-  barChoice = "waybar"; # Options: "dms", "noctalia", or "waybar"
+  barChoice = "noctalia"; # Options: "dms", "noctalia", or "waybar"
 
   # Shell Choice
   defaultShell = "zsh"; # Options: "fish" or "zsh"
