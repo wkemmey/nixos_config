@@ -1,8 +1,10 @@
-{host, ...}: let
+{ host, lib, ... }:
+let
   inherit (import ../../hosts/${host}/variables.nix) keyboardLayout;
-in {
+in
+{
   services.xserver = {
-    enable = false;
+    enable = lib.mkDefault false;
     xkb = {
       layout = "${keyboardLayout}";
       variant = "";

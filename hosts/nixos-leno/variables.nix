@@ -56,7 +56,11 @@
   enableCommunicationApps = true; # teams, zoom, telegram, vesktop
   enableProductivityApps = true; # obsidian, gnome-boxes
 
-  # Both WMs available at login - select via display manager
+  # Window Manager / Desktop Environment Choice
+  # Both Hyprland and Niri enabled by default - user selects at login
+  enableGnome = false; # GNOME Desktop Environment
+  enableHyprland = true; # Hyprland tiling compositor
+  enableNiri = true; # Niri scrollable tiling compositor
 
   # Bar/Shell Choice
   barChoice = "noctalia"; # Options: "dms", "noctalia", or "waybar"

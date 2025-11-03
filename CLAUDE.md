@@ -53,11 +53,12 @@ git push origin BRANCH-NAME
 ## Architecture Overview
 
 ### Key Design Principles
-1. **Dual Window Managers**: Both Hyprland and Niri always available - user selects at login
+1. **Flexible Desktop Environment**: Choose between tiling WMs (Hyprland/Niri) or traditional DE (GNOME)
 2. **Simple Installation**: Minimal questions, sensible defaults
 3. **Easy Customization**: All settings in `hosts/HOSTNAME/variables.nix`
 4. **Modular Features**: Enable only what you need
 5. **Newcomer Friendly**: Great defaults that work out of the box
+6. **Optimized Builds**: Only build what you use - disable unused WMs/DEs per host
 
 ### Multi-Host Configuration System
 - **Flake-based**: Uses Nix flakes for reproducible builds
@@ -72,6 +73,8 @@ git push origin BRANCH-NAME
 - `modules/home/`: Home-manager user environment configs
 - `modules/home/hyprland/`: Hyprland window manager configuration
 - `modules/home/niri/`: Niri window manager configuration
+- `modules/home/gnome/`: GNOME desktop environment configuration
+- `modules/core/gnome.nix`: GNOME system-level configuration
 - `profiles/`: Hardware-specific profiles that import appropriate modules
 - `wallpapers/`: System wallpapers for theming
 
@@ -94,10 +97,17 @@ Each host under `hosts/` contains:
 ### Host Variables (`hosts/*/variables.nix`)
 Important settings to understand when working with host configurations:
 
-#### Window Manager Settings
-- **NO windowManager variable** - Both Hyprland and Niri are always available
-- User selects which one at SDDM login screen
-- No rebuild needed to switch between them
+#### Window Manager / Desktop Environment Settings
+**New Conditional System** (replaces old "always both" approach):
+- `enableHyprland`: Enable Hyprland tiling compositor (default: `true`)
+- `enableNiri`: Enable Niri scrollable tiling compositor (default: `true`)
+- `enableGnome`: Enable GNOME desktop environment (default: `false`)
+
+**Benefits:**
+- Faster builds - only compile what you use
+- Perfect for specialized systems (homelab with GNOME, workstations with tiling WMs)
+- User selects active WM/DE at login screen (SDDM for tiling WMs, GDM for GNOME)
+- Mix and match as needed per host
 
 #### Lock Screen Settings
 - `enableHyprlock`: Controls whether hyprlock and hypridle are enabled
@@ -219,12 +229,16 @@ Manual process:
 - Waybar themes: Located in `modules/home/waybar/`, select in `variables.nix`
 - Hyprland configs: Located in `modules/home/hyprland/`
 - Niri configs: Located in `modules/home/niri/`
+- GNOME configs: Located in `modules/home/gnome/`
 
-### Window Manager Changes
-- Both Hyprland and Niri are ALWAYS imported
-- Do NOT add conditional imports based on windowManager variable
-- Do NOT add `windowManager` variable to new hosts
-- User selects WM at login screen via SDDM
+### Window Manager / Desktop Environment Changes
+**New Conditional System:**
+- WMs/DEs are conditionally imported based on `enableHyprland`, `enableNiri`, and `enableGnome` variables
+- Set these in each host's `variables.nix` to control which are built
+- SDDM used for Hyprland/Niri (disabled when GNOME enabled)
+- GDM used for GNOME (enabled automatically when `enableGnome = true`)
+- Default: Hyprland and Niri enabled, GNOME disabled
+- Homelab/server use case: Enable GNOME only, disable tiling WMs for faster builds
 
 ### Hardware Configuration Updates
 - Monitor setup: Update `extraMonitorSettings` in `variables.nix`
@@ -247,7 +261,9 @@ Manual process:
 - **Host not found**: Check hostname matches directory in `hosts/`
 - **Monitor issues**: Update `extraMonitorSettings` in `variables.nix`
 - **Hyprlock conflicts**: Set `enableHyprlock = false` if using DMS/Noctalia
-- **Window manager not showing**: Both should always be available; check SDDM session list
+- **WM/DE not showing at login**: Check enable variables in `variables.nix`
+- **GDM and SDDM conflict**: SDDM auto-disables when `enableGnome = true`
+- **Long build times**: Disable unused WMs/DEs in `variables.nix` to speed up builds
 
 ## Development Workflow
 
@@ -263,15 +279,17 @@ Manual process:
 - Uses NixOS unstable for latest features
 - Integrates Stylix for system theming
 - Home-manager for user environment management
-- Both Hyprland and Niri always available
+- Conditional WM/DE loading for optimized builds
+- GNOME support for homelab/simple desktop use cases
 - Flake-utils for development environments (Flutter)
 
 ## Important Reminders for Claude
 
-1. **Never add `windowManager` variable** - it's been removed
-2. **Both WMs always imported** - don't make it conditional
+1. **Use conditional WM/DE system** - respect `enableHyprland`, `enableNiri`, `enableGnome` variables
+2. **Never add `windowManager` variable** - it's been removed in favor of enable flags
 3. **Keep it simple** - this is for NixOS newcomers
 4. **Test changes** - build before committing
 5. **Document everything** - users need to understand changes
-6. **Respect the architecture** - dual WM support is a key feature
-7. **Backwards compatibility** - use `or` defaults for new variables
+6. **Respect the architecture** - flexible WM/DE choice is a key feature
+7. **Backwards compatibility** - use `or` defaults for new variables (defaults: Hyprland=true, Niri=true, GNOME=false)
+8. **Display managers** - SDDM for tiling WMs, GDM for GNOME (auto-managed)

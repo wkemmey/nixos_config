@@ -66,6 +66,18 @@
             helium-browser = inputs.helium-browser.packages.${system}.helium-browser;
           };
           modules = [
+            # Global nixpkgs config with overlays
+            {
+              nixpkgs.overlays = [
+                # Fix qgnomeplatform build failure with Qt6
+                (final: prev: {
+                  qgnomeplatform = prev.runCommand "qgnomeplatform-dummy" { } ''
+                    mkdir -p $out
+                    echo "qgnomeplatform disabled due to Qt6 build issues" > $out/README
+                  '';
+                })
+              ];
+            }
             ./profiles/${profile}
           ];
         };

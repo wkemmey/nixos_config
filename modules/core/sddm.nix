@@ -3,9 +3,13 @@
   pkgs,
   config,
   lib,
+  host,
   ...
 }:
 let
+  variables = import ../../hosts/${host}/variables.nix;
+  enableGnome = variables.enableGnome or false;
+
   foreground = config.stylix.base16Scheme.base00;
   textColor = config.stylix.base16Scheme.base05;
   sddm-astronaut = pkgs.sddm-astronaut.override {
@@ -64,6 +68,8 @@ let
   };
 in
 {
+  # SDDM is the unified display manager for all desktop environments
+  # (Hyprland, Niri, and GNOME)
   services.displayManager = {
     sddm = {
       package = pkgs.kdePackages.sddm;

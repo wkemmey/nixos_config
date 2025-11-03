@@ -39,9 +39,13 @@
   enableCommunicationApps = false; # Disabled for lab/test machine
   enableProductivityApps = false; # Disabled for lab/test machine
 
-  # Both WMs available at login - select via display manager
+  # Window Manager / Desktop Environment Choice
+  # For homelab use, GNOME provides simple GUI management
+  enableGnome = true; # Enable GNOME Desktop Environment
+  enableHyprland = false; # Disable Hyprland (not needed for homelab)
+  enableNiri = false; # Disable Niri (not needed for homelab)
 
-  # Bar/Shell Choice
+  # Bar/Shell Choice (only applies when using Hyprland/Niri)
   barChoice = "noctalia"; # Options: "dms", "noctalia", or "waybar"
 
   # Shell Choice

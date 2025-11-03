@@ -61,6 +61,12 @@
   # Set to false if using DMS or Noctalia lock screens
   enableHyprlock = true;
 
+  # Window Manager / Desktop Environment Choice
+  # Both Hyprland and Niri enabled by default - user selects at login
+  enableGnome = false; # GNOME Desktop Environment
+  enableHyprland = true; # Hyprland tiling compositor
+  enableNiri = true; # Niri scrollable tiling compositor
+
   # Bar/Shell Choice
   barChoice = "dms"; # Options: "dms", "noctalia", or "waybar"
 

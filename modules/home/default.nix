@@ -13,6 +13,11 @@ let
   barChoice = variables.barChoice or "waybar";
   defaultShell = variables.defaultShell or "zsh";
 
+  # Window Manager/DE enablement (new conditional system)
+  enableHyprland = variables.enableHyprland or true;
+  enableNiri = variables.enableNiri or true;
+  enableGnome = variables.enableGnome or false;
+
   # Legacy variable support (backwards compatibility)
   enableDMS = variables.enableDankMaterialShell or false;
   legacyBarChoice = if enableDMS then "dms" else "waybar";
@@ -59,10 +64,15 @@ in
     ./environment.nix
   ]
 
-  # Window Managers - Both always available, user selects at login
-  ++ [
-    ./niri
+  # Window Managers / Desktop Environments - Conditional based on host config
+  ++ lib.optionals enableHyprland [
     ./hyprland
+  ]
+  ++ lib.optionals enableNiri [
+    ./niri
+  ]
+  ++ lib.optionals enableGnome [
+    ./gnome
   ]
 
   # Shell - conditional import based on defaultShell variable

@@ -9,6 +9,7 @@
     ./flatpak.nix
     ./flutter-dev.nix
     ./fonts.nix
+    ./gnome.nix
     ./greetd.nix
     ./ly.nix
     ./sddm.nix
