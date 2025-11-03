@@ -28,8 +28,5 @@
 
     # Prevent idle while Lightworks is running
     "idleinhibit always, class:^(lightworks)$"
-
-    # Force integer scaling for better icon rendering
-    "forceinput, class:^(lightworks)$"
   ];
 }
