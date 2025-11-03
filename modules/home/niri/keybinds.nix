@@ -95,7 +95,7 @@ in
 
       // === Application Launchers ===
       Mod+T { spawn "${terminal}"; }
-      Mod+Enter { spawn "${terminal}"; }
+      Mod+Return { spawn "${terminal}"; }
       Mod+Y { spawn "fuzzel"; }
       Mod+Space { spawn ${launcherCommand}; }
 

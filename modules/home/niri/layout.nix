@@ -29,7 +29,7 @@
       }
 
       focus-follows-mouse max-scroll-amount="0%"
-      warp-mouse-to-focus true
+      warp-mouse-to-focus
   }
 
   layout {
