@@ -4,15 +4,19 @@
   browser,
   barChoice,
   hostKeybinds ? "",
+  config,
   ...
 }:
 let
+  # Full path to dms binary for Niri (systemd service has limited PATH)
+  dmsPath = "${config.home.homeDirectory}/.local/bin/dms";
+
   # Determine launcher command based on barChoice
   launcherCommand =
     if barChoice == "noctalia" then
       ''"noctalia-shell" "ipc" "call" "launcher" "toggle"''
     else if barChoice == "dms" then
-      ''"dms" "ipc" "call" "spotlight" "toggle"''
+      ''"${dmsPath}" "ipc" "call" "spotlight" "toggle"''
     # waybar or default
     else
       ''"rofi" "-show" "drun"'';
@@ -42,45 +46,45 @@ let
         // === DMS Controls ===
         Mod+Comma { spawn "ignis" "open-window" "Settings"; }
         Mod+Shift+V {
-            spawn "dms" "ipc" "call" "clipboard" "toggle";
+            spawn "${dmsPath}" "ipc" "call" "clipboard" "toggle";
         }
         Mod+M {
-            spawn "dms" "ipc" "call" "processlist" "toggle";
+            spawn "${dmsPath}" "ipc" "call" "processlist" "toggle";
         }
         Mod+Alt+S {
-            spawn "dms" "ipc" "call" "settings" "toggle";
+            spawn "${dmsPath}" "ipc" "call" "settings" "toggle";
         }
-        Mod+N { spawn "dms" "ipc" "call" "notifications" "toggle"; }
-        Mod+Shift+N { spawn "dms" "ipc" "call" "notepad" "toggle"; }
+        Mod+N { spawn "${dmsPath}" "ipc" "call" "notifications" "toggle"; }
+        Mod+Shift+N { spawn "${dmsPath}" "ipc" "call" "notepad" "toggle"; }
 
         // === Security ===
         Mod+Alt+L {
-            spawn "dms" "ipc" "call" "lock" "lock";
+            spawn "${dmsPath}" "ipc" "call" "lock" "lock";
         }
         Ctrl+Alt+Delete {
-            spawn "dms" "ipc" "call" "processlist" "toggle";
+            spawn "${dmsPath}" "ipc" "call" "processlist" "toggle";
         }
 
         // === Audio Controls ===
         XF86AudioRaiseVolume allow-when-locked=true {
-            spawn "dms" "ipc" "call" "audio" "increment" "3";
+            spawn "${dmsPath}" "ipc" "call" "audio" "increment" "3";
         }
         XF86AudioLowerVolume allow-when-locked=true {
-            spawn "dms" "ipc" "call" "audio" "decrement" "3";
+            spawn "${dmsPath}" "ipc" "call" "audio" "decrement" "3";
         }
         XF86AudioMute allow-when-locked=true {
-            spawn "dms" "ipc" "call" "audio" "mute";
+            spawn "${dmsPath}" "ipc" "call" "audio" "mute";
         }
         XF86AudioMicMute allow-when-locked=true {
-            spawn "dms" "ipc" "call" "audio" "micmute";
+            spawn "${dmsPath}" "ipc" "call" "audio" "micmute";
         }
 
         // === Monitor Brightness Controls ===
         XF86MonBrightnessUp allow-when-locked=true {
-           spawn "dms" "ipc" "call" "brightness" "increment" "5" "";
+           spawn "${dmsPath}" "ipc" "call" "brightness" "increment" "5" "";
         }
         XF86MonBrightnessDown allow-when-locked=true {
-           spawn "dms" "ipc" "call" "brightness" "decrement" "5" "";
+           spawn "${dmsPath}" "ipc" "call" "brightness" "decrement" "5" "";
         }
       ''
     else
@@ -268,7 +272,7 @@ in
       Mod+S { spawn "steam"; }
       Mod+Shift+O { spawn "obs"; }
       Mod+Z { spawn "zed-fix"; }
-      Mod+F { spawn "nemo"; }
+      Mod+F { spawn "thunar"; }
       Ctrl+Mod+V { spawn "virt-manager"; }
       Ctrl+Mod+E { spawn "emopicker9000"; }
 

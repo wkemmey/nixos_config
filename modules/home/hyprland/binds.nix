@@ -1,4 +1,4 @@
-{ host, ... }:
+{ host, config, ... }:
 let
   inherit (import ../../../hosts/${host}/variables.nix)
     browser
@@ -15,12 +15,15 @@ let
     else
       import defaultBindsPath { inherit host; };
 
+  # Full path to dms binary for use in Hyprland (systemd service has limited PATH)
+  dmsPath = "${config.home.homeDirectory}/.local/bin/dms";
+
   # Determine launcher command based on barChoice
   launcherCommand =
     if barChoice == "noctalia" then
       "noctalia-shell ipc call launcher toggle"
     else if barChoice == "dms" then
-      "dms ipc call spotlight toggle"
+      "${dmsPath} ipc call spotlight toggle"
     else
       "rofi-launcher";
 
@@ -40,19 +43,19 @@ let
     if barChoice == "dms" then
       [
         "$modifier,comma,exec,ignis open-window Settings"
-        "$modifier SHIFT,V,exec,dms ipc call clipboard toggle"
-        "$modifier,M,exec,dms ipc call processlist toggle"
-        "$modifier ALT,S,exec,dms ipc call settings toggle"
-        "$modifier,N,exec,dms ipc call notifications toggle"
-        "$modifier SHIFT,N,exec,dms ipc call notepad toggle"
-        "$modifier ALT,L,exec,dms ipc call lock lock"
-        "CTRL ALT,Delete,exec,dms ipc call processlist toggle"
-        ",XF86AudioRaiseVolume,exec,dms ipc call audio increment 3"
-        ",XF86AudioLowerVolume,exec,dms ipc call audio decrement 3"
-        ",XF86AudioMute,exec,dms ipc call audio mute"
-        ",XF86AudioMicMute,exec,dms ipc call audio micmute"
-        ",XF86MonBrightnessDown,exec,dms ipc call brightness decrement 5 ''"
-        ",XF86MonBrightnessUp,exec,dms ipc call brightness increment 5 ''"
+        "$modifier SHIFT,V,exec,${dmsPath} ipc call clipboard toggle"
+        "$modifier,M,exec,${dmsPath} ipc call processlist toggle"
+        "$modifier ALT,S,exec,${dmsPath} ipc call settings toggle"
+        "$modifier,N,exec,${dmsPath} ipc call notifications toggle"
+        "$modifier SHIFT,N,exec,${dmsPath} ipc call notepad toggle"
+        "$modifier ALT,L,exec,${dmsPath} ipc call lock lock"
+        "CTRL ALT,Delete,exec,${dmsPath} ipc call processlist toggle"
+        ",XF86AudioRaiseVolume,exec,${dmsPath} ipc call audio increment 3"
+        ",XF86AudioLowerVolume,exec,${dmsPath} ipc call audio decrement 3"
+        ",XF86AudioMute,exec,${dmsPath} ipc call audio mute"
+        ",XF86AudioMicMute,exec,${dmsPath} ipc call audio micmute"
+        ",XF86MonBrightnessDown,exec,${dmsPath} ipc call brightness decrement 5 ''"
+        ",XF86MonBrightnessUp,exec,${dmsPath} ipc call brightness increment 5 ''"
       ]
     else
       [ ];
@@ -63,7 +66,7 @@ let
     "$modifier SHIFT CTRL,D,exec,nwg-displays"
     "$modifier ALT,M,exec,appimage-run ./Moonlight-6.1.0-x86_64.AppImage"
     "$modifier,K,exec,list-keybinds"
-    "$modifier,Z,exec,pypr zoom"
+    "$modifier,Z,exec,zeditor"
     "$modifier,SPACE,exec,${launcherCommand}"
     "$modifier SHIFT,W,exec,web-search"
     "$modifier ALT,W,exec,wallsetter"
@@ -79,7 +82,7 @@ let
     "$modifier,C,exec,hyprpicker -a"
     "$modifier,L,exec,hyprlock"
     "$modifier,X,exec,wlogout"
-    "$modifier,G,exec,telegram-desktop"
+    "$modifier,G,exec,Telegram"
     "$modifier SHIFT,T,exec,pypr toggle term"
     "$modifier,M,exec,pavucontrol"
     "$modifier,E,exec,hyprctl dispatch hyprexpo:expo toggle"

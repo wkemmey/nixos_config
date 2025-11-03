@@ -18,6 +18,8 @@ let
   enableDMSLegacy = variables.enableDankMaterialShell or false;
   actualBarChoice =
     if variables ? barChoice then barChoice else (if enableDMSLegacy then "dms" else "waybar");
+  # Full path to dms binary for use in Hyprland (systemd service has limited PATH)
+  dmsPath = "${config.home.homeDirectory}/.local/bin/dms";
 in
 {
   home.packages = with pkgs; [
@@ -78,7 +80,7 @@ in
         if actualBarChoice == "dms" then
           [
             # Launch Dank Material Shell via quickshell
-            "killall -q quickshell;sleep .5 && dms run"
+            "killall -q quickshell;sleep .5 && ${dmsPath} run"
           ]
         else if actualBarChoice == "noctalia" then
           [

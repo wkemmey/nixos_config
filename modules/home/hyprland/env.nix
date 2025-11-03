@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   wayland.windowManager.hyprland = {
     settings = {
       env = [
@@ -30,6 +31,12 @@
         # ToDo: Pull default terminal from config
         "TERMINAL,kitty"
         "XDG_TERMINAL_EMULATOR,kitty"
+        # XWayland rendering fixes for legacy applications like Lightworks
+        "XWAYLAND_NO_GLAMOR,0"
+        # Force X11 apps to use proper scaling
+        "GDK_DPI_SCALE,1"
+        # Better font rendering for X11/XWayland apps
+        "FREETYPE_PROPERTIES,truetype:interpreter-version=40"
       ];
     };
   };
