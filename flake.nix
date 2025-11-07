@@ -65,6 +65,12 @@
           username = "user";
         };
 
+        whit2020 = mkHost {
+          hostname = "whit2020";
+          profile = "amd";
+          username = "whit";
+        };
+
         nix-tester = mkHost {
           hostname = "nix-tester";
           profile = "intel";
