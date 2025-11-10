@@ -13,7 +13,8 @@
     export CHROME_EXECUTABLE=/run/current-system/sw/bin/google-chrome-stable
     export PATH="$HOME/.local/bin:$PATH"
     export PATH="$PATH":"$HOME/.pub-cache/bin"
-    export BROWSER="flatpak run app.zen_browser.zen"
+  # Flatpak removed: use xdg-open as generic browser opener
+  export BROWSER="xdg-open"
 
     #
     export EDITOR="zeditor"

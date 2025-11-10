@@ -55,7 +55,7 @@ let
   defaultBinds = [
     "$modifier,T,exec,${terminal}"
     "$modifier SHIFT CTRL,D,exec,nwg-displays"
-    "$modifier ALT,M,exec,appimage-run ./Moonlight-6.1.0-x86_64.AppImage"
+  # AppImage keybind removed: Moonlight AppImage not used
     "$modifier,K,exec,list-keybinds"
     "$modifier,Z,exec,zeditor"
     "$modifier,SPACE,exec,${launcherCommand}"
@@ -68,7 +68,7 @@ let
     "$modifier,D,exec,vesktop"
     "$modifier SHIFT,V,exec,virt-manager"
     "$modifier,S,exec,steam"
-    "$modifier SHIFT,O,exec,flatpak run com.obsproject.Studio"
+  # OBS via Flatpak removed: invoke system package if present (obs) or configure manually
     "$modifier SHIFT,Z,exec,zeditor"
     "$modifier,C,exec,hyprpicker -a"
     "$modifier,L,exec,hyprlock"

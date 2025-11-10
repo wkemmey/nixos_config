@@ -42,7 +42,7 @@
 
   environment.systemPackages = with pkgs; [
     amfora # Fancy Terminal Browser For Gemini Protocol
-    appimage-run # Needed For AppImage Support
+  # appimage-run removed - AppImage support disabled
     bottom # btop like util
     brightnessctl # For Screen Brightness Control
     cmatrix # Matrix Movie Effect In Terminal

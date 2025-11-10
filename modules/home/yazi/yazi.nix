@@ -287,10 +287,7 @@
             "application/{debian*-package,redhat-package-manager,rpm,android.package-archive}";
           run = "archive";
         }
-        {
-          name = "*.{AppImage,appimage}";
-          run = "archive";
-        }
+        # AppImage preview handler removed
         {
           mime = "application/{iso9660-image,qemu-disk,ms-wim,apple-diskimage}";
           run = "archive";
