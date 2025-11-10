@@ -3,9 +3,9 @@
   // Host-specific output configuration for whit2020
   // Configure your monitors here
 
-  output "eDP-1" {
-    mode "1920x1080@60.000"
-    scale 1.0
+  output "HDMI-A-1" {
+    mode "3840x2160"
+    scale 1.5
     position x=0 y=0
   }
 

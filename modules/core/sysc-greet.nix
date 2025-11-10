@@ -44,14 +44,14 @@ let
 
   # Compositor selection
   compositorCmd =
-    if config.wayland.windowManager.hyprland.enable or false then
-      "Hyprland"
-    else if config.programs.niri.enable or false then
+    if config.programs.niri.enable or false then
       "niri"
+    else if config.wayland.windowManager.hyprland.enable or false then
+      "Hyprland"
     else if config.programs.sway.enable or false then
       "sway"
     else
-      "Hyprland"; # Default fallback
+      "niri"; # Default fallback
 
 in
 {

@@ -70,11 +70,5 @@ in
     # other
     ./scripts
 
-  ]
-
-  # Window Managers - Both always available, user selects at login
-  ++ [
-    ./niri
-    ./hyprland
   ];
 }

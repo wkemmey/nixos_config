@@ -7,6 +7,7 @@
 
   # Enable sddm display manager
   services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.defaultSession = "niri";
 
   # Sysc-greet display manager
   services.sysc-greet.enable = false;
