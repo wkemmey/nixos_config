@@ -91,6 +91,7 @@
     unzip # Tool For Handling .zip Files
     usbutils # Good Tools For USB Devices
     v4l-utils # Used For Things Like OBS Virtual Camera
+    obs-studio # OBS Studio (system package)
     waypaper # backup wallpaper GUI
     wget # Tool For Fetching Files With Links
     xwayland-satellite # Xwayland outside your Wayland compositor

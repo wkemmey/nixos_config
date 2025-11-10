@@ -68,7 +68,8 @@ let
     "$modifier,D,exec,vesktop"
     "$modifier SHIFT,V,exec,virt-manager"
     "$modifier,S,exec,steam"
-  # OBS via Flatpak removed: invoke system package if present (obs) or configure manually
+  # Launch OBS (system package)
+    "$modifier SHIFT,O,exec,obs"
     "$modifier SHIFT,Z,exec,zeditor"
     "$modifier,C,exec,hyprpicker -a"
     "$modifier,L,exec,hyprlock"
