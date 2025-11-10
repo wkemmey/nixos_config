@@ -71,8 +71,8 @@ let
   # Launch OBS (system package)
     "$modifier SHIFT,O,exec,obs"
     "$modifier SHIFT,Z,exec,zeditor"
-    "$modifier,C,exec,hyprpicker -a"
-    "$modifier,L,exec,hyprlock"
+  "$modifier,C,exec,hyprpicker -a"
+  # hyprlock removed (no Hyprland). Configure a lock command if you want one.
     "$modifier,X,exec,wlogout"
     "$modifier,G,exec,telegram-desktop"
     "$modifier SHIFT,T,exec,pypr toggle term"

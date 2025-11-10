@@ -5,15 +5,12 @@
     ./host-packages.nix
   ];
 
-  # Enable sddm display manager
-  services.displayManager.sddm.enable = true;
-
-  # Sysc-greet display manager
+  # Use greetd + tuigreet (TUI) to launch Niri. Disable other DMs.
+  services.displayManager.sddm.enable = false;
+  services.displayManager.ly.enable = false;
   services.sysc-greet.enable = false;
 
-  # Keep niri available at system level for ly display manager to detect it
+  # Keep niri available at system level and ensure session package is present
   programs.niri.package = pkgs.niri;
-
-  # Ensure niri session is available to display manager
   services.displayManager.sessionPackages = [ pkgs.niri ];
 }
