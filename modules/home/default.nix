@@ -21,68 +21,60 @@ let
 in
 {
   imports = [
-    ./amfora.nix
+    #./amfora.nix
+    # window manager / compositor
+    ./niri
+    ./xdg.nix
+    # bar
+    ./noctalia-shell
+    ./qt.nix
+    # shells
     ./bash.nix
     ./bashrc-personal.nix
+    ./fish
+    ./fish/fishrc-personal.nix
+    # shell tools
     ./bat.nix
     ./bottom.nix
     ./btop.nix
     ./cava.nix
-    ./emoji.nix
+    #./emoji.nix
     ./eza.nix
     ./fastfetch
     ./fzf.nix
     ./gh.nix
-    ./ghostty.nix
+    #./ghostty.nix
     ./git.nix
-    ./gtk.nix
+    ./gtk.nix # TODO do i need
     ./htop.nix
-    ./kitty.nix
+    #./kitty.nix
     ./lazygit.nix
-    ./nvf.nix
-    ./nwg-drawer.nix
-    ./obs-studio.nix
-    ./rofi
-    ./qt.nix
-    ./scripts
+    #./nvf.nix
+    ./nwg-drawer.nix # TODO do i need
+    ./rofi # TODO do i need
     ./starship.nix
-    ./stylix.nix
-    ./swappy.nix
+    ./swappy.nix # TODO do i need
     ./tealdeer.nix
-    ./tmux.nix
-    ./virtmanager.nix
-    ./vscode.nix
+    ./tmux.nix # TODO don't think i need now but maybe in the future
+    #./virtmanager.nix
     ./wlogout
-    ./xdg.nix
     ./yazi
     ./zoxide.nix
     ./environment.nix
+    # editors
+    ./vscode.nix
+    # programs
+    ./obs-studio.nix
+    # theming
+    ./stylix.nix
+    # other
+    ./scripts
+
   ]
 
   # Window Managers - Both always available, user selects at login
   ++ [
     ./niri
     ./hyprland
-  ]
-
-  # Shell - conditional import based on defaultShell variable
-  ++ lib.optionals (defaultShell == "fish") [
-    ./fish
-    ./fish/fishrc-personal.nix
-  ]
-  ++ lib.optionals (defaultShell == "zsh") [
-    ./zsh
-  ]
-
-  # Bar - conditional import based on barChoice variable
-  ++ lib.optionals (actualBarChoice == "dms") [
-    ./dank-material-shell
-  ]
-  ++ lib.optionals (actualBarChoice == "noctalia") [
-    ./noctalia-shell
-  ]
-  ++ lib.optionals (actualBarChoice == "waybar") [
-    waybarChoice
-    ./swaync.nix # Only use swaync with waybar
   ];
 }
