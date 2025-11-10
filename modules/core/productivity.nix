@@ -12,9 +12,9 @@ in
   config = lib.mkIf enableProductivityApps {
     environment.systemPackages = with pkgs; [
       obsidian # Note-taking app
-      gnome-boxes # Simple VM manager
-      quickemu # Fast VM creation tool
-      quickgui # Optional GUI for quickemu
+      #gnome-boxes # Simple VM manager
+      #quickemu # Fast VM creation tool
+      #quickgui # Optional GUI for quickemu
     ];
   };
 }

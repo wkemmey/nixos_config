@@ -38,7 +38,7 @@
   syncthingEnable = false;           # Syncthing file synchronization
   enableCommunicationApps = false;   # Discord, Teams, Zoom, Telegram
   enableExtraBrowsers = false;       # Vivaldi, Brave, Firefox, Chromium, Helium
-  enableProductivityApps = false;    # Obsidian, GNOME Boxes, QuickEmu
+  enableProductivityApps = true;    # Obsidian, GNOME Boxes, QuickEmu
   aiCodeEditorsEnable = false;       # Claude-code, gemini-cli, cursor
 
   # Desktop Environment
