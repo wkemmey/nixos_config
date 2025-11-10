@@ -68,11 +68,11 @@ in
     sddm = {
       package = pkgs.kdePackages.sddm;
       extraPackages = [ sddm-astronaut ];
-      enable = true;
+      enable = false;
       wayland.enable = true;
       theme = "sddm-astronaut-theme";
     };
   };
 
-  environment.systemPackages = [ sddm-astronaut ];
+  #environment.systemPackages = [ sddm-astronaut ];
 }
