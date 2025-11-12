@@ -62,7 +62,9 @@
     htop # Simple Terminal Based System Monitor
     hyprpicker # Color Picker
     eog # For Image Viewing
-    alacritty # Terminal Emulator (default for niri)
+  # Terminal emulators
+  foot # terminal emulator (preferred)
+  alacritty # Terminal Emulator (legacy/default for niri)
     fuzzel # Application Launcher (default for niri)
     inxi # CLI System Information Tool
     killall # For Killing All Instances Of Programs
@@ -102,6 +104,7 @@
     rofi-emoji # rofi-emoji-wayland merged into rofi-emoji in nixpkgs-unstable
     youtube-music
     zen-browser # Default browser
+  firefox
     # Development Tools
     zed-editor # Code editor with AI features
     popsicle

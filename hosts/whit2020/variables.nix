@@ -15,8 +15,8 @@
   clock24h = false;
 
   # Default Applications
-  browser = "zen";
-  terminal = "kitty";
+  browser = "firefox";
+  terminal = "foot";
   keyboardLayout = "us";
   consoleKeyMap = "us";
 
