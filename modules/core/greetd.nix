@@ -6,7 +6,9 @@
   ...
 }:
 {
-  services.greetd = lib.mkIf (!config.services.sysc-greet.enable or false) {
+  # Configure greetd unconditionally. It will be enabled by default only when other
+  # display managers (sddm, ly) are not enabled.
+  services.greetd = {
     enable = lib.mkDefault (
       !config.services.displayManager.sddm.enable && !config.services.displayManager.ly.enable
     );
