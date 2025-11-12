@@ -264,7 +264,7 @@ in
       source = ../../../wallpapers;
       recursive = true;
     };
-    ".face.icon".source = ../hyprland/face.jpg;
-    ".config/face.jpg".source = ../hyprland/face.jpg;
+    #".face.icon".source = ../hyprland/face.jpg;
+    #".config/face.jpg".source = ../hyprland/face.jpg;
   };
 }
