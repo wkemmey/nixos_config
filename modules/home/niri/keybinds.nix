@@ -8,15 +8,14 @@
   ...
 }:
 let
-  # Full path to dms binary for use in niri
-  dmsPath = "${config.home.homeDirectory}/.local/bin/dms";
+  # DMS removed — no dms binary
 
   # Determine launcher command based on barChoice
   launcherCommand =
     if barChoice == "noctalia" then
       ''"noctalia-shell" "ipc" "call" "launcher" "toggle"''
     else if barChoice == "dms" then
-      ''"${dmsPath}" "ipc" "call" "spotlight" "toggle"''
+      ''"rofi" "-show" "drun"''
     # waybar or default
     else
       ''"rofi" "-show" "drun"'';
@@ -39,56 +38,8 @@ let
     else
       "";
 
-  # DMS-specific keybinds
-  dmsKeybinds =
-    if barChoice == "dms" then
-      ''
-        // === DMS Controls ===
-        Mod+Comma { spawn "ignis" "open-window" "Settings"; }
-        Mod+Shift+V {
-            spawn "${dmsPath}" "ipc" "call" "clipboard" "toggle";
-        }
-        Mod+M {
-            spawn "${dmsPath}" "ipc" "call" "processlist" "toggle";
-        }
-        Mod+Alt+S {
-            spawn "${dmsPath}" "ipc" "call" "settings" "toggle";
-        }
-        Mod+N { spawn "${dmsPath}" "ipc" "call" "notifications" "toggle"; }
-        Mod+Shift+N { spawn "${dmsPath}" "ipc" "call" "notepad" "toggle"; }
-
-        // === Security ===
-        Mod+Alt+L {
-            spawn "${dmsPath}" "ipc" "call" "lock" "lock";
-        }
-        Ctrl+Alt+Delete {
-            spawn "${dmsPath}" "ipc" "call" "processlist" "toggle";
-        }
-
-        // === Audio Controls ===
-        XF86AudioRaiseVolume allow-when-locked=true {
-            spawn "${dmsPath}" "ipc" "call" "audio" "increment" "3";
-        }
-        XF86AudioLowerVolume allow-when-locked=true {
-            spawn "${dmsPath}" "ipc" "call" "audio" "decrement" "3";
-        }
-        XF86AudioMute allow-when-locked=true {
-            spawn "${dmsPath}" "ipc" "call" "audio" "mute";
-        }
-        XF86AudioMicMute allow-when-locked=true {
-            spawn "${dmsPath}" "ipc" "call" "audio" "micmute";
-        }
-
-        // === Monitor Brightness Controls ===
-        XF86MonBrightnessUp allow-when-locked=true {
-           spawn "${dmsPath}" "ipc" "call" "brightness" "increment" "5" "";
-        }
-        XF86MonBrightnessDown allow-when-locked=true {
-           spawn "${dmsPath}" "ipc" "call" "brightness" "decrement" "5" "";
-        }
-      ''
-    else
-      "";
+  # DMS removed — no dmsKeybinds
+  dmsKeybinds = "";
 in
 ''
   binds {
