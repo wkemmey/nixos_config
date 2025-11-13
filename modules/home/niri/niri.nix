@@ -144,8 +144,6 @@ in
     Install.WantedBy = [ "graphical-session.target" ];
   };
 
-  # DMS removed — Noctalia is used as the status bar; DMS-specific user services removed.
-
   # XWayland satellite service for X11 app support
   systemd.user.services.xwayland-satellite = {
     Unit = {

@@ -43,17 +43,14 @@ git push origin BRANCH-NAME
 
 ## Repository Information
 
-**GitLab Repository**: https://gitlab.com/theblackdon/black-don-os
+**GitLab Repository**: https://github.com/wkemmey/black-don-os
 
 ### Branch Strategy
 - **main**: Public-facing simplified configuration for distribution
-- **bdos-beta-0.4**: Development branch for new features
-- **dons-personal**: Don's personal hosts and settings (not public-facing)
 
 ## Architecture Overview
 
 ### Key Design Principles
-1. **Dual Window Managers**: Both Hyprland and Niri always available - user selects at login
 2. **Simple Installation**: Minimal questions, sensible defaults
 3. **Easy Customization**: All settings in `hosts/HOSTNAME/variables.nix`
 4. **Modular Features**: Enable only what you need
@@ -80,7 +77,6 @@ git push origin BRANCH-NAME
 2. Profiles import appropriate driver and core modules
 3. Host directories contain hardware-specific settings
 4. `variables.nix` in each host defines customization options
-5. Both Hyprland and Niri are always imported (user selects at login)
 
 ### Host Configuration Structure
 Each host under `hosts/` contains:
@@ -94,20 +90,8 @@ Each host under `hosts/` contains:
 ### Host Variables (`hosts/*/variables.nix`)
 Important settings to understand when working with host configurations:
 
-#### Window Manager Settings
-- **NO windowManager variable** - Both Hyprland and Niri are always available
-- User selects which one at SDDM login screen
-- No rebuild needed to switch between them
-
-#### Lock Screen Settings
-- `enableHyprlock`: Controls whether hyprlock and hypridle are enabled
-- Set to `false` if using DMS or Noctalia lock screens
-- Defaults to `true` for backwards compatibility
-
 #### Display Settings
-- `extraMonitorSettings`: Monitor configuration for Hyprland
 - `intelID`/`nvidiaID`: PCI IDs for NVIDIA Prime support on hybrid laptops
-- `clock24h`: 24-hour or 12-hour clock format
 
 #### Application Defaults
 - `browser`: Default browser (zen, firefox, vivaldi, brave, chromium)
@@ -115,10 +99,8 @@ Important settings to understand when working with host configurations:
 - `defaultShell`: Default shell (zsh, fish)
 - `keyboardLayout`: Keyboard layout (us, uk, de, fr, etc.)
 
-#### Desktop Environment
-- `barChoice`: Status bar choice (waybar, dms, noctalia)
-- `waybarChoice`: Waybar theme file path
-- `animChoice`: Hyprland animation style
+- #### Desktop Environment
+- `barChoice`: Status bar choice (waybar, noctalia)
 - `stylixImage`: Wallpaper for system theming
 - `stylixEnable`: Enable/disable Stylix theming
 
@@ -135,34 +117,9 @@ All optional features default to `false` for faster installation:
 - `enableProductivityApps`: Obsidian, GNOME Boxes, QuickEmu
 
 ### Flake Configuration (`flake.nix`)
-- Defines input sources (nixpkgs, home-manager, stylix, hyprland, niri, etc.)
+- Defines input sources (nixpkgs, home-manager, stylix, niri, etc.)
 - Creates host configurations using `mkHost` helper function
 - Maps hostnames to hardware profiles
-- Includes Flutter development shell for mobile development
-
-### Window Manager Implementation
-
-#### Both Always Available
-`modules/home/default.nix` always imports both:
-```nix
-++ [
-  ./niri
-  ./hyprland
-]
-```
-
-Previously this was conditional based on `windowManager` variable, but now both are always loaded.
-
-#### Hyprlock Optional
-`modules/home/hyprland/default.nix` conditionally imports hyprlock:
-```nix
-++ lib.optionals enableHyprlock [
-  ./hypridle.nix
-  ./hyprlock.nix
-];
-```
-
-This allows users to disable hyprlock if using alternative lock screens (DMS, Noctalia).
 
 ## Installation Script
 
@@ -179,7 +136,7 @@ Everything else uses sensible defaults:
 - Browser: zen
 - Terminal: kitty
 - Shell: zsh
-- Bar: waybar
+- Bar: noctalia
 - All optional features: false (faster install)
 
 Users can customize everything later via `variables.nix`.
@@ -216,18 +173,9 @@ Manual process:
 
 ### Desktop Customization
 - Wallpapers: Add to `wallpapers/` and reference in `variables.nix`
-- Waybar themes: Located in `modules/home/waybar/`, select in `variables.nix`
-- Hyprland configs: Located in `modules/home/hyprland/`
 - Niri configs: Located in `modules/home/niri/`
 
-### Window Manager Changes
-- Both Hyprland and Niri are ALWAYS imported
-- Do NOT add conditional imports based on windowManager variable
-- Do NOT add `windowManager` variable to new hosts
-- User selects WM at login screen via SDDM
-
 ### Hardware Configuration Updates
-- Monitor setup: Update `extraMonitorSettings` in `variables.nix`
 - GPU IDs: Use `lspci | grep VGA` to find correct PCI IDs for NVIDIA Prime
 
 ## Troubleshooting
@@ -240,14 +188,11 @@ Manual process:
 
 ### Hardware Detection
 - Find GPU IDs: `lspci | grep VGA`
-- Monitor detection: `hyprctl monitors` (in Hyprland)
 - Generate new hardware config if needed
 
 ### Common Issues
 - **Host not found**: Check hostname matches directory in `hosts/`
-- **Monitor issues**: Update `extraMonitorSettings` in `variables.nix`
-- **Hyprlock conflicts**: Set `enableHyprlock = false` if using DMS/Noctalia
-- **Window manager not showing**: Both should always be available; check SDDM session list
+- **Hyprlock conflicts**: Set `enableHyprlock = false` if using Noctalia
 
 ## Development Workflow
 
@@ -263,15 +208,10 @@ Manual process:
 - Uses NixOS unstable for latest features
 - Integrates Stylix for system theming
 - Home-manager for user environment management
-- Both Hyprland and Niri always available
-- Flake-utils for development environments (Flutter)
 
 ## Important Reminders for Claude
 
-1. **Never add `windowManager` variable** - it's been removed
-2. **Both WMs always imported** - don't make it conditional
 3. **Keep it simple** - this is for NixOS newcomers
 4. **Test changes** - build before committing
 5. **Document everything** - users need to understand changes
-6. **Respect the architecture** - dual WM support is a key feature
 7. **Backwards compatibility** - use `or` defaults for new variables

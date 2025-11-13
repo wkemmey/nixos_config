@@ -61,12 +61,11 @@
   aiCodeEditorsEnable = false;
 
   # Enable Hyprlock (Hyprland lock screen)
-  # Set to false if using DMS or Noctalia lock screens
+  # Set to false if using Noctalia lock screens
   enableHyprlock = false;
 
   # Bar/Shell Choice
-  barChoice = "noctalia"; # Options: "dms" or "noctalia"
-  # NOTE: If you change barChoice to "dms", you must run 'dms-install' after rebuilding
+  barChoice = "noctalia"; # Options: "noctalia"
 
   # Shell Choice
   defaultShell = "zsh"; # Options: "fish" or "zsh"
@@ -80,7 +79,7 @@
   #stylixImage = ../../wallpapers/zaney-wallpaper.jpg;
   stylixImage = ../../wallpapers/55.png;
 
-  # Set Waybar (temporarily disabled - use DMS or Noctalia)
+  # Set Waybar (temporarily disabled - use Noctalia)
   # Includes alternates such as:
   # Just uncomment the one you want and comment out the others
 

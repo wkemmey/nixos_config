@@ -139,7 +139,7 @@ No rebuild needed!
 
 ### Hyprlock Interfering with Other Lock Screens
 
-**Problem:** Using DMS or Noctalia but hyprlock keeps activating
+**Problem:** Using Noctalia but hyprlock keeps activating
 
 **Solution:** Disable hyprlock in `~/black-don-os/hosts/YOUR-HOSTNAME/variables.nix`:
 

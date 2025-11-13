@@ -13,10 +13,8 @@ let
   barChoice = variables.barChoice or "waybar";
   defaultShell = variables.defaultShell or "zsh";
 
-  # Legacy variable support (backwards compatibility)
-  enableDMS = variables.enableDankMaterialShell or false;
-  legacyBarChoice = if enableDMS then "dms" else "waybar";
-  actualBarChoice = if variables ? barChoice then barChoice else legacyBarChoice;
+  # Bar and shell defaults
+  # (DMS support removed; prefer explicit `barChoice` in host variables)
 
 in
 {

@@ -42,11 +42,10 @@
   aiCodeEditorsEnable = false;       # Claude-code, gemini-cli, cursor
 
   # Desktop Environment
-  enableHyprlock = false;  # Set to false if using DMS/Noctalia lock screens
+  enableHyprlock = false;  # Set to false if using Noctalia lock screens
 
   # Bar/Shell Choice
-  barChoice = "noctalia";      # Options: "dms" or "noctalia"
-  # NOTE: If you change barChoice to "dms", you must run 'dms-install' after rebuilding
+  barChoice = "noctalia";      # Options: "noctalia"
 
   # Shell Choice
   defaultShell = "fish";   # Options: "fish" or "zsh"

@@ -8,14 +8,10 @@
   ...
 }:
 let
-  # DMS removed — no dms binary
-
   # Determine launcher command based on barChoice
   launcherCommand =
     if barChoice == "noctalia" then
       ''"noctalia-shell" "ipc" "call" "launcher" "toggle"''
-    else if barChoice == "dms" then
-      ''"rofi" "-show" "drun"''
     # waybar or default
     else
       ''"rofi" "-show" "drun"'';
@@ -38,8 +34,7 @@ let
     else
       "";
 
-  # DMS removed — no dmsKeybinds
-  dmsKeybinds = "";
+  # No additional keybinds
 in
 ''
   binds {
@@ -54,8 +49,7 @@ in
       Mod+Y { spawn "fuzzel"; }
       Mod+Space { spawn ${launcherCommand}; }
 
-      ${noctaliaKeybinds}
-      ${dmsKeybinds}
+  ${noctaliaKeybinds}
 
       // === Security ===
       Super+L { spawn "hyprlock"; }

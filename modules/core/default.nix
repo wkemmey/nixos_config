@@ -9,7 +9,7 @@
     #./flatpak.nix
     #./flutter-dev.nix
     ./fonts.nix
-  ./greetd.nix
+    ./greetd.nix
     ./hardware.nix
     ./network.nix
     ./nfs.nix

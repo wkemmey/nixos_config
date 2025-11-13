@@ -37,11 +37,4 @@ Available configuration sections:
 
 Full documentation: https://docs.noctalia.dev
 
-## Switching Back to Waybar or DMS
 
-Simply change `barChoice` in your `variables.nix`:
-- `barChoice = "waybar"` - Use Waybar
-- `barChoice = "dms"` - Use Dank Material Shell
-- `barChoice = "noctalia"` - Use Noctalia Shell
-
-Then rebuild: `dcli rebuild`

@@ -116,7 +116,7 @@ The installer will:
 - **Browser**: Zen Browser
 - **Terminal**: Kitty
 - **Shell**: Zsh with starship prompt
-- **Bar**: Noctalia (DMS also available as an option)
+- **Bar**: Noctalia
 - **File Manager**: Thunar
 - **Window Managers**: Both Hyprland and Niri
 - **Theming**: Stylix for system-wide color coordination
@@ -134,8 +134,7 @@ After installation, customize your system by editing:
 
 #### Change Bar
 ```nix
-barChoice = "noctalia"; # Options: "dms", "noctalia"
-# NOTE: If you change to "dms", run 'dms-install' after rebuilding
+barChoice = "noctalia"; # Options: "noctalia"
 ```
 
 #### Change Your Wallpaper
@@ -279,7 +278,7 @@ lspci | grep VGA
 
 ### Hyprlock Conflicting with Other Lock Screens
 
-If using DMS or Noctalia lock screens:
+If using Noctalia lock screens:
 ```nix
 enableHyprlock = false;  # in variables.nix
 ```

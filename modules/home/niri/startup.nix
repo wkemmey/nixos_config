@@ -6,8 +6,6 @@
   ...
 }:
 let
-  # Determine which bar to launch
-  # Note: waybar is handled by systemd services; DMS removed
   barStartupCommand =
     if barChoice == "noctalia" then
       ''spawn-at-startup "noctalia-shell"''
