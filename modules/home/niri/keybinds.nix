@@ -9,12 +9,8 @@
 }:
 let
   # Determine launcher command based on barChoice
-  launcherCommand =
-    if barChoice == "noctalia" then
-      ''"noctalia-shell" "ipc" "call" "launcher" "toggle"''
-    # waybar or default
-    else
-      ''"rofi" "-show" "drun"'';
+  # Waybar/rofi removed — always use Noctalia launcher
+  launcherCommand = ''"noctalia-shell" "ipc" "call" "launcher" "toggle"'';
 
   # Noctalia-specific keybinds
   noctaliaKeybinds =

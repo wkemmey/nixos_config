@@ -14,7 +14,7 @@ let
     startupApps
     ;
 
-  barChoice = variables.barChoice or "waybar";
+  barChoice = variables.barChoice or "noctalia";
 
   # Try to import host-specific keybinds, fallback to empty if doesn't exist
   hostKeybindsPath = ./hosts/${host}/keybinds.nix;
@@ -128,21 +128,7 @@ in
     };
   };
 
-  # Waybar service for Niri (only when barChoice is waybar)
-  systemd.user.services.waybar-niri = lib.mkIf (barChoice == "waybar") {
-    Unit = {
-      Description = "Waybar status bar (Niri session)";
-      PartOf = "graphical-session.target";
-      After = "graphical-session.target";
-      ConditionEnvironment = "XDG_CURRENT_DESKTOP=niri";
-    };
-    Service = {
-      ExecStart = "${pkgs.waybar}/bin/waybar";
-      Restart = "on-failure";
-      RestartSec = "1s";
-    };
-    Install.WantedBy = [ "graphical-session.target" ];
-  };
+  # Waybar removed — no waybar systemd service for Niri
 
   # XWayland satellite service for X11 app support
   systemd.user.services.xwayland-satellite = {

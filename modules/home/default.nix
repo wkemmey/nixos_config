@@ -10,7 +10,8 @@ let
 
   # New variable system
   windowManager = variables.windowManager or "hyprland";
-  barChoice = variables.barChoice or "waybar";
+  # Prefer Noctalia as the default status bar
+  barChoice = variables.barChoice or "noctalia";
   defaultShell = variables.defaultShell or "zsh";
 
   # Bar and shell defaults
@@ -49,7 +50,7 @@ in
     ./lazygit.nix
     #./nvf.nix
     ./nwg-drawer.nix # TODO do i need
-    ./rofi # TODO do i need
+  # rofi removed (not used)
     ./starship.nix
     ./swappy.nix # TODO do i need
     ./tealdeer.nix
