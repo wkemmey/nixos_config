@@ -24,6 +24,8 @@ in
       text = builtins.toJSON {
         appLauncher = {
           backgroundOpacity = 1;
+          customLaunchPrefix = "";
+          customLaunchPrefixEnabled = false;
           enableClipboardHistory = false;
           pinnedExecs = [ ];
           position = "center";
@@ -40,8 +42,8 @@ in
           volumeStep = 5;
         };
         bar = {
-          backgroundOpacity = 1;
-          density = "default";
+          backgroundOpacity = 0;
+          density = "comfortable";
           floating = false;
           marginHorizontal = 0.25;
           marginVertical = 0.25;
@@ -52,7 +54,7 @@ in
             center = [
               {
                 customFont = "";
-                formatHorizontal = "h:mm AP, MMM dd";
+                formatHorizontal = "h:mm AP - dd MMM yyyy";
                 formatVertical = "HH mm - dd MM";
                 id = "Clock";
                 useCustomFont = false;
@@ -61,6 +63,7 @@ in
             ];
             left = [
               {
+                characterCount = 2;
                 hideUnoccupied = false;
                 id = "Workspace";
                 labelMode = "index";
@@ -88,7 +91,7 @@ in
             right = [
               {
                 blacklist = [ ];
-                colorizeIcons = false;
+                colorizeIcons = true;
                 id = "Tray";
               }
               {
@@ -96,9 +99,13 @@ in
                 showCpuTemp = true;
                 showCpuUsage = true;
                 showDiskUsage = false;
-                showMemoryAsPercent = false;
+                showMemoryAsPercent = true;
                 showMemoryUsage = true;
-                showNetworkStats = false;
+                showNetworkStats = true;
+              }
+              {
+                id = "Spacer";
+                width = 20;
               }
               {
                 hideWhenZero = true;
@@ -107,13 +114,28 @@ in
               }
               {
                 displayMode = "onhover";
+                id = "Bluetooth";
+              }
+              {
+                displayMode = "onhover";
+                id = "Brightness";
+              }
+              {
+                id = "WallpaperSelector";
+              }
+              {
+                displayMode = "onhover";
+                id = "Microphone";
+              }
+              {
+                displayMode = "onhover";
                 id = "Volume";
               }
               {
-                customIconPath = "/home/don/black-don-os/modules/home/fastfetch/blackdontrans.png";
-                icon = "noctalia";
+                customIconPath = "";
+                icon = "";
                 id = "ControlCenter";
-                useDistroLogo = false;
+                useDistroLogo = true;
               }
             ];
           };
@@ -123,13 +145,14 @@ in
         };
         brightness = {
           brightnessStep = 5;
+          enforceMinimum = true;
         };
         colorSchemes = {
           darkMode = true;
           generateTemplatesForPredefined = true;
           manualSunrise = "06:30";
           manualSunset = "18:30";
-          matugenSchemeType = "scheme-fruit-salad";
+          matugenSchemeType = "scheme-expressive";
           predefinedScheme = "Catppuccin";
           schedulingMode = "off";
           useWallpaperColors = false;
@@ -202,14 +225,14 @@ in
         general = {
           animationDisabled = false;
           animationSpeed = 1;
-          avatarImage = "/home/don/black-don-os/modules/home/fastfetch/blackdontrans.png";
+          avatarImage = "";
           compactLockScreen = false;
           dimDesktop = true;
           forceBlackScreenCorners = false;
           language = "en";
           lockOnSuspend = true;
           radiusRatio = 0.5;
-          scaleRatio = 1;
+          scaleRatio = 1.2;
           screenRadiusRatio = 1;
           showScreenCorners = false;
         };
@@ -219,11 +242,12 @@ in
           wallpaperChange = "";
         };
         "location" = {
-          name = "Local";
+          analogClockInCalendar = false;
+          name = "Fredericksburg, VA";
           showCalendarEvents = true;
           showWeekNumberInCalendar = false;
           use12hourFormat = false;
-          useFahrenheit = false;
+          useFahrenheit = true;
           weatherEnabled = true;
         };
         network = {
@@ -288,21 +312,27 @@ in
           vicinae = false;
         };
         ui = {
-          fontDefault = "FiraCode Nerd Font";
-          fontDefaultScale = 1;
-          fontFixed = "DejaVu Sans Mono";
-          fontFixedScale = 1;
+          fontDefault = "JetBrainsMono Nerd Font";
+          fontDefaultScale = 1.2;
+          fontFixed = "JetBrainsMono Nerd Font";
+          fontFixedScale = 1.2;
           panelsOverlayLayer = true;
           tooltipsEnabled = true;
         };
         wallpaper = {
           defaultWallpaper = "";
-          directory = "";
+          directory = "/home/whit/black-don-os/wallpapers";
           enableMultiMonitorDirectories = false;
           enabled = true;
           fillColor = "#000000";
           fillMode = "crop";
-          monitors = [ ];
+          monitors = [
+            {
+              directory = "/home/whit/black-don-os/wallpapers";
+              name = "HDMI-A-1";
+              wallpaper = "/home/whit/black-don-os/wallpapers/3840x2160_aenami_timeless.png";
+            }
+          ];
           randomEnabled = false;
           randomIntervalSec = 300;
           setWallpaperOnAllMonitors = true;
