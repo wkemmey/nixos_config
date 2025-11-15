@@ -153,7 +153,7 @@ in
           manualSunrise = "06:30";
           manualSunset = "18:30";
           matugenSchemeType = "scheme-expressive";
-          predefinedScheme = "Catppuccin";
+          predefinedScheme = (variables.colorScheme or "Catppuccin");
           schedulingMode = "off";
           useWallpaperColors = false;
         };

@@ -78,6 +78,8 @@
   #stylixImage = ../../wallpapers/Rainnight.jpg;
   #stylixImage = ../../wallpapers/zaney-wallpaper.jpg;
   stylixImage = ../../wallpapers/55.png;
+  # Color scheme (Stylix or Noctalia predefined name). Examples: "darktooth", "catppuccin-mocha"
+  colorScheme = "catppuccin-mocha";
 
   # Set Waybar (temporarily disabled - use Noctalia)
   # Includes alternates such as:
