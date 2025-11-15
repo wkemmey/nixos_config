@@ -7,8 +7,7 @@
 in
 lib.mkIf stylixEnable {
   stylix = {
-    # When colorScheme is set, prefer the named scheme over wallpaper-derived colors
-    theme = colorScheme or "catppuccin-mocha";
+    theme = colorScheme;
     useWallpaperColors = false;
     # Targets control which application-specific outputs Stylix will produce.
     # Enable common targets for terminals, editors and toolkits so Stylix can
