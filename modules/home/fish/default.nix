@@ -11,72 +11,37 @@ in
   programs.fish = {
     enable = true;
 
-    # Disable fish greeting
+    # disable fish greeting
     interactiveShellInit = ''
       set fish_greeting
 
-      # Launch fastfetch on first terminal spawn
+      # launch fastfetch on first terminal spawn
       if not set -q FASTFETCH_LAUNCHED
         set -gx FASTFETCH_LAUNCHED 1
         fastfetch
       end
 
-      # Load personal config if it exists
+      # load personal config if it exists
       if test -f $HOME/.fishrc-personal
         source $HOME/.fishrc-personal
       end
     '';
 
-    # Shell initialization for PATH additions
+    # shell initialization for PATH additions
     shellInit = ''
-      # Add local bin directories to PATH
+      # add local bin directories to PATH
       fish_add_path $HOME/.local/bin
       fish_add_path $HOME/.pub-cache/bin
-      fish_add_path $HOME/Development/Repos/flutter/bin
     '';
 
-    # Vim-style key bindings (matching zsh config) + HyDE history bindings
-    functions = {
-      fish_user_key_bindings = ''
-        bind \eh backward-word
-        bind \ej down-line-or-history
-        bind \ek up-line-or-history
-        bind \el forward-word
+    #functions = {
+    #};
 
-        # HyDE: Quick history access with Alt+number (1-9)
-        bind_M_n_history
-      '';
-
-      # HyDE function: Bind Alt+number to recall history items
-      bind_M_n_history = ''
-        for i in (seq 9)
-          set -l command
-          if test (count $history) -ge $i
-            set command "commandline -r \$history[$i]"
-          else
-            set command "echo \"No history found for number $i\""
-          end
-
-          if contains fish_vi_key_bindings $fish_key_bindings
-            bind -M default \e$i "$command"
-            bind -M insert \e$i "$command"
-          else
-            bind \e$i "$command"
-          end
-        end
-      '';
-    };
-
-    # Shell aliases (migrated from zsh + HyDE inspired)
     shellAliases = {
-      # Editor aliases
-      sv = "sudo nvim";
-      v = "nvim";
-
-      # System aliases
+      # system aliases
       c = "clear";
 
-      # dcli aliases (PRESERVED - don't remove!)
+      # nixos aliases
       fr = "dcli rebuild";
       fu = "dcli update";
       rebuild = "dcli rebuild";
@@ -84,6 +49,15 @@ in
       cleanup = "dcli cleanup";
       hosts = "dcli list-hosts";
       switchhost = "dcli switch-host"; # 'switch' is reserved in fish
+
+      nxr = "cd $HOME/nixos_config"
+
+      # git aliases
+      gs = "git status";
+      gl = "git log";
+      ga = "git add *";
+      gc = "git commit -m 'Update'"'
+      gp = "git push";
 
       # NixOS specific
       ncg = "nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
@@ -131,3 +105,51 @@ in
     ];
   };
 }
+# single key
+abbr -a -- c clear
+abbr -a -- h history
+abbr -a -- l 'ls -UF'
+
+# better ls
+abbr -a -- la 'ls -lah'
+abbr -a -- ldot 'ls -ld .*'
+abbr -a -- ll 'ls -lGFh'
+abbr -a -- lsa 'ls -aGF'
+
+# quick nav
+abbr -a -- fconf 'cd $__fish_config_dir'
+abbr -a -- fishconf 'cd $__fish_config_dir'
+abbr -a -- fdot 'cd $__fish_config_dir'
+abbr -a -- zdot 'cd $ZDOTDIR'
+
+# date/time
+abbr -a -- ds 'date +%Y-%m-%d'
+abbr -a -- ts 'date +%Y-%m-%dT%H:%M:%SZ'
+abbr -a -- yyyymmdd 'date +%Y%m%d'
+
+# git
+# abbr -a -- gad 'git add'
+# abbr -a -- gbn 'git rev-parse --abbrev-ref HEAD'
+# abbr -a -- gcl 'git clean'
+# abbr -a -- gcmt 'git commit -am '
+# abbr -a -- gco 'git checkout'
+# abbr -a -- gcob 'git checkout -b '
+# abbr -a -- gcod 'git checkout develop'
+# abbr -a -- gcom 'git checkout master'
+# abbr -a -- get git
+# abbr -a -- glg 'git log'
+# abbr -a -- glog git\ log\ --Uraph\ --pretty=\'\%Cred\%h\%Creset\ -\%C\(auto\)\%d\%Creset\ \%s\ \%Cgreen\(\%ad\)\ \%C\(bold\ blue\)\<\%an\>\%Creset\'\ --date=short
+# abbr -a -- gpll 'git pull'
+# abbr -a -- gpristine 'git reset --hard && git clean -fdx'
+# abbr -a -- gpsh 'git push'
+# abbr -a -- gpsuo 'git push --set-Upstream origin (git rev-parse --abbrev-ref HEAD)'
+# abbr -a -- grm 'git rm'
+# abbr -a -- grv 'git remote -v'
+# abbr -a -- gsh 'git stash'
+# abbr -a -- gst 'git status -sb'
+abbr -a -- gclone 'git clone git@github.com:mattmc3/'
+abbr -a -- gwhoami 'echo "user.name:" (git config user.name) && echo "user.email:" (git config user.email)'
+
+
+
+https://nixos.wiki/wiki/Fish
