@@ -7,7 +7,6 @@
 in
 lib.mkIf stylixEnable {
   stylix = {
-    theme = colorScheme;
     useWallpaperColors = false;
     # Targets control which application-specific outputs Stylix will produce.
     # Enable common targets for terminals, editors and toolkits so Stylix can
