@@ -11,6 +11,7 @@ lib.mkIf stylixEnable {
   stylix = {
     enable = true;
     image = stylixImage;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
     # base16Scheme = {
     #   base00 = "282936";
     #   base01 = "3a3c4e";
