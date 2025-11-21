@@ -13,7 +13,8 @@ lib.mkIf stylixEnable {
     image = stylixImage;
     #base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
     base16Scheme = {
-      base00 = "1e1e2e"; # base
+      #base00 = "1e1e2e"; # base
+      base00 = "11111b"; # base
       base01 = "181825"; # mantle
       base02 = "313244"; # surface0
       base03 = "45475a"; # surface1

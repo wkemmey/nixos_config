@@ -11,15 +11,23 @@
     profiles = {
       default = {
         extensions = with pkgs.vscode-extensions; [
-          #bbenoist.nix
           jeff-hykin.better-nix-syntax
-          #ms-vscode.cpptools-extension-pack
-          #vscodevim.vim # Vim emulation
-          #mads-hartmann.bash-ide-vscode
-          #tamasfe.even-better-toml
-          #zainchen.json
+          rust-lang.rust-analyzer          #vscodevim.vim # Vim emulation
+          vadimcn.vscode-lldb
+          serayuzgur.crates
+          tamasfe.even-better-toml
+          usernamehw.errorlens
         ];
       };
     };
   };
 }
+#"editor.semanticTokenColorCustomizations": {
+#    "[ (Name of the theme you're using here) ]": {
+#        "rules": {
+#            "*.mutable": {
+#                "fontStyle": "italic"
+#            }
+#        }
+#    }
+#}
