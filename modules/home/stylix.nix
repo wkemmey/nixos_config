@@ -7,7 +7,7 @@
 in
 lib.mkIf stylixEnable {
   stylix = {
-    useWallpaperColors = false;
+    #useWallpaperColors = false;
     # Targets control which application-specific outputs Stylix will produce.
     # Enable common targets for terminals, editors and toolkits so Stylix can
     # generate matching configs (where supported).
