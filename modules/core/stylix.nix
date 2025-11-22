@@ -52,10 +52,10 @@ lib.mkIf stylixEnable {
         name = "Montserrat";
       };
       sizes = {
-        applications = 12;
-        terminal = 18; # Increased from 15 for better readability
-        desktop = 11;
-        popups = 12;
+        applications = 16;
+        terminal = 16;
+        desktop = 16;
+        popups = 16;
       };
     };
   };
