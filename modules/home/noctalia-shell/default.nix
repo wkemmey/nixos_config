@@ -321,16 +321,16 @@ in
         };
         wallpaper = {
           defaultWallpaper = "";
-          directory = "/home/whit/black-don-os/wallpapers";
+          directory = "/home/whit/nixos_config/wallpapers";
           enableMultiMonitorDirectories = false;
           enabled = true;
           fillColor = "#000000";
           fillMode = "crop";
           monitors = [
             {
-              directory = "/home/whit/black-don-os/wallpapers";
+              directory = "/home/whit/nixos_config/wallpapers";
               name = "HDMI-A-1";
-              wallpaper = "/home/whit/black-don-os/wallpapers/3840x2160_aenami_timeless.png";
+              wallpaper = "/home/whit/nixos_config/wallpapers/3840x2160_aenami_timeless.png";
             }
           ];
           randomEnabled = false;

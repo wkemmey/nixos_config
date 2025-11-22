@@ -455,7 +455,7 @@ read -p "Ready to build? [Y/n]: " build_confirm
 if [[ $build_confirm =~ ^[Nn]$ ]]; then
   echo ""
   print_info "You can build manually later with:"
-  echo -e "  ${GREEN}sudo nixos-rebuild switch --flake ~/black-don-os#$hostname${NC}"
+  echo -e "  ${GREEN}sudo nixos-rebuild switch --flake ~/nixos_config#$hostname${NC}"
   exit 0
 fi
 
@@ -468,10 +468,10 @@ if sudo nixos-rebuild switch --flake .#"$hostname"; then
   print_success "Black Don OS has been installed!"
   echo ""
   echo -e "${BLUE}What's next:${NC}"
-  echo -e "  1. Your configuration is in: ${GREEN}~/black-don-os/hosts/$hostname/${NC}"
-  echo -e "  2. Both Hyprland and Niri are available - select at login screen"
-  echo -e "  3. Customize: ${GREEN}~/black-don-os/hosts/$hostname/variables.nix${NC}"
-  echo -e "  4. Rebuild: ${GREEN}sudo nixos-rebuild switch --flake ~/black-don-os#$hostname${NC}"
+  echo -e "  1. Your configuration is in: ${GREEN}~/nixos_config/hosts/$hostname/${NC}"
+  echo -e "  2. Available profiles: amd, intel, nvidia, nvidia-laptop, vm"
+  echo -e "  3. Customize: ${GREEN}~/nixos_config/hosts/$hostname/variables.nix${NC}"
+  echo -e "  4. Rebuild: ${GREEN}sudo nixos-rebuild switch --flake ~/nixos_config#$hostname${NC}"
   echo ""
   echo -e "${YELLOW}Tip: Update your monitor settings in variables.nix for optimal display${NC}"
   echo ""
@@ -496,7 +496,7 @@ else
   print_error "Build failed"
   echo ""
   echo -e "${YELLOW}To retry manually:${NC}"
-  echo -e "  ${GREEN}cd ~/black-don-os${NC}"
+  echo -e "  ${GREEN}cd ~/nixos_config${NC}"
   echo -e "  ${GREEN}sudo nixos-rebuild switch --flake .#$hostname${NC}"
   exit 1
 fi
