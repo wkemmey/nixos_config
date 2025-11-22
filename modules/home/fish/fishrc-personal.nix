@@ -9,7 +9,7 @@
     set -gx CHROME_EXECUTABLE /run/current-system/sw/bin/google-chrome-stable
   # Flatpak removed: use xdg-open as generic browser opener
   set -gx BROWSER "xdg-open"
-    set -gx EDITOR "zeditor"
+    set -gx EDITOR "hx"
     # set -gx VISUAL "nvim"
 
     # Custom aliases can go here

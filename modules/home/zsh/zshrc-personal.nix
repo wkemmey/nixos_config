@@ -17,7 +17,7 @@
   export BROWSER="xdg-open"
 
     #
-    export EDITOR="zeditor"
+    export EDITOR="hx"
     #export VISUAL="nvim"
 
     #alias c="clear"

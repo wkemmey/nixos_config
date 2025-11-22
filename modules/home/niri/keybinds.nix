@@ -212,7 +212,6 @@ in
       Mod+D { spawn "vesktop"; }
       Mod+S { spawn "steam"; }
       Mod+Shift+O { spawn "obs"; }
-      Mod+Z { spawn "zed-fix"; }
       Mod+F { spawn "thunar"; }
       Ctrl+Mod+V { spawn "virt-manager"; }
       Ctrl+Mod+E { spawn "emopicker9000"; }
