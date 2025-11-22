@@ -5,12 +5,7 @@
   ...
 }: {
   nixpkgs.config.allowUnfree = true;
-
-  # Force VSCode to use native Wayland for proper font rendering and scaling
-  home.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-  };
-
+  
   programs.vscode = {
     enable = true;
     

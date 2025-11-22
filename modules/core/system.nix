@@ -36,6 +36,12 @@ in
     ZANEYOS_VERSION = "2.3.1";
     ZANEYOS = "true";
   };
+  
+  # Force Electron apps (VSCode, etc.) to use native Wayland rendering
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
+  
   console.keyMap = "${consoleKeyMap}";
   system.stateVersion = "25.05"; # Do not change!
 
