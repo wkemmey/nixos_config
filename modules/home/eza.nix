@@ -23,8 +23,10 @@
   home.shellAliases = {
     ls = "eza";
     lt = "eza --tree --level=2";
-    ll = "eza  -lh --no-user --long";
-    la = "eza -lah ";
-    tree = "eza --tree ";
+    ll = "eza -lh --no-user --long";
+    la = "eza -lah";
+    ld = "eza -lhD --icons=auto"; # list directories only
+    ldot = "eza -lhd .*"; # list dotfiles/directories
+    tree = "eza --tree";
   };
 }

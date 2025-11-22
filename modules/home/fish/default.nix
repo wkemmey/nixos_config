@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  host,
   ...
 }:
 let
@@ -37,37 +38,21 @@ in
     #functions = {
     #};
 
-    shellAliases = {
-      # system aliases
+    # fish abbreviations (expanded when pressing space or enter)
+    shellAbbrs = {
+      # single key shortcuts
       c = "clear";
+      h = "history";
 
-      # nixos aliases
-      fr = "dcli rebuild";
-      fu = "dcli update";
-      rebuild = "dcli rebuild";
-      update = "dcli update";
-      cleanup = "dcli cleanup";
-      hosts = "dcli list-hosts";
-      switchhost = "dcli switch-host"; # 'switch' is reserved in fish
+      # nixos abbreviations
+      nxr = "nixos-rebuild switch --flake .#${host}";
+      nxu = "nix flake update";
+      nxg = "nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
+      ncd = "cd ~/black-don-os";
 
-      nxr = "cd $HOME/nixos_config"
-
-      # git aliases
-      gs = "git status";
-      gl = "git log";
-      ga = "git add *";
-      gc = "git commit -m 'Update'"'
-      gp = "git push";
-
-      # NixOS specific
-      ncg = "nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
-
-      # Better defaults
+      # better defaults
       cat = "bat";
       man = "batman";
-
-      # Additional eza aliases (base ones are in eza.nix)
-      ld = "eza -lhD --icons=auto"; # list directories only
 
       # Directory navigation shortcuts
       ".." = "cd ..";
@@ -78,6 +63,27 @@ in
 
       # Always mkdir with parents
       mkdir = "mkdir -p";
+
+      # Git abbreviations
+      ga = "git add";
+      gbn = "git rev-parse --abbrev-ref HEAD";
+      gcl = "git clean";
+      gc = "git commit -am";
+      gco = "git checkout";
+      gcob = "git checkout -b";
+      gcod = "git checkout develop";
+      gcom = "git checkout master";
+      gl = "git log";
+      glog = "git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ad) %C(bold blue)<%an>%Creset' --date=short";
+      gpl = "git pull";
+      gpristine = "git reset --hard && git clean -fdx";
+      gp = "git push";
+      gpsuo = "git push --set-upstream origin (git rev-parse --abbrev-ref HEAD)";
+      grm = "git rm";
+      grv = "git remote -v";
+      gstash = "git stash";
+      gs = "git status -sb";
+      gwhoami = "echo \"user.name:\" (git config user.name) && echo \"user.email:\" (git config user.email)";
     };
 
     # Fish plugins for enhanced functionality
@@ -105,51 +111,3 @@ in
     ];
   };
 }
-# single key
-abbr -a -- c clear
-abbr -a -- h history
-abbr -a -- l 'ls -UF'
-
-# better ls
-abbr -a -- la 'ls -lah'
-abbr -a -- ldot 'ls -ld .*'
-abbr -a -- ll 'ls -lGFh'
-abbr -a -- lsa 'ls -aGF'
-
-# quick nav
-abbr -a -- fconf 'cd $__fish_config_dir'
-abbr -a -- fishconf 'cd $__fish_config_dir'
-abbr -a -- fdot 'cd $__fish_config_dir'
-abbr -a -- zdot 'cd $ZDOTDIR'
-
-# date/time
-abbr -a -- ds 'date +%Y-%m-%d'
-abbr -a -- ts 'date +%Y-%m-%dT%H:%M:%SZ'
-abbr -a -- yyyymmdd 'date +%Y%m%d'
-
-# git
-# abbr -a -- gad 'git add'
-# abbr -a -- gbn 'git rev-parse --abbrev-ref HEAD'
-# abbr -a -- gcl 'git clean'
-# abbr -a -- gcmt 'git commit -am '
-# abbr -a -- gco 'git checkout'
-# abbr -a -- gcob 'git checkout -b '
-# abbr -a -- gcod 'git checkout develop'
-# abbr -a -- gcom 'git checkout master'
-# abbr -a -- get git
-# abbr -a -- glg 'git log'
-# abbr -a -- glog git\ log\ --Uraph\ --pretty=\'\%Cred\%h\%Creset\ -\%C\(auto\)\%d\%Creset\ \%s\ \%Cgreen\(\%ad\)\ \%C\(bold\ blue\)\<\%an\>\%Creset\'\ --date=short
-# abbr -a -- gpll 'git pull'
-# abbr -a -- gpristine 'git reset --hard && git clean -fdx'
-# abbr -a -- gpsh 'git push'
-# abbr -a -- gpsuo 'git push --set-Upstream origin (git rev-parse --abbrev-ref HEAD)'
-# abbr -a -- grm 'git rm'
-# abbr -a -- grv 'git remote -v'
-# abbr -a -- gsh 'git stash'
-# abbr -a -- gst 'git status -sb'
-abbr -a -- gclone 'git clone git@github.com:mattmc3/'
-abbr -a -- gwhoami 'echo "user.name:" (git config user.name) && echo "user.email:" (git config user.email)'
-
-
-
-https://nixos.wiki/wiki/Fish
