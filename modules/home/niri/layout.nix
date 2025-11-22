@@ -13,6 +13,8 @@
   input {
       keyboard {
           xkb {
+              // Remap Caps Lock to act as Super (Mod) key
+              options "caps:super"
           }
           numlock
       }

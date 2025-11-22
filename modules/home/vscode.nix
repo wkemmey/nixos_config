@@ -19,8 +19,11 @@
         usernamehw.errorlens
       ];
       
-      # Stylix will merge its settings with this profile automatically
-      # No userSettings needed here - Stylix handles all theming
+      # Override AI chat font size to match Stylix's application font size
+      userSettings = {
+        "chat.editor.fontSize" = config.stylix.fonts.sizes.applications;
+        "inlineChat.fontSize" = config.stylix.fonts.sizes.applications;
+      };
     };
   };
 }

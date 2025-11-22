@@ -14,8 +14,9 @@ lib.mkIf stylixEnable {
     #base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
     base16Scheme = {
       #base00 = "1e1e2e"; # base
-      base00 = "000000"; # base
-      base01 = "181825"; # mantle
+      #base01 = "181825"; # mantle
+      base00 = "000000"; # base - pure black for editor
+      base01 = "0f0f0f"; # mantle - dark charcoal gray (no purple tint) for sidebars
       base02 = "313244"; # surface0
       base03 = "45475a"; # surface1
       base04 = "585b70"; # surface2
