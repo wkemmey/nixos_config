@@ -6,8 +6,16 @@
 }: {
   nixpkgs.config.allowUnfree = true;
 
+  # Force VSCode to use native Wayland for proper font rendering and scaling
+  home.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
+
   programs.vscode = {
     enable = true;
+    
+    # Enable Wayland support explicitly
+    package = pkgs.vscode;
     
     # Fully declarative: Nix manages extensions, Stylix manages theming
     # Both can coexist in profiles without conflict
@@ -20,12 +28,8 @@
         usernamehw.errorlens
       ];
       
-      # Override chat font to be explicitly larger than Stylix's calculated value
-      # Using mkForce to override Stylix's setting
-      userSettings = {
-        "chat.editor.fontSize" = lib.mkForce 24;
-        "inlineChat.fontSize" = lib.mkForce 24;
-      };
+      # Stylix handles all font sizes - with native Wayland rendering,
+      # fonts should display at the correct size
     };
   };
 }
