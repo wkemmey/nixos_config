@@ -49,7 +49,7 @@
     gdu # graphical disk usage
     gedit # Simple Graphical Text Editor
     gimp # Great Photo Editor
-    glxinfo # Needed for inxi -G GPU info
+    mesa-demos # Needed for inxi -G GPU info (includes glxinfo)
     gping # graphical ping
     tuigreet # The Login Manager (Sometimes Referred To As Display Manager)
     htop # Simple Terminal Based System Monitor
