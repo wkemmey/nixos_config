@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }: {
   nixpkgs.config.allowUnfree = true;
@@ -19,10 +20,11 @@
         usernamehw.errorlens
       ];
       
-      # Override AI chat font size to match Stylix's application font size
+      # Override chat font to be explicitly larger than Stylix's calculated value
+      # Using mkForce to override Stylix's setting
       userSettings = {
-        "chat.editor.fontSize" = config.stylix.fonts.sizes.applications;
-        "inlineChat.fontSize" = config.stylix.fonts.sizes.applications;
+        "chat.editor.fontSize" = lib.mkForce 24;
+        "inlineChat.fontSize" = lib.mkForce 24;
       };
     };
   };
