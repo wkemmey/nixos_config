@@ -40,6 +40,9 @@ in
   # Force Electron apps (VSCode, etc.) to use native Wayland rendering
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
+    # Tells Electron apps to use Wayland natively if available
+    # Note: auto is typically safer than wayland directly
+    ELECTRON_OZONE_PLATFORM_HINT = "auto";
   };
   
   console.keyMap = "${consoleKeyMap}";

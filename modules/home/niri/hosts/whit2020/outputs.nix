@@ -5,7 +5,7 @@
 
   output "HDMI-A-1" {
     mode "3840x2160"
-    scale 1.5
+    scale 2.0
     position x=0 y=0
   }
 
