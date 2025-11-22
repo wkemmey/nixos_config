@@ -47,6 +47,9 @@ in
     ./gtk.nix # TODO do i need
     ./htop.nix
     #./kitty.nix
+    # terminal emulators
+    ./alacritty.nix
+    ./foot.nix
     ./lazygit.nix
     #./nvf.nix
     ./nwg-drawer.nix # TODO do i need

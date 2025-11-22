@@ -1,16 +1,12 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  config,
+  ...
+}: {
   nixpkgs.config.allowUnfree = true;
 
   programs.vscode = {
     enable = true;
-
-    # User settings - these will be merged with Stylix-generated settings
-    userSettings = {
-      # Font sizes for different UI elements
-      "chat.editor.fontSize" = 16; # AI chat input font size
-      "markdown.preview.fontSize" = 16; # Chat response preview size
-      "terminal.integrated.fontSize" = 16; # Integrated terminal
-    };
 
     profiles = {
       default = {
@@ -21,6 +17,15 @@
           tamasfe.even-better-toml
           usernamehw.errorlens
         ];
+        
+        # User settings - override only what Stylix doesn't handle
+        # Stylix manages: editor font, UI font, terminal font
+        # We set chat/preview areas to match Stylix's applications size
+        userSettings = {
+          "chat.editor.fontSize" = config.stylix.fonts.sizes.applications; # AI chat input
+          "markdown.preview.fontSize" = config.stylix.fonts.sizes.applications; # Chat response preview
+          # Note: integrated terminal font is managed by Stylix via terminal size
+        };
       };
     };
   };
