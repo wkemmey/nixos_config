@@ -16,6 +16,8 @@
     # Both can coexist in profiles without conflict
     profiles.default = {
       extensions = with pkgs.vscode-extensions; [
+        GitHub.copilot
+        GitHub.copilot-chat
         jeff-hykin.better-nix-syntax
         rust-lang.rust-analyzer
         vadimcn.vscode-lldb
