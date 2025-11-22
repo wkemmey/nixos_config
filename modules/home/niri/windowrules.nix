@@ -45,6 +45,19 @@
       default-column-width { proportion 0.75; }
   }
 
+  // VSCode always opens at full column width
+  window-rule {
+      match app-id=r#"^(code|Code|code-url-handler|VSCodium)$"#
+      default-column-width { proportion 1.0; }
+  }
+
+  // Firefox always opens at full column width (except picture-in-picture)
+  window-rule {
+      match app-id=r#"^firefox$"#
+      exclude title="^Picture-in-Picture$"
+      default-column-width { proportion 1.0; }
+  }
+
   // Web apps and Steam opacity
   window-rule {
       match app-id=r#"^(steam|chrome-app\.restream\.io__home-Default|chrome-claude\.ai__new-Default|chrome-github\.com__-Default|chrome-gitlab\.com__theblackdon_black-don-os-Default|chrome-mail\.proton\.me__u_0_inbox-Default|chrome-meet\.google\.com__-Default|chrome-messages\.google\.com__web_u_1_conversations-Default|chrome-web\.descript\.com__-Default)$"#
