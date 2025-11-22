@@ -45,7 +45,7 @@ in
       h = "history";
 
       # nixos abbreviations
-      nxr = "nixos-rebuild switch --flake .#${host}";
+      nxr = "sudo nixos-rebuild switch --flake .#${host}";
       nxu = "nix flake update";
       nxg = "nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
       nxcd = "cd ~/black-don-os";

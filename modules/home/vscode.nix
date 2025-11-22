@@ -8,22 +8,20 @@
   programs.vscode = {
     enable = true;
     
-    # Allow VSCode to manage extensions and settings mutably
-    # This prevents conflicts with Stylix trying to manage the same files
-    mutableExtensionsDir = true;
-    
-    # Let Stylix handle all theming through userSettings
-    # Don't use profiles when Stylix is managing VSCode
-    extensions = with pkgs.vscode-extensions; [
-      jeff-hykin.better-nix-syntax
-      rust-lang.rust-analyzer
-      vadimcn.vscode-lldb
-      tamasfe.even-better-toml
-      usernamehw.errorlens
-    ];
-    
-    # Note: All font sizes and colors are managed by Stylix
-    # via the vscode.enable target in modules/home/stylix.nix
+    # Fully declarative: Nix manages extensions, Stylix manages theming
+    # Both can coexist in profiles without conflict
+    profiles.default = {
+      extensions = with pkgs.vscode-extensions; [
+        jeff-hykin.better-nix-syntax
+        rust-lang.rust-analyzer
+        vadimcn.vscode-lldb
+        tamasfe.even-better-toml
+        usernamehw.errorlens
+      ];
+      
+      # Stylix will merge its settings with this profile automatically
+      # No userSettings needed here - Stylix handles all theming
+    };
   };
 }
 #"editor.semanticTokenColorCustomizations": {
