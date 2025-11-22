@@ -44,7 +44,6 @@
             inherit profile;
             inherit username;
             helium-browser = inputs.helium-browser.packages.${system}.helium-browser;
-            vscode-pinned = pkgs-vscode.vscode;
           };
           modules = [
             ./profiles/${profile}
