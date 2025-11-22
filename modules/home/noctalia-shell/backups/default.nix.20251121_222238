@@ -72,7 +72,7 @@ in
                 colorizeIcons = false;
                 hideMode = "hidden";
                 id = "ActiveWindow";
-                maxWidth = 1000;
+                maxWidth = 145;
                 scrollingMode = "hover";
                 showIcon = true;
                 useFixedWidth = false;

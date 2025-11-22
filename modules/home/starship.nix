@@ -15,8 +15,11 @@ let
 in
 {
   programs.starship = {
-    # Disable starship for Fish (it has its own custom prompt)
-    enable = defaultShell != "fish";
+    # Starship works great with all shells including Fish
+    enable = true;
+    enableFishIntegration = true;
+    enableBashIntegration = true;
+    enableZshIntegration = true;
     settings = {
       add_newline = false;
       format = lib.concatStrings [
