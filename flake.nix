@@ -10,7 +10,6 @@
     nvf.url = "github:notashelf/nvf";
     stylix.url = "github:danth/stylix";
     flake-utils.url = "github:numtide/flake-utils";
-    zen-browser.url = "github:0xc000022070/zen-browser-flake";
     quickshell = {
       url = "github:outfoxxed/quickshell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -44,8 +43,8 @@
             host = hostname;
             inherit profile;
             inherit username;
-            zen-browser = inputs.zen-browser.packages.${system}.default;
             helium-browser = inputs.helium-browser.packages.${system}.helium-browser;
+            vscode-pinned = pkgs-vscode.vscode;
           };
           modules = [
             ./profiles/${profile}

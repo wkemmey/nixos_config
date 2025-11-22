@@ -32,13 +32,6 @@
       open-on-output "DP-2"
   }
 
-  // Zen Browser settings
-  window-rule {
-      match app-id="zen-beta"
-      opacity 0.98
-      default-column-width { proportion 0.75; }
-  }
-
   // VSCode always opens at full column width
   window-rule {
       match app-id=r#"^(code|Code|code-url-handler|VSCodium)$"#

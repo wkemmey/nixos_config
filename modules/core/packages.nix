@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  zen-browser,
   host,
   ...
 }:
@@ -16,7 +15,6 @@
     seahorse.enable = true;
     fuse.userAllowOther = true;
     mtr.enable = true;
-    adb.enable = true;
     gnupg.agent = {
       enable = true;
       enableSSHSupport = true;
@@ -27,11 +25,6 @@
   virtualisation.libvirtd.enable = true;
 
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.allowUnfreePredicate =
-    pkg:
-    builtins.elem (lib.getName pkg) [
-      "zed"
-    ];
 
   environment.systemPackages = with pkgs; [
     amfora # Fancy Terminal Browser For Gemini Protocol
@@ -53,7 +46,6 @@
     gping # graphical ping
     tuigreet # The Login Manager (Sometimes Referred To As Display Manager)
     htop # Simple Terminal Based System Monitor
-    hyprpicker # Color Picker
     eog # For Image Viewing
     # Terminal emulators
     foot # terminal emulator (preferred)
@@ -63,7 +55,6 @@
     killall # For Killing All Instances Of Programs
     libnotify # For Notifications
     lm_sensors # Used For Getting Hardware Temps
-    lolcat # Add Colors To Your Terminal Command Output
     lshw # Detailed Hardware Information
     mpv # Incredible Video Player
     ncdu # Disk Usage Analyzer With Ncurses Interface
@@ -78,7 +69,6 @@
     picard # For Changing Music Metadata & Getting Cover Art
     pkg-config # Wrapper Script For Allowing Packages To Get Info On Others
     playerctl # Allows Changing Media Volume Through Scripts
-    rhythmbox
     ripgrep # Improved Grep
     socat # Needed For Screenshots
     sox # audio support for FFMPEG
@@ -87,18 +77,14 @@
     usbutils # Good Tools For USB Devices
     v4l-utils # Used For Things Like OBS Virtual Camera
     obs-studio # OBS Studio (system package)
-    waypaper # backup wallpaper GUI
     wget # Tool For Fetching Files With Links
     xwayland-satellite # Xwayland outside your Wayland compositor
-    ytmdl # Tool For Downloading Audio From YouTube
     nwg-displays # Manage Displays
     nwg-drawer # drawer GUI
     nwg-look # Look GUI
     youtube-music
-    zen-browser # Default browser
     firefox
     # Development Tools
-    zed-editor # Code editor with AI features
     popsicle
     # AI code editors (cursor, claude-code, gemini-cli) moved to modules/core/ai-code-editors.nix
     gum

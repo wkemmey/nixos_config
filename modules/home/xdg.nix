@@ -5,16 +5,16 @@
     mimeApps = {
       enable = true;
       defaultApplications = {
-        "text/html" = "zen-beta.desktop";
-        "x-scheme-handler/http" = "zen-beta.desktop";
-        "x-scheme-handler/https" = "zen-beta.desktop";
-        "x-scheme-handler/about" = "zen-beta.desktop";
-        "application/x-extension-htm" = "zen-beta.desktop";
-        "application/x-extension-html" = "zen-beta.desktop";
-        "application/x-extension-shtml" = "zen-beta.desktop";
-        "application/xhtml+xml" = "zen-beta.desktop";
-        "application/x-extension-xhtml" = "zen-beta.desktop";
-        "application/x-extension-xht" = "zen-beta.desktop";
+        "text/html" = "firefox.desktop";
+        "x-scheme-handler/http" = "firefox.desktop";
+        "x-scheme-handler/https" = "firefox.desktop";
+        "x-scheme-handler/about" = "firefox.desktop";
+        "application/x-extension-htm" = "firefox.desktop";
+        "application/x-extension-html" = "firefox.desktop";
+        "application/x-extension-shtml" = "firefox.desktop";
+        "application/xhtml+xml" = "firefox.desktop";
+        "application/x-extension-xhtml" = "firefox.desktop";
+        "application/x-extension-xht" = "firefox.desktop";
       };
     };
     # Portal configuration moved to system-level (modules/core/flatpak.nix)
