@@ -48,7 +48,7 @@ in
       nxr = "sudo nixos-rebuild switch --flake .#${host}";
       nxu = "nix flake update";
       nxg = "nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot";
-      nxcd = "cd ~/black-don-os";
+      nxcd = "cd ~/nixos_config";
 
       # better defaults
       cat = "bat";
@@ -69,6 +69,7 @@ in
       gbn = "git rev-parse --abbrev-ref HEAD";
       gcl = "git clean";
       gc = "git commit -am";
+      gd = "git diff";
       gco = "git checkout";
       gcob = "git checkout -b";
       gcod = "git checkout develop";

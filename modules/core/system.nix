@@ -56,9 +56,5 @@ in
     zlib
     openssl
     libGL
-    # Android-specific libraries
-    jdk11
-    android-tools
-    androidenv.androidPkgs.platform-tools
   ];
 }
