@@ -94,7 +94,6 @@
     nwg-displays # Manage Displays
     nwg-drawer # drawer GUI
     nwg-look # Look GUI
-    rofi-emoji # rofi-emoji-wayland merged into rofi-emoji in nixpkgs-unstable
     youtube-music
     zen-browser # Default browser
     firefox

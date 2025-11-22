@@ -1,11 +1,5 @@
 { host, ... }:
 ''
-  // Work around WezTerm's initial configure bug
-  window-rule {
-      match app-id=r#"^org\.wezfurlong\.wezterm$"#
-      default-column-width {}
-  }
-
   // Open the Firefox picture-in-picture player as floating by default
   window-rule {
       match app-id=r#"firefox$"# title="^Picture-in-Picture$"

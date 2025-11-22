@@ -48,7 +48,6 @@ in
   ${noctaliaKeybinds}
 
       // === Security ===
-      Super+L { spawn "hyprlock"; }
       Mod+Shift+Q { quit; }
 
       // === Keyboard Brightness Controls ===
