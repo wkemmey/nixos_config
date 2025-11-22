@@ -10,6 +10,7 @@ let
   variables = import ../../../hosts/${host}/variables.nix;
   barChoice = variables.barChoice or "waybar";
   enableNoctalia = barChoice == "noctalia";
+  wallpaperImage = builtins.toString variables.wallpaperImage;
 in
 {
   imports = lib.optionals enableNoctalia [
@@ -330,7 +331,7 @@ in
             {
               directory = "/home/whit/nixos_config/wallpapers";
               name = "HDMI-A-1";
-              wallpaper = "/home/whit/nixos_config/wallpapers/3840x2160_aenami_timeless.png";
+              wallpaper = wallpaperImage;
             }
           ];
           randomEnabled = false;

@@ -10,7 +10,7 @@ let
   inherit (variables)
     browser
     terminal
-    stylixImage
+    wallpaperImage
     startupApps
     ;
 
@@ -37,7 +37,7 @@ let
   startupModule = import ./startup.nix {
     inherit
       host
-      stylixImage
+      wallpaperImage
       startupApps
       barChoice
       ;
@@ -63,7 +63,6 @@ in
     niri
     udiskie
     xwayland-satellite
-    swww
     grim
     slurp
     wl-clipboard

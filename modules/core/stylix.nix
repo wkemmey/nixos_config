@@ -4,13 +4,13 @@
   lib,
   ...
 }: let
-  inherit (import ../../hosts/${host}/variables.nix) stylixImage stylixEnable;
+  inherit (import ../../hosts/${host}/variables.nix) wallpaperImage stylixEnable;
 in
 lib.mkIf stylixEnable {
   # Styling Options
   stylix = {
     enable = true;
-    image = stylixImage;
+    image = wallpaperImage;
     #base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
     base16Scheme = {
       #base00 = "1e1e2e"; # base

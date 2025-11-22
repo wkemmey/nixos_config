@@ -51,7 +51,7 @@
   defaultShell = "fish";   # Options: "fish" or "zsh"
 
   # Theming
-  stylixImage = ../../wallpapers/3840x2160_bonsai_rock_milky.jpg;
+  wallpaperImage = ../../wallpapers/3840x2160_bonsai_rock_milky.jpg;
   # Color scheme: prefer Stylix-controlled schemes (e.g. "darktooth" or "catppuccin-mocha")
   colorScheme = "catppuccin-mocha";
   #waybarChoice = ../../modules/home/waybar/waybar-ddubs.nix;  # Waybar temporarily disabled
