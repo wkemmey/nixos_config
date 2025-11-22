@@ -13,7 +13,7 @@
 
       logo = {
         source = ./nixos.png;
-        type = "kitty-direct";
+        type = "auto";
         height = 10;
         width = 20;
         padding = {
@@ -26,7 +26,7 @@
         "break"
         {
           type = "os";
-          key = "OS - BlackDon's OS";
+          key = "OS   ";
           keyColor = "31";
         }
         {
@@ -79,7 +79,7 @@
         {
           type = "host";
           format = "{5} {1} Type {2}";
-          key = "PC   ";
+          key = "HW   ";
           keyColor = "33";
         }
         {
@@ -122,7 +122,7 @@
         "break"
         {
           type = "uptime";
-          key = "   Uptime   ";
+          key = "   Uptime ";
         }
       ];
     };

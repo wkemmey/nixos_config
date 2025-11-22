@@ -11,10 +11,8 @@ in
 {
   config = lib.mkIf enableCommunicationApps {
     environment.systemPackages = with pkgs; [
-      teams-for-linux # Video Meetings
       zoom-us # Video Meetings
-      telegram-desktop # Messaging App
-      vesktop # Discord Alternative
+      #vesktop # Discord Alternative
     ];
   };
 }

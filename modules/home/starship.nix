@@ -6,8 +6,9 @@
   ...
 }:
 let
-  accent = "#${config.lib.stylix.colors.base0D}";
-  background-alt = "#${config.lib.stylix.colors.base01}";
+  # Use comment color for subtle, unobtrusive prompt
+  comment = "#${config.lib.stylix.colors.base03}";  # Muted gray like code comments
+  dimmed = "#${config.lib.stylix.colors.base04}";   # Slightly brighter for active elements
 
   # Import variables to check shell choice
   variables = import ../../hosts/${host}/variables.nix;
@@ -33,39 +34,47 @@ in
         "$character"
       ];
       directory = {
-        style = accent;
+        style = comment;
+        truncation_length = 4;
+        truncate_to_repo = true;
       };
 
       character = {
-        success_symbol = "[❯](${accent})";
+        success_symbol = "[❯](${dimmed})";
         error_symbol = "[❯](red)";
-        vimcmd_symbol = "[❮](cyan)";
+        vimcmd_symbol = "[❮](${comment})";
       };
 
       nix_shell = {
         format = "[$symbol]($style) ";
-        symbol = "🐚";
-        style = "";
+        symbol = "󱄅";
+        style = comment;
       };
 
       git_branch = {
-        symbol = "[](${background-alt}) ";
-        style = "fg:${accent} bg:${background-alt}";
-        format = "on [$symbol$branch]($style)[](${background-alt}) ";
+        symbol = " ";
+        style = comment;
+        format = "[$symbol$branch]($style) ";
       };
 
       git_status = {
-        format = "[[(*$conflicted$untracked$modified$staged$renamed$deleted)](218)($ahead_behind$stashed)]($style)";
-        style = "cyan";
-        conflicted = "";
-        renamed = "";
-        deleted = "";
+        format = "[($all_status$ahead_behind)]($style)";
+        style = comment;
+        conflicted = "~";
+        ahead = "⇡";
+        behind = "⇣";
+        diverged = "⇕";
+        untracked = "?";
         stashed = "≡";
+        modified = "!";
+        staged = "+";
+        renamed = "»";
+        deleted = "✘";
       };
 
       git_state = {
         format = "([$state( $progress_current/$progress_total)]($style)) ";
-        style = "bright-black";
+        style = comment;
       };
     };
   };
