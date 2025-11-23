@@ -10,6 +10,7 @@ let
   variables = import ../../../hosts/${host}/variables.nix;
   barChoice = variables.barChoice or "waybar";
   enableNoctalia = barChoice == "noctalia";
+  wallpaperImage = builtins.toString variables.wallpaperImage;
 in
 {
   imports = lib.optionals enableNoctalia [
@@ -18,14 +19,14 @@ in
 
   config = lib.mkIf enableNoctalia {
     programs.waybar.enable = lib.mkForce false;
-    home.packages = [ inputs.noctalia.packages.${pkgs.system}.default ];
+    home.packages = [ inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default ];
 
     home.file.".config/noctalia/settings.json.template" = {
       text = builtins.toJSON {
         appLauncher = {
+          backgroundOpacity = 1;
           customLaunchPrefix = "";
           customLaunchPrefixEnabled = false;
-          enableClipPreview = true;
           enableClipboardHistory = false;
           pinnedExecs = [ ];
           position = "center";
@@ -35,24 +36,19 @@ in
         };
         audio = {
           cavaFrameRate = 60;
-          externalMixer = "pwvucontrol || pavucontrol";
           mprisBlacklist = [ ];
           preferredPlayer = "";
-          visualizerQuality = "high";
           visualizerType = "linear";
           volumeOverdrive = false;
           volumeStep = 5;
         };
         bar = {
           backgroundOpacity = 0;
-          capsuleOpacity = 1;
           density = "comfortable";
-          exclusive = true;
           floating = false;
           marginHorizontal = 0.25;
           marginVertical = 0.25;
           monitors = [ ];
-          outerCorners = true;
           position = "top";
           showCapsule = true;
           widgets = {
@@ -69,7 +65,6 @@ in
             left = [
               {
                 characterCount = 2;
-                followFocusedScreen = false;
                 hideUnoccupied = false;
                 id = "Workspace";
                 labelMode = "index";
@@ -85,12 +80,10 @@ in
               }
               {
                 hideMode = "hidden";
-                hideWhenIdle = false;
                 id = "MediaMini";
                 maxWidth = 145;
                 scrollingMode = "hover";
                 showAlbumArt = false;
-                showArtistFirst = true;
                 showVisualizer = false;
                 useFixedWidth = false;
                 visualizerType = "linear";
@@ -98,7 +91,11 @@ in
             ];
             right = [
               {
-                diskPath = "/";
+                blacklist = [ ];
+                colorizeIcons = true;
+                id = "Tray";
+              }
+              {
                 id = "SystemMonitor";
                 showCpuTemp = true;
                 showCpuUsage = true;
@@ -106,7 +103,6 @@ in
                 showMemoryAsPercent = true;
                 showMemoryUsage = true;
                 showNetworkStats = true;
-                usePrimaryColor = false;
               }
               {
                 id = "Spacer";
@@ -137,7 +133,6 @@ in
                 id = "Volume";
               }
               {
-                colorizeDistroLogo = false;
                 customIconPath = "";
                 icon = "";
                 id = "ControlCenter";
@@ -146,13 +141,12 @@ in
             ];
           };
         };
+        battery = {
+          chargingMode = 0;
+        };
         brightness = {
           brightnessStep = 5;
-          enableDdcSupport = false;
           enforceMinimum = true;
-        };
-        changelog = {
-          lastSeenVersion = "";
         };
         colorSchemes = {
           darkMode = true;
@@ -160,7 +154,7 @@ in
           manualSunrise = "06:30";
           manualSunset = "18:30";
           matugenSchemeType = "scheme-expressive";
-          predefinedScheme = "Catppuccin";
+          predefinedScheme = (variables.colorScheme or "Catppuccin");
           schedulingMode = "off";
           useWallpaperColors = false;
         };
@@ -223,32 +217,24 @@ in
           backgroundOpacity = 1;
           colorizeIcons = true;
           displayMode = "exclusive";
-          enabled = true;
           floatingRatio = 1;
           monitors = [ "DP-1" ];
           onlySameOutput = true;
           pinnedApps = [ ];
-          radiusRatio = 0.1;
           size = 1;
         };
         general = {
-          allowPanelsOnScreenWithoutBar = true;
           animationDisabled = false;
           animationSpeed = 1;
           avatarImage = "";
           compactLockScreen = false;
-          dimmerOpacity = 0.8;
-          enableShadows = true;
+          dimDesktop = true;
           forceBlackScreenCorners = false;
           language = "en";
           lockOnSuspend = true;
           radiusRatio = 0.5;
           scaleRatio = 1.2;
           screenRadiusRatio = 1;
-          shadowDirection = "bottom_right";
-          shadowOffsetX = 2;
-          shadowOffsetY = 3;
-          showHibernateOnLockScreen = false;
           showScreenCorners = false;
         };
         hooks = {
@@ -258,15 +244,12 @@ in
         };
         "location" = {
           analogClockInCalendar = false;
-          firstDayOfWeek = -1;
           name = "Fredericksburg, VA";
           showCalendarEvents = true;
-          showCalendarWeather = true;
           showWeekNumberInCalendar = false;
           use12hourFormat = false;
           useFahrenheit = true;
           weatherEnabled = true;
-          weatherShowEffects = true;
         };
         network = {
           wifiEnabled = true;
@@ -281,10 +264,8 @@ in
           nightTemp = "4000";
         };
         notifications = {
-          backgroundOpacity = 1;
           criticalUrgencyDuration = 15;
-          enableKeyboardLayoutToast = true;
-          enabled = true;
+          doNotDisturb = false;
           "location" = "top_right";
           lowUrgencyDuration = 3;
           monitors = [ ];
@@ -294,7 +275,6 @@ in
         };
         osd = {
           autoHideMs = 2000;
-          backgroundOpacity = 1;
           enabled = true;
           "location" = "top_right";
           monitors = [ ];
@@ -311,57 +291,16 @@ in
           videoCodec = "h264";
           videoSource = "portal";
         };
-        sessionMenu = {
-          countdownDuration = 10000;
-          enableCountdown = true;
-          position = "center";
-          powerOptions = [
-            {
-              action = "lock";
-              enabled = true;
-            }
-            {
-              action = "suspend";
-              enabled = true;
-            }
-            {
-              action = "hibernate";
-              enabled = true;
-            }
-            {
-              action = "reboot";
-              enabled = true;
-            }
-            {
-              action = "logout";
-              enabled = true;
-            }
-            {
-              action = "shutdown";
-              enabled = true;
-            }
-          ];
-          showHeader = true;
-        };
-        settingsVersion = 23;
+        settingsVersion = 16;
         setupCompleted = true;
-        systemMonitor = {
-          cpuCriticalThreshold = 90;
-          cpuWarningThreshold = 80;
-          criticalColor = "";
-          diskCriticalThreshold = 90;
-          diskWarningThreshold = 80;
-          memCriticalThreshold = 90;
-          memWarningThreshold = 80;
-          tempCriticalThreshold = 90;
-          tempWarningThreshold = 80;
-          useCustomColors = false;
-          warningColor = "";
-        };
         templates = {
-          alacritty = false;
-          code = false;
           discord = false;
+          discord_armcord = false;
+          discord_dorion = false;
+          discord_equibop = false;
+          discord_lightcord = false;
+          discord_vesktop = false;
+          discord_webcord = false;
           enableUserTemplates = false;
           foot = false;
           fuzzel = false;
@@ -371,20 +310,14 @@ in
           kitty = false;
           pywalfox = false;
           qt = false;
-          spicetify = false;
-          telegram = false;
           vicinae = false;
-          walker = false;
-          wezterm = false;
         };
         ui = {
           fontDefault = "JetBrainsMono Nerd Font";
           fontDefaultScale = 1.2;
           fontFixed = "JetBrainsMono Nerd Font";
           fontFixedScale = 1.2;
-          panelBackgroundOpacity = 1;
-          panelsAttachedToBar = true;
-          settingsPanelAttachToBar = false;
+          panelsOverlayLayer = true;
           tooltipsEnabled = true;
         };
         wallpaper = {
@@ -394,32 +327,19 @@ in
           enabled = true;
           fillColor = "#000000";
           fillMode = "crop";
-          hideWallpaperFilenames = false;
           monitors = [
             {
-              directory = "/home/whit/black-don-os/wallpapers";
+              directory = "/home/whit/nixos_config/wallpapers";
               name = "HDMI-A-1";
-              wallpaper = "/home/whit/black-don-os/wallpapers/3840x2160_aenami_timeless.png";
+              wallpaper = wallpaperImage;
             }
           ];
-          overviewEnabled = false;
-          panelPosition = "follow_bar";
           randomEnabled = false;
           randomIntervalSec = 300;
-          recursiveSearch = false;
           setWallpaperOnAllMonitors = true;
           transitionDuration = 1500;
           transitionEdgeSmoothness = 0.05;
           transitionType = "random";
-          useWallhaven = false;
-          wallhavenCategories = "111";
-          wallhavenOrder = "desc";
-          wallhavenPurity = "100";
-          wallhavenQuery = "black";
-          wallhavenResolutionHeight = "";
-          wallhavenResolutionMode = "atleast";
-          wallhavenResolutionWidth = "";
-          wallhavenSorting = "relevance";
         };
       };
     };
