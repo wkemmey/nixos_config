@@ -23,94 +23,99 @@
 
   environment.systemPackages = with pkgs; [
     # terminal emulators and launchers
-    foot # terminal emulator (preferred)
-    alacritty # terminal emulator (legacy/default for niri)
-    fuzzel # application launcher (default for niri)
+    foot # terminal emulator (for user, configured in modules/home/foot.nix)
+    alacritty # terminal emulator (for user, legacy fallback)
+    fuzzel # application launcher (used by niri keybinds, emopicker9000 script)
 
     # system monitoring and process management
-    bottom # modern system monitor (btop alternative)
-    htop # simple terminal based system monitor
-    btop # feature-rich system monitor
+    bottom # modern system monitor (for user)
+    htop # simple terminal based system monitor (for user)
+    btop # feature-rich system monitor (for user)
 
     # disk usage utilities
-    duf # modern disk usage viewer
-    dysk # disk usage utility
-    gdu # graphical disk usage analyzer
-    ncdu # ncurses disk usage analyzer
+    duf # modern disk usage viewer (for user)
+    dysk # disk usage utility (for user)
+    gdu # graphical disk usage analyzer (for user)
+    ncdu # ncurses disk usage analyzer (for user)
 
     # hardware information and control
-    brightnessctl # screen brightness control
-    inxi # comprehensive system information tool
-    lm_sensors # hardware temperature monitoring
-    lshw # detailed hardware information
-    mesa-demos # gpu info tools (includes glxinfo)
-    pciutils # pci device inspection tools
-    usbutils # usb device tools
+    brightnessctl # screen brightness control (for user)
+    inxi # comprehensive system information tool (used by dcli script, fastfetch)
+    lm_sensors # hardware temperature monitoring (for user)
+    lshw # detailed hardware information (for user)
+    mesa-demos # gpu info tools (used by inxi/fastfetch for gpu info)
+    pciutils # pci device inspection tools (for user)
+    usbutils # usb device tools (for user)
 
     # file management and archiving
-    file-roller # archive manager gui
-    unrar # rar archive support
-    unzip # zip archive support
+    file-roller # archive manager gui (for user)
+    unrar # rar archive support (for user)
+    unzip # zip archive support (for user)
 
     # text editors
-    gedit # simple graphical text editor
+    gedit # simple graphical text editor (for user)
 
     # image and graphics
-    eog # image viewer
-    gimp # advanced photo editor
+    eog # image viewer (for user)
+    gimp # advanced photo editor (for user)
 
     # audio and video
-    ffmpeg # video/audio encoding and editing
-    mpv # versatile video player
-    pavucontrol # audio level and device control
-    playerctl # media player control through scripts
-    sox # audio processing for ffmpeg
-    v4l-utils # video4linux utilities (for obs virtual camera)
+    ffmpeg # video/audio encoding and editing (for user)
+    mpv # versatile video player (for user)
+    pavucontrol # audio level and device control (for user)
+    playerctl # media player control through scripts (for user)
+    sox # audio processing for ffmpeg (dependency for ffmpeg)
+    v4l-utils # video4linux utilities (dependency for obs virtual camera)
 
     # media applications
-    obs-studio # video recording and streaming
-    picard # music metadata editor and cover art downloader
-    youtube-music # youtube music client
+    obs-studio # video recording and streaming (for user)
+    picard # music metadata editor and cover art downloader (for user)
+    youtube-music # youtube music client (for user)
 
     # web browsers
-    firefox # mozilla firefox browser
+    firefox # mozilla firefox browser (for user, set as default in xdg.nix)
 
     # networking utilities
-    gping # graphical ping tool
-    wget # file download tool
+    gping # graphical ping tool (for user)
+    wget # file download tool (for user)
 
     # terminal utilities and tools
-    cmatrix # matrix movie effect
-    eza # modern ls replacement
-    killall # kill all instances of a program
-    nitch # minimal fetch utility
-    onefetch # git repository information display
-    ripgrep # fast grep alternative
-    socat # socket utility (needed for screenshots)
+    cmatrix # matrix movie effect (for user)
+    eza # modern ls replacement (configured in modules/home/eza.nix)
+    killall # kill all instances of a program (for user)
+    nitch # minimal fetch utility (for user)
+    onefetch # git repository information display (for user)
+    ripgrep # fast grep alternative (for user)
+    socat # socket utility (used by screenshootin script)
 
     # system utilities
-    libnotify # desktop notification support
-    tuigreet # login manager (display manager)
-    xwayland-satellite # xwayland support outside compositor
+    libnotify # desktop notification support (used by emopicker9000, niri-gaming-mode, note-from-clipboard scripts)
+    tuigreet # login manager (used by greetd.nix as display manager)
+    xwayland-satellite # xwayland support outside compositor (used by niri.nix for x11 app support)
+
+    # wayland/niri utilities
+    nwg-displays # display/monitor configuration gui (for user)
+    nwg-drawer # application launcher gui (configured in modules/home/nwg-drawer.nix with stylix theming)
+    nwg-look # gtk theme configuration gui (for user)
 
     # development tools
-    gum # shell script styling and prompts
-    popsicle # usb flasher utility
+    gum # shell script styling and prompts (for user)
+    popsicle # usb flasher utility (for user)
 
     # nix language tools
-    nixfmt-rfc-style # nix code formatter
-    nixd # nix language server
-    nil # nix language server (alternative)
+    nixfmt-rfc-style # nix code formatter (for user)
+    nixd # nix language server (for user)
+    nil # nix language server (used by evil-helix.nix)
 
     # containerization
-    docker-compose # docker multi-container management
+    docker-compose # docker multi-container management (for user)
 
     # libraries and frameworks
-    gtk3 # gtk3 library
-    gtk4 # gtk4 library
-    pkg-config # package configuration tool
+    gtk3 # gtk3 library (system dependency for gtk apps)
+    gtk4 # gtk4 library (system dependency for gtk apps)
+    pkg-config # package configuration tool (build-time dependency for compiling software)
 
     # file sharing
-    localsend # local network file sharing
+    localsend # local network file sharing (for user)
   ];
 }

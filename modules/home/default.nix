@@ -37,7 +37,7 @@ in
     ./bottom.nix
     ./btop.nix
     ./cava.nix
-    #./emoji.nix
+    ./emoji.nix
     ./eza.nix
     ./fastfetch
     ./fzf.nix

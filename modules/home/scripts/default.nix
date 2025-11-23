@@ -7,7 +7,7 @@
 }:
 {
   home.packages = [
-    (import ./emopicker9000.nix { inherit pkgs; })
+    (import ./emopicker.nix { inherit pkgs; })
     (import ./nvidia-offload.nix { inherit pkgs; })
     (import ./screenshootin.nix { inherit pkgs; })
     (import ./hm-find.nix { inherit pkgs; })

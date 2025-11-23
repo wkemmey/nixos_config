@@ -1,5 +1,5 @@
 {pkgs}:
-pkgs.writeShellScriptBin "emopicker9000" ''
+pkgs.writeShellScriptBin "emopicker" ''
   # Get user selection via fuzzel from emoji file.
   chosen=$(cat $HOME/.config/.emoji | ${pkgs.fuzzel}/bin/fuzzel --dmenu --width 60 --lines 20 | awk '{print $1}')
 
