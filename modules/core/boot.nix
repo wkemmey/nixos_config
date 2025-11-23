@@ -8,7 +8,6 @@
     kernel.sysctl = { "vm.max_map_count" = 2147483642; };
     loader.systemd-boot.enable = true;
     loader.efi.canTouchEfiVariables = true;
-    # AppImage support removed/disabled - binfmt registration cleared
     plymouth.enable = true;
   };
 }

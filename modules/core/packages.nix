@@ -25,11 +25,6 @@
     # terminal emulators and launchers
     fuzzel # application launcher (used by niri keybinds, emopicker script)
 
-    # system monitoring and process management
-    bottom # modern system monitor (for user)
-    htop # simple terminal based system monitor (for user)
-    btop # feature-rich system monitor (for user)
-
     # disk usage utilities
     duf # modern disk usage viewer (for user)
     dysk # disk usage utility (for user)
@@ -66,7 +61,6 @@
     v4l-utils # video4linux utilities (dependency for obs virtual camera)
 
     # media applications
-    obs-studio # video recording and streaming (for user)
     picard # music metadata editor and cover art downloader (for user)
     youtube-music # youtube music client (for user)
 

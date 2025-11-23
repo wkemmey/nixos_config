@@ -20,7 +20,6 @@ let
 in
 {
   imports = [
-    #./amfora.nix
     # window manager / compositor
     ./niri
     ./xdg.nix
@@ -42,22 +41,19 @@ in
     ./fastfetch
     ./fzf.nix
     ./gh.nix
-    #./ghostty.nix
     ./git.nix
     ./gtk.nix # TODO do i need
     ./htop.nix
-    #./kitty.nix
     # terminal emulators
     ./alacritty.nix
     ./foot.nix
     ./lazygit.nix
-    #./nvf.nix
-  # rofi removed (not used)
+
     ./starship.nix
     ./swappy.nix # TODO do i need
     ./tealdeer.nix
     ./tmux.nix # TODO don't think i need now but maybe in the future
-    #./virtmanager.nix
+    ./virtmanager.nix
     ./wlogout
     ./yazi
     ./zoxide.nix

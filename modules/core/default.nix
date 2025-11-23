@@ -6,8 +6,6 @@
     ./browsers-extra.nix
     ./communication.nix
     ./gaming-support.nix
-    #./flatpak.nix
-    #./flutter-dev.nix
     ./fonts.nix
     ./greetd.nix
     ./hardware.nix
