@@ -93,11 +93,6 @@
     tuigreet # login manager (used by greetd.nix as display manager)
     xwayland-satellite # xwayland support outside compositor (used by niri.nix for x11 app support)
 
-    # wayland/niri utilities
-    nwg-displays # display/monitor configuration gui (for user)
-    nwg-drawer # application launcher gui (configured in modules/home/nwg-drawer.nix with stylix theming)
-    nwg-look # gtk theme configuration gui (for user)
-
     # development tools
     gum # shell script styling and prompts (for user)
     popsicle # usb flasher utility (for user)

@@ -22,6 +22,4 @@ lib.mkIf stylixEnable {
       firefox.enable = true;
     };
   };
-
-  services.nwg-drawer-stylix.enable = true;
 }

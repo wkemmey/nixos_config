@@ -52,7 +52,6 @@ in
     ./foot.nix
     ./lazygit.nix
     #./nvf.nix
-    ./nwg-drawer.nix # TODO do i need
   # rofi removed (not used)
     ./starship.nix
     ./swappy.nix # TODO do i need
