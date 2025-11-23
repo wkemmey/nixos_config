@@ -12,7 +12,6 @@ lib.mkIf stylixEnable {
     # Enable common targets for terminals, editors and toolkits so Stylix can
     # generate matching configs (where supported).
     targets = {
-      ghostty.enable = false;
       qt.enable = true;
       gtk.enable = true;
       # Terminal emulators

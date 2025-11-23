@@ -6,10 +6,6 @@
 }:
 {
   programs = {
-    neovim = {
-      enable = false;
-      defaultEditor = false;
-    };
     firefox.enable = false; # Firefox is not installed by default
     dconf.enable = true;
     seahorse.enable = true;

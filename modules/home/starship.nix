@@ -20,7 +20,6 @@ in
     enable = true;
     enableFishIntegration = true;
     enableBashIntegration = true;
-    enableZshIntegration = true;
     settings = {
       add_newline = false;
       format = lib.concatStrings [

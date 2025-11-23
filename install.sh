@@ -193,11 +193,11 @@ echo -e "  Keyboard:      ${GREEN}$keyboard${NC}"
 echo -e "  GPU Profile:   ${GREEN}$profile${NC}"
 echo ""
 echo -e "${BLUE}Default Settings (you can change these later):${NC}"
-echo -e "  Browser:       zen"
-echo -e "  Terminal:      kitty"
-echo -e "  Shell:         zsh"
+echo -e "  Browser:       firefox"
+echo -e "  Terminal:      foot"
+echo -e "  Shell:         fish"
 echo -e "  Bar:           noctalia"
-echo -e "  Window Mgrs:   Both Hyprland and Niri (choose at login)"
+echo -e "  Window Mgrs:   Niri"
 echo ""
 
 read -p "Continue with installation? [Y/n]: " proceed
@@ -241,8 +241,8 @@ cat > "hosts/$hostname/variables.nix" << EOF
   clock24h = false;
 
   # Default Applications
-  browser = "zen";
-  terminal = "kitty";
+  browser = "firefox";
+  terminal = "foot";
   keyboardLayout = "$keyboard";
   consoleKeyMap = "$keyboard";
 
@@ -274,7 +274,7 @@ cat > "hosts/$hostname/variables.nix" << EOF
   barChoice = "noctalia";      # Options: "noctalia"
 
   # Shell Choice
-  defaultShell = "zsh";   # Options: "fish" or "zsh"
+  defaultShell = "fish";
 
   # Theming
   wallpaperImage = ../../wallpapers/Valley.jpg;

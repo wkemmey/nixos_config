@@ -57,7 +57,7 @@ in
       auto-pairs = true
       mouse = true
       middle-click-paste = true
-      shell = ["zsh", "-c"]
+      shell = ["fish", "-c"]
       line-number = "absolute"
       auto-completion = true
       path-completion = true

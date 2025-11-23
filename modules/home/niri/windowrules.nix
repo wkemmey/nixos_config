@@ -15,7 +15,7 @@
 
   // Opacity rules for specific applications
   window-rule {
-      match app-id=r#"^(kitty|thunar|org\.telegram\.desktop|discord|vesktop|org\.gnome\.Nautilus|nemo)$"#
+      match app-id=r#"^(thunar|org\.telegram\.desktop|discord|vesktop|org\.gnome\.Nautilus|nemo)$"#
       opacity 0.9
   }
 
