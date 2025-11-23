@@ -16,7 +16,7 @@
     };
   };
 
-  # virtualization support for gnome boxes
+  # virtualization support (libvirtd for virt-manager, etc.)
   virtualisation.libvirtd.enable = true;
 
   nixpkgs.config.allowUnfree = true;

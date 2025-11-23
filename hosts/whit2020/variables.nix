@@ -25,7 +25,7 @@
   gamingSupportEnable = false;       # Gaming controllers, gamescope, protonup-qt
   syncthingEnable = false;           # Syncthing file synchronization
   enableCommunicationApps = false;   # Discord, Teams, Zoom, Telegram
-  enableProductivityApps = true;     # Obsidian, GNOME Boxes, QuickEmu
+  enableProductivityApps = true;     # Obsidian, QuickEmu
   aiCodeEditorsEnable = false;       # Claude-code, gemini-cli, cursor
 
   # desktop environment

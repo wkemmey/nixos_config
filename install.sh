@@ -264,7 +264,7 @@ cat > "hosts/$hostname/variables.nix" << EOF
   syncthingEnable = false;           # Syncthing file synchronization
   enableCommunicationApps = false;   # Discord, Teams, Zoom, Telegram
 
-  enableProductivityApps = false;    # Obsidian, GNOME Boxes, QuickEmu
+  enableProductivityApps = false;    # Obsidian, QuickEmu
   aiCodeEditorsEnable = false;       # Claude-code, gemini-cli, cursor
 
   # Desktop Environment
