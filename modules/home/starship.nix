@@ -6,9 +6,9 @@
   ...
 }:
 let
-  # Use comment color for subtle, unobtrusive prompt
-  comment = "#${config.lib.stylix.colors.base03}";  # Muted gray like code comments
-  dimmed = "#${config.lib.stylix.colors.base04}";   # Slightly brighter for active elements
+  # Use brightest color for prompt, keep right-side info subtle
+  bright = "#${config.lib.stylix.colors.base07}";  # Brightest color for prompt
+  subtle = "#${config.lib.stylix.colors.base04}";  # Subtle color for right-side info
 
   # Import variables to check shell choice
   variables = import ../../hosts/${host}/variables.nix;
@@ -23,42 +23,43 @@ in
     settings = {
       add_newline = false;
       format = lib.concatStrings [
+        "$character"
+      ];
+      right_format = lib.concatStrings [
         "$nix_shell"
         "$hostname"
         "$directory"
         "$git_branch"
         "$git_state"
         "$git_status"
-        "\n"
-        "$character"
       ];
       directory = {
-        style = comment;
+        style = subtle;
         truncation_length = 4;
         truncate_to_repo = true;
       };
 
       character = {
-        success_symbol = "[❯](${dimmed})";
+        success_symbol = "[❯](${bright})";
         error_symbol = "[❯](red)";
-        vimcmd_symbol = "[❮](${comment})";
+        vimcmd_symbol = "[❮](${bright})";
       };
 
       nix_shell = {
         format = "[$symbol]($style) ";
         symbol = "󱄅";
-        style = comment;
+        style = subtle;
       };
 
       git_branch = {
         symbol = " ";
-        style = comment;
+        style = subtle;
         format = "[$symbol$branch]($style) ";
       };
 
       git_status = {
         format = "[($all_status$ahead_behind)]($style)";
-        style = comment;
+        style = subtle;
         conflicted = "~";
         ahead = "⇡";
         behind = "⇣";
@@ -73,7 +74,7 @@ in
 
       git_state = {
         format = "([$state( $progress_current/$progress_total)]($style)) ";
-        style = comment;
+        style = subtle;
       };
     };
   };
