@@ -21,7 +21,7 @@ in
     enableFishIntegration = true;
     enableBashIntegration = true;
     settings = {
-      add_newline = false;
+      add_newline = true;
       format = lib.concatStrings [
         "$character"
       ];
