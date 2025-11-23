@@ -16,73 +16,101 @@
     };
   };
 
-  # Virtualization support for GNOME Boxes
+  # virtualization support for gnome boxes
   virtualisation.libvirtd.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    bottom # btop like util
-    brightnessctl # For Screen Brightness Control
-    cmatrix # Matrix Movie Effect In Terminal
-    cowsay # Great Fun Terminal Program
-    docker-compose # Allows Controlling Docker From A Single File
-    duf # Utility For Viewing Disk Usage In Terminal
-    dysk # disk usage util
-    eza # Beautiful ls Replacement
-    ffmpeg # Terminal Video / Audio Editing
-    file-roller # Archive Manager
-    gdu # graphical disk usage
-    gedit # Simple Graphical Text Editor
-    gimp # Great Photo Editor
-    mesa-demos # Needed for inxi -G GPU info (includes glxinfo)
-    gping # graphical ping
-    tuigreet # The Login Manager (Sometimes Referred To As Display Manager)
-    htop # Simple Terminal Based System Monitor
-    eog # For Image Viewing
-    # Terminal emulators
+    # terminal emulators and launchers
     foot # terminal emulator (preferred)
-    alacritty # Terminal Emulator (legacy/default for niri)
-    fuzzel # Application Launcher (default for niri)
-    inxi # CLI System Information Tool
-    killall # For Killing All Instances Of Programs
-    libnotify # For Notifications
-    lm_sensors # Used For Getting Hardware Temps
-    lshw # Detailed Hardware Information
-    mpv # Incredible Video Player
-    ncdu # Disk Usage Analyzer With Ncurses Interface
-    nitch # small fetch util
-    # Nix Language Packages
-    nixfmt-rfc-style # Nix Formatter
-    nixd # Nix Language Server
-    nil # Nix Language Server
-    onefetch # shows current build info and stats
-    pavucontrol # For Editing Audio Levels & Devices
-    pciutils # Collection Of Tools For Inspecting PCI Devices
-    picard # For Changing Music Metadata & Getting Cover Art
-    pkg-config # Wrapper Script For Allowing Packages To Get Info On Others
-    playerctl # Allows Changing Media Volume Through Scripts
-    ripgrep # Improved Grep
-    socat # Needed For Screenshots
-    sox # audio support for FFMPEG
-    unrar # Tool For Handling .rar Files
-    unzip # Tool For Handling .zip Files
-    usbutils # Good Tools For USB Devices
-    v4l-utils # Used For Things Like OBS Virtual Camera
-    obs-studio # OBS Studio (system package)
-    wget # Tool For Fetching Files With Links
-    xwayland-satellite # Xwayland outside your Wayland compositor
-    nwg-displays # Manage Displays
-    nwg-drawer # drawer GUI
-    nwg-look # Look GUI
-    youtube-music
-    firefox
-    # Development Tools
-    popsicle
-    # AI code editors (cursor, claude-code, gemini-cli) moved to modules/core/ai-code-editors.nix
-    gum
-    gtk3
-    gtk4
-    localsend
+    alacritty # terminal emulator (legacy/default for niri)
+    fuzzel # application launcher (default for niri)
+
+    # system monitoring and process management
+    bottom # modern system monitor (btop alternative)
+    htop # simple terminal based system monitor
+    btop # feature-rich system monitor
+
+    # disk usage utilities
+    duf # modern disk usage viewer
+    dysk # disk usage utility
+    gdu # graphical disk usage analyzer
+    ncdu # ncurses disk usage analyzer
+
+    # hardware information and control
+    brightnessctl # screen brightness control
+    inxi # comprehensive system information tool
+    lm_sensors # hardware temperature monitoring
+    lshw # detailed hardware information
+    mesa-demos # gpu info tools (includes glxinfo)
+    pciutils # pci device inspection tools
+    usbutils # usb device tools
+
+    # file management and archiving
+    file-roller # archive manager gui
+    unrar # rar archive support
+    unzip # zip archive support
+
+    # text editors
+    gedit # simple graphical text editor
+
+    # image and graphics
+    eog # image viewer
+    gimp # advanced photo editor
+
+    # audio and video
+    ffmpeg # video/audio encoding and editing
+    mpv # versatile video player
+    pavucontrol # audio level and device control
+    playerctl # media player control through scripts
+    sox # audio processing for ffmpeg
+    v4l-utils # video4linux utilities (for obs virtual camera)
+
+    # media applications
+    obs-studio # video recording and streaming
+    picard # music metadata editor and cover art downloader
+    youtube-music # youtube music client
+
+    # web browsers
+    firefox # mozilla firefox browser
+
+    # networking utilities
+    gping # graphical ping tool
+    wget # file download tool
+
+    # terminal utilities and tools
+    cmatrix # matrix movie effect
+    eza # modern ls replacement
+    killall # kill all instances of a program
+    nitch # minimal fetch utility
+    onefetch # git repository information display
+    ripgrep # fast grep alternative
+    socat # socket utility (needed for screenshots)
+
+    # system utilities
+    libnotify # desktop notification support
+    tuigreet # login manager (display manager)
+    xwayland-satellite # xwayland support outside compositor
+
+    # development tools
+    gum # shell script styling and prompts
+    popsicle # usb flasher utility
+
+    # nix language tools
+    nixfmt-rfc-style # nix code formatter
+    nixd # nix language server
+    nil # nix language server (alternative)
+
+    # containerization
+    docker-compose # docker multi-container management
+
+    # libraries and frameworks
+    gtk3 # gtk3 library
+    gtk4 # gtk4 library
+    pkg-config # package configuration tool
+
+    # file sharing
+    localsend # local network file sharing
   ];
 }
