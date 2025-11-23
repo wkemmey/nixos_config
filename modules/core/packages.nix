@@ -23,9 +23,7 @@
 
   environment.systemPackages = with pkgs; [
     # terminal emulators and launchers
-    foot # terminal emulator (for user, configured in modules/home/foot.nix)
-    alacritty # terminal emulator (for user, legacy fallback)
-    fuzzel # application launcher (used by niri keybinds, emopicker9000 script)
+    fuzzel # application launcher (used by niri keybinds, emopicker script)
 
     # system monitoring and process management
     bottom # modern system monitor (for user)
@@ -81,7 +79,6 @@
 
     # terminal utilities and tools
     cmatrix # matrix movie effect (for user)
-    eza # modern ls replacement (configured in modules/home/eza.nix)
     killall # kill all instances of a program (for user)
     nitch # minimal fetch utility (for user)
     onefetch # git repository information display (for user)
