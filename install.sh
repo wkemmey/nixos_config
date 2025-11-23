@@ -263,12 +263,12 @@ cat > "hosts/$hostname/variables.nix" << EOF
   flutterdevEnable = false;          # Flutter development environment
   syncthingEnable = false;           # Syncthing file synchronization
   enableCommunicationApps = false;   # Discord, Teams, Zoom, Telegram
-  enableExtraBrowsers = false;       # Vivaldi, Brave, Firefox, Chromium, Helium
+
   enableProductivityApps = false;    # Obsidian, GNOME Boxes, QuickEmu
   aiCodeEditorsEnable = false;       # Claude-code, gemini-cli, cursor
 
   # Desktop Environment
-  enableHyprlock = false;  # Set to false if using Noctalia lock screens
+
 
   # Bar/Shell Choice
   barChoice = "noctalia";      # Options: "noctalia"
