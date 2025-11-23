@@ -12,10 +12,8 @@
       };
 
       logo = {
-        source = ./nixos.png;
-        type = "auto";
-        height = 10;
-        width = 20;
+        source = "nixos";
+        type = "builtin";
         padding = {
           top = 2;
           left = 2;
