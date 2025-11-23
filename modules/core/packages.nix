@@ -93,6 +93,11 @@
     nixd # nix language server (for user)
     nil # nix language server (used by evil-helix.nix)
 
+    # rust development tools
+    rustup # rust toolchain manager (for user)
+    rust-analyzer # rust language server (for user)
+    gcc # rust dependency (for user)
+
     # containerization
     docker-compose # docker multi-container management (for user)
 
