@@ -12,7 +12,7 @@
   # default applications
   browser = "firefox";
   terminal = "foot";
-  defaultShell = "fish"
+  defaultShell = "fish";
 
   # core features
   enableNFS = false;
