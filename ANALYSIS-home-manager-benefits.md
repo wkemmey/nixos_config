@@ -18,12 +18,13 @@ However, **~40% of your home-manager files are just static config templating** t
 **Files leveraging Stylix colors:**
 - `fish/default.nix` - Accent color in prompt: `accent = "#${config.lib.stylix.colors.base0D}"`
 - `alacritty.nix` - Font size from Stylix: `size = config.stylix.fonts.sizes.terminal`
-- `foot.nix` - Full Stylix theme integration (font, colors, DPI)
+- `foot.nix` - Full Stylix theme integration (font, colors, DPI) via `include=` directive
 - `lazygit.nix` - Active/inactive border colors from Stylix palette
-- `swaync.nix` - **52 color references** to Stylix base16 scheme
 - `nvf.nix` - Background color: `background_colour = "#${config.lib.stylix.colors.base01}"`
 
-**Value:** Change one color scheme in `variables.nix` → 15+ apps update atomically. This is **impossible** with plain dotfiles.
+**Note:** `swaync.nix` exists with 52 color references but is NOT imported in `default.nix` and not running - dead code to delete.
+
+**Value:** Change one color scheme in `variables.nix` → 5+ apps update atomically. This is **impossible** with plain dotfiles.
 
 ### ✅ Dynamic Config Generation with Nix (Strong Justification)
 
@@ -32,6 +33,8 @@ However, **~40% of your home-manager files are just static config templating** t
 nxr = "sudo nixos-rebuild switch --flake .#${host}";  # Host variable injection
 ```
 **Benefit:** Per-host commands without manual editing. The `${host}` variable makes this DRY across multiple machines.
+
+**Alternative:** Could use `(hostname)` in Fish: `nxr = "sudo nixos-rebuild switch --flake .#(hostname)"` - This works fine and is more portable, though lacks build-time validation that the host exists in flake.nix.
 
 **Git Configuration:**
 ```nix
@@ -63,10 +66,12 @@ ${pkgs.libnotify}/bin/notify-send
 
 **Programs that bundle package + config:**
 - `programs.git.enable = true` - Installs git + generates ~/.gitconfig
-- `programs.foot.enable = true` - Installs foot terminal + config
+- `programs.foot.enable = true` - Installs foot terminal + generates config with Stylix integration
 - `programs.lazygit.enable = true` - Installs lazygit + themed config
-- `programs.fish.enable = true` - Installs fish + enables system-wide completions
+- `programs.fish.enable = true` - Installs fish + manages user config (abbreviations, plugins)
 - `programs.vscode` - Installs VSCode + extensions declaratively
+
+**Important Clarification:** Vendor completions for Fish come from `programs.fish.enable = true` in `modules/core/user.nix` (NixOS system config), NOT from home-manager. Home-manager only manages user-specific Fish config (abbreviations, plugins, init scripts).
 
 **Benefit:** Atomic deployment - package and config always in sync. Rollback reverts both together.
 
@@ -97,6 +102,27 @@ gtk.iconTheme = {
 ---
 
 ## 3. LOW-VALUE / PURE TEMPLATING
+
+### Package Installation Reality Check
+
+**When you install a package via plain Nix (no home-manager):**
+```nix
+home.packages = [ pkgs.foot ];
+```
+You get:
+- ✅ Binary installed in Nix store
+- ❌ **NO config file created** (no `~/.config/foot/foot.ini`)
+- ✅ Program runs with built-in defaults
+
+**Most packages do NOT include default config files.** The binary contains hardcoded defaults.
+
+**With home-manager's `programs.X.enable`:**
+- ✅ Binary installed
+- ✅ Config file generated from your Nix settings
+- ✅ Stylix can auto-inject colors/fonts
+- ✅ Settings validated at build time
+
+So the choice isn't "home-manager config vs package default config" - it's "home-manager config vs manually creating dotfiles vs using built-in defaults."
 
 ### ❌ Static Config Files (Should Consider Plain Dotfiles)
 
@@ -169,21 +195,27 @@ VSCode tries to write settings → conflict → file opens on every restart.
 
 | Feature | Files Using It | Value Level |
 |---------|---------------|-------------|
-| **Stylix Colors** | 7 files (fish, alacritty, foot, lazygit, swaync, nvf, niri) | 🟢 HIGH |
-| **Host Variables** | 6 files (fish, git, niri startup/keybinds) | 🟢 HIGH |
+| **Stylix Colors** | 5 files (fish, alacritty, foot, lazygit, nvf) | 🟢 HIGH |
+| **Stylix via Include** | foot.nix (auto-includes generated theme file) | 🟢 HIGH |
+| **Host Variables** | 6 files (fish, git, niri startup/keybinds) - *could use $(hostname) instead* | 🟡 MEDIUM |
 | **Nix Package Paths** | 5 files (scripts: emopicker, dcli, screenshootin, wallsetter, nvidia-offload) | 🟢 HIGH |
-| **Programs.X.enable** | 12 programs | 🟡 MEDIUM |
+| **Programs.X.enable with Stylix** | foot, alacritty, lazygit | 🟢 HIGH |
+| **Programs.X.enable without Stylix** | git (structured config), others | 🟡 MEDIUM |
 | **Static Config Templates** | ~15 files | 🔴 LOW |
+| **Dead Code** | swaync.nix (not imported, 300+ lines) | 🔴 DELETE |
 
 ---
 
 ## 6. RECOMMENDATIONS
 
 ### Keep in Home-Manager (Strong Benefits):
-1. ✅ **Stylix-themed configs**: fish, alacritty, foot, lazygit, swaync, nvf
-2. ✅ **Variable-driven configs**: git, fish abbrs, niri startup
+1. ✅ **Stylix-themed configs**: foot (includes theme file), alacritty, lazygit, nvf
+2. ✅ **Fish config with Stylix colors**: fish/default.nix (if using `accent` in prompt)
 3. ✅ **Scripts using pkgs.X**: All in `modules/home/scripts/`
-4. ✅ **Package+config bundles**: git, foot, lazygit, fish (system completion benefit)
+4. ✅ **Structured config with validation**: git (though could be plain dotfile too)
+
+### Delete (Dead Code):
+1. ❌ **swaync.nix** - Not imported in default.nix, not running, 300+ wasted lines
 
 ### Consider Moving to Plain Dotfiles:
 1. ❓ **Niri layout.nix** → `~/.config/niri/layout.kdl` (pure KDL, no Nix features)
@@ -264,13 +296,19 @@ modules/home/
 
 ## 9. FINAL VERDICT
 
-**Your home-manager usage is ~60% justified:**
+**Your home-manager usage is ~50% justified:**
 
 **Strong Justifications (Keep):**
-- Stylix theme propagation (unique to Nix ecosystem)
-- Multi-host variable management (DRY principle)
-- Script robustness with package paths
-- Atomic rollbacks for critical configs (fish, git)
+- Stylix theme propagation via auto-generated include files (foot.nix)
+- Stylix color variables in configs (fish accent, lazygit borders)
+- Script robustness with package paths (scripts/)
+- Atomic rollbacks for configs that change frequently
+
+**Corrections to Original Analysis:**
+- ❌ Fish vendor completions come from NixOS system config, not home-manager
+- ❌ swaync.nix is dead code (not imported, not running)
+- ⚠️ Host variables could be replaced with $(hostname) shell command
+- ⚠️ Most packages include NO default config, so comparison is to manual dotfiles, not package defaults
 
 **Weak Justifications (Consider Alternatives):**
 - Static config templating (better editors available)
