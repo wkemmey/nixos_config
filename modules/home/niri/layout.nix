@@ -31,7 +31,7 @@
       }
 
       // prevent jumping to completely off-screen windows
-      focus-follows-mouse max-scroll-amount "5%"
+      focus-follows-mouse max-scroll-amount="5%"
       
       warp-mouse-to-focus
   }
