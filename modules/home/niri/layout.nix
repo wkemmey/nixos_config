@@ -30,12 +30,8 @@
       trackpoint {
       }
 
-      // Enable focus-follows-mouse with scroll threshold
-      // 5% is a good starting point. This prevents jumping to completely 
-      // off-screen windows, but allows minor scrolling for partially visible ones.
-      focus-follows-mouse {
-          max-scroll-amount "5%"
-      }
+      // prevent jumping to completely off-screen windows
+      focus-follows-mouse max-scroll-amount "5%"
       
       warp-mouse-to-focus
   }
