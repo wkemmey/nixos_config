@@ -30,12 +30,16 @@
       trackpoint {
       }
 
+      // Enable focus-follows-mouse behavior
+      focus-follows-mouse
+
+      // Set the maximum scroll amount to trigger focus-follows-mouse.
+      // 5% is a good starting point. This prevents jumping to completely 
+      // off-screen windows, but allows minor scrolling for partially visible ones.
       focus-follows-mouse {
-        // Set the maximum scroll allowed to trigger focus-follows-mouse.
-        // 5 percent is a good starting point. This prevents jumping to completely 
-        // off-screen windows, but allows minor scrolling for partially visible ones.
-        max-scroll-amount "5%"
+          max-scroll-amount "5%"
       }
+      
       warp-mouse-to-focus
   }
 
