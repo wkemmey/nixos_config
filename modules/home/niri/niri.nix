@@ -67,6 +67,7 @@ in
     slurp
     wl-clipboard
     swappy
+    swww
     xdg-desktop-portal-gnome
   ];
 
