@@ -27,8 +27,6 @@ in
     ./noctalia-shell
     ./qt.nix
     # shells
-    ./bash.nix
-    ./bashrc-personal.nix
     ./fish
     ./fish/fishrc-personal.nix
     # shell tools
@@ -42,19 +40,15 @@ in
     ./fzf.nix
     ./gh.nix
     ./git.nix
-    ./gtk.nix # TODO do i need
+    ./gtk.nix # Sets icon theme and dark preference for GTK apps
     ./htop.nix
     # terminal emulators
-    ./alacritty.nix
     ./foot.nix
     ./lazygit.nix
 
     ./starship.nix
-    ./swappy.nix # TODO do i need
     ./tealdeer.nix
-    ./tmux.nix # TODO don't think i need now but maybe in the future
     ./virtmanager.nix
-    ./wlogout
     ./yazi
     ./zoxide.nix
     ./environment.nix
