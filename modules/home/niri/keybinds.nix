@@ -214,7 +214,7 @@ in
       Mod+F { spawn "thunar"; }
       Ctrl+Mod+V { spawn "virt-manager"; }
       Ctrl+Mod+E { spawn "emopicker9000"; }
-      Mod+Shift+E { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "launcher" "emoji"; }
+      Mod+Shift+E { spawn "noctalia-shell" "ipc" "call" "launcher" "emoji"; }
 
       // === Color picker ===
       Mod+C { spawn-sh "niri msg pick-color | grep 'Hex:' | cut -d' ' -f2 | wl-copy"; }

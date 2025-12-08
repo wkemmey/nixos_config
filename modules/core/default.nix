@@ -5,6 +5,7 @@
     ./boot.nix
     ./browsers-extra.nix
     ./communication.nix
+    ./dotbot.nix
     ./gaming-support.nix
     ./fonts.nix
     ./greetd.nix
