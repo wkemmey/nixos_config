@@ -10,7 +10,7 @@
     
     # Extensions managed by Nix (declarative, reproducible)
     # Settings managed via dotfiles (easier to edit frequently)
-    extensions = with pkgs.vscode-extensions; [
+    profiles.default.extensions = with pkgs.vscode-extensions; [
       github.copilot
       github.copilot-chat
       jeff-hykin.better-nix-syntax
