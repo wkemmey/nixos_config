@@ -18,7 +18,6 @@
   enableNFS = false;
   printEnable = false;
   thunarEnable = true;
-  stylixEnable = false;
 
   # optional features (disabled for faster initial install)
   # you can enable these later by setting to true and rebuilding
