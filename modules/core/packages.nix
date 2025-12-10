@@ -125,6 +125,9 @@
     yazi # terminal file manager
     niri # wayland compositor
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default # noctalia shell
+    
+    # cursor theme
+    bibata-cursors
   ];
 
   # Enable fish shell system-wide for vendor completions

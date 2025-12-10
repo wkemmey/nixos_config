@@ -19,6 +19,15 @@
       #symbola   #still 404 error
       terminus_font
       #inter  # Inter Variable font (general use)
+      montserrat
     ];
+    
+    fontconfig = {
+      defaultFonts = {
+        monospace = ["JetBrains Mono"];
+        sansSerif = ["Montserrat"];
+        serif = ["Montserrat"];
+      };
+    };
   };
 }
