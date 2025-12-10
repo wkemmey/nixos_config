@@ -2,6 +2,7 @@
   pkgs,
   lib,
   host,
+  inputs,
   ...
 }:
 {
@@ -108,5 +109,24 @@
 
     # file sharing
     localsend # local network file sharing (for user)
+
+    # packages for dotfiles-managed configs
+    foot # terminal emulator
+    git # version control
+    lazygit # git tui
+    starship # shell prompt
+    bat # cat with syntax highlighting
+    bottom # system monitor
+    btop # system monitor
+    htop # system monitor
+    cava # audio visualizer
+    eza # modern ls replacement
+    tealdeer # tldr client
+    yazi # terminal file manager
+    niri # wayland compositor
+    inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default # noctalia shell
   ];
+
+  # Enable fish shell system-wide for vendor completions
+  programs.fish.enable = true;
 }

@@ -1,0 +1,21 @@
+disableStartupPopups: true
+git:
+  commit:
+    signOff: true
+  parseEmoji: true
+gui:
+  nerdFontsVersion: '3'
+  showBottomLine: false
+  showCommandLog: false
+  showListFooter: false
+  showRandomTip: false
+  theme:
+    activeBorderColor:
+    - '#89b4fa'
+    - bold
+    inactiveBorderColor:
+    - '#45475a'
+notARepository: skip
+promptToReturnFromSubprocess: false
+update:
+  method: never

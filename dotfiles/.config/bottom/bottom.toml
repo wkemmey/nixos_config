@@ -1,0 +1,25 @@
+enable_gpu = true
+theme = "nord"
+
+[flags]
+group_processes = true
+
+[[row]]
+ratio = 2
+[[row.child]]
+type = "cpu"
+
+[[row.child]]
+type = "temp"
+
+[[row]]
+ratio = 2
+[[row.child]]
+type = "network"
+
+[[row]]
+ratio = 3
+[[row.child]]
+default = true
+ratio = 1
+type = "proc"

@@ -20,36 +20,35 @@ let
 in
 {
   imports = [
-    # window manager / compositor
-    ./niri
-    ./xdg.nix
-    # bar
-    ./noctalia-shell
+    # window manager / compositor - managed via dotfiles
+    # ./niri
+    # ./xdg.nix
+    # bar - managed via dotfiles
+    # ./noctalia-shell
     ./qt.nix
-    # shells
-    ./fish
+    # shells - managed via dotfiles
+    # ./fish
     ./fish/fishrc-personal.nix
-    # shell tools
-    ./bat.nix
-    ./bottom.nix
-    ./btop.nix
-    ./cava.nix
+    # shell tools - managed via dotfiles
+    # ./bat.nix
+    # ./bottom.nix
+    # ./btop.nix
+    # ./cava.nix
     ./emoji.nix
-    ./eza.nix
+    # ./eza.nix
     ./fastfetch
     ./fzf.nix
     ./gh.nix
-    ./git.nix
-    ./gtk.nix # Sets icon theme and dark preference for GTK apps
-    ./htop.nix
-    # terminal emulators
-    ./foot.nix
-    ./lazygit.nix
-
-    ./starship.nix
-    ./tealdeer.nix
+    # ./git.nix
+    # ./gtk.nix
+    # ./htop.nix
+    # terminal emulators - managed via dotfiles
+    # ./foot.nix
+    # ./lazygit.nix
+    # ./starship.nix
+    # ./tealdeer.nix
     ./virtmanager.nix
-    ./yazi
+    # ./yazi
     ./zoxide.nix
     ./environment.nix
     # editors
