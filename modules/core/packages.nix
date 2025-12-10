@@ -126,8 +126,10 @@
     niri # wayland compositor
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default # noctalia shell
     
-    # cursor theme
+    # cursor and icon themes
     bibata-cursors
+    tela-icon-theme
+    adw-gtk3
   ];
 
   # Enable fish shell system-wide for vendor completions
