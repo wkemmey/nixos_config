@@ -13,12 +13,12 @@ lib.mkIf stylixEnable {
     # generate matching configs (where supported).
     targets = {
       qt.enable = true;
-      gtk.enable = true;
+      gtk.enable = false; # managed via dotfiles
       # Terminal emulators
-      foot.enable = true;
-      alacritty.enable = true;
+      foot.enable = false; # managed via dotfiles
+      alacritty.enable = false;
       # Editor / browser
-      vscode.enable = true;
+      vscode.enable = false; # managed via dotfiles
       firefox.enable = true;
     };
   };
