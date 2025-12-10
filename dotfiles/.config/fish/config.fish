@@ -12,6 +12,9 @@ if test -f $HOME/.fishrc-personal
   source $HOME/.fishrc-personal
 end
 
+# initialize starship prompt
+starship init fish | source
+
 # add local bin directories to PATH
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.pub-cache/bin

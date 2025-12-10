@@ -15,5 +15,6 @@
   "scm.inputFontFamily": "JetBrains Mono",
   "scm.inputFontSize": 15,
   "screencastMode.fontSize": 64,
-  "terminal.integrated.fontSize": 16
+  "terminal.integrated.fontSize": 16,
+  "git.enableSmartCommit": true
 }
