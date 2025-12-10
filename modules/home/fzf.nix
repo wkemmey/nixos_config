@@ -4,9 +4,9 @@
   lib,
   ...
 }: let
-  accent = "#" + config.lib.stylix.colors.base0D;
-  foreground = "#" + config.lib.stylix.colors.base05;
-  muted = "#" + config.lib.stylix.colors.base03;
+  accent = "#89b4fa"; # catppuccin blue
+  foreground = "#cdd6f4"; # catppuccin text
+  muted = "#585b70"; # catppuccin surface1
 in {
   programs.fzf = {
     enable = true;

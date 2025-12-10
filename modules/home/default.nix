@@ -56,7 +56,7 @@ in
     # programs
     ./obs-studio.nix
     # theming
-    ./stylix.nix
+    # ./stylix.nix  # disabled - configs managed via dotfiles
     # other
     ./scripts
 
