@@ -19,6 +19,9 @@ starship init fish | source
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.pub-cache/bin
 
+# browser for CLI tools
+set -gx BROWSER "xdg-open"
+
 # bat/man configuration
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -gx MANROFFOPT "-c"

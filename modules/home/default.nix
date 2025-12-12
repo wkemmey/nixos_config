@@ -50,7 +50,7 @@ in
     ./virtmanager.nix
     # ./yazi
     ./zoxide.nix
-    ./environment.nix
+    # ./environment.nix
     # editors
     ./vscode.nix
     # programs
