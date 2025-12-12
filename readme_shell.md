@@ -58,6 +58,19 @@ A comprehensive list of command-line and terminal user interface (TUI) tools ins
 - Interactive filtering for files, history, processes
 - Integrates with shell, vim, and other tools
 - Fast and responsive even with large datasets
+- **Key bindings:**
+  - `Ctrl+R` - Search command history
+  - `Ctrl+T` - Search files and insert path
+  - `Alt+C` - Search directories and cd
+- **Usage examples:**
+  - `vim $(fzf)` - Select a file to open
+  - `cd $(find . -type d | fzf)` - Select directory to cd into
+  - Works with any command that accepts file paths
+- **Inside FZF:**
+  - Type to fuzzy search (no exact match needed)
+  - `Ctrl+J/K` or arrows to navigate
+  - `Enter` to select, `Esc` to cancel
+  - `Tab` for multi-select
 
 ---
 

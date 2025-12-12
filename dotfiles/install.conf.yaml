@@ -9,6 +9,7 @@
     ~/.config/Code/User/settings.json: .config/Code/User/settings.json
     ~/.config/.emoji: .config/.emoji
     ~/.config/fish/config.fish: .config/fish/config.fish
+    ~/.config/fish/conf.d/fzf.fish: .config/fish/conf.d/fzf.fish
     ~/.config/foot/foot.ini: .config/foot/foot.ini
     ~/.config/lazygit/config.yml: .config/lazygit/config.yml
     ~/.config/git/config: .config/git/config
