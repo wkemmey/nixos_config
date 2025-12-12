@@ -19,6 +19,10 @@ starship init fish | source
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.pub-cache/bin
 
+# bat/man configuration
+set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
+set -gx MANROFFOPT "-c"
+
 # fish abbreviations (expanded when pressing space or enter)
 # single key shortcuts
 abbr -a c clear

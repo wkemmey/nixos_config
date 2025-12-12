@@ -116,8 +116,10 @@
     lazygit # git tui
     starship # shell prompt
     bat # cat with syntax highlighting
+    bat-extras.batman # man pages with bat
+    bat-extras.batpipe # bat preprocessor for various file types
     bottom # system monitor
-    btop # system monitor
+    btop # system monitor (GPU support added in driver modules)
     htop # system monitor
     cava # audio visualizer
     eza # modern ls replacement

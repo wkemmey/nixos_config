@@ -36,5 +36,10 @@ in
       # Optionally, you may need to select the appropriate driver version for your specific GPU.
       package = config.boot.kernelPackages.nvidiaPackages.latest;
     };
+    
+    # Enable NVIDIA GPU monitoring in btop
+    environment.systemPackages = [
+      (pkgs.btop.override { cudaSupport = true; })
+    ];
   };
 }
