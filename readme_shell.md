@@ -515,3 +515,166 @@ We need to add `rust-analyzer` itself to the shell environment, along with the R
     *   When it needs to build a proc-macro that depends on `glib`, it runs `cargo check`, which correctly finds `glib` because `PKG_CONFIG_PATH` is set.
 
 You now have a perfectly integrated setup where your interactive terminal (`nix develop`) and your IDE's language server share the exact same reproducible environment.
+
+---------------------------
+
+Of course. Setting up `direnv` with Neovim is a fantastic workflow. It's arguably the most seamless way to work with Nix-defined environments in a terminal-based editor.
+
+The magic of this setup is that the act of simply `cd`-ing into your project directory is enough to load the entire environment. Neovim, when opened, will inherit this environment automatically, making your Language Server Protocol (LSP) client work perfectly.
+
+Here is the complete, step-by-step guide.
+
+---
+
+### The Goal
+
+1.  When you `cd` into your project folder, `direnv` will automatically run `nix develop` in the background.
+2.  When you open Neovim, it will inherit the environment from `direnv`.
+3.  Your LSP client (`nvim-lspconfig`) will start `rust-analyzer` within this correct environment, giving it access to `rustup`, `pkg-config`, `glib`, etc.
+
+---
+
+### Step 1: Install and Configure `direnv` on NixOS
+
+First, you need to ensure `direnv` is installed and properly "hooked" into your shell.
+
+In your `/etc/nixos/configuration.nix`, enable the `direnv` program. This is the most idiomatic way as it also handles the shell hooks for you.
+
+```nix
+# /etc/nixos/configuration.nix
+{ pkgs, ... }: {
+  # ... other config
+  programs.direnv = {
+    enable = true;
+    # This automatically handles hooking direnv into bash, zsh, and fish.
+    # It's equivalent to manually adding `eval "$(direnv hook ...)"`
+    nix-direnv.enable = true;
+  };
+}
+```
+
+After adding this, rebuild your system:
+```bash
+sudo nixos-rebuild switch
+```
+And restart your shell session (close and reopen your terminal) for the changes to take effect. The `nix-direnv.enable` option automatically adds support for the `use flake` command we'll need next.
+
+---
+
+### Step 2: Create the Project `.envrc` File
+
+Now, tell `direnv` what to do when you enter your project directory.
+
+In the root of your project (the same directory where your `flake.nix` lives), create a new file named `.envrc`.
+
+```bash
+# In your project's root, create this file:
+# file: .envrc
+
+use flake
+```
+
+That's it. This one command instructs `direnv` to load the `devShell` from the `flake.nix` in the current directory.
+
+The first time you `cd` into this directory, `direnv` will show a security warning and refuse to run. You must explicitly grant it permission by running:
+
+```bash
+direnv allow
+```
+
+From now on, `direnv` will automatically load/unload the environment every time you enter/leave this directory. You'll see a message like `direnv: loading ~/path/to/project/.envrc`.
+
+---
+
+### Step 3: Configure Neovim
+
+You need to ensure Neovim has two things:
+1.  An LSP client configured for Rust (`nvim-lspconfig` + `rust-analyzer`).
+2.  A plugin to make Neovim aware of `direnv`.
+
+Here is an example using the popular `lazy.nvim` package manager. You can adapt this to any other plugin manager.
+
+```lua
+-- Example using lazy.nvim
+-- file: ~/.config/nvim/lua/plugins/lsp.lua (or similar)
+
+return {
+  -- 1. The core LSP configuration engine
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      -- Ensure rust-analyzer is installed via Mason or your preferred method
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+    },
+    config = function()
+      local lspconfig = require("lspconfig")
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+      -- This sets up rust-analyzer to be started by nvim-lspconfig.
+      -- It will automatically run inside the direnv-provided environment.
+      lspconfig.rust_analyzer.setup({
+        capabilities = capabilities,
+        -- You can add server-specific settings here if needed
+        -- settings = { ... }
+      })
+    end,
+  },
+
+  -- 2. The direnv integration plugin
+  {
+    "nvim-treesitter/nvim-treesitter", -- direnv plugin has a treesitter dependency
+    opts = {
+      ensure_installed = "bash" -- required by nvim-direnv
+    }
+  },
+  {
+    "leoluz/nvim-dap-go", -- direnv plugin has a dap-go dependency
+    module = "dap-go"
+  },
+  {
+    "mfussenegger/nvim-dap", -- direnv plugin has a dap dependency
+    module = "dap"
+  },
+  {
+    "rcarriga/nvim-dap-ui", -- direnv plugin has a dap-ui dependency
+    module = "dapui"
+  },
+  {
+    "theHamsta/nvim-dap-virtual-text", -- direnv plugin has a dap-virtual-text dependency
+    module = "dap-virtual-text"
+  },
+  {
+    'https://git.sr.ht/~motorto/nvim-direnv',
+    config = function()
+      require('direnv').setup()
+    end,
+  }
+}
+```
+
+**Why this works:** The `nvim-direnv` plugin ensures that your project's `.envrc` is loaded *before* `nvim-lspconfig` tries to start the `rust-analyzer` server. This means the server process spawns with the full environment, and the circle is complete.
+
+---
+
+### The Final Workflow
+
+Once the setup above is complete, here is what your day-to-day workflow looks like:
+
+1.  **Open a terminal.**
+2.  **Navigate to your project:**
+    ```bash
+    cd ~/my-rust-project
+    # direnv automatically loads the Nix environment
+    # Output: direnv: loading ~/my-rust-project/.envrc
+    ```
+3.  **Launch Neovim:**
+    ```bash
+    nvim .
+    ```
+4.  **Start coding.** Your `rust-analyzer` LSP will start up, correctly find `rust-src`, and be able to compile `sys` crates because it can see `pkg-config` and all the libraries from your `flake.nix`.
+
+It feels completely seamless, as if the tools were globally installed, but you get all the power and reproducibility of a per-project Nix environment.
+
+---------------
+
