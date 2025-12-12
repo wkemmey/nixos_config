@@ -25,7 +25,7 @@ in
     # ./xdg.nix
     # bar - managed via dotfiles
     # ./noctalia-shell
-    ./qt.nix
+    #./qt.nix
     # shells - managed via dotfiles
     # ./fish
     #./fish/fishrc-personal.nix
