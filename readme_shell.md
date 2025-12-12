@@ -392,3 +392,126 @@ A key best practice added here is the use of a `shellHook` to make `rustup` and 
     *   `cargo`, `rustc`, and `rustup` commands work.
     *   Any `*-sys` crate in your project (like `glib-sys` or `openssl-sys`) will automatically find the corresponding libraries provided by Nix because `pkg-config` is correctly configured by the environment.
     *   Your Rust toolchain and compiled dependencies are neatly contained within `.nix-rustup/` and `.nix-cargo/` in your project folder. You can safely add these directories to your `.gitignore` file.
+
+
+    --------------------
+
+
+    Excellent question. Integrating `rust-analyzer` is the final piece of the puzzle for a smooth IDE experience.
+
+The core challenge is that your IDE (like VS Code) runs as a separate process and doesn't automatically know about the environment you've configured in your `flake.nix`. When `rust-analyzer` starts, it won't see the special `PATH`, `RUSTUP_HOME`, or `PKG_CONFIG_PATH` variables from your `devShell`.
+
+The solution is to use a specific IDE extension that makes your editor "Nix-aware." For VS Code, the standard tool for this is the **`nix-environment-selector`** extension.
+
+Here is the step-by-step guide and the updated `flake.nix`.
+
+### Step 1: Update Your `flake.nix`
+
+We need to add `rust-analyzer` itself to the shell environment, along with the Rust standard library's source code, which `rust-analyzer` needs for "go to definition" and type analysis.
+
+```nix
+{
+  description = "A hybrid Rust development environment with rust-analyzer integration";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+  };
+
+  outputs = { self, nixpkgs, flake-utils }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      {
+        devShell = pkgs.mkShell {
+          buildInputs = [
+            # 1. Core Tools
+            pkgs.rustup
+            pkgs.pkg-config
+
+            # 2. Rust Analyzer Support
+            # --------------------------
+            # Add rust-analyzer to the environment. The VS Code extension will find it here.
+            pkgs.rust-analyzer
+            # Add the Rust standard library source code.
+            pkgs.rust-src
+
+            # 3. Example System Libraries
+            pkgs.glib
+            pkgs.openssl
+          ];
+
+          # Set the RUST_SRC_PATH environment variable. rust-analyzer will
+          # automatically pick this up to find the standard library source.
+          RUST_SRC_PATH = pkgs.rust-src.src;
+
+          shellHook = ''
+            echo "--- Rustup Hybrid Nix Shell (with rust-analyzer) ---"
+
+            export RUSTUP_HOME="$(pwd)/.nix-rustup"
+            export CARGO_HOME="$(pwd)/.nix-cargo"
+            export PATH="$CARGO_HOME/bin:$PATH"
+
+            if ! rustup toolchain list | grep -q "stable"; then
+              echo ""
+              echo "Rust toolchain not found. To get started, run:"
+              echo "  > rustup toolchain install stable"
+              echo "  > rustup default stable"
+              echo ""
+              echo "NOTE: rust-analyzer needs the 'rust-src' component."
+              echo "You can add it by running:"
+              echo "  > rustup component add rust-src"
+              echo ""
+            fi
+          '';
+        };
+      }
+    );
+}
+```
+
+**What changed?**
+
+1.  We added `pkgs.rust-analyzer` to `buildInputs`. This makes the `rust-analyzer` language server binary available inside the Nix environment.
+2.  We added `pkgs.rust-src` to `buildInputs`.
+3.  We set the `RUST_SRC_PATH` environment variable to point directly to the location of the source code provided by `pkgs.rust-src`. This is the most robust way to ensure `rust-analyzer` finds it.
+
+### Step 2: Configure Your IDE (VS Code Example)
+
+1.  **Install Extensions**: Make sure you have these three extensions installed in VS Code:
+    *   `rust-lang.rust-analyzer` (the official one)
+    *   `jnoortheen.nix-ide` (A good alternative is `arrterian.nix-env-selector` )
+    *   `bbenoist.Nix` (for syntax highlighting)
+
+2.  **Configure `rust-analyzer`**: Open your VS Code settings (`settings.json`) and add the following line. This tells the extension *not* to download its own binary, but to use the one provided by our Nix environment.
+
+    ```json
+    {
+        "rust-analyzer.server.path": "rust-analyzer"
+    }
+    ```
+    This simply tells it to find `rust-analyzer` on the `PATH`. The `nix-ide` extension will handle making sure the correct `PATH` is used.
+
+### Step 3: The Workflow in Action
+
+1.  **Close and Re-open VS Code**: Open your Rust project folder in VS Code.
+
+2.  **Allow the Nix Environment**: The `nix-ide` extension will detect your `flake.nix` and show a prompt at the bottom-right corner asking for permission to load it. It will look something like this:
+
+    > `Nix-IDE: Select nix-shell environment for this workspace...`
+
+    Click it and select `flake.nix` (`devShell`).
+
+3.  **It Just Works**: The extension will now automatically load the Nix environment *for the VS Code window*. When the `rust-analyzer` extension tries to start its server, it will do so within this Nix-prepared environment.
+
+### How It All Works Together
+
+1.  `nix-ide` runs `nix develop` in the background and applies the resulting environment (all the `PATH`s and other variables) to your VS Code session.
+2.  The `rust-analyzer` extension starts and looks for a binary named `rust-analyzer` on the `PATH` (per our `settings.json`). It finds the one from our `flake.nix`.
+3.  The `rust-analyzer` server process inherits the full Nix environment.
+4.  When it needs to check your code:
+    *   It finds the `rust-src` because `RUST_SRC_PATH` is set.
+    *   When it needs to build a proc-macro that depends on `glib`, it runs `cargo check`, which correctly finds `glib` because `PKG_CONFIG_PATH` is set.
+
+You now have a perfectly integrated setup where your interactive terminal (`nix develop`) and your IDE's language server share the exact same reproducible environment.
