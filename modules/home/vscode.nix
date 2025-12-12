@@ -8,8 +8,8 @@
     enable = true;
     package = pkgs.vscode;
     
-    # Extensions managed by Nix (declarative, reproducible)
-    # Settings managed via dotfiles (easier to edit frequently)
+    # extensions managed by nix (declarative, reproducible)
+    # settings managed via dotfiles (easier to edit frequently)
     profiles.default.extensions = with pkgs.vscode-extensions; [
       github.copilot
       github.copilot-chat
