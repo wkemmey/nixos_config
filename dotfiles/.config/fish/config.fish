@@ -23,6 +23,19 @@ fish_add_path $HOME/.pub-cache/bin
 set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 set -gx MANROFFOPT "-c"
 
+# eza configuration
+set -gx EZA_ICONS_AUTO 1
+set -gx EZA_GRID_ROWS 1
+
+# eza aliases
+alias ls 'eza --group-directories-first --git-ignore --icons=always --classify --hyperlink'
+alias lt 'eza --tree --level=2'
+alias ll 'eza -lh --no-user --long --header --group-directories-first --git --icons=always'
+alias la 'eza -lah --group-directories-first --git --icons=always'
+alias ld 'eza -lhD --icons=auto'
+alias ldot 'eza -lhd .*'
+alias tree 'eza --tree'
+
 # fish abbreviations (expanded when pressing space or enter)
 # single key shortcuts
 abbr -a c clear
