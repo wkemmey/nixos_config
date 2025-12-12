@@ -38,7 +38,7 @@ in
     # ./eza.nix
     ./fastfetch
     # ./fzf.nix
-    ./gh.nix
+    # ./gh.nix
     # ./git.nix
     # ./gtk.nix
     # ./htop.nix
@@ -47,6 +47,7 @@ in
     # ./lazygit.nix
     # ./starship.nix
     # ./tealdeer.nix
+    # ./qt.nix
     ./virtmanager.nix
     # ./yazi
     ./zoxide.nix

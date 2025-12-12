@@ -113,6 +113,7 @@
     # packages for dotfiles-managed configs
     foot # terminal emulator
     fzf # fuzzy finder
+    gh # github cli
     git # version control
     lazygit # git tui
     starship # shell prompt
