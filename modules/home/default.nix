@@ -28,7 +28,7 @@ in
     ./qt.nix
     # shells - managed via dotfiles
     # ./fish
-    ./fish/fishrc-personal.nix
+    #./fish/fishrc-personal.nix
     # shell tools - managed via dotfiles
     # ./bat.nix
     # ./bottom.nix
