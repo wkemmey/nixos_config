@@ -2,6 +2,9 @@
 	name = wkemmey
 	email = whit@fastmail.com
 
+[credential "https://github.com"]
+	helper = !gh auth git-credential
+
 [push]
 	default = simple
 
