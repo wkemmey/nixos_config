@@ -22,7 +22,7 @@ in
   imports = [
     # window manager / compositor - managed via dotfiles
     # ./niri
-    # ./xdg.nix
+    # ./xdg.nix  # mimeapps.list now in dotfiles
     # bar - managed via dotfiles
     # ./noctalia-shell
     #./qt.nix
@@ -50,7 +50,7 @@ in
     # ./qt.nix
     ./virtmanager.nix
     # ./yazi
-    ./zoxide.nix
+    # ./zoxide.nix
     # ./environment.nix
     # editors
     ./vscode.nix

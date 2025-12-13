@@ -15,6 +15,9 @@ end
 # initialize starship prompt
 starship init fish | source
 
+# initialize zoxide (smart cd)
+zoxide init fish --cmd cd | source
+
 # add local bin directories to PATH
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.pub-cache/bin
