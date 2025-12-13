@@ -7,8 +7,10 @@
     "separator": " ➜  "
   },
   "logo": {
-    "source": "nixos",
-    "type": "builtin",
+    "source": "~/.config/fastfetch/nixos.png",
+    "type": "auto",
+    "width": 20,
+    "height": 10,
     "padding": {
       "top": 2,
       "left": 2

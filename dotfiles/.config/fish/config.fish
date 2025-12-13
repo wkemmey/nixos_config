@@ -1,12 +1,10 @@
 # disable fish greeting
 set fish_greeting
 
-# launch fastfetch on first terminal spawn
-if not set -q FASTFETCH_LAUNCHED
+# launch fastfetch on first terminal spawn (only in interactive shells)
+if status is-interactive; and not set -q FASTFETCH_LAUNCHED
   set -g FASTFETCH_LAUNCHED 1
   fastfetch
-else
-  echo "DEBUG: FASTFETCH_LAUNCHED already set to: $FASTFETCH_LAUNCHED"
 end
 
 # load personal config if it exists
