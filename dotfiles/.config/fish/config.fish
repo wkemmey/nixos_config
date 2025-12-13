@@ -3,8 +3,10 @@ set fish_greeting
 
 # launch fastfetch on first terminal spawn
 if not set -q FASTFETCH_LAUNCHED
-  set -gx FASTFETCH_LAUNCHED 1
+  set -g FASTFETCH_LAUNCHED 1
   fastfetch
+else
+  echo "DEBUG: FASTFETCH_LAUNCHED already set to: $FASTFETCH_LAUNCHED"
 end
 
 # load personal config if it exists

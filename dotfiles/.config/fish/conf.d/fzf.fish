@@ -10,7 +10,6 @@ set -gx FZF_DEFAULT_OPTS "--color=fg:#cdd6f4,bg:-1,fg+:#89b4fa,bg+:-1,prompt:#58
 --prompt='--> ' \
 -i \
 --no-bold \
---bind=enter:execute(nvim {}) \
 --preview='bat --style=numbers --color=always --line-range :500 {}' \
 --preview-window=right:60%:wrap"
 
