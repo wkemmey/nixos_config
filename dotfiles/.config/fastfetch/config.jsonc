@@ -8,7 +8,7 @@
   },
   "logo": {
     "source": "~/.config/fastfetch/nixos.png",
-    "type": "auto",
+    "type": "sixel",
     "width": 20,
     "height": 10,
     "padding": {

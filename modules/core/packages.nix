@@ -111,6 +111,7 @@
     localsend # local network file sharing (for user)
 
     # packages for dotfiles-managed configs
+    chafa # image to terminal graphics converter (for fastfetch)
     fastfetch # system info
     foot # terminal emulator
     fzf # fuzzy finder
