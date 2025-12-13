@@ -198,15 +198,15 @@ Mod+Shift+C {
     Mod+K     { focus-window-up; }
     Mod+L     { focus-column-right; }
 
-    // === Window Movement ===
-    Mod+Shift+Left  { move-column-left; }
-    Mod+Shift+Down  { move-window-down; }
-    Mod+Shift+Up    { move-window-up; }
-    Mod+Shift+Right { move-column-right; }
-    Mod+Shift+H     { move-column-left; }
-    Mod+Shift+J     { move-window-down; }
-    Mod+Shift+K     { move-window-up; }
-    Mod+Shift+L     { move-column-right; }
+    // === Window/Column Movement (within workspace) ===
+    Mod+Ctrl+Left   { move-column-left; }
+    Mod+Ctrl+Down   { move-window-down; }
+    Mod+Ctrl+Up     { move-window-up; }
+    Mod+Ctrl+Right  { move-column-right; }
+    Mod+Ctrl+H      { move-column-left; }
+    Mod+Ctrl+J      { move-window-down; }
+    Mod+Ctrl+K      { move-window-up; }
+    Mod+Ctrl+L      { move-column-right; }
 
     // === Column Navigation ===
     Mod+Home { focus-column-first; }
@@ -215,12 +215,12 @@ Mod+Shift+C {
     Mod+Ctrl+End  { move-column-to-last; }
 
     // === Monitor Navigation ===
-    Mod+Ctrl+Left  { focus-monitor-left; }
-    Mod+Ctrl+Right { focus-monitor-right; }
-    Mod+Ctrl+H     { focus-monitor-left; }
-    Mod+Ctrl+J     { focus-monitor-down; }
-    Mod+Ctrl+K     { focus-monitor-up; }
-    Mod+Ctrl+L     { focus-monitor-right; }
+    Mod+Shift+Left  { focus-monitor-left; }
+    Mod+Shift+Right { focus-monitor-right; }
+    Mod+Shift+H     { focus-monitor-left; }
+    Mod+Shift+J     { focus-monitor-down; }
+    Mod+Shift+K     { focus-monitor-up; }
+    Mod+Shift+L     { focus-monitor-right; }
 
     // === Move to Monitor ===
     Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
@@ -233,12 +233,10 @@ Mod+Shift+C {
     Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
 
     // === Workspace Navigation ===
-    Mod+U                { focus-workspace-down; }
-    Mod+I                { focus-workspace-up; }
-    Mod+Ctrl+Down        { focus-workspace-down; }
-    Mod+Ctrl+Up          { focus-workspace-up; }
-    Mod+Ctrl+Alt+Down    { move-column-to-workspace-down; }
-    Mod+Ctrl+Alt+Up      { move-column-to-workspace-up; }
+    Mod+Page_Down        { focus-workspace-down; }
+    Mod+Page_Up          { focus-workspace-up; }
+    Mod+Ctrl+Page_Down   { move-column-to-workspace-down; }
+    Mod+Ctrl+Page_Up     { move-column-to-workspace-up; }
 
     // === Move Workspaces ===
     Mod+Shift+Page_Down { move-workspace-down; }
@@ -315,11 +313,6 @@ Mod+Shift+C {
     Mod+Alt+Shift+R { spawn "ignis" "run-command" "recorder-record-screen"; }
     Mod+Alt+Shift+S { spawn "ignis" "run-command" "recorder-record-region"; }
     Mod+Alt+Shift+W { spawn "ignis" "run-command" "recorder-record-portal"; }
-
-    // === Noctalia Config Sync ===
-    Ctrl+Shift+S {
-        spawn "sh" "-c" "/home/whit/nixos_config/modules/home/noctalia-shell/sync-from-gui.py && notify-send 'Noctalia Config' 'Settings synced to Nix template' -i preferences-system";
-    }
 
     // === System Controls ===
     Mod+Escape { spawn "ignis" "open-window" "PowerMenu"; }
