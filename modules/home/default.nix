@@ -36,7 +36,7 @@ in
     # ./cava.nix
     # ./emoji.nix
     # ./eza.nix
-    ./fastfetch
+    # ./fastfetch
     # ./fzf.nix
     # ./gh.nix
     # ./git.nix

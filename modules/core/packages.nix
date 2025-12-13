@@ -111,6 +111,7 @@
     localsend # local network file sharing (for user)
 
     # packages for dotfiles-managed configs
+    fastfetch # system info
     foot # terminal emulator
     fzf # fuzzy finder
     gh # github cli

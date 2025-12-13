@@ -8,6 +8,7 @@
 - link:
     ~/.config/Code/User/settings.json: .config/Code/User/settings.json
     ~/.config/.emoji: .config/.emoji
+    ~/.config/fastfetch/config.jsonc: .config/fastfetch/config.jsonc
     ~/.config/fish/config.fish: .config/fish/config.fish
     ~/.config/fish/conf.d/fzf.fish: .config/fish/conf.d/fzf.fish
     ~/.config/foot/foot.ini: .config/foot/foot.ini
