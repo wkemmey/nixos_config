@@ -1,6 +1,6 @@
-# FZF configuration for Fish shell
+# fzf configuration for fish shell
 
-# FZF colors (Catppuccin-inspired)
+# fzf colors (catppuccin-inspired)
 set -gx FZF_DEFAULT_OPTS "--color=fg:#cdd6f4,bg:-1,fg+:#89b4fa,bg+:-1,prompt:#585b70,pointer:#89b4fa \
 --margin=1 \
 --layout=reverse \
@@ -14,5 +14,5 @@ set -gx FZF_DEFAULT_OPTS "--color=fg:#cdd6f4,bg:-1,fg+:#89b4fa,bg+:-1,prompt:#58
 --preview='bat --style=numbers --color=always --line-range :500 {}' \
 --preview-window=right:60%:wrap"
 
-# Initialize fzf key bindings for Fish
+# initialize fzf key bindings for fish
 fzf --fish | source
