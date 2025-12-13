@@ -338,6 +338,9 @@ Mod+Shift+C {
     Ctrl+Mod+E { spawn "emopicker9000"; }
     Mod+Shift+E { spawn "noctalia-shell" "ipc" "call" "launcher" "emoji"; }
 
+    // === Clipboard History ===
+    Mod+V { spawn-sh "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
+
     // === Color picker ===
     Mod+C { spawn-sh "niri msg pick-color | grep 'Hex:' | cut -d' ' -f2 | wl-copy"; }
 
