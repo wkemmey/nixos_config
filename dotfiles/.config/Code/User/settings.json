@@ -18,5 +18,6 @@
   "terminal.integrated.fontSize": 16,
   "git.enableSmartCommit": true,
   "workbench.colorTheme": "Tokyo Night",
-  "git.confirmSync": false
+  "git.confirmSync": false,
+  "update.mode": "none"
 }
