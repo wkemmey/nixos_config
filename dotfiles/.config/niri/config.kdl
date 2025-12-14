@@ -186,7 +186,7 @@ Mod+Shift+C {
     Mod+Shift+F { fullscreen-window; }
     Mod+W { toggle-window-floating; }
     Mod+Ctrl+W { switch-focus-between-floating-and-tiling; }
-    Mod+V { toggle-column-tabbed-display; }
+    Mod+Shift+V { toggle-column-tabbed-display; }
 
     // === Focus Navigation ===
     Mod+Left  { focus-column-left; }
