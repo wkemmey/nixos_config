@@ -1,5 +1,0 @@
-{host, ...}: {
-  imports = [
-    ./niri.nix
-  ];
-}

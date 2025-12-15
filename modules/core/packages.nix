@@ -133,6 +133,15 @@
     niri # wayland compositor
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default # noctalia shell
     
+    # wayland utilities
+    wl-clipboard # wayland clipboard utilities (wl-copy, wl-paste) - used by clipboard history, color picker, scripts
+    udiskie # usb drive automounter
+    
+    # xdg desktop portal (for screen sharing, file pickers, etc)
+    xdg-desktop-portal
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-gnome
+    
     # cursor and icon themes
     bibata-cursors
     tela-icon-theme
