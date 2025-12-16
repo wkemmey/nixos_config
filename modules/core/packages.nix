@@ -86,7 +86,10 @@
     # nix language tools
     nixfmt-rfc-style # nix code formatter (for user)
     nixd # nix language server (for user)
-    nil # nix language server (used by evil-helix.nix)
+    nil # nix language server (for user)
+
+    # text editors
+    helix # modal text editor (for user)
 
     # rust development tools
     rustup # rust toolchain manager (for user)

@@ -69,7 +69,7 @@ This is a flake-based NixOS configuration system with modular architecture, home
 
 ## Important Files
 
-- `flake.nix` - Inputs (nixpkgs, home-manager, nvf, noctalia) and host definitions via `mkHost`
+- `flake.nix` - Inputs (nixpkgs, home-manager, noctalia) and host definitions via `mkHost`
 - `install.sh` - Interactive installer (generates hardware-config, creates host files)
 - `modules/core/user.nix` - User creation + home-manager integration point
 - `modules/home/default.nix` - Home-manager module index
