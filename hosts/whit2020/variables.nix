@@ -28,7 +28,4 @@
   enableCommunicationApps = false;   # discord, teams, zoom, telegram
   enableProductivityApps = true;     # obsidian, quickemu
   enableAiCodeEditors = false;       # claude-code, gemini-cli, cursor
-
-  # startup applications
-  startupApps = [];
 }
