@@ -21,11 +21,11 @@ starship init fish | source
 # initialize zoxide (smart cd)
 zoxide init fish --cmd cd | source
 
-# add local bin directories to PATH
+# add local bin directories to path
 fish_add_path $HOME/.local/bin
 fish_add_path $HOME/.pub-cache/bin
 
-# browser for CLI tools
+# browser for cli tools
 set -gx BROWSER "xdg-open"
 
 # bat/man configuration
@@ -60,17 +60,17 @@ abbr -a nxcd "cd ~/nixos_config"
 abbr -a cat bat
 abbr -a man batman
 
-# Directory navigation shortcuts
+# directory navigation shortcuts
 abbr -a .. "cd .."
 abbr -a ... "cd ../.."
 abbr -a .3 "cd ../../.."
 abbr -a .4 "cd ../../../.."
 abbr -a .5 "cd ../../../../.."
 
-# Always mkdir with parents
+# always mkdir with parents
 abbr -a mkdir "mkdir -p"
 
-# Git abbreviations
+# git abbreviations
 abbr -a ga "git add *"
 abbr -a gbn "git rev-parse --abbrev-ref HEAD"
 abbr -a gcl "git clean"

@@ -26,7 +26,7 @@ gestures {
 input {
     keyboard {
         xkb {
-            // remap Caps Lock to act as Super (Mod) key
+            // remap caps lock to act as super (mod) key
             options "caps:super"
         }
         numlock
@@ -155,7 +155,7 @@ binds {
     // application launchers - C, HJKL, O, P, Q, R, V, W already used
     Mod+T { spawn "foot"; }
     Mod+Return { spawn "foot"; }
-    //Mod+Y { spawn "fuzzel"; }
+    // mod+Y { spawn "fuzzel"; }
     Mod+Space { spawn "noctalia-shell" "ipc" "call" "launcher" "toggle"; }
     Mod+Shift+Ctrl+C { spawn "foot" "claude"; }
     Mod+B { spawn "obsidian"; }
@@ -169,9 +169,9 @@ binds {
     Mod+Shift+E { spawn "noctalia-shell" "ipc" "call" "launcher" "emoji"; }
 
     // noctalia controls
-    //Mod+Comma { spawn "noctalia-shell" "ipc" "call" "settings" "toggle"; }
-    //Mod+Alt+S { spawn "noctalia-shell" "ipc" "call" "settings" "toggle"; }
-    //Mod+Shift+C { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
+    // mod+Comma { spawn "noctalia-shell" "ipc" "call" "settings" "toggle"; }
+    // mod+Alt+S { spawn "noctalia-shell" "ipc" "call" "settings" "toggle"; }
+    // mod+Shift+C { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
 
     // keyboard brightness controls
     XF86KbdBrightnessUp allow-when-locked=true { spawn "kbdbrite.sh" "up"; }
@@ -212,22 +212,22 @@ binds {
     Mod+Ctrl+End  { move-column-to-last; }
 
     // monitor navigation
-    //Mod+Shift+Left  { focus-monitor-left; }
-    //Mod+Shift+Right { focus-monitor-right; }
-    //Mod+Shift+H     { focus-monitor-left; }
-    //Mod+Shift+J     { focus-monitor-down; }
-    //Mod+Shift+K     { focus-monitor-up; }
-    //Mod+Shift+L     { focus-monitor-right; }
+    // mod+Shift+Left  { focus-monitor-left; }
+    // mod+Shift+Right { focus-monitor-right; }
+    // mod+Shift+H     { focus-monitor-left; }
+    // mod+Shift+J     { focus-monitor-down; }
+    // mod+Shift+K     { focus-monitor-up; }
+    // mod+Shift+L     { focus-monitor-right; }
 
     // move to monitor
-    //Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
-    //Mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
-    //Mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
-    //Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
-    //Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
-    //Mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
-    //Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
-    //Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
+    // mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+    // mod+Shift+Ctrl+Down  { move-column-to-monitor-down; }
+    // mod+Shift+Ctrl+Up    { move-column-to-monitor-up; }
+    // mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+    // mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
+    // mod+Shift+Ctrl+J     { move-column-to-monitor-down; }
+    // mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
+    // mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
 
     // workspace navigation
     Mod+Page_Down        { focus-workspace-down; }
@@ -280,14 +280,14 @@ binds {
     // column management
     Mod+BracketLeft  { consume-or-expel-window-left; }
     Mod+BracketRight { consume-or-expel-window-right; }
-    //Mod+Period { expel-window-from-column; }
+    // mod+Period { expel-window-from-column; }
 
     // sizing & layout
     Mod+R { switch-preset-column-width; }
     Mod+Shift+R { switch-preset-window-height; }
     Mod+Ctrl+R { reset-window-height; }
-    //Mod+Ctrl+F { expand-column-to-available-width; }
-    //Mod+Ctrl+C { center-column; }
+    // mod+Ctrl+F { expand-column-to-available-width; }
+    // mod+Ctrl+C { center-column; }
 
     // manual sizing
     Mod+Minus { set-column-width "-10%"; }
