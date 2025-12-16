@@ -1,6 +1,9 @@
 # disable fish greeting
 set fish_greeting
 
+# disable terminal capability query timeout warnings
+set -g fish_query_timeout 0
+
 # launch fastfetch on first terminal spawn (only in interactive shells)
 if status is-interactive; and not set -q FASTFETCH_LAUNCHED
   set -g FASTFETCH_LAUNCHED 1

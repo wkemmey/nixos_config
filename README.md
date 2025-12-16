@@ -253,9 +253,126 @@ Verify your Git credential configuration:
 git config --list | grep credential
 ```
 
+## Containers (Docker)
+
+This system includes Docker for running containers. 
+
+### Basic Docker Usage
+
+```bash
+# Run a container
+docker run hello-world
+docker run -it ubuntu bash          # Interactive Ubuntu container
+docker run -d -p 8080:80 nginx      # Run nginx in background, expose port 8080
+
+# List containers
+docker ps                            # Running containers
+docker ps -a                         # All containers (including stopped)
+
+# Manage containers
+docker stop <container-id>           # Stop a running container
+docker start <container-id>          # Start a stopped container
+docker rm <container-id>             # Remove a container
+
+# Images
+docker images                        # List downloaded images
+docker pull <image-name>             # Download an image
+docker rmi <image-name>              # Remove an image
+
+# Logs and debugging
+docker logs <container-id>           # View container logs
+docker exec -it <container-id> bash  # Open shell in running container
+```
+
+### Docker Management with lazydocker
+
+For a better experience, use `lazydocker` (a terminal UI for Docker):
+
+```bash
+lazydocker
+```
+
+Navigate with arrow keys, press `x` to see available actions, `q` to quit.
+
+## Virtual Machines
+
+This system includes KVM/QEMU with virt-manager for full virtualization.
+
+### Quick Start
+
+1. **Download an OS ISO** and place it in `/var/lib/libvirt/isos/`
+
+```bash
+# Create directory if needed (should already exist)
+sudo mkdir -p /var/lib/libvirt/isos
+
+# Download an ISO (example: Ubuntu)
+cd /var/lib/libvirt/isos
+sudo wget https://releases.ubuntu.com/22.04/ubuntu-22.04.3-desktop-amd64.iso
+```
+
+2. **Launch virt-manager:**
+
+```bash
+virt-manager
+# Or use keybind: Ctrl+Mod+V
+```
+
+3. **Create a new VM:**
+   - Click "Create a new virtual machine"
+   - Choose "Local install media (ISO image)"
+   - Browse to `/var/lib/libvirt/isos/` and select your ISO
+   - Set memory (4096 MB recommended) and CPUs (2-4 recommended)
+   - Create disk (20-40 GB recommended, format is qcow2 by default)
+   - Name your VM and click "Finish"
+
+### VM Storage Locations
+
+- **ISO files:** `/var/lib/libvirt/isos/` - Put OS installation ISOs here
+- **VM disk images:** `/var/lib/libvirt/images/` - VM disk files stored here (qcow2 format)
+
+### Useful VM Commands
+
+```bash
+# List all VMs
+virsh list --all
+
+# Start/stop VMs from command line
+virsh start <vm-name>
+virsh shutdown <vm-name>
+virsh destroy <vm-name>      # Force power off
+
+# Autostart VM on boot
+virsh autostart <vm-name>
+virsh autostart --disable <vm-name>
+
+# VM information
+virsh dominfo <vm-name>
+virt-top                     # htop for VMs
+```
+
+### Features Enabled
+
+Your VM setup includes:
+- **Hardware acceleration (KVM)** - VMs run at near-native speed
+- **SPICE** - Better graphics, clipboard sharing, USB redirection
+- **UEFI support** - Can install modern OSes like Windows 11
+- **TPM emulation** - Required for Windows 11
+- **3D acceleration** - Basic 3D graphics support in VMs
+- **Snapshots** - Disk format (qcow2) supports VM snapshots
+
+### Tips
+
+- **Performance:** VMs use host CPU passthrough for best performance
+- **Display:** Resize virt-manager window and the VM display will auto-resize
+- **USB devices:** Can be passed through to VMs via virt-manager device menu
+- **Networking:** VMs automatically get internet through NAT (virbr0 bridge)
+- **Windows drivers:** virtio-win package included for Windows guest optimization
+
 ## Resources
 
 - [NixOS Manual](https://nixos.org/manual/nixos/stable/)
 - [Home Manager Manual](https://nix-community.github.io/home-manager/)
 - [Niri Documentation](https://github.com/YaLTeR/niri)
-- [Stylix Documentation](https://github.com/danth/stylix)
+- [Docker Documentation](https://docs.docker.com/)
+- [libvirt Documentation](https://libvirt.org/)
