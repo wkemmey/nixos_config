@@ -18,7 +18,7 @@
 
   # core features
   enableNFS = false;
-  enablePrint = false;
+  enablePrint = true;
   enableThunar = true;
 
   # optional features (disabled for faster initial install)

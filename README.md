@@ -126,6 +126,43 @@ http://localhost:8384
 
 Configure folders and devices through the web interface.
 
+### 7. Printing and Scanning
+
+If you enabled `enablePrint = true` in variables.nix:
+
+**Web Interface (CUPS):**
+1. Open browser to `http://localhost:631`
+2. Click "Administration" → "Add Printer"
+3. Select your network printer from the discovered list
+4. Follow the wizard (drivers auto-configure)
+
+**Command Line:**
+```bash
+# List discovered printers
+lpinfo -v
+
+# Add printer
+lpadmin -p PrinterName -v <printer-uri> -E
+
+# Print a test page
+lp -d PrinterName /path/to/file.pdf
+
+# List all printers
+lpstat -p -d
+```
+
+**Scanning:**
+```bash
+# List available scanners
+scanimage -L
+
+# Scan to file
+scanimage --format=png > scan.png
+
+# Or use Simple Scan GUI
+simple-scan
+```
+
 ## Architecture
 
 ### Three-Tier Structure
