@@ -9,7 +9,6 @@
   home.packages = [
     (import ./emopicker.nix { inherit pkgs; })
     (import ./nvidia-offload.nix { inherit pkgs; })
-    (import ./screenshootin.nix { inherit pkgs; })
     (import ./hm-find.nix { inherit pkgs; })
     (import ./niri-gaming-mode.nix { inherit pkgs; })
     (import ./webapp-install.nix { inherit pkgs; })
