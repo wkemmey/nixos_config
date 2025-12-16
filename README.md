@@ -118,7 +118,7 @@ cat ~/.ssh/id_ed25519.pub  # Copy this to GitHub/GitLab/etc.
 
 ### 6. Syncthing (Optional)
 
-If you enabled `syncthingEnable = true` in variables.nix, access the web UI at:
+If you enabled `enableSyncthing = true` in variables.nix, access the web UI at:
 
 ```
 http://localhost:8384

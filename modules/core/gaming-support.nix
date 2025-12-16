@@ -4,9 +4,9 @@
   lib,
   ...
 }: let
-  inherit (import ../../hosts/${host}/variables.nix) gamingSupportEnable;
+  inherit (import ../../hosts/${host}/variables.nix) enableGamingSupport;
 in
-lib.mkIf gamingSupportEnable {
+lib.mkIf enableGamingSupport {
   # enable kernel modules for controller support
   boot.kernelModules = [
     "uinput"      # user input module for virtual devices

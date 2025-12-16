@@ -33,9 +33,9 @@ This is a flake-based NixOS configuration system with modular architecture, home
 
 ### Configuration Customization
 **All user preferences live in `hosts/<hostname>/variables.nix`:**
-- Feature flags: `gamingSupportEnable`, `syncthingEnable`, `enableCommunicationApps`, etc.
+- Feature flags: `enableGamingSupport`, `enableSyncthing`, `enableCommunicationApps`, etc.
 - User info: `userFullName`
-- Apps: `browser`, `terminal`, `startupApps`
+- Apps: `defaultBrowser`, `defaultTerminal`, `defaultShell`, `startupApps`
 
 **To add new features:** Check if module already exists in `modules/core/`. If it uses variables, import from host: `let inherit (import ../../hosts/${host}/variables.nix) featureFlagName;`
 

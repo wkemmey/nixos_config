@@ -1,8 +1,8 @@
 { username, host, lib, ... }: 
 let
-  inherit (import ../../hosts/${host}/variables.nix) syncthingEnable;
+  inherit (import ../../hosts/${host}/variables.nix) enableSyncthing;
 in
-lib.mkIf syncthingEnable {
+lib.mkIf enableSyncthing {
   services.syncthing = {
     enable = true;
     user = "${username}";

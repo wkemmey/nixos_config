@@ -234,8 +234,8 @@ cat > "hosts/$hostname/variables.nix" << EOF
   clock24h = false;
 
   # Default Applications
-  browser = "firefox";
-  terminal = "foot";
+  defaultBrowser = "firefox";
+  defaultTerminal = "foot";
   keyboardLayout = "$keyboard";
   consoleKeyMap = "$keyboard";
 
@@ -246,19 +246,16 @@ cat > "hosts/$hostname/variables.nix" << EOF
 
   # Core Features
   enableNFS = false;
-  printEnable = false;
-  thunarEnable = true;
-  stylixEnable = true;
+  enablePrint = false;
+  enableThunar = true;
 
   # Optional Features (disabled for faster initial install)
   # You can enable these later by setting to true and rebuilding
-  gamingSupportEnable = false;       # Gaming controllers, gamescope, protonup-qt
-  flutterdevEnable = false;          # Flutter development environment
-  syncthingEnable = false;           # Syncthing file synchronization
+  enableGamingSupport = false;       # Gaming controllers, gamescope, protonup-qt
+  enableSyncthing = false;           # Syncthing file synchronization
   enableCommunicationApps = false;   # Discord, Teams, Zoom, Telegram
-
   enableProductivityApps = false;    # Obsidian, QuickEmu
-  aiCodeEditorsEnable = false;       # Claude-code, gemini-cli, cursor
+  enableAiCodeEditors = false;       # Claude-code, gemini-cli, cursor
 
   # Shell Choice
   defaultShell = "fish";

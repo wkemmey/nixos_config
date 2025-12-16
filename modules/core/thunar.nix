@@ -3,11 +3,11 @@
   pkgs,
   ...
 }: let
-  inherit (import ../../hosts/${host}/variables.nix) thunarEnable;
+  inherit (import ../../hosts/${host}/variables.nix) enableThunar;
 in {
   programs = {
     thunar = {
-      enable = thunarEnable;
+      enable = enableThunar;
       plugins = with pkgs.xfce; [
         thunar-archive-plugin
         thunar-volman

@@ -1,9 +1,9 @@
 { config, lib, pkgs, host, ... }:
 let
-  inherit (import ../../hosts/${host}/variables.nix) aiCodeEditorsEnable;
+  inherit (import ../../hosts/${host}/variables.nix) enableAiCodeEditors;
 in
 {
-  config = lib.mkIf aiCodeEditorsEnable {
+  config = lib.mkIf enableAiCodeEditors {
     nixpkgs.config.allowUnfreePredicate =
       pkg:
       builtins.elem (lib.getName pkg) [
