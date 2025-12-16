@@ -1,6 +1,6 @@
-# Black Don OS - AI Agent Instructions
+# Whit's NixOS Config - AI Agent Instructions
 
-This is a flake-based NixOS configuration system (based on ZaneyOS) with modular architecture, home-manager integration, and hardware-profile-based deployments.
+This is a flake-based NixOS configuration system with modular architecture, home-manager integration, and hardware-profile-based deployments.
 
 ## Architecture Overview
 

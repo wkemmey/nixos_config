@@ -33,8 +33,6 @@ in
     LC_TIME = "en_US.UTF-8";
   };
   environment.variables = {
-    ZANEYOS_VERSION = "2.3.1";
-    ZANEYOS = "true";
   };
   
   # force electron apps (vscode, etc.) to use native wayland rendering

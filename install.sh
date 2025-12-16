@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 ######################################
-# Black Don OS - Simplified Installer
-# A NixOS configuration for everyone
+# Whit's NixOS Config - Installer
+# a nixos configuration for everyone
 ######################################
 
 set -e  # Exit on error
@@ -35,9 +35,9 @@ print_info() {
 
 # Welcome
 clear
-print_header "Black Don OS - Simplified Installation"
+print_header "Whit's NixOS Config - Installation"
 echo ""
-echo -e "${BLUE}Welcome! This installer will set up Black Don OS with sensible defaults.${NC}"
+echo -e "${BLUE}Welcome! This installer will set up your system with sensible defaults.${NC}"
 echo -e "${BLUE}You can customize everything later by editing your variables.nix file.${NC}"
 echo ""
 sleep 2
@@ -447,7 +447,7 @@ fi
 echo ""
 
 # Build configuration
-print_header "Building Black Don OS"
+print_header "Building System Configuration"
 echo -e "${YELLOW}This will take 10-20 minutes depending on your hardware...${NC}"
 echo ""
 
@@ -465,7 +465,7 @@ if sudo nixos-rebuild switch --flake .#"$hostname"; then
   echo ""
   print_header "Installation Successful!"
   echo ""
-  print_success "Black Don OS has been installed!"
+  print_success "System has been installed!"
   echo ""
   echo -e "${BLUE}What's next:${NC}"
   echo -e "  1. Your configuration is in: ${GREEN}~/nixos_config/hosts/$hostname/${NC}"

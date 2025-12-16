@@ -1,6 +1,6 @@
-# Don CLI (dcli) - Version 2.0.0
+# dcli - Version 2.0.0
 
-dcli is a command-line utility for managing your Black Don OS multi-host setup with ease. It provides convenient commands for system management, multi-host operations, and maintenance tasks.
+dcli is a command-line utility for managing your NixOS multi-host setup with ease. It provides convenient commands for system management, multi-host operations, and maintenance tasks.
 
 ## Usage
 
@@ -93,13 +93,13 @@ dcli comes with convenient shell aliases for common operations:
 
 ### Git Commands
 
-- **📝 commit [message]**: Adds all changes in your Black Don OS directory and commits them with the specified message. If no message is provided, you'll be prompted to enter one.
+- **📝 commit [message]**: Adds all changes in your NixOS directory and commits them with the specified message. If no message is provided, you'll be prompted to enter one.
 
 - **⬆️ push**: Pushes your committed changes to your GitLab fork. Automatically detects the current branch.
 
 - **⬇️ pull**: Pulls the latest changes from your GitLab fork to keep your local copy up to date.
 
-- **📊 status**: Shows the current git status of your Black Don OS directory, including modified files and branch information.
+- **📊 status**: Shows the current git status of your NixOS directory, including modified files and branch information.
 
 ## Multi-Host Workflow Examples
 
@@ -208,7 +208,7 @@ If git commands fail:
 
 ## Migration from zcli
 
-If you were previously using ZaneyOS's `zcli`, here are the key differences:
+If you were previously using `zcli`, here are the key differences:
 
 | Old Command | New Command | Notes |
 | ----------- | ----------- | ----- |
@@ -222,7 +222,7 @@ If you were previously using ZaneyOS's `zcli`, here are the key differences:
 
 ## Version History
 
-- **2.0.0**: Complete rewrite for Black Don OS multi-host support
+- **2.0.0**: Complete rewrite for multi-host support
   - Added multi-host commands (`build`, `deploy`, `list-hosts`)
   - Improved git integration
   - Better error handling and validation
@@ -233,4 +233,4 @@ If you were previously using ZaneyOS's `zcli`, here are the key differences:
 
 ---
 
-*Happy computing with Black Don OS! 🚀*
+*Happy computing! 🚀*

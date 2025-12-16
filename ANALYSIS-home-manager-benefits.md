@@ -1,4 +1,4 @@
-# Home-Manager Benefits Analysis for Black Don OS
+# Home-Manager Benefits Analysis
 
 ## Executive Summary
 

@@ -12,7 +12,7 @@ pkgs.writeShellScriptBin "webapp-install" ''
 
     # --- Helper Functions ---
     print_help() {
-      echo "Black Don OS Web App Installer -- version $VERSION"
+      echo "Web App Installer -- version $VERSION"
       echo ""
       echo "Usage: webapp-install [OPTIONS] [APP_NAME URL ICON_REF]"
       echo ""

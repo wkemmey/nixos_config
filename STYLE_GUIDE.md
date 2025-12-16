@@ -1,4 +1,4 @@
-# Black Don OS - Nix Code Style Guide
+# Style Guide
 
 This document defines the code style conventions for this NixOS configuration. These rules ensure consistency across the codebase and make it easier for AI agents to audit compliance.
 

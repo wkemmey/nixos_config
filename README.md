@@ -1,6 +1,6 @@
-# Black Don OS
+# Whit's NixOS Config
 
-A modular, flake-based NixOS configuration system built on ZaneyOS with home-manager integration and hardware-profile-based deployments.
+A modular, flake-based NixOS configuration system with home-manager integration and hardware-profile-based deployments.
 
 ## Quick Start
 
@@ -376,3 +376,15 @@ Your VM setup includes:
 - [Niri Documentation](https://github.com/YaLTeR/niri)
 - [Docker Documentation](https://docs.docker.com/)
 - [libvirt Documentation](https://libvirt.org/)
+
+## Credits & Thanks
+
+This configuration is based on the excellent work of:
+
+- **ZaneyOS** by Zaney - [GitHub](https://github.com/Zaney1/ZaneyOS)
+  - Original flake-based NixOS configuration system that pioneered many of the modular patterns used here
+
+- **Black Don's NixOS Config** by Black Don - [GitHub](https://github.com/BlackDon/nixos-config)
+  - Built upon ZaneyOS with additional refinements and features
+
+This configuration continues that evolution with further customizations and adaptations to my workflow. Thank you to both authors for their foundational work!

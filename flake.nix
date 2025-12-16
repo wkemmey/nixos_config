@@ -1,5 +1,5 @@
 {
-  description = "Black Don OS (Based on ZaneyOS)";
+  description = "Whit's NixOS Config";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
