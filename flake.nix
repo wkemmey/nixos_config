@@ -55,14 +55,6 @@
     in
     {
       nixosConfigurations = {
-        # default template configuration
-        # users will create their own host configurations during installation
-        default = mkHost {
-          hostname = "default";
-          profile = "amd";
-          username = "user";
-        };
-
         whit2020 = mkHost {
           hostname = "whit2020";
           profile = "amd";

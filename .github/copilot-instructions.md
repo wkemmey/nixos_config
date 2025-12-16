@@ -34,9 +34,8 @@ This is a flake-based NixOS configuration system with modular architecture, home
 ### Configuration Customization
 **All user preferences live in `hosts/<hostname>/variables.nix`:**
 - Feature flags: `gamingSupportEnable`, `syncthingEnable`, `enableCommunicationApps`, etc.
-- Theming: `wallpaperImage`, `colorScheme`, `barChoice` (must be "noctalia" currently)
+- User info: `userFullName`
 - Apps: `browser`, `terminal`, `startupApps`
-- Git config: `gitUsername`, `gitEmail`
 
 **To add new features:** Check if module already exists in `modules/core/`. If it uses variables, import from host: `let inherit (import ../../hosts/${host}/variables.nix) featureFlagName;`
 
@@ -58,11 +57,10 @@ This is a flake-based NixOS configuration system with modular architecture, home
 - Host-specific overrides: `modules/home/niri/hosts/<hostname>/keybinds.nix` (optional, falls back to defaults)
 - Uses variables from `hosts/<hostname>/variables.nix` for terminal, browser, wallpaper
 
-### Theming with Stylix
-- Configured in `modules/core/stylix.nix`, gated by `stylixEnable` variable
-- Custom base16 scheme with pure black editor background (`base00 = "000000"`)
-- Automatically themes all applications through Stylix's NixOS integration
-- Wallpaper source from `wallpaperImage` in variables.nix
+### Theming
+- Theming is managed through Noctalia shell configuration
+- Wallpapers are stored in `/wallpapers/` directory
+- Noctalia settings in `dotfiles/.config/noctalia-shell/settings.json`
 
 ### Custom Scripts
 - Defined in `modules/home/scripts/` as Nix expressions returning derivations
@@ -71,7 +69,7 @@ This is a flake-based NixOS configuration system with modular architecture, home
 
 ## Important Files
 
-- `flake.nix` - Inputs (nixpkgs, home-manager, nvf, stylix, noctalia) and host definitions via `mkHost`
+- `flake.nix` - Inputs (nixpkgs, home-manager, nvf, noctalia) and host definitions via `mkHost`
 - `install.sh` - Interactive installer (generates hardware-config, creates host files)
 - `modules/core/user.nix` - User creation + home-manager integration point
 - `modules/home/default.nix` - Home-manager module index
@@ -93,4 +91,4 @@ This is a flake-based NixOS configuration system with modular architecture, home
 
 **Add keybind:** Edit `modules/home/niri/keybinds.nix` or create host override in `modules/home/niri/hosts/<hostname>/keybinds.nix`
 
-**Modify theme colors:** Edit base16 scheme in `modules/core/stylix.nix`
+**Modify theme:** Edit Noctalia settings in `dotfiles/.config/noctalia-shell/settings.json`

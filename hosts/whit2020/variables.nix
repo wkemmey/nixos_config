@@ -27,16 +27,8 @@
   enableProductivityApps = true;     # obsidian, quickemu
   aiCodeEditorsEnable = false;       # claude-code, gemini-cli, cursor
 
-  # desktop environment
-  barChoice = "noctalia"; 
-
-  # theming
-  wallpaperImage = ../../wallpapers/3840x2160_bonsai_rock_milky.jpg;
-  colorScheme = "catppuccin-mocha";
-
-  # git configuration
-  gitUsername = "whit";
-  gitEmail = "whit@fastmail.com";
+  # user info
+  userFullName = "Whit Kemmey";
 
   # startup applications
   startupApps = [];

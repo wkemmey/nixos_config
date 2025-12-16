@@ -62,18 +62,12 @@ echo ""
 
 # Get hostname
 print_header "Hostname Configuration"
-echo -e "${YELLOW}⚠️  Do NOT use 'default' as your hostname!${NC}"
 echo -e "Suggested names: my-desktop, nixos-laptop, gaming-rig"
 echo ""
 
 while true; do
   read -p "Enter hostname [nixos-desktop]: " hostname
   hostname=${hostname:-nixos-desktop}
-
-  if [ "$hostname" = "default" ]; then
-    print_error "Cannot use 'default' as hostname. Choose something else."
-    continue
-  fi
 
   if [[ ! "$hostname" =~ ^[a-zA-Z0-9]([a-zA-Z0-9-]*[a-zA-Z0-9])?$ ]]; then
     print_error "Invalid hostname. Use only letters, numbers, and hyphens."
@@ -216,8 +210,7 @@ echo ""
 print_header "Creating Host Configuration"
 mkdir -p "hosts/$hostname"
 
-# Copy default template
-cp hosts/default/*.nix "hosts/$hostname/" 2>/dev/null || true
+# note: host files are created below, no template copy needed
 
 # Copy hardware config
 mv /tmp/hardware.nix "hosts/$hostname/hardware.nix"
@@ -267,19 +260,8 @@ cat > "hosts/$hostname/variables.nix" << EOF
   enableProductivityApps = false;    # Obsidian, QuickEmu
   aiCodeEditorsEnable = false;       # Claude-code, gemini-cli, cursor
 
-  # Desktop Environment
-
-
-  # Bar/Shell Choice
-  barChoice = "noctalia";      # Options: "noctalia"
-
   # Shell Choice
   defaultShell = "fish";
-
-  # Theming
-  wallpaperImage = ../../wallpapers/Valley.jpg;
-  #waybarChoice = ../../modules/home/waybar/waybar-ddubs.nix;  # Waybar temporarily disabled
-  animChoice = ../../modules/home/hyprland/animations-end4.nix;
 
   # Startup Applications
   startupApps = [];
@@ -410,19 +392,17 @@ print_header "Updating Flake Configuration"
 if grep -q "\"$hostname\"" flake.nix; then
   print_info "Host already exists in flake.nix"
 else
-  # Add host to flake.nix right after the default host
-  # Use awk to insert at the right location (after default host closing brace, before nixosConfigurations closing brace)
+  # Add host to flake.nix after nixosConfigurations = {
+  # Use awk to insert at the right location
   awk -v hostname="$hostname" -v profile="$profile" -v username="$username" '
-    /username = "user";/ { in_default = 1 }
-    in_default && /^        };$/ {
+    /nixosConfigurations = {$/ {
       print
-      print ""
       print "        " hostname " = mkHost {"
       print "          hostname = \"" hostname "\";"
       print "          profile = \"" profile "\";"
       print "          username = \"" username "\";"
       print "        };"
-      in_default = 0
+      print ""
       next
     }
     { print }
