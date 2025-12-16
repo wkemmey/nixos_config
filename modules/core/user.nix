@@ -1,11 +1,4 @@
-{
-  pkgs,
-  inputs,
-  username,
-  host,
-  profile,
-  ...
-}:
+{ pkgs, inputs, username, host, profile, ... }:
 let
   variables = import ../../hosts/${host}/variables.nix;
   inherit (variables) gitUsername;

@@ -1,9 +1,5 @@
-{
-  username,
-  host,
-  lib,
-  ...
-}: let
+{ username, host, lib, ... }: 
+let
   inherit (import ../../hosts/${host}/variables.nix) syncthingEnable;
 in
 lib.mkIf syncthingEnable {

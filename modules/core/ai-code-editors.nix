@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  host,
-  ...
-}:
+{ config, lib, pkgs, host, ... }:
 let
   inherit (import ../../hosts/${host}/variables.nix) aiCodeEditorsEnable;
 in

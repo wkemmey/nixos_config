@@ -1,9 +1,4 @@
-{
-  inputs,
-  host,
-  lib,
-  ...
-}:
+{ inputs, host, lib, ... }:
 let
   variables = import ../../hosts/${host}/variables.nix;
   inherit (variables) waybarChoice;

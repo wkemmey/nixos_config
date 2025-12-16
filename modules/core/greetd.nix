@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  username,
-  ...
-}:
+{ config, lib, pkgs, username, ... }:
 {
   # Configure greetd unconditionally. It will be enabled by default only when other
   # display managers (sddm, ly) are not enabled.
