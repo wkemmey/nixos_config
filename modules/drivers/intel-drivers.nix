@@ -7,7 +7,7 @@ in {
   };
 
   config = mkIf cfg.enable {
-    # OpenGL
+    # opengl
     hardware.graphics = {
       extraPackages = with pkgs; [
         intel-media-driver

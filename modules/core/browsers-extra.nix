@@ -8,11 +8,11 @@
 }:
 {
   environment.systemPackages = with pkgs; [
-    #vivaldi # Privacy-focused browser
-    #brave # Privacy browser with ad blocking
-    #chromium # Open source Chrome
-    #google-chrome # Google Chrome
-    firefox # Mozilla Firefox
-    helium-browser # Helium browser
+    #vivaldi # privacy-focused browser
+    #brave # privacy browser with ad blocking
+    #chromium # open source chrome
+    #google-chrome # google chrome
+    firefox # mozilla firefox
+    helium-browser # helium browser
   ];
 }

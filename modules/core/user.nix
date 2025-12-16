@@ -6,7 +6,7 @@ in
 {
   imports = [ inputs.home-manager.nixosModules.home-manager ];
 
-  # Enable Fish system-wide for vendor completions
+  # enable fish system-wide for vendor completions
   programs.fish.enable = true;
 
   home-manager = {
@@ -37,14 +37,14 @@ in
     extraGroups = [
       "adbusers"
       "docker"
-      "libvirtd" # For VirtManager
+      "libvirtd" # for virtmanager
       "lp"
       "networkmanager"
       "scanner"
       "wheel" # sudo access
-      "vboxusers" # For VirtualBox
+      "vboxusers" # for virtualbox
     ];
-    # Use fish as default shell
+    # use fish as default shell
     shell = pkgs.fish;
     ignoreShellProgramCheck = true;
   };

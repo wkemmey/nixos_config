@@ -6,8 +6,8 @@ pkgs.writeShellScriptBin "webapp-install" ''
     #!${pkgs.bash}/bin/bash
     set -euo pipefail
 
-    # Black Don OS Web App Installer
-    # Creates desktop entries for web applications using Chromium browser
+    # web app installer
+    # creates desktop entries for web applications using chromium browser
     VERSION="1.0.0"
 
     # --- Helper Functions ---
@@ -49,7 +49,7 @@ pkgs.writeShellScriptBin "webapp-install" ''
     fi
 
     if [ "$#" -lt 3 ]; then
-      # Interactive mode
+      # interactive mode
       echo -e "\e[32mLet's create a new web app you can start with the app launcher.\n\e[0m"
 
       APP_NAME=$(${pkgs.gum}/bin/gum input --prompt "Name> " --placeholder "My favorite web app")
@@ -59,29 +59,29 @@ pkgs.writeShellScriptBin "webapp-install" ''
       MIME_TYPES=""
       INTERACTIVE_MODE=true
     else
-      # Direct mode
+      # direct mode
       APP_NAME="$1"
       APP_URL="$2"
       ICON_REF="$3"
-      CUSTOM_EXEC="''${4:-}" # Optional custom exec command
-      MIME_TYPES="''${5:-}"  # Optional mime types
+      CUSTOM_EXEC="''${4:-}" # optional custom exec command
+      MIME_TYPES="''${5:-}"  # optional mime types
       INTERACTIVE_MODE=false
     fi
 
-    # Ensure valid execution
+    # ensure valid execution
     if [[ -z "$APP_NAME" || -z "$APP_URL" || -z "$ICON_REF" ]]; then
       echo "Error: You must set app name, app URL, and icon URL!" >&2
       exit 1
     fi
 
-    # Create icon directory if it doesn't exist (using standard icon location)
+    # create icon directory if it doesn't exist (using standard icon location)
     ICON_DIR="$HOME/.local/share/icons/hicolor/256x256/apps"
     mkdir -p "$ICON_DIR"
 
-    # Create a sanitized icon name (replace spaces with dashes, lowercase)
+    # create a sanitized icon name (replace spaces with dashes, lowercase)
     ICON_NAME=$(echo "$APP_NAME" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
 
-    # Refer to local icon or fetch remotely from URL
+    # refer to local icon or fetch remotely from url
     if [[ $ICON_REF =~ ^https?:// ]]; then
       ICON_FILE="$ICON_DIR/$ICON_NAME.png"
       echo "Downloading icon from $ICON_REF..."
@@ -92,16 +92,16 @@ pkgs.writeShellScriptBin "webapp-install" ''
         exit 1
       fi
     else
-      # Assume it's a local file reference
+      # assume it's a local file reference
       if [[ "$ICON_REF" == /* ]]; then
-        # Absolute path provided
+        # absolute path provided
         ICON_FILE="$ICON_DIR/$ICON_NAME.png"
         cp "$ICON_REF" "$ICON_FILE" || {
           echo "Error: Failed to copy icon from $ICON_REF" >&2
           exit 1
         }
       else
-        # Relative filename - look in icon dir
+        # relative filename - look in icon dir
         ICON_FILE="$ICON_DIR/$ICON_REF"
         if [ ! -f "$ICON_FILE" ]; then
           echo "Warning: Icon file $ICON_FILE does not exist" >&2
@@ -109,15 +109,15 @@ pkgs.writeShellScriptBin "webapp-install" ''
       fi
     fi
 
-    # Use custom exec if provided, otherwise use Chromium in app mode
+    # use custom exec if provided, otherwise use chromium in app mode
     if [[ -n $CUSTOM_EXEC ]]; then
       EXEC_COMMAND="$CUSTOM_EXEC"
     else
-      # Chromium browser in app mode - creates a standalone window without browser UI
+      # chromium browser in app mode - creates a standalone window without browser ui
       EXEC_COMMAND="${pkgs.chromium}/bin/chromium --app=\"$APP_URL\""
     fi
 
-    # Create application .desktop file
+    # create application .desktop file
     DESKTOP_FILE="$HOME/.local/share/applications/$APP_NAME.desktop"
 
     echo "Creating desktop entry at $DESKTOP_FILE..."
@@ -134,14 +134,14 @@ pkgs.writeShellScriptBin "webapp-install" ''
   Categories=WebApp;Network;
   EOF
 
-    # Add mime types if provided
+    # add mime types if provided
     if [[ -n $MIME_TYPES ]]; then
       echo "MimeType=$MIME_TYPES" >>"$DESKTOP_FILE"
     fi
 
     chmod +x "$DESKTOP_FILE"
 
-    # Update icon cache
+    # update icon cache
     ${pkgs.gtk3}/bin/gtk-update-icon-cache -f -t "$HOME/.local/share/icons/hicolor" 2>/dev/null || true
 
     echo "✓ Web app created successfully!"

@@ -3,14 +3,14 @@ let
   variables = import ../../hosts/${host}/variables.nix;
   inherit (variables) waybarChoice;
 
-  # New variable system
+  # new variable system
   windowManager = variables.windowManager or "hyprland";
-  # Prefer Noctalia as the default status bar
+  # prefer noctalia as the default status bar
   barChoice = variables.barChoice or "noctalia";
   defaultShell = variables.defaultShell or "zsh";
 
-  # Bar and shell defaults
-  # (DMS support removed; prefer explicit `barChoice` in host variables)
+  # bar and shell defaults
+  # (dms support removed; prefer explicit `barChoice` in host variables)
 
 in
 {

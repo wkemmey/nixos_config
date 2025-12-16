@@ -7,16 +7,16 @@
       dedicatedServer.openFirewall = false;
       extraCompatPackages = [ pkgs.proton-ge-bin ];
 
-      # Enable Steam Input for controller support
+      # enable steam input for controller support
       package = pkgs.steam.override {
         extraPkgs =
           pkgs: with pkgs; [
-            # Controller support libraries
+            # controller support libraries
             libusb1
             udev
             SDL2
 
-            # Additional libraries for better compatibility
+            # additional libraries for better compatibility
             xorg.libXcursor
             xorg.libXi
             xorg.libXinerama
@@ -26,7 +26,7 @@
             xorg.libXrender
             xorg.libXext
 
-            # Fix for Xwayland symbol errors
+            # fix for xwayland symbol errors
             libkrb5
             keyutils
           ];
@@ -34,7 +34,7 @@
     };
   };
 
-  # System-level packages
+  # system-level packages
   environment.systemPackages = with pkgs; [
     mangohud
   ];

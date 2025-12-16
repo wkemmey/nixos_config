@@ -12,7 +12,7 @@ in
     systemd.tmpfiles.rules = [ "L+    /opt/rocm/hip   -    -    -     -    ${pkgs.rocmPackages.clr}" ];
     services.xserver.videoDrivers = [ "amdgpu" ];
     
-    # Enable AMD GPU monitoring in btop
+    # enable amd gpu monitoring in btop
     environment.systemPackages = [
       (pkgs.btop.override { rocmSupport = true; })
     ];

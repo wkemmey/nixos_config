@@ -1,14 +1,14 @@
 {profile, pkgs, ...}: {
-  # Services to start
+  # services to start
   services = {
-    libinput.enable = true; # Input Handling
-    fstrim.enable = true; # SSD Optimizer
-    gvfs.enable = true; # For Mounting USB & More
-    openssh.enable = true; # Enable SSH
-    blueman.enable = true; # Bluetooth Support
-    tumbler.enable = true; # Image/video preview
+    libinput.enable = true; # input handling
+    fstrim.enable = true; # ssd optimizer
+    gvfs.enable = true; # for mounting usb & more
+    openssh.enable = true; # enable ssh
+    blueman.enable = true; # bluetooth support
+    tumbler.enable = true; # image/video preview
     gnome.gnome-keyring.enable = true;
-    upower.enable = true; # Power management (required for battery monitoring TODO this was required for DMS, is it still needed for noctalia?)
+    upower.enable = true; # power management (required for battery monitoring TODO this was required for dms, is it still needed for noctalia?)
 
     smartd = {
       enable =
@@ -22,14 +22,14 @@
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
-      wireplumber.enable = true;  # Enable WirePlumber session manager
+      wireplumber.enable = true;  # enable wireplumber session manager
     };
     
-    # USB automounting
+    # usb automounting
     udisks2.enable = true;
   };
 
-  # XDG Desktop Portal for Niri (screen sharing, file pickers)
+  # xdg desktop portal for niri (screen sharing, file pickers)
   xdg.portal = {
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-gnome ];
@@ -46,7 +46,7 @@
     };
   };
 
-  # XWayland satellite service for X11 app support in Niri
+  # xwayland satellite service for x11 app support in niri
   systemd.user.services.xwayland-satellite = {
     description = "Xwayland outside Wayland";
     after = [ "graphical-session.target" ];
@@ -60,7 +60,7 @@
     wantedBy = [ "graphical-session.target" ];
   };
 
-  # USB automounter
+  # usb automounter
   systemd.user.services.udiskie = {
     description = "USB automounter";
     after = [ "graphical-session.target" ];

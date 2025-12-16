@@ -31,7 +31,7 @@
     let
       system = "x86_64-linux";
 
-      # Helper function to create a host configuration
+      # helper function to create a host configuration
       mkHost =
         {
           hostname,
@@ -55,8 +55,8 @@
     in
     {
       nixosConfigurations = {
-        # Default template configuration
-        # Users will create their own host configurations during installation
+        # default template configuration
+        # users will create their own host configurations during installation
         default = mkHost {
           hostname = "default";
           profile = "amd";

@@ -4,7 +4,7 @@
     ../../modules/drivers
     ../../modules/core
   ];
-  # Enable GPU Drivers
+  # enable gpu drivers
   drivers.amdgpu.enable = false;
   drivers.nvidia.enable = false;
   drivers.nvidia-prime.enable = false;

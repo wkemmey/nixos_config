@@ -1,13 +1,13 @@
 {pkgs}:
 pkgs.writeShellScriptBin "emopicker" ''
-  # Get user selection via fuzzel from emoji file.
+  # get user selection via fuzzel from emoji file
   chosen=$(cat $HOME/.config/.emoji | ${pkgs.fuzzel}/bin/fuzzel --dmenu --width 60 --lines 20 | awk '{print $1}')
 
-  # Exit if none chosen.
+  # exit if none chosen
   [ -z "$chosen" ] && exit
 
-  # If you run this command with an argument, it will automatically insert the
-  # character. Otherwise, show a message that the emoji has been copied.
+  # if you run this command with an argument, it will automatically insert the
+  # character; otherwise, show a message that the emoji has been copied
   if [ -n "$1" ]; then
    ${pkgs.ydotool}/bin/ydotool type "$chosen"
   else

@@ -1,7 +1,7 @@
 { pkgs, ... }:
 pkgs.writeShellScriptBin "note" ''
 
-  # Colors for nice output
+  # colors for nice output
   RED='\033[0;31m'
   GREEN='\033[0;32m'
   YELLOW='\033[0;33m'
@@ -11,16 +11,16 @@ pkgs.writeShellScriptBin "note" ''
   WHITE='\033[1;37m'
   GRAY='\033[0;37m'
   BOLD='\033[1m'
-  NC='\033[0m' # No Color
+  NC='\033[0m' # no color
 
-  # XDG-compliant notes directory and file
+  # xdg-compliant notes directory and file
   NOTES_DIR="$HOME/.local/share/notes"
   NOTES_FILE="$NOTES_DIR/notes.txt"
   
-  # Create notes directory if it doesn't exist
+  # create notes directory if it doesn't exist
   mkdir -p "$NOTES_DIR"
 
-  # Function to display usage
+  # function to display usage
   show_usage() {
     echo -e "''${BOLD}''${BLUE}📝 Note Manager''${NC}"
     echo -e "''${GRAY}Usage:''${NC}"
@@ -37,7 +37,7 @@ pkgs.writeShellScriptBin "note" ''
     echo -e "  ''${GREEN}note del 3''${NC}"
   }
 
-  # Function to add a note
+  # function to add a note
   add_note() {
     local note_text="$1"
     local timestamp=$(date '+%Y-%m-%d %H:%M:%S')

@@ -37,21 +37,21 @@ in
     ZANEYOS = "true";
   };
   
-  # Force Electron apps (VSCode, etc.) to use native Wayland rendering
+  # force electron apps (vscode, etc.) to use native wayland rendering
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
-    # Tells Electron apps to use Wayland natively if available
-    # Note: auto is typically safer than wayland directly
+    # tells electron apps to use wayland natively if available
+    # note: auto is typically safer than wayland directly
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
   };
   
   console.keyMap = "${consoleKeyMap}";
-  system.stateVersion = "25.11"; # Do not change!
+  system.stateVersion = "25.11"; # do not change!
 
-  # Enable nix-ld for running unpackaged programs like adb
+  # enable nix-ld for running unpackaged programs like adb
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
-    # Common libraries needed for Android tools
+    # common libraries needed for android tools
     stdenv.cc.cc.lib
     zlib
     openssl

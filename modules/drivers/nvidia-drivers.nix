@@ -10,29 +10,28 @@ in
   config = mkIf cfg.enable {
     services.xserver.videoDrivers = [ "nvidia" ];
     hardware.nvidia = {
-      # Modesetting is required.
+      # modesetting is required
       modesetting.enable = true;
-      # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+      # nvidia power management; experimental, and can cause sleep/suspend to fail
       powerManagement.enable = false;
-      # Fine-grained power management. Turns off GPU when not in use.
-      # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+      # fine-grained power management; turns off gpu when not in use
+      # experimental and only works on modern nvidia gpus (turing or newer)
       powerManagement.finegrained = false;
-      # Use the NVidia open source kernel module (not to be confused with the
-      # independent third-party "nouveau" open source driver).
-      # Support is limited to the Turing and later architectures. Full list of
-      # supported GPUs is at:
+      # use the nvidia open source kernel module (not to be confused with the
+      # independent third-party "nouveau" open source driver)
+      # support is limited to the turing and later architectures; full list of
+      # supported gpus is at:
       # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
-      # Only available from driver 515.43.04+
-      # Currently alpha-quality/buggy, so false is currently the recommended setting.
+      # only available from driver 515.43.04+
+      # currently alpha-quality/buggy, so false is currently the recommended setting
       open = true;
-      # Enable the Nvidia settings menu,
-      # accessible via `nvidia-settings`.
+      # enable the nvidia settings menu, accessible via `nvidia-settings`
       nvidiaSettings = true;
-      # Optionally, you may need to select the appropriate driver version for your specific GPU.
+      # optionally, you may need to select the appropriate driver version for your specific gpu
       package = config.boot.kernelPackages.nvidiaPackages.latest;
     };
     
-    # Enable NVIDIA GPU monitoring in btop
+    # enable nvidia gpu monitoring in btop
     environment.systemPackages = [
       (pkgs.btop.override { cudaSupport = true; })
     ];

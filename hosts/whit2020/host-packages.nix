@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    # Add host-specific packages here
+    # add host-specific packages here
   ];
 }

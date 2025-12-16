@@ -12,10 +12,10 @@ in
       ];
 
     environment.systemPackages = with pkgs; [
-      # AI-powered code editors and development tools
-      # code-cursor # AI IDE (currently commented out - uncomment if needed)
-      claude-code # Claude AI native development environment
-      gemini-cli # Google Gemini CLI tool for terminal AI assistance
+      # ai-powered code editors and development tools
+      # code-cursor # ai ide (currently commented out - uncomment if needed)
+      claude-code # claude ai native development environment
+      gemini-cli # google gemini cli tool for terminal ai assistance
     ];
   };
 }

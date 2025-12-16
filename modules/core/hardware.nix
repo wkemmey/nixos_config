@@ -17,9 +17,9 @@
 
 
 
-  # Udev rules for Corsair devices
+  # udev rules for corsair devices
   services.udev.extraRules = ''
-    # Corsair devices
+    # corsair devices
     SUBSYSTEM=="usb", ATTRS{idVendor}=="1b1c", MODE="0666", GROUP="users"
     SUBSYSTEM=="hidraw", ATTRS{idVendor}=="1b1c", MODE="0666", GROUP="users"
   '';

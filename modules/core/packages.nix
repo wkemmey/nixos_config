@@ -135,7 +135,7 @@
     xdg-desktop-portal
     xdg-desktop-portal-gtk
     xdg-desktop-portal-gnome
-    
+
     # cursor and icon themes
     bibata-cursors
     tela-icon-theme
@@ -148,6 +148,6 @@
     fishPlugins.sponge
   ];
 
-  # Enable fish shell system-wide for vendor completions
+  # enable fish shell system-wide for vendor completions
   programs.fish.enable = true;
 }
