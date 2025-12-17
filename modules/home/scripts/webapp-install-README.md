@@ -106,7 +106,7 @@ Find high-quality icons for your webapps:
 
 3. **App Launcher Integration**:
    - The webapp appears in your system app launcher immediately
-   - Can be found via search (SUPER + SPACE on Hyprland)
+   - Can be found via search (SUPER + SPACE on Niri)
 
 ## Generated Files
 

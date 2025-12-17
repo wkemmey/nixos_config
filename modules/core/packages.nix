@@ -60,7 +60,7 @@
     youtube-music # youtube music client (for user)
 
     # web browsers
-    firefox # mozilla firefox browser (for user, set as default in xdg.nix)
+    firefox # mozilla firefox browser (for user, set as default for xdg)
 
     # networking utilities
     gping # graphical ping tool (for user)

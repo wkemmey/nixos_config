@@ -1,6 +1,4 @@
-{ config, pkgs, ... }:
-
-{
+{ config, pkgs, ... }: {
   # install dotbot for dotfiles management
   environment.systemPackages = with pkgs; [
     dotbot

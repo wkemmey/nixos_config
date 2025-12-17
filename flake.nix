@@ -22,8 +22,7 @@
     };
   };
 
-  outputs =
-    { nixpkgs, flake-utils, ... }@inputs:
+  outputs = { nixpkgs, flake-utils, ... }@inputs:
     let
       system = "x86_64-linux";
 
