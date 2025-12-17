@@ -23,7 +23,7 @@
 
   # optional features (disabled for faster initial install)
   # you can enable these later by setting to true and rebuilding
-  enableGamingSupport = false;       # gaming controllers, gamescope, protonup-qt
+  enableGamingSupport = true;       # gaming controllers, gamescope, protonup-qt
   enableSyncthing = false;           # syncthing file synchronization
   enableCommunicationApps = false;   # discord, teams, zoom, telegram
   enableProductivityApps = true;     # obsidian, quickemu
