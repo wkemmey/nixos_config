@@ -1,0 +1,50 @@
+# Aider Configuration Template
+# 
+# To use a different model or add API keys directly (not recommended):
+# 1. Copy this template: cp ~/.aider.conf.yml ~/.aider.conf.yml.local
+# 2. Edit the local copy with your preferences
+# 3. Aider will use .aider.conf.yml.local if it exists
+#
+# For API keys, set environment variables (recommended):
+# - export ANTHROPIC_API_KEY="your-key"     # For Claude
+# - export OPENAI_API_KEY="your-key"        # For GPT
+# - export GEMINI_API_KEY="your-key"        # For Gemini
+
+## Model Selection (uncomment ONE)
+# model: claude-3-5-sonnet-20241022  # Best for coding, recommended
+# model: gpt-4-turbo-preview           # OpenAI alternative
+# model: gemini/gemini-2.0-flash-exp   # Google Gemini (free tier available)
+
+## Default model (Claude Sonnet is best for coding)
+model: claude-3-5-sonnet-20241022
+
+## Git integration
+auto-commits: true              # Auto-commit changes with descriptive messages
+dirty-commits: true             # Allow commits even with uncommitted changes
+attribute-author: true          # Add AI attribution to commits
+attribute-commit-message-author: true
+attribute-commit-message-committer: false
+
+## Editor integration
+editor-model: claude-3-5-sonnet-20241022  # Model for edit operations
+editor-edit-format: diff        # How to show edits: diff, whole, or udiff
+
+## Chat behavior
+no-pretty: false                # Use pretty formatted output
+dark-mode: true                 # Use dark mode colors
+show-diffs: true                # Show diffs of proposed changes
+
+## Code context
+map-tokens: 2048                # Tokens to use for repository map
+max-chat-history-tokens: 4096   # Max tokens for chat history
+
+## API Keys (optional - better to use environment variables)
+# anthropic-api-key: "your-key-here"
+# openai-api-key: "your-key-here"
+# gemini-api-key: "your-key-here"
+
+## Other useful options
+# check-update: false           # Don't check for updates
+# lint: true                    # Run linter after changes
+# test: true                    # Run tests after changes
+# voice-language: en            # Language for voice input

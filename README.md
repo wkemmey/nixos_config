@@ -163,6 +163,48 @@ scanimage --format=png > scan.png
 simple-scan
 ```
 
+### 8. AI Code Editors (Optional)
+
+If you enabled `enableAiCodeEditors = true` in variables.nix, you have access to:
+
+**Claude Code** - Graphical AI IDE with chat interface
+
+**Aider** - Terminal-based agentic AI coding assistant
+
+**Gemini CLI** - Terminal AI assistant
+
+**Setting up API keys:**
+
+For **Aider** (uses Claude by default):
+```bash
+# Get your API key from https://console.anthropic.com/
+# Set it permanently in Fish
+set -Ux ANTHROPIC_API_KEY "your-anthropic-key-here"
+
+# Or for OpenAI GPT models
+set -Ux OPENAI_API_KEY "your-openai-key-here"
+
+# Or for Google Gemini
+set -Ux GEMINI_API_KEY "your-gemini-key-here"
+```
+
+For **Gemini CLI** (optional - falls back to web login without key):
+```bash
+# Copy template and add your key
+cp ~/nixos_config/dotfiles/gem.key.template ~/gem.key
+# Edit ~/gem.key and replace YOUR_API_KEY_HERE
+chmod 600 ~/gem.key
+```
+
+**Using Aider:**
+```bash
+cd your-project
+aider src/main.rs src/lib.rs
+# Chat with AI to make code changes
+```
+
+See `dotfiles/AIDER_SETUP.md` for comprehensive Aider documentation.
+
 ## Architecture
 
 ### Three-Tier Structure

@@ -16,6 +16,7 @@ in
       # code-cursor # ai ide (currently commented out - uncomment if needed)
       claude-code # claude ai native development environment
       gemini-cli # google gemini cli tool for terminal ai assistance
+      aider-chat # terminal-based agentic ai coding assistant
     ];
   };
 }

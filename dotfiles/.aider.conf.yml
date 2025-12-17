@@ -1,0 +1,38 @@
+# Aider Configuration
+# 
+# API keys should be set via environment variables:
+# - ANTHROPIC_API_KEY for Claude models
+# - OPENAI_API_KEY for GPT models
+# - GEMINI_API_KEY for Google Gemini models
+#
+# Add to ~/.config/fish/config.fish:
+#   set -Ux ANTHROPIC_API_KEY "your-key-here"
+#
+# Or create ~/.aider.conf.yml.local for machine-specific overrides
+# (not tracked in git)
+
+## Model Selection
+model: claude-3-5-sonnet-20241022  # Best for coding
+
+## Git integration
+auto-commits: true              # Auto-commit changes with descriptive messages
+dirty-commits: true             # Allow commits even with uncommitted changes
+attribute-author: true          # Add AI attribution to commits
+attribute-commit-message-author: true
+attribute-commit-message-committer: false
+
+## Editor integration
+editor-model: claude-3-5-sonnet-20241022  # Model for edit operations
+editor-edit-format: diff        # How to show edits: diff, whole, or udiff
+
+## Chat behavior
+no-pretty: false                # Use pretty formatted output
+dark-mode: true                 # Use dark mode colors
+show-diffs: true                # Show diffs of proposed changes
+
+## Code context
+map-tokens: 2048                # Tokens to use for repository map
+max-chat-history-tokens: 4096   # Max tokens for chat history
+
+## NOTE: API keys should NEVER be stored here
+## Use environment variables instead for security
