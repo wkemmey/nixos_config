@@ -1,5 +1,4 @@
-{ pkgs, lib, host, inputs, ... }:
-{
+{ pkgs, lib, host, inputs, ... }: {
   programs = {
     dconf.enable = true;
     seahorse.enable = true;

@@ -1,4 +1,5 @@
-{host, pkgs, ...}: let
+{ host, pkgs, ... }: 
+let
   inherit (import ../../hosts/${host}/variables.nix) enablePrint;
 in {
   services = {

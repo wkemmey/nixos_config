@@ -1,9 +1,4 @@
-{
-  pkgs,
-  host,
-  options,
-  ...
-}: {
+{ pkgs, host, options, ... }: {
   networking = {
     hostName = "${host}";
     networkmanager.enable = true;
