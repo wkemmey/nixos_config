@@ -3,6 +3,7 @@ _: {
     rtkit.enable = true;
     polkit = {
       enable = true;
+      # make it so a user can shutdown or reboot without password
       extraConfig = ''
         polkit.addRule(function(action, subject) {
           if ( subject.isInGroup("users") && (

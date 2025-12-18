@@ -172,7 +172,7 @@ binds {
     // mod+Comma { spawn "noctalia-shell" "ipc" "call" "settings" "toggle"; }
     // mod+Alt+S { spawn "noctalia-shell" "ipc" "call" "settings" "toggle"; }
     // mod+Shift+C { spawn "noctalia-shell" "ipc" "call" "controlCenter" "toggle"; }
-    Mod+Z { spawn "noctalia-shell" "ipc" "call" "lockScreen" "toggle"; }
+    Mod+Z { spawn "noctalia-shell" "ipc" "call" "lockScreen" "lock"; }
 
     // keyboard brightness controls
     XF86KbdBrightnessUp allow-when-locked=true { spawn "kbdbrite.sh" "up"; }
