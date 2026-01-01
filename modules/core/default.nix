@@ -6,13 +6,14 @@
     ./browsers-extra.nix    # additional browsers beyond firefox
     ./communication.nix     # communication apps: discord, teams, zoom, telegram
     ./dotbot.nix            # dotfile symlink manager
-    ./gaming-support.nix    # gaming: controllers, gamescope, protonup-qt
     ./fonts.nix             # system font configuration
+    ./gaming-support.nix    # gaming: controllers, gamescope, protonup-qt
     ./greetd.nix            # login manager for niri
     ./hardware.nix          # hardware support: bluetooth, sound, power management
     ./network.nix           # network configuration and firewall
     ./nfs.nix               # network file system support
     ./nh.nix                # nix helper tool for easier rebuilds
+    ./niri.nix              # niri wayland compositor configuration
     ./packages.nix          # core system packages
     ./printing.nix          # printing and scanning support
     ./productivity.nix      # productivity apps: obsidian, quickemu
