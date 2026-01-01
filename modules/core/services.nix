@@ -1,4 +1,4 @@
-{profile, pkgs, ...}: {
+{ profile, pkgs, ... }: {
   # services to start
   services = {
     libinput.enable = true; # input handling
@@ -10,13 +10,14 @@
     gnome.gnome-keyring.enable = true;
     upower.enable = true; # power management (required for battery monitoring TODO this was required for dms, is it still needed for noctalia?)
 
-    smartd = {
+    smartd = { # monitors health of hard drives and ssds
       enable =
         if profile == "vm"
         then false
         else true;
       autodetect = true;
     };
+
     pipewire = {
       enable = true;
       alsa.enable = true;
