@@ -50,9 +50,9 @@ in
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     # common libraries needed for android tools
-    stdenv.cc.cc.lib
-    zlib
-    openssl
-    libGL
+    #stdenv.cc.cc.lib
+    #zlib
+    #openssl
+    #libGL
   ];
 }
