@@ -7,12 +7,10 @@
     "separator": " ➜  "
   },
   "logo": {
-    "source": "~/.config/fastfetch/nixos.png",
-    "type": "sixel",
-    "width": 20,
-    "height": 10,
+    "source": "~/.config/fastfetch/nix.txt",
+    "type": "file",
     "padding": {
-      "top": 2,
+      "top": 1,
       "left": 2
     }
   },

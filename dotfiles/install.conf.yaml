@@ -9,8 +9,10 @@
     ~/.config/Code/User/settings.json: .config/Code/User/settings.json
     ~/.config/.emoji: .config/.emoji
     ~/.config/fastfetch/config.jsonc: .config/fastfetch/config.jsonc
-    ~/.config/mimeapps.list: .config/mimeapps.list
+    ~/.config/fastfetch/nix.txt: .config/fastfetch/nix.txt
+    ~/.config/fastfetch/nix_large.txt: .config/fastfetch/nix_large.txt
     ~/.config/fastfetch/nixos.png: .config/fastfetch/nixos.png
+    ~/.config/mimeapps.list: .config/mimeapps.list
     ~/.config/fish/config.fish: .config/fish/config.fish
     ~/.config/foot/foot.ini: .config/foot/foot.ini
     ~/.config/lazygit/config.yml: .config/lazygit/config.yml
