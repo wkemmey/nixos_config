@@ -4,7 +4,7 @@
   "chat.fontFamily": "Montserrat",
   "debug.console.fontFamily": "JetBrains Mono",
   "debug.console.fontSize": 16,
-  "editor.fontFamily": "JetBrains Mono",
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
   "editor.fontSize": 16,
   "editor.inlayHints.fontFamily": "JetBrains Mono",
   "editor.inlineSuggest.fontFamily": "JetBrains Mono",
