@@ -75,6 +75,11 @@
       "format": "{vendor} {name}"
     },
     {
+      "key": " │             │\u001b[13D\u001b[34m󰢮  mboard",
+      "type": "board",
+      "format": "{vendor} {name}"
+    },
+    {
       "key": " │             │\u001b[13D\u001b[34m󰍹  display",
       "type": "display",
       "format": "{width}x{height} @ {refresh-rate} Hz"
