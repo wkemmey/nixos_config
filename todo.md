@@ -18,6 +18,9 @@
 - setup AGENTS.md
 - make it so i can change themes - set up noctalia to manage themes
 - check each file in /etc/profiles/per-user/whit/bin -- do i want it?
+- ensure xbox controller is working
+
+- create rust directory merger project
 
 
 
