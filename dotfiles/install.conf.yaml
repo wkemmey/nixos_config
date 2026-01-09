@@ -26,6 +26,7 @@
     ~/.config/bat/config: .config/bat/config
     ~/.config/bottom/bottom.toml: .config/bottom/bottom.toml
     ~/.config/btop/btop.conf: .config/btop/btop.conf
+    ~/.config/btop/themes: .config/btop/themes
     ~/.config/htop/htoprc: .config/htop/htoprc
     ~/.config/cava/config: .config/cava/config
     ~/.config/tealdeer/config.toml: .config/tealdeer/config.toml
