@@ -15,4 +15,4 @@
 - install dropbox (can i put it on different drive)
 - set up rust and python dev environments
 - get steam working
-
+- setup AGENTS.md

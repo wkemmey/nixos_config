@@ -1,32 +1,33 @@
-{ pkgs, ...}: {
+{ pkgs, ... }: {
   fonts = {
     packages = with pkgs; [
+      # unicode fallback and international character coverage
       dejavu_fonts
-      fira-code
-      fira-code-symbols
-      noto-fonts
-      noto-fonts-color-emoji
-      noto-fonts-cjk-sans
+      noto-fonts              # from google - "no tofu" = no missing character boxes
+      noto-fonts-color-emoji  # system-wide color emoji support
+      noto-fonts-cjk-sans     # chinese/japanese/korean support
+      
+      # icon fonts for gui apps and web content
       font-awesome
-      jetbrains-mono
       material-icons
-      maple-mono.NF
+      
+      # nerd fonts (patched with icons/glyphs for terminals and editors)
       nerd-fonts.fira-code
-      nerd-fonts.droid-sans-mono
       nerd-fonts.jetbrains-mono
-      nerd-fonts.meslo-lg
-      nerd-fonts.hack
-      #symbola   #still 404 error
-      terminus_font
-      #inter  # inter variable font (general use)
-      montserrat
+      
+      # additional fonts
+      terminus_font            # bitmap font for specific use cases
+      montserrat               # sans-serif UI font
+      roboto                   # google's popular UI font
+      ubuntu_font_family       # clean, readable fonts
+      liberation_ttf           # microsoft font compatibility (arial, times new roman, courier)
     ];
     
     fontconfig = {
       defaultFonts = {
         monospace = ["JetBrains Mono"];
-        sansSerif = ["Montserrat"];
-        serif = ["Montserrat"];
+        sansSerif = ["Liberation Sans" "DejaVu Sans"];
+        serif = ["Liberation Serif" "DejaVu Serif"];
       };
     };
   };
