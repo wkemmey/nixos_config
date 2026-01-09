@@ -1,3 +1,5 @@
+# dotbot config
+
 - defaults:
     link:
       relink: true

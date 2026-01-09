@@ -874,9 +874,9 @@ on = ["g", "c"]
 run = "cd ~/.config"
 
 [[mgr.keymap]]
-desc = "Goto ~/Downloads"
+desc = "Goto ~/downloads"
 on = ["g", "d"]
-run = "cd ~/Downloads"
+run = "cd ~/downloads"
 
 [[mgr.keymap]]
 desc = "Jump interactively"

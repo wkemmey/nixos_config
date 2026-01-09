@@ -16,3 +16,18 @@
 - set up rust and python dev environments
 - get steam working
 - setup AGENTS.md
+- make it so i can change themes - set up noctalia to manage themes
+- check each file in /etc/profiles/per-user/whit/bin -- do i want it?
+
+
+
+
+
+
+i'm using nixos with niri and noctalia shell. noctalia has the ability to choose a theme for noctalia and optionally apply this to a preconfigured set of other tools/apps. how does this work? is it compatible with nixos? is it a good idea if i want to be able to switch themes occasionally? 
+
+
+i'm using home manager for a few things, which i'm comfortable handling through nix config, but most of my software is configured through dotfiles. in my .config directory, i have simlinks to a git repo, but the files in the git repo are writeable, so i think this would work with noctalia. does noctalia update theme settings in other apps but leave the rest of the config alone, or does it overwrite whole config files (which would undo non-theme options that i have configured) 
+
+
+ what does noctalia's "enable user templates" do?
