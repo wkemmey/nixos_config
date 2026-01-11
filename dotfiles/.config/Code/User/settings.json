@@ -17,7 +17,7 @@
   "screencastMode.fontSize": 64,
   "terminal.integrated.fontSize": 16,
   "git.enableSmartCommit": true,
-  "workbench.colorTheme": "Tokyo Night",
+  "workbench.colorTheme": "NoctaliaTheme",
   "git.confirmSync": false,
   "update.mode": "none"
 }

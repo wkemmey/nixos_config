@@ -32,4 +32,9 @@
     ~/.config/htop/htoprc: .config/htop/htoprc
     ~/.config/cava/config: .config/cava/config
     ~/.config/tealdeer/config.toml: .config/tealdeer/config.toml
+    ~/.config/helix/config.toml: .config/helix/config.toml
+    ~/.config/fuzzel/fuzzel.ini: .config/fuzzel/fuzzel.ini
+    ~/.config/obs-studio/global.ini: .config/obs-studio/global.ini
+    ~/.config/noctalia/settings.json: .config/noctalia/settings.json
+    ~/.config/Thunar/uca.xml: .config/Thunar/uca.xml
     ~/.aider.conf.yml: .aider.conf.yml
