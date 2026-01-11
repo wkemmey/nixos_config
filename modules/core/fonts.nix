@@ -19,7 +19,7 @@
       terminus_font            # bitmap font for specific use cases
       montserrat               # sans-serif UI font
       roboto                   # google's popular UI font
-      ubuntu_font_family       # clean, readable fonts
+      ubuntu-classic           # clean, readable fonts
       liberation_ttf           # microsoft font compatibility (arial, times new roman, courier)
     ];
     
