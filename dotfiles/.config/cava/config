@@ -7,3 +7,6 @@ bar_spacing=1
 bar_width=2
 frame_rate=60
 
+
+[color]
+theme = "noctalia"
