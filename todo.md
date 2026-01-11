@@ -23,6 +23,10 @@
 - create rust directory merger project
 
 
+next steps:
+set up noctalia to control all themes, incl firefox
+
+
 
 
 
