@@ -19,5 +19,14 @@
   "git.enableSmartCommit": true,
   "workbench.colorTheme": "NoctaliaTheme",
   "git.confirmSync": false,
-  "update.mode": "none"
+  "update.mode": "none",
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "path": "/run/current-system/sw/bin/bash"
+    }
+  },
+  "terminal.integrated.automationProfile.linux": {
+    "path": "/run/current-system/sw/bin/bash"
+  }
 }

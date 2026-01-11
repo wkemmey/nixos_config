@@ -112,8 +112,7 @@ fg = "#cdd6f4"
 mime = "*"
 
 [flavor]
-dark = ""
-light = ""
+use = "noctalia"
 
 [help.desc]
 fg = "#cdd6f4"

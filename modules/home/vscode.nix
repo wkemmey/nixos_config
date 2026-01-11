@@ -7,6 +7,8 @@
     
     # extensions managed by nix (declarative, reproducible)
     # settings managed via dotfiles (easier to edit frequently)
+    # Note: NoctaliaTheme extension may need to be installed manually via VS Code
+    # if not available in nixpkgs vscode-extensions
     profiles.default.extensions = with pkgs.vscode-extensions; [
       github.copilot
       github.copilot-chat
