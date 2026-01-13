@@ -11,20 +11,20 @@ if status is-interactive; and not set -q FASTFETCH_LAUNCHED
 end
 
 # fix a problem where vscode has trouble understanding when fish is finished executing a command
-if status is-interactive
-    if test "$TERM_PROGRAM" = "vscode"
-        # Signal that the command has finished whenever a prompt is about to be shown
-        function vscode_signal_finish --on-event fish_prompt
-            echo -ne "\033]633;D;0\007"
-            echo -ne "\033]633;A\007" # Also signal that a new prompt is starting
-        end
-
-        # Signal that a command is starting
-        function vscode_signal_start --on-event fish_preexec
-            echo -ne "\033]633;B\007"
-        end
-    end
-end
+#if status is-interactive
+#    if test "$TERM_PROGRAM" = "vscode"
+#        # Signal that the command has finished whenever a prompt is about to be shown
+#        function vscode_signal_finish --on-event fish_prompt
+#            echo -ne "\033]633;D;0\007"
+#            echo -ne "\033]633;A\007" # Also signal that a new prompt is starting
+#        end
+#
+#        # Signal that a command is starting
+#        function vscode_signal_start --on-event fish_preexec
+#            echo -ne "\033]633;B\007"
+#        end
+#    end
+#end
 
 # load personal config if it exists
 if test -f $HOME/.fishrc-personal
