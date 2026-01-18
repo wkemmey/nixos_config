@@ -1,6 +1,7 @@
 # disable fish greeting
 set fish_greeting
 
+# remove this once i'm sure i don't need it
 # fix PATH order - ensure wrappers come before system bins
 # this works around a nixos fish integration bug where PATH order gets scrambled
 # remove all instances of /run/wrappers/bin first, then prepend it
