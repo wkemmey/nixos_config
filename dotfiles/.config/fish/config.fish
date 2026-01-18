@@ -1,6 +1,12 @@
 # disable fish greeting
 set fish_greeting
 
+# fix PATH order - ensure wrappers come before system bins
+# this works around a nixos fish integration bug where PATH order gets scrambled
+# remove all instances of /run/wrappers/bin first, then prepend it
+set -l cleaned_path (string match -v /run/wrappers/bin $PATH)
+set -gx PATH /run/wrappers/bin $cleaned_path
+
 # disable terminal capability query timeout warnings
 set -g fish_query_timeout 0
 
@@ -36,10 +42,6 @@ starship init fish | source
 
 # initialize zoxide (smart cd)
 zoxide init fish --cmd cd | source
-
-# add local bin directories to path
-fish_add_path $HOME/.local/bin
-fish_add_path $HOME/.pub-cache/bin
 
 # browser for cli tools
 set -gx BROWSER "xdg-open"
