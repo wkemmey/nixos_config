@@ -132,6 +132,7 @@
     # wayland utilities
     wl-clipboard # wayland clipboard utilities (wl-copy, wl-paste) - used by clipboard history, color picker, scripts
     udiskie # usb drive automounter
+    matugen # material you color generator for theming
     
     # xdg desktop portal (for screen sharing, file pickers, etc)
     xdg-desktop-portal
