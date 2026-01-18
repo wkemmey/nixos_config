@@ -1,0 +1,23 @@
+# matugen configuration
+# colors will be generated from wallpaper or predefined schemes
+
+[config]
+# generate colors and apply templates
+reload_apps = true
+reload_apps_list = ["killall -SIGUSR1 foot", "niri msg action reload-config", "pkill -USR1 fuzzel"]
+
+[templates]
+# templates will read from ~/.config/matugen/templates/
+# and output to the specified paths
+
+# foot terminal
+foot = { input_path = "~/.config/matugen/templates/foot.toml", output_path = "~/.config/foot/themes/matugen" }
+
+# fuzzel launcher  
+fuzzel = { input_path = "~/.config/matugen/templates/fuzzel.ini", output_path = "~/.config/fuzzel/themes/matugen" }
+
+# niri compositor
+niri = { input_path = "~/.config/matugen/templates/niri.kdl", output_path = "~/.config/niri/matugen.kdl" }
+
+# cava visualizer
+cava = { input_path = "~/.config/matugen/templates/cava.conf", output_path = "~/.config/cava/themes/matugen" }

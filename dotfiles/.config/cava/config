@@ -1,6 +1,6 @@
-# Colors managed by Noctalia - see ~/.config/cava/themes/noctalia
-# Gradient colors removed to avoid conflicts
-# include directive not supported by cava, but Noctalia overwrites this file
+# colors managed by matugen - see ~/.config/cava/themes/matugen
+# gradient colors removed to avoid conflicts
+# include directive not supported by cava, but matugen overwrites this file
 
 [general]
 bar_spacing=1

@@ -13,6 +13,7 @@
     (import ./niri-gaming-mode.nix { inherit pkgs; })
     (import ./webapp-install.nix { inherit pkgs; })
     (import ./webapp-remove.nix { inherit pkgs; })
+    (import ./theme-switch.nix { inherit pkgs; })
     (import ./dcli.nix {
       inherit pkgs host profile;
       backupFiles = [
