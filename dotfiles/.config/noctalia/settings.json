@@ -279,10 +279,10 @@
     },
     "hooks": {
         "darkModeChange": "",
-        "enabled": false,
+        "enabled": true,
         "screenLock": "",
         "screenUnlock": "",
-        "wallpaperChange": ""
+        "wallpaperChange": "theme-switch \"$WALL\""
     },
     "location": {
         "analogClockInCalendar": false,
