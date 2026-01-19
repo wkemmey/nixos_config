@@ -282,7 +282,7 @@
         "enabled": true,
         "screenLock": "",
         "screenUnlock": "",
-        "wallpaperChange": "theme-switch \"$WALL\""
+        "wallpaperChange": "matugen image \"$WALL\""
     },
     "location": {
         "analogClockInCalendar": false,

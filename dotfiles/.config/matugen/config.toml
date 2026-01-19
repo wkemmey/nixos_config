@@ -20,4 +20,4 @@ fuzzel = { input_path = "~/.config/matugen/templates/fuzzel.ini", output_path = 
 niri = { input_path = "~/.config/matugen/templates/niri.kdl", output_path = "~/.config/niri/matugen.kdl" }
 
 # cava visualizer
-cava = { input_path = "~/.config/matugen/templates/cava.conf", output_path = "~/.config/cava/themes/matugen" }
+#cava = { input_path = "~/.config/matugen/templates/cava.conf", output_path = "~/.config/cava/themes/matugen" }
