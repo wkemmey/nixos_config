@@ -17,12 +17,11 @@ This setup allows you to change color schemes without a NixOS rebuild using Matu
 theme-switch ~/wallpapers/my-image.png
 ```
 
-### From a Predefined Scheme
+### From a Color
 ```bash
-theme-switch --scheme catppuccin-mocha
-theme-switch --scheme tokyo-night
-theme-switch --scheme nord
-theme-switch --scheme gruvbox-dark
+# Use a hex color as the base
+theme-switch --color "#cba6f7"  # Catppuccin Mocha mauve
+theme-switch --color "#7aa2f7"  # Tokyo Night blue
 ```
 
 ## Supported Apps
@@ -50,13 +49,6 @@ See [Matugen docs](https://github.com/InioX/matugen) for full list. Common ones:
 - `{{ colors.secondary.default.hex }}` - Secondary accent
 - `{{ colors.tertiary.default.hex }}` - Tertiary accent
 - `{{ colors.error.default.hex }}` - Error color
-
-## Disabling Noctalia
-
-If you're switching to Matugen, you may want to:
-1. Remove noctalia-shell from niri startup
-2. Remove noctalia theming from app configs
-3. Optionally uninstall noctalia package
 
 ## Current Setup Status
 
