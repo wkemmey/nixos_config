@@ -1,33 +1,4 @@
 {
-  "chat.editor.fontFamily": "JetBrains Mono",
-  "chat.editor.fontSize": 16,
-  "chat.fontFamily": "Montserrat",
-  "debug.console.fontFamily": "JetBrains Mono",
-  "debug.console.fontSize": 16,
-  "editor.fontFamily": "JetBrainsMono Nerd Font",
-  "editor.fontSize": 16,
-  "editor.inlayHints.fontFamily": "JetBrains Mono",
-  "editor.inlineSuggest.fontFamily": "JetBrains Mono",
-  "editor.minimap.sectionHeaderFontSize": 10,
-  "markdown.preview.fontFamily": "Montserrat",
-  "markdown.preview.fontSize": 16,
-  "notebook.markup.fontFamily": "Montserrat",
-  "scm.inputFontFamily": "JetBrains Mono",
-  "scm.inputFontSize": 15,
-  "screencastMode.fontSize": 64,
-  "terminal.integrated.fontSize": 16,
-  "git.enableSmartCommit": true,
-  "git.confirmSync": false,
-  "update.mode": "none",
-  "terminal.integrated.defaultProfile.linux": "bash",
-  "terminal.integrated.profiles.linux": {
-    "bash": {
-      "path": "/run/current-system/sw/bin/bash"
-    }
-  },
-  "terminal.integrated.automationProfile.linux": {
-    "path": "/run/current-system/sw/bin/bash"
-  },
   "workbench.colorCustomizations": {
     "focusBorder": "#d6bbfb",
     "foreground": "#e7e0e8",

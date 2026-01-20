@@ -24,6 +24,7 @@
     ~/.config/gtk-3.0/settings.ini: .config/gtk-3.0/settings.ini
     ~/.config/gtk-4.0/settings.ini: .config/gtk-4.0/settings.ini
     ~/.config/yazi: .config/yazi
+    ~/.config/noctalia: .config/noctala
     ~/.config/noctalia-shell/settings.json: .config/noctalia-shell/settings.json
     ~/.config/starship.toml: .config/starship.toml
     ~/.config/bat/config: .config/bat/config
