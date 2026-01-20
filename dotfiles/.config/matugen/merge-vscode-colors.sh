@@ -4,6 +4,9 @@
 
 set -e
 
+# log execution for debugging
+echo "[$(date)] merge-vscode-colors.sh called" >> /tmp/matugen-merge.log
+
 SETTINGS_FILE="$HOME/.config/Code/User/settings.json"
 COLORS_FILE="$HOME/.config/matugen/vscode-colors.json"
 

@@ -282,7 +282,7 @@
         "enabled": true,
         "screenLock": "",
         "screenUnlock": "",
-        "wallpaperChange": "matugen image \"$WALL\""
+        "wallpaperChange": "~/.config/matugen/wallpaper-hook.sh $1"
     },
     "location": {
         "analogClockInCalendar": false,
