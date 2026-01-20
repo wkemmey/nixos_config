@@ -4,7 +4,7 @@
 [config]
 # generate colors and apply templates
 reload_apps = true
-reload_apps_list = ["killall -SIGUSR1 foot", "niri msg action reload-config", "pkill -USR1 fuzzel"]
+reload_apps_list = ["killall -SIGUSR1 foot", "niri msg action reload-config", "pkill -USR1 fuzzel", "~/.config/matugen/merge-vscode-colors.sh"]
 
 [templates]
 # templates will read from ~/.config/matugen/templates/
@@ -18,6 +18,9 @@ fuzzel = { input_path = "~/.config/matugen/templates/fuzzel.ini", output_path = 
 
 # niri compositor
 niri = { input_path = "~/.config/matugen/templates/niri.kdl", output_path = "~/.config/niri/matugen.kdl" }
+
+# vscode colors (will be merged into settings.json by script)
+vscode = { input_path = "~/.config/matugen/templates/vscode-colors.json", output_path = "~/.config/matugen/vscode-colors.json" }
 
 # cava visualizer
 #cava = { input_path = "~/.config/matugen/templates/cava.conf", output_path = "~/.config/cava/themes/matugen" }

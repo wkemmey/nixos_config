@@ -17,7 +17,6 @@
   "screencastMode.fontSize": 64,
   "terminal.integrated.fontSize": 16,
   "git.enableSmartCommit": true,
-  "workbench.colorTheme": "NoctaliaTheme",
   "git.confirmSync": false,
   "update.mode": "none",
   // use bash because github copilot struggles with fish

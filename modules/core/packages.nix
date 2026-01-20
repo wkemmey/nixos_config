@@ -67,6 +67,7 @@
 
     # terminal utilities and tools
     cmatrix # matrix movie effect (for user)
+    jq # json processor (used by matugen vscode color merge script)
     killall # kill all instances of a program (for user)
     nitch # minimal fetch utility (for user)
     onefetch # git repository information display (for user)
