@@ -22,5 +22,8 @@ niri = { input_path = "~/.config/matugen/templates/niri.kdl", output_path = "~/.
 # vscode colors (will be merged into settings.json by script)
 vscode = { input_path = "~/.config/matugen/templates/vscode-colors.json", output_path = "~/.config/matugen/vscode-colors.json" }
 
+# fastfetch system info
+fastfetch = { input_path = "~/.config/matugen/templates/fastfetch.jsonc", output_path = "~/.config/fastfetch/config.jsonc" }
+
 # cava visualizer
 #cava = { input_path = "~/.config/matugen/templates/cava.conf", output_path = "~/.config/cava/themes/matugen" }

@@ -4,135 +4,134 @@
     "type": "none"
   },
   "display": {
-    "separator": "",
+    "separator": " ",
     "key": {
       "width": 18
     }
   },
   "modules": [
     {
-      "key": " ╭─────────────╮",
+      "key": "\u001b[38;2;157;142;129m ╭─────────────╮",
       "type": "custom"
     },
     {
-      // draw borders first to make colors of left and right border consistant
-      "key": " │             │\u001b[13D\u001b[36m  user",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;251;186;115m\uf007  user",
       "type": "title",
       "format": "{user-name}"
     },
     {
-      "key": " │             │\u001b[13D\u001b[36m󰌢  hostname",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;251;186;115m󰌢  hostname",
       "type": "title",
       "format": "{host-name}"
     },
     {
-      "key": " ├─────────────┤",
+      "key": "\u001b[38;2;157;142;129m ├─────────────┤",
       "type": "custom"
     },
     {
-      "key": " │             │\u001b[13D\u001b[32m󱄅  distro",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;224;193;163m󱄅  distro",
       "type": "os"
     },
     {
-      "key": " │             │\u001b[13D\u001b[32m  kernel",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;224;193;163m\uf0a0  kernel",
       "type": "kernel"
     },
     {
-      "key": " │             │\u001b[13D\u001b[32m󰏖  packages",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;224;193;163m󰏖  packages",
       "type": "packages"
     },
     {
-      "key": " ├─────────────┤",
+      "key": "\u001b[38;2;157;142;129m ├─────────────┤",
       "type": "custom"
     },
     {
-      "key": " │             │\u001b[13D\u001b[33m  win mgr",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;190;204;156m\uf2d2  win mgr",
       "type": "wm"
     },
     {
-      "key": " │             │\u001b[13D\u001b[33m  shell",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;190;204;156m\uf489  shell",
       "type": "shell"
     },
     {
-      "key": " │             │\u001b[13D\u001b[33m  terminal",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;190;204;156m\uf120  terminal",
       "type": "terminal"
     },
     {
-      "key": " │             │\u001b[13D\u001b[33m  font",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;190;204;156m\uf031  font",
       "type": "terminalfont"
     },
     {
-      "key": " ├─────────────┤",
+      "key": "\u001b[38;2;157;142;129m ├─────────────┤",
       "type": "custom"
     },
     {
-      "key": " │             │\u001b[13D\u001b[34m󰍛  cpu",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;251;186;115m󰍛  cpu",
       "type": "cpu"
     },
     {
-      "key": " │             │\u001b[13D\u001b[34m󰢮  gpu",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;251;186;115m󰢮  gpu",
       "type": "gpu",
       "format": "{vendor} {name}"
     },
     {
-      "key": " │             │\u001b[13D\u001b[34m󰢮  mboard",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;251;186;115m󰚫  mboard",
       "type": "board",
       "format": "{vendor} {name}"
     },
     {
-      "key": " │             │\u001b[13D\u001b[34m󰍹  display",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;251;186;115m󰍹  display",
       "type": "display",
       "format": "{width}x{height} @ {refresh-rate} Hz"
     },
     {
-      "key": " │             │\u001b[13D\u001b[34m󰉉  disk",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;251;186;115m󰉉  disk",
       "type": "disk",
       "folders": "/"
     },
     {
-      "key": " │             │\u001b[13D\u001b[34m󰑭  memory",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;251;186;115m󰑭  memory",
       "type": "memory"
     },
     {
-      "key": " │             │\u001b[13D\u001b[34m  wifi",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;251;186;115m\uf1eb  wifi",
       "type": "wifi",
       "format": "{status} {ssid}"
     },
     {
-      "key": " │             │\u001b[13D\u001b[34m  battery",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;251;186;115m  battery",
       "type": "battery"
     },
     {
-      "key": " │             │\u001b[13D\u001b[34m  sound",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;251;186;115m\uf028  sound",
       "type": "sound"
     },
     {
-      "key": " ├─────────────┤",
+      "key": "\u001b[38;2;157;142;129m ├─────────────┤",
       "type": "custom"
     },
     {
-      "key": " │             │\u001b[13D\u001b[31m󰥠  player",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;224;193;163m󰥠  player",
       "type": "player"
     },
     {
-      "key": " │             │\u001b[13D\u001b[31m󰝚  media",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;224;193;163m󰝚  media",
       "type": "media"
     },
     {
-      "key": " │             │\u001b[13D\u001b[31m󰅐  uptime",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;224;193;163m󰅐  uptime",
       "type": "uptime"
     },
     {
-      "key": " ├─────────────┤",
+      "key": "\u001b[38;2;157;142;129m ├─────────────┤",
       "type": "custom"
     },
     {
-      "key": " │             │\u001b[13D\u001b[35m󰍛  colors",
+      "key": "\u001b[38;2;157;142;129m │             │\u001b[13D\u001b[38;2;190;204;156m󰍛  colors",
       "type": "colors",
       "symbol": "circle"
     },
     {
-      "key": " ╰─────────────╯",
+      "key": "\u001b[38;2;157;142;129m ╰─────────────╯",
       "type": "custom"
     }
   ]

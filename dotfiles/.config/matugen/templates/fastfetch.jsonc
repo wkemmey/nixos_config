@@ -1,0 +1,138 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "type": "none"
+  },
+  "display": {
+    "separator": " ",
+    "key": {
+      "width": 18
+    }
+  },
+  "modules": [
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m ╭─────────────╮",
+      "type": "custom"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.primary.default.red }};{{ colors.primary.default.green }};{{ colors.primary.default.blue }}m\uf007  user",
+      "type": "title",
+      "format": "{user-name}"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.primary.default.red }};{{ colors.primary.default.green }};{{ colors.primary.default.blue }}m󰌢  hostname",
+      "type": "title",
+      "format": "{host-name}"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m ├─────────────┤",
+      "type": "custom"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.secondary.default.red }};{{ colors.secondary.default.green }};{{ colors.secondary.default.blue }}m󱄅  distro",
+      "type": "os"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.secondary.default.red }};{{ colors.secondary.default.green }};{{ colors.secondary.default.blue }}m\uf0a0  kernel",
+      "type": "kernel"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.secondary.default.red }};{{ colors.secondary.default.green }};{{ colors.secondary.default.blue }}m󰏖  packages",
+      "type": "packages"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m ├─────────────┤",
+      "type": "custom"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.tertiary.default.red }};{{ colors.tertiary.default.green }};{{ colors.tertiary.default.blue }}m\uf2d2  win mgr",
+      "type": "wm"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.tertiary.default.red }};{{ colors.tertiary.default.green }};{{ colors.tertiary.default.blue }}m\uf489  shell",
+      "type": "shell"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.tertiary.default.red }};{{ colors.tertiary.default.green }};{{ colors.tertiary.default.blue }}m\uf120  terminal",
+      "type": "terminal"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.tertiary.default.red }};{{ colors.tertiary.default.green }};{{ colors.tertiary.default.blue }}m\uf031  font",
+      "type": "terminalfont"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m ├─────────────┤",
+      "type": "custom"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.primary.default.red }};{{ colors.primary.default.green }};{{ colors.primary.default.blue }}m󰍛  cpu",
+      "type": "cpu"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.primary.default.red }};{{ colors.primary.default.green }};{{ colors.primary.default.blue }}m󰢮  gpu",
+      "type": "gpu",
+      "format": "{vendor} {name}"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.primary.default.red }};{{ colors.primary.default.green }};{{ colors.primary.default.blue }}m󰚫  mboard",
+      "type": "board",
+      "format": "{vendor} {name}"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.primary.default.red }};{{ colors.primary.default.green }};{{ colors.primary.default.blue }}m󰍹  display",
+      "type": "display",
+      "format": "{width}x{height} @ {refresh-rate} Hz"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.primary.default.red }};{{ colors.primary.default.green }};{{ colors.primary.default.blue }}m󰉉  disk",
+      "type": "disk",
+      "folders": "/"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.primary.default.red }};{{ colors.primary.default.green }};{{ colors.primary.default.blue }}m󰑭  memory",
+      "type": "memory"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.primary.default.red }};{{ colors.primary.default.green }};{{ colors.primary.default.blue }}m\uf1eb  wifi",
+      "type": "wifi",
+      "format": "{status} {ssid}"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.primary.default.red }};{{ colors.primary.default.green }};{{ colors.primary.default.blue }}m  battery",
+      "type": "battery"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.primary.default.red }};{{ colors.primary.default.green }};{{ colors.primary.default.blue }}m\uf028  sound",
+      "type": "sound"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m ├─────────────┤",
+      "type": "custom"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.secondary.default.red }};{{ colors.secondary.default.green }};{{ colors.secondary.default.blue }}m󰥠  player",
+      "type": "player"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.secondary.default.red }};{{ colors.secondary.default.green }};{{ colors.secondary.default.blue }}m󰝚  media",
+      "type": "media"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.secondary.default.red }};{{ colors.secondary.default.green }};{{ colors.secondary.default.blue }}m󰅐  uptime",
+      "type": "uptime"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m ├─────────────┤",
+      "type": "custom"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m │             │\u001b[13D\u001b[38;2;{{ colors.tertiary.default.red }};{{ colors.tertiary.default.green }};{{ colors.tertiary.default.blue }}m󰍛  colors",
+      "type": "colors",
+      "symbol": "circle"
+    },
+    {
+      "key": "\u001b[38;2;{{ colors.outline.default.red }};{{ colors.outline.default.green }};{{ colors.outline.default.blue }}m ╰─────────────╯",
+      "type": "custom"
+    }
+  ]
+}
