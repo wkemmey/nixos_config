@@ -96,5 +96,7 @@
     "notifications.background": "#1d2024",
     "notifications.foreground": "#e1e2e8",
     "notifications.border": "#8c9199"
-  }
+  },
+  "specstory.cloudSync.enabled": "never",
+  "specstory.helpUsImprove": false
 }

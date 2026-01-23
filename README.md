@@ -97,7 +97,17 @@ Edit `hosts/<hostname>/variables.nix` to set your actual Git email:
 gitEmail = "your.email@example.com";
 ```
 
-### 4. Customize Variables
+### 4. Install VS Code Extensions (Manual)
+
+Some VS Code extensions aren't available in nixpkgs and must be installed through the VS Code UI:
+
+1. Open VS Code (Ctrl+Shift+X to open Extensions panel)
+2. Search for and install:
+   - **SpecStory** - Automatically logs GitHub Copilot chat history (save, export, search conversations)
+
+Extensions installed via the UI are stored in `~/.vscode/extensions/` and coexist with Nix-managed extensions.
+
+### 5. Customize Variables
 
 Review and update other settings in `hosts/<hostname>/variables.nix`:
 - Enable optional features (gaming support, communication apps, etc.)
