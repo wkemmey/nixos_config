@@ -2,14 +2,17 @@
 # wrapper script called by noctalia wallpaper change hook
 # runs matugen then merges vscode colors
 
-#set -e
-
-# log execution for debugging
-echo "[$(date)] wallpaper-hook.sh called" >> /tmp/wallpaper-hook.log
-echo "  \$1 = '$1'" >> /tmp/wallpaper-hook.log
+set -e
 
 # generate colors from wallpaper
-matugen image "$1"
+# scheme-tonal-spot - balanced, small range of related hues, default
+# scheme-expressive - vibrant, unexpected hues, high energy
+# scheme-fidelity - literal, match source as closely as possible
+# scheme-fruit-salad - playful, highly varied hues, "busy" in a fun way
+# scheme-monochrome - greyscale, removes almost all saturation, minimalist
+# scheme-neutral - subdued, very low saturation, hint of the source color
+# scheme-content - adaptive, dynamically adjusts based on the image
+matugen image "$1" -t scheme-tonal-spot
 
 # merge colors into vscode settings
 ~/.config/matugen/merge-vscode-colors.sh

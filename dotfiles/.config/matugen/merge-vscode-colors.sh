@@ -2,13 +2,12 @@
 # merge matugen-generated vs code colors into settings.json; this preserves user
 # settings while updating color customizations
 
+# note: vscode uses jsonc, but jq can't handle comments in settings.json
+
 set -e
 
-# log execution for debugging
-echo "[$(date)] merge-vscode-colors.sh called" >> /tmp/matugen-merge.log
-
-SETTINGS_FILE="$HOME/.config/Code/User/settings.json"
-COLORS_FILE="$HOME/.config/matugen/vscode-colors.json"
+SETTINGS_FILE="~/.config/Code/User/settings.json"
+COLORS_FILE="~/.config/matugen/vscode-colors.json"
 
 # check if jq is available
 if ! command -v jq &> /dev/null; then
