@@ -38,3 +38,16 @@ i'm using home manager for a few things, which i'm comfortable handling through 
 
 
  what does noctalia's "enable user templates" do?
+
+
+
+
+ ---
+
+ i need to remove the debug stuff copilot added while trying to resolve vscode/matugen
+ i need to find additional wallpapers so the matugen link is more clear
+ i need to try different matugen options like fruit salad
+ i need to theme firefox and everything else
+ i need to add logic to establish matugen themes if not already there to prevent failed build
+
+ i need to see why fixes didn't resolve boot errors
