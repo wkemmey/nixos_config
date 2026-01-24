@@ -12,7 +12,7 @@ set -e
 # scheme-monochrome - greyscale, removes almost all saturation, minimalist
 # scheme-neutral - subdued, very low saturation, hint of the source color
 # scheme-content - adaptive, dynamically adjusts based on the image
-matugen image "$1" -t scheme-tonal-spot
+matugen image "$1" -t scheme-fruit-salad
 
 # merge colors into vscode settings
 ~/.config/matugen/merge-vscode-colors.sh
