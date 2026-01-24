@@ -6,8 +6,8 @@
 
 set -e
 
-SETTINGS_FILE="~/.config/Code/User/settings.json"
-COLORS_FILE="~/.config/matugen/vscode-colors.json"
+SETTINGS_FILE="$HOME/.config/Code/User/settings.json"
+COLORS_FILE="$HOME/.config/matugen/vscode-colors.json"
 
 # check if jq is available
 if ! command -v jq &> /dev/null; then
