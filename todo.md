@@ -48,4 +48,6 @@ i'm using home manager for a few things, which i'm comfortable handling through 
  i need to theme firefox and everything else
  i need to add logic to establish matugen themes if not already there to prevent failed build
 
+ do i want to use any of the templates from the matugen themes github
+
  i need to see why fixes didn't resolve boot errors
