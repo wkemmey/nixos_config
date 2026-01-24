@@ -432,4 +432,5 @@ hotkey-overlay {
 prefer-no-csd
 
 screenshot-path "~/pictures/screenshots/screenshot from %Y-%m-%d %H-%M-%S.png"
-include "./noctalia.kdl"
+
+include "./matugen.kdl"
