@@ -37,16 +37,11 @@ i'm using nixos with niri and noctalia shell. noctalia has the ability to choose
 i'm using home manager for a few things, which i'm comfortable handling through nix config, but most of my software is configured through dotfiles. in my .config directory, i have simlinks to a git repo, but the files in the git repo are writeable, so i think this would work with noctalia. does noctalia update theme settings in other apps but leave the rest of the config alone, or does it overwrite whole config files (which would undo non-theme options that i have configured) 
 
 
- what does noctalia's "enable user templates" do?
-
-
-
 
  ---
 
- i need to try different matugen options like fruit salad
  i need to theme firefox and everything else
- i need to add logic to establish matugen themes if not already there to prevent failed build
+
 
  do i want to use any of the templates from the matugen themes github
 
