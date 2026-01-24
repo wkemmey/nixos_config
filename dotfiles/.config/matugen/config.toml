@@ -25,5 +25,8 @@ vscode = { input_path = "~/.config/matugen/templates/vscode-colors.json", output
 # fastfetch system info
 fastfetch = { input_path = "~/.config/matugen/templates/fastfetch.jsonc", output_path = "~/.config/fastfetch/config.jsonc" }
 
+# pywalfox (firefox theming)
+pywalfox = { input_path = "~/.config/matugen/templates/pywalfox.json", output_path = "~/.cache/wal/colors.json", post_hook = "pywalfox update" }
+
 # cava visualizer
 #cava = { input_path = "~/.config/matugen/templates/cava.conf", output_path = "~/.config/cava/themes/matugen" }

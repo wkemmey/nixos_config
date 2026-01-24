@@ -60,6 +60,7 @@
 
     # web browsers
     firefox # mozilla firefox browser (for user, set as default for xdg)
+    pywalfox-native # native messaging host for pywalfox firefox extension
 
     # networking utilities
     gping # graphical ping tool (for user)

@@ -97,7 +97,34 @@ Edit `hosts/<hostname>/variables.nix` to set your actual Git email:
 gitEmail = "your.email@example.com";
 ```
 
-### 4. Install VS Code Extensions (Manual)
+### 4. Firefox Theming (Pywalfox)
+
+Your Firefox browser can automatically match your wallpaper colors using Pywalfox. The native backend (`pywalfox-native`) is already installed, but you need to complete the setup:
+
+**Install the Firefox extension:**
+1. Open Firefox
+2. Go to https://addons.mozilla.org/firefox/addon/pywalfox/
+3. Click "Add to Firefox" and approve the installation
+
+**Initialize Pywalfox (one-time):**
+```bash
+pywalfox install
+```
+
+**Apply the theme:**
+1. Click the Pywalfox icon in your Firefox toolbar
+2. Click "Fetch Pywal colors"
+3. Firefox will instantly update to match your wallpaper!
+
+**Automatic updates:**
+Firefox will now automatically re-theme whenever you change wallpapers in Noctalia - no manual intervention needed.
+
+**Customization:**
+- Click the Pywalfox icon → Settings for extensive theme customization options
+- Edit the color template at `dotfiles/.config/matugen/templates/pywalfox.json`
+- Enable custom CSS in Pywalfox settings for advanced theming (requires enabling `toolkit.legacyUserProfileCustomizations.stylesheets` in `about:config`)
+
+### 5. Install VS Code Extensions (Manual)
 
 Some VS Code extensions aren't available in nixpkgs and must be installed through the VS Code UI:
 
@@ -107,7 +134,7 @@ Some VS Code extensions aren't available in nixpkgs and must be installed throug
 
 Extensions installed via the UI are stored in `~/.vscode/extensions/` and coexist with Nix-managed extensions.
 
-### 5. Customize Variables
+### 6. Customize Variables
 
 Review and update other settings in `hosts/<hostname>/variables.nix`:
 - Enable optional features (gaming support, communication apps, etc.)
@@ -117,7 +144,7 @@ Review and update other settings in `hosts/<hostname>/variables.nix`:
 
 After making changes, rebuild with `nxr`.
 
-### 5. SSH Keys (Optional)
+### 7. SSH Keys (Optional)
 
 If you need SSH access to remote systems or for Git over SSH:
 
@@ -126,7 +153,7 @@ ssh-keygen -t ed25519 -C "your.email@example.com"
 cat ~/.ssh/id_ed25519.pub  # Copy this to GitHub/GitLab/etc.
 ```
 
-### 6. Syncthing (Optional)
+### 8. Syncthing (Optional)
 
 If you enabled `enableSyncthing = true` in variables.nix, access the web UI at:
 
@@ -136,7 +163,7 @@ http://localhost:8384
 
 Configure folders and devices through the web interface.
 
-### 7. Printing and Scanning
+### 9. Printing and Scanning
 
 If you enabled `enablePrint = true` in variables.nix:
 
@@ -173,7 +200,7 @@ scanimage --format=png > scan.png
 simple-scan
 ```
 
-### 8. AI Code Editors (Optional)
+### 10. AI Code Editors (Optional)
 
 If you enabled `enableAiCodeEditors = true` in variables.nix, you have access to:
 
