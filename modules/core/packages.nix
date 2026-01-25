@@ -58,6 +58,10 @@
     picard # music metadata editor and cover art downloader (for user)
     youtube-music # youtube music client (for user)
 
+    # productivity and utilities
+    _1password-gui # password manager (for user)
+    dropbox # cloud storage and file sync (for user)
+
     # web browsers
     firefox # mozilla firefox browser (for user, set as default for xdg)
     pywalfox-native # native messaging host for pywalfox firefox extension
