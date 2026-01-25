@@ -35,5 +35,8 @@ gtk4 = { input_path = "~/.config/matugen/templates/gtk-colors.css", output_path 
 # youtube music theming
 youtube-music = { input_path = "~/.config/matugen/templates/youtube-music.css", output_path = "~/.config/YouTube Music/matugen-theme.css" }
 
+# helix theming
+helix = { input_path = "~/.config/matugen/templates/helix.toml", output_path = "~/.config/helix/themes/matugen.toml" }
+
 # cava visualizer
 #cava = { input_path = "~/.config/matugen/templates/cava.conf", output_path = "~/.config/cava/themes/matugen" }

@@ -21,6 +21,8 @@
 
 - create rust directory merger project
 
+- dev shell for python, ruby, ruby on rails, rust
+
 
 next steps:
 set up noctalia to control all themes, incl firefox
