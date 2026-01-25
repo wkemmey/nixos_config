@@ -2,7 +2,6 @@
 
 - [ ] Print test page once a week
 - [ ] keyboard command to shutdown
-- sleep not working
 - microphone not working
 - 1password
 - way to set credentials on google, etc
@@ -60,15 +59,9 @@ Fuzzel (launcher - via emoji picker)
 VS Code
 Fastfetch (system info)
 Firefox (via Pywalfox)
+gtk (thunar, gedit)
 
 Worth Integrating
-
-High Priority:
-
-GTK apps (gtk-3.0/gtk-4.0) - Would theme all GTK applications system-wide (gedit, file-roller, etc.)
-Thunar - Your file manager, could match the theme
-
-Medium Priority:
 
 Helix - Your helix editor could match
 Yazi - File manager colors
