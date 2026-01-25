@@ -19,6 +19,11 @@
 - check each file in /etc/profiles/per-user/whit/bin -- do i want it?
 - ensure xbox controller is working
 - nordvpn
+- mtg arena
+- distrobox
+- slack app
+- what else from windows install?
+
 
 - create rust directory merger project
 
