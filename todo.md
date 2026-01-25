@@ -46,3 +46,37 @@ i'm using home manager for a few things, which i'm comfortable handling through 
  do i want to use any of the templates from the matugen themes github
 
  i need to see why fixes didn't resolve boot errors
+
+
+
+
+ Looking at your system, here are some good candidates for matugen integration:
+
+Already Integrated ✅
+Noctalia (shell/bar)
+Niri (compositor borders/focus)
+Foot (terminal)
+Fuzzel (launcher - via emoji picker)
+VS Code
+Fastfetch (system info)
+Firefox (via Pywalfox)
+
+Worth Integrating
+
+High Priority:
+
+GTK apps (gtk-3.0/gtk-4.0) - Would theme all GTK applications system-wide (gedit, file-roller, etc.)
+Thunar - Your file manager, could match the theme
+
+Medium Priority:
+
+Helix - Your helix editor could match
+Yazi - File manager colors
+Btop/Bottom/Htop - System monitors
+Bat - Code viewer
+Starship - Prompt colors (though it already has some theming)
+
+Lower Priority:
+
+Lazygit - Git TUI colors
+

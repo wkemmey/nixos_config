@@ -22,7 +22,9 @@
     ~/.config/git/config: .config/git/config
     ~/.config/niri/config.kdl: .config/niri/config.kdl
     ~/.config/gtk-3.0/settings.ini: .config/gtk-3.0/settings.ini
+    ~/.config/gtk-3.0/gtk.css: .config/gtk-3.0/gtk.css
     ~/.config/gtk-4.0/settings.ini: .config/gtk-4.0/settings.ini
+    ~/.config/gtk-4.0/gtk.css: .config/gtk-4.0/gtk.css
     ~/.config/yazi: .config/yazi
     ~/.config/noctalia: .config/noctalia
     ~/.config/noctalia-shell/settings.json: .config/noctalia-shell/settings.json

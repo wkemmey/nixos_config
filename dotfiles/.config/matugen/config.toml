@@ -28,5 +28,9 @@ fastfetch = { input_path = "~/.config/matugen/templates/fastfetch.jsonc", output
 # pywalfox (firefox theming)
 pywalfox = { input_path = "~/.config/matugen/templates/pywalfox.json", output_path = "~/.cache/wal/colors.json", post_hook = "pywalfox update" }
 
+# gtk theming
+gtk3 = { input_path = "~/.config/matugen/templates/gtk-colors.css", output_path = "~/.config/gtk-3.0/colors.css" }
+gtk4 = { input_path = "~/.config/matugen/templates/gtk-colors.css", output_path = "~/.config/gtk-4.0/colors.css", post_hook = "sh -c 'THEME=$(gsettings get org.gnome.desktop.interface gtk-theme); gsettings set org.gnome.desktop.interface gtk-theme \"\"; gsettings set org.gnome.desktop.interface gtk-theme $THEME'" }
+
 # cava visualizer
 #cava = { input_path = "~/.config/matugen/templates/cava.conf", output_path = "~/.config/cava/themes/matugen" }
