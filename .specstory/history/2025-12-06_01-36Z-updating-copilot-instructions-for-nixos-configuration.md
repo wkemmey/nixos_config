@@ -73578,3 +73578,77 @@ So you currently only have Rust development tools installed globally. Python and
 
 ---
 
+_**User (2026-01-25 23:18Z)**_
+
+ok, i removed rustup et al from packages; i think that should be part of our dev environment solution.  on that topic, i did some research, and i think i want to use devenv instead of directly using flakes.  this will mean fewer choices i have to make now, and i can always move to flakes later if i need greater configurability/flexibility.  i would still integrate devenv with direnv, i would like to maintain a directory of project templates just called "templates" instead of "dev-templates".  what do you think about that approach?  any cautions?
+
+---
+
+_**Agent (model copilot/claude-sonnet-4.5)**_
+
+Excellent choice! **devenv** is a great middle ground—it's built on flakes but provides much better ergonomics and sane defaults. I think this is the right call for your use case.
+
+## Why devenv is a good fit:
+
+✅ **Less boilerplate** - You write `devenv.nix` instead of full `flake.nix`, much simpler syntax
+✅ **Better defaults** - Automatic devcontainer support, process management, pre-commit hooks
+✅ **Language-specific helpers** - `languages.rust.enable = true;` vs manually specifying all packages
+✅ **direnv integration** - Built-in, works seamlessly with `use devenv`
+✅ **Easy migration path** - Can always drop down to raw flakes later if needed
+✅ **Active development** - Well-maintained, good docs at devenv.sh
+
+## Cautions & Considerations:
+
+⚠️ **devenv itself needs to be installed** - We should add it to your system packages or home-manager
+
+⚠️ **Slight learning curve** - Different from raw Nix, but docs are good
+
+⚠️ **Cache management** - devenv creates its own cache, but integrates well with `nix-direnv` for speed
+
+⚠️ **Templates location** - `~/templates` is fine, though consider `~/dev/templates` or `~/.config/devenv/templates` to keep home directory cleaner (personal preference)
+
+## Proposed Setup Plan:
+
+1. **Install devenv + direnv system-wide**:
+   - Add `devenv` package to `packages.nix`
+   - Add `direnv` and `nix-direnv` packages
+
+2. **Configure direnv for Fish**:
+   - Add direnv hook to `modules/home/fish/default.nix`
+   - Enable nix-direnv for faster loading
+
+3. **Create templates directory structure**:
+   ```
+   ~/templates/
+   ├── rust/
+   │   ├── devenv.nix
+   │   └── .envrc
+   ├── ruby-rails/
+   │   ├── devenv.nix
+   │   └── .envrc
+   └── python/
+       ├── devenv.nix
+       └── .envrc
+   ```
+
+4. **Each template's `devenv.nix`** will be minimal:
+   ```nix
+   { pkgs, ... }: {
+     languages.rust.enable = true;
+     # devenv handles toolchain, LSP, etc.
+   }
+   ```
+
+5. **Each `.envrc`** just needs:
+   ```bash
+   use devenv
+   ```
+
+## One potential gotcha:
+
+Since you removed `rustup`, you'll lose the ability to easily switch Rust toolchains globally. With devenv, you specify Rust version per-project in `devenv.nix`. This is actually *more* flexible, but means no global `cargo` command outside projects. If you want a global Rust for quick experiments, we could keep minimal `rustc` + `cargo` system-wide, or create a `~/scratch` dev environment.
+
+**Ready to proceed with this approach?** I can start by installing devenv/direnv and setting up the Fish integration, then create the template structure.
+
+---
+
