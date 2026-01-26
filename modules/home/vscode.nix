@@ -17,6 +17,7 @@
       vadimcn.vscode-lldb
       tamasfe.even-better-toml
       usernamehw.errorlens
+      mkhl.direnv
     ];
   };
 }

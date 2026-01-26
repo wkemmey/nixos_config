@@ -44,6 +44,9 @@ starship init fish | source
 # initialize zoxide (smart cd)
 zoxide init fish --cmd cd | source
 
+# initialize direnv for automatic environment loading
+direnv hook fish | source
+
 # browser for cli tools
 set -gx BROWSER "xdg-open"
 

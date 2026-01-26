@@ -88,6 +88,11 @@
     gum # shell script styling and prompts (for user)
     popsicle # usb flasher utility (for user)
 
+    # development environment tools
+    devenv # declarative development environments (for user)
+    direnv # automatic environment switching (for user)
+    nix-direnv # fast direnv evaluation for nix (for user)
+
     # nix language tools
     nixfmt-rfc-style # nix code formatter (for user)
     nixd # nix language server (for user)
