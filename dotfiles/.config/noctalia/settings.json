@@ -458,12 +458,12 @@
         "tooltipsEnabled": true
     },
     "wallpaper": {
-        "directory": "/home/whit/nixos_config/wallpapers",
+        "directory": "/home/whit/nixos_config/wallpapers/current_resolution",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "fillColor": "#000000",
         "fillMode": "crop",
-        "hideWallpaperFilenames": false,
+        "hideWallpaperFilenames": true,
         "monitorDirectories": [
         ],
         "overviewEnabled": false,
