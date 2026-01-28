@@ -13,6 +13,9 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  # enable ntfs filesystem support for windows drives
+  boot.supportedFilesystems = [ "ntfs" ];
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/8816a0ce-763b-4b1d-a593-2d4373b1c0be";
       fsType = "ext4";
@@ -27,6 +30,31 @@
   swapDevices =
     [ { device = "/dev/disk/by-uuid/ce810a60-f6a9-42eb-9fe5-68a58dff555a"; }
     ];
+
+  # Manual mount configurations for NTFS drives (not auto-generated)
+  fileSystems."/mnt/apps1" = {
+    device = "/dev/disk/by-uuid/A45AE3745AE34222";
+    fsType = "ntfs-3g";
+    options = [ "rw" "uid=1000" "gid=100" "dmask=022" "fmask=133" ];
+  };
+
+  fileSystems."/mnt/apps2" = {
+    device = "/dev/disk/by-uuid/7E76FA8876FA4107";
+    fsType = "ntfs-3g";
+    options = [ "rw" "uid=1000" "gid=100" "dmask=022" "fmask=133" ];
+  };
+
+  fileSystems."/mnt/storage" = {
+    device = "/dev/disk/by-uuid/B8EA71A3EA715E96";
+    fsType = "ntfs-3g";
+    options = [ "rw" "uid=1000" "gid=100" "dmask=022" "fmask=133" ];
+  };
+
+  fileSystems."/mnt/data" = {
+    device = "/dev/disk/by-uuid/D62A542A2A5409BF";
+    fsType = "ntfs-3g";
+    options = [ "rw" "uid=1000" "gid=100" "dmask=022" "fmask=133" ];
+  };
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

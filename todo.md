@@ -106,3 +106,5 @@ adobe
 imazing
 turbotax
 davinci or similar
+
+don't forget to save my wallpaper dump from pictures
