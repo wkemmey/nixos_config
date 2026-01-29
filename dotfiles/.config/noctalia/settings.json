@@ -126,6 +126,16 @@
                     "id": "Volume"
                 },
                 {
+                    "blacklist": [
+                    ],
+                    "colorizeIcons": false,
+                    "drawerEnabled": false,
+                    "hidePassive": false,
+                    "id": "Tray",
+                    "pinned": [
+                    ]
+                },
+                {
                     "colorizeDistroLogo": false,
                     "colorizeSystemIcon": "none",
                     "customIconPath": "",
@@ -241,7 +251,7 @@
         "backgroundOpacity": 1,
         "colorizeIcons": true,
         "deadOpacity": 0.6,
-        "displayMode": "exclusive",
+        "displayMode": "always_visible",
         "enabled": true,
         "floatingRatio": 1,
         "inactiveIndicators": false,

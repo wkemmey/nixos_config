@@ -11,6 +11,9 @@ set fish_greeting
 # disable terminal capability query timeout warnings
 set -g fish_query_timeout 0
 
+# gtk pixbuf loaders for dropbox icon support
+set -gx GDK_PIXBUF_MODULE_FILE (echo /nix/store/*-gdk-pixbuf-*/lib/gdk-pixbuf-2.0/*/loaders.cache | string split ' ')[1]
+
 # launch fastfetch on first terminal spawn (only in interactive shells)
 if status is-interactive; and not set -q FASTFETCH_LAUNCHED
   set -g FASTFETCH_LAUNCHED 1
