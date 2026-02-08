@@ -242,6 +242,115 @@ aider src/main.rs src/lib.rs
 
 See `dotfiles/AIDER_SETUP.md` for comprehensive Aider documentation.
 
+## Starting a New Development Project
+
+This config includes pre-configured development environment templates in `templates/` for Rust, Ruby, Rails, and Python. Here's how to start a new Rust project:
+
+### Method 1: GitHub-First (Recommended)
+
+**1. Create the GitHub repository first:**
+```bash
+# Navigate to github.com in your browser and create a new repository
+# OR use GitHub CLI:
+gh repo create my-rust-project --public --clone
+cd my-rust-project
+```
+
+**2. Copy the Rust template:**
+```bash
+cp ~/nixos_config/templates/rust/devenv.nix .
+cp ~/nixos_config/templates/rust/.envrc .
+```
+
+**3. Allow direnv to activate:**
+```bash
+direnv allow
+# This downloads and activates all Rust tools defined in devenv.nix
+# The environment automatically activates whenever you cd into this directory
+```
+
+**4. Initialize the Rust project:**
+```bash
+cargo init
+# Or for a library: cargo init --lib
+```
+
+**5. First commit:**
+```bash
+git add .
+git commit -m "Initial commit with devenv setup"
+git push
+```
+
+### Method 2: Local-First
+
+**1. Create project directory and initialize git:**
+```bash
+mkdir ~/projects/my-rust-project
+cd ~/projects/my-rust-project
+git init
+```
+
+**2. Copy the Rust template:**
+```bash
+cp ~/nixos_config/templates/rust/devenv.nix .
+cp ~/nixos_config/templates/rust/.envrc .
+direnv allow
+```
+
+**3. Initialize the Rust project:**
+```bash
+cargo init
+```
+
+**4. Create GitHub repository and push:**
+```bash
+gh repo create my-rust-project --public --source=. --remote=origin
+git add .
+git commit -m "Initial commit with devenv setup"
+git push -u origin main
+```
+
+### What the Template Provides
+
+The Rust template (`templates/rust/devenv.nix`) includes:
+
+**Tools:**
+- Latest stable Rust toolchain
+- cargo-watch, cargo-edit, cargo-outdated, cargo-audit
+- cargo-bloat, cargo-expand, cargo-flamegraph
+- cargo-nextest (modern test runner), cargo-tarpaulin (coverage)
+- bacon (background code checker), rust-analyzer (LSP)
+
+**Pre-commit hooks:**
+- rustfmt (auto-formatting)
+- clippy (linting)
+
+**Development scripts:**
+```bash
+devenv up          # Start all background services
+cargo run          # Standard run
+cargo test         # Run tests
+cargo watch -x run # Auto-reload on changes
+```
+
+### Templates for Other Languages
+
+The same workflow applies to other templates:
+
+```bash
+# Ruby
+cp ~/nixos_config/templates/ruby/* .
+
+# Rails (includes PostgreSQL + Redis)
+cp ~/nixos_config/templates/rails/* .
+
+# Python
+cp ~/nixos_config/templates/python/* .
+```
+
+Each template has its own `devenv.nix` with language-specific tools, linters, and formatters pre-configured.
+
 ## Architecture
 
 ### Three-Tier Structure

@@ -28,6 +28,11 @@
   "terminal.integrated.automationProfile.linux": {
     "path": "/run/current-system/sw/bin/bash"
   },
+  "files.readonlyInclude": {
+    "**/.cargo/registry/src/**/*.rs": true,
+    "**/.cargo/git/checkouts/**/*.rs": true,
+    "**/lib/rustlib/src/rust/library/**/*.rs": true
+  },
   "workbench.colorCustomizations": {
     "focusBorder": "#51d7ee",
     "foreground": "#dee2ef",
