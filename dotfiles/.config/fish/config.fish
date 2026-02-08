@@ -85,6 +85,9 @@ abbr -a nxcd "cd ~/nixos_config"
 abbr -a cat bat
 abbr -a man batman
 
+# suppress harmless wayland warnings from electron apps (vs code, etc)
+abbr -a code "code 2>/dev/null"
+
 # directory navigation shortcuts
 abbr -a .. "cd .."
 abbr -a ... "cd ../.."
