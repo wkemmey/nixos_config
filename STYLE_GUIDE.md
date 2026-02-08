@@ -115,8 +115,7 @@ To audit the codebase for style compliance, an AI agent should check:
 
 ```nix
 # function with proper parameter formatting
-{ pkgs, lib, host, inputs, ... }:
-{
+{ pkgs, lib, host, inputs, ... }: {
   environment.systemPackages = with pkgs; [
     # terminal emulators and launchers
     fuzzel
@@ -124,8 +123,7 @@ To audit the codebase for style compliance, an AI agent should check:
 }
 
 # multi-sentence comment with semicolon separator
-{ config, lib, pkgs, username, ... }:
-{
+{ config, lib, pkgs, username, ... }: {
   # configure greetd unconditionally; it will be enabled by default only when other
   # display managers (sddm, ly) are not enabled
   services.greetd = {

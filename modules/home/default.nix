@@ -5,6 +5,7 @@ let
 in
 {
   imports = [
+    ./direnv.nix
     ./virtmanager.nix
     ./vscode.nix
     ./obs-studio.nix

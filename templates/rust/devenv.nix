@@ -5,8 +5,7 @@
   
   languages.rust = {
     enable = true;
-    # using stable channel by default, can override per-project
-    channel = "stable";
+    # channel = "stable"; # requires rust-overlay input, keep simple instead
   };
 
   # common rust development packages
