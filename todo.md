@@ -199,3 +199,5 @@ This video provides a visual walkthrough of setting up cross-compilation for var
 consider replacing dropbox with https://www.hetzner.com/storage/storage-share/ and cryptomator
 
 but for now, once we move to other machine, let's try maestro instead of dropbox
+
+make sure the style guide is applied to all files
