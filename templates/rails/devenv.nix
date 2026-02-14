@@ -58,8 +58,8 @@
     libyaml
   ];
 
-  # pre-commit hooks for code quality
-  pre-commit.hooks = {
+  # git hooks for code quality
+  git-hooks.hooks = {
     rubocop.enable = true;      # ruby linter and formatter
   };
 

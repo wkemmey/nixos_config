@@ -49,4 +49,6 @@ in
     ignoreShellProgramCheck = true;
   };
   nix.settings.allowed-users = [ "${username}" ];
+  # allow user to manage binary caches for devenv
+  nix.settings.trusted-users = [ "root" "${username}" ];
 }

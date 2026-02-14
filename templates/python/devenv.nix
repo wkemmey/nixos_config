@@ -48,8 +48,8 @@
     zlib
   ];
 
-  # pre-commit hooks for code quality
-  pre-commit.hooks = {
+  # git hooks for code quality
+  git-hooks.hooks = {
     black.enable = true;         # python formatter
     ruff.enable = true;          # python linter
     mypy.enable = true;          # type checker
