@@ -201,3 +201,5 @@ consider replacing dropbox with https://www.hetzner.com/storage/storage-share/ a
 but for now, once we move to other machine, let's try maestro instead of dropbox
 
 make sure the style guide is applied to all files
+
+i want to make it so only a few wallpapers are stored in my nixos config, but noctalia looks in my dropbox folder if it's present. this is so the repo doesn't get polluted with hundreds of large files, and so not all my wallpaper choices are public.  the ones in the repo are just there if the dropbox isn't ready yet, or someone else is using my repo

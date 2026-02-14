@@ -233,7 +233,7 @@
     },
     "colorSchemes": {
         "darkMode": true,
-        "generationMethod": "tonal-spot",
+        "generationMethod": "fruit-salad",
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "monitorForColors": "",
@@ -572,7 +572,7 @@
     },
     "wallpaper": {
         "automationEnabled": false,
-        "directory": "/home/whit/Pictures/Wallpapers",
+        "directory": "/home/whit/nixos_config/wallpapers/current_resolution",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "favorites": [
