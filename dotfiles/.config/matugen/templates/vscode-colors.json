@@ -66,6 +66,10 @@
     "notificationCenter.border": "{{ colors.outline.default.hex }}",
     "notifications.background": "{{ colors.surface_container.default.hex }}",
     "notifications.foreground": "{{ colors.on_surface.default.hex }}",
-    "notifications.border": "{{ colors.outline.default.hex }}"
+    "notifications.border": "{{ colors.outline.default.hex }}",
+    "editorInlayHint.foreground": "#666666",
+    "editorInlayHint.background": "#1a1a1a80",
+    "editorInlayHint.parameterForeground": "#8a7d65",
+    "editorInlayHint.typeForeground": "#5c7080"
   }
 }
