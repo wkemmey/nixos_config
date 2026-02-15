@@ -7,6 +7,8 @@
   "editor.fontFamily": "JetBrainsMono Nerd Font",
   "editor.fontSize": 16,
   "editor.inlayHints.fontFamily": "JetBrains Mono",
+  "editor.inlayHints.fontStyle": "italic",
+  "editor.codeLensFontStyle": "italic",
   "editor.inlineSuggest.fontFamily": "JetBrains Mono",
   "editor.minimap.sectionHeaderFontSize": 10,
   "markdown.preview.fontFamily": "Montserrat",
