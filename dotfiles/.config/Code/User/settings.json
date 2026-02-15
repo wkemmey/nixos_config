@@ -105,5 +105,11 @@
     "notifications.border": "#8891a5"
   },
   "specstory.cloudSync.enabled": "never",
-  "specstory.helpUsImprove": false
+  "specstory.helpUsImprove": false,
+  "errorLens.border": [
+    "1px solid",
+    "",
+    "",
+    ""
+  ]
 }
