@@ -82717,3 +82717,272 @@ Added `sqlite` (CLI) and `sqlitebrowser` (GUI) to your Rust devenv template. Nex
 
 ---
 
+_**User (2026-03-04 00:59Z)**_
+
+in noctalia, even when i enable the dock, i don't see it--do you know why?
+
+---
+
+_**Agent (model copilot/claude-sonnet-4.6)**_
+
+I don't have enough information about Noctalia's dock implementation to give a confident answer, but here are the most common reasons a dock might not show in Noctalia:
+
+1. **Niri compositor**: Noctalia's dock may not be supported under Niri. Noctalia is primarily designed for Hyprland/wlroots compositors, and some features like the dock may depend on compositor-specific layer-shell positioning that Niri handles differently.
+
+2. **Layer shell issues**: The dock uses `wlr-layer-shell` to anchor to the screen. Niri supports this protocol but may have quirks with how Noctalia requests the layer or anchor position.
+
+3. **Monitor/output configuration**: If the dock is being placed on a monitor that doesn't match Noctalia's expected output, it may render off-screen.
+
+4. **Known Noctalia bug**: The dock feature may simply be unfinished or broken in the version you updated to — it's a relatively new feature in active development.
+
+**What to check:**
+- Look at Noctalia's GitHub issues for "dock" + "niri"
+- Check `journalctl --user -f` while toggling the dock to see if there are layer-shell errors
+- Try running `noctalia` from a terminal and look for error output when you enable the dock
+
+My best guess is **Niri compatibility** — the dock is likely working as intended on Hyprland but not fully tested under Niri. If you find a GitHub issue confirming this, it's worth watching for a fix in a future update.
+
+---
+
+_**User (2026-03-04 01:00Z)**_
+
+what noctalia counterpart works best with niri?
+
+---
+
+_**Agent (model copilot/claude-sonnet-4.6)**_
+
+The Noctalia ecosystem doesn't have a specific "Niri edition," but the closest purpose-built alternatives for Niri are:
+
+**Best fit for Niri:**
+
+- **Quickshell** — This is actually already in your config (`modules/core/quickshell.nix`). It's a QtQuick-based shell framework that works well with Niri via layer-shell. It's compositor-agnostic and has active Niri support.
+
+- **niri-shell** — A minimal shell specifically targeting Niri, though it's much less polished than Noctalia.
+
+- **waybar** — The most battle-tested Wayland bar, works perfectly under Niri, highly configurable. No dock, but extremely reliable.
+
+**Honest assessment:**
+
+Noctalia is built primarily for Hyprland. If you want a full desktop shell experience (bar + dock + widgets + wallpaper manager all integrated), there isn't a perfect Noctalia equivalent for Niri yet.
+
+**What most Niri users do:**
+
+- **Waybar** for the panel
+- **Swww** or **wpaperd** for wallpaper
+- **swaync** (already in your config) for notifications
+- Individual tools composed together rather than one integrated shell
+
+Since you already have Quickshell configured, that's likely your best path forward if you want more than just a bar — it's the most Niri-compatible "shell framework" available right now. The tradeoff is it requires more manual configuration than Noctalia's GUI-driven approach.
+
+---
+
+_**User (2026-03-04 01:01Z)**_
+
+but noctalia is implemented in quickshll
+
+---
+
+_**Agent (model copilot/claude-sonnet-4.6)**_
+
+You're right, my mistake! Noctalia is built on Quickshell, so they share the same underlying layer-shell implementation. That means the dock issue isn't a Quickshell/Niri compatibility problem at the framework level.
+
+The dock not showing is more likely:
+
+1. **A Noctalia bug** — the dock feature may simply be broken or incomplete in the current version regardless of compositor
+2. **A configuration issue** — something in your Noctalia settings may need to be set to make it appear (position, screen, size, auto-hide settings)
+3. **A Niri-specific quirk** — even though Quickshell works with Niri, Noctalia's dock component may have hardcoded assumptions about compositor behavior (e.g., how it handles `layer-shell` exclusive zones or anchor edges)
+
+Since you just updated Noctalia, checking their GitHub issues or changelog for "dock" would be the quickest way to know if it's a known bug. Do you want me to look that up?
+
+---
+
+_**User (2026-03-04 01:01Z)**_
+
+yes
+
+---
+
+_**Agent (model copilot/claude-sonnet-4.6)**_
+
+<tool-use data-tool-type="search" data-tool-name="copilot_findTextInFiles">
+<details>
+<summary>Tool use: **copilot_findTextInFiles** • Searching for text `noctalia` (`**/flake.nix`)</summary>
+
+
+Searched for text `noctalia` (`**/flake.nix`), 3 results
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_fetchWebPage">
+<details>
+<summary>Tool use: **copilot_fetchWebPage**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_fetchWebPage",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "Using \"Fetch Web Page\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="vscode_fetchWebPage_internal">
+<details>
+<summary>Tool use: **vscode_fetchWebPage_internal**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "vscode_fetchWebPage_internal",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "Fetching https://github.com/noctalia-dev/noctalia-shell/issues?q%3Ddock",
+  "pastTenseMessage": "Fetched https://github.com/noctalia-dev/noctalia-shell/issues?q%3Ddock",
+  "resultDetails": [
+    {
+      "$mid": 1,
+      "fsPath": "/noctalia-dev/noctalia-shell/issues",
+      "external": "https://github.com/noctalia-dev/noctalia-shell/issues?q%3Ddock",
+      "path": "/noctalia-dev/noctalia-shell/issues",
+      "scheme": "https",
+      "authority": "github.com",
+      "query": "q=dock"
+    }
+  ],
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="copilot_fetchWebPage">
+<details>
+<summary>Tool use: **copilot_fetchWebPage**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "copilot_fetchWebPage",
+  "isHidden": true
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "Using \"Fetch Web Page\"",
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+<tool-use data-tool-type="unknown" data-tool-name="vscode_fetchWebPage_internal">
+<details>
+<summary>Tool use: **vscode_fetchWebPage_internal**</summary>
+
+Additional data:
+
+```json
+{
+  "vscodeToolId": "vscode_fetchWebPage_internal",
+  "isHidden": false
+}
+```
+Result:
+
+```json
+{
+  "invocationMessage": "Fetching https://github.com/noctalia-dev/noctalia-shell/issues/1969",
+  "pastTenseMessage": "Fetched https://github.com/noctalia-dev/noctalia-shell/issues/1969",
+  "resultDetails": [
+    {
+      "$mid": 1,
+      "fsPath": "/noctalia-dev/noctalia-shell/issues/1969",
+      "external": "https://github.com/noctalia-dev/noctalia-shell/issues/1969",
+      "path": "/noctalia-dev/noctalia-shell/issues/1969",
+      "scheme": "https",
+      "authority": "github.com"
+    }
+  ],
+  "isConfirmed": {
+    "type": 1
+  },
+  "content": "",
+  "textEditContent": "",
+  "toolCallResult": null
+}
+```
+Status: **completed**
+
+
+</details>
+</tool-use>
+
+---
+
+Found a very relevant issue — and it was filed by another **Niri + 3840x2160** user, same as you.
+
+**What's happening:**
+
+Issue #1969 reports that with **Static dock style**, the dock frame stays visible as an empty element when no apps are open. The reporter was on Niri at 4K. It's been **fixed** in the main branch (PR #1905, commit `022d6d3`).
+
+**What to try:**
+
+1. **Switch dock style from "Static" to "Floating"** — the floating style hides correctly when there are no windows, and the fix for static may or may not be in the version you're currently on.
+
+2. **Update your flake** (`nxu` + `nxr`) if you haven't already after the last update 
+
+---
+

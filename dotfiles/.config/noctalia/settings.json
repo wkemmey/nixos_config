@@ -54,10 +54,10 @@
         "monitors": [
         ],
         "outerCorners": true,
-        "position": "top",
+        "position": "bottom",
         "screenOverrides": [
         ],
-        "showCapsule": true,
+        "showCapsule": false,
         "showOutline": false,
         "useSeparateOpacity": true,
         "widgets": {
@@ -311,7 +311,7 @@
         "displayMode": "always_visible",
         "enabled": true,
         "floatingRatio": 1,
-        "inactiveIndicators": false,
+        "inactiveIndicators": true,
         "monitors": [
             "DP-1"
         ],
@@ -474,7 +474,7 @@
         "autoUpdate": false
     },
     "sessionMenu": {
-        "countdownDuration": 10000,
+        "countdownDuration": 3000,
         "enableCountdown": true,
         "largeButtonsLayout": "single-row",
         "largeButtonsStyle": false,
@@ -521,6 +521,13 @@
                 "countdownEnabled": true,
                 "enabled": true,
                 "keybind": "6"
+            },
+            {
+                "action": "rebootToUefi",
+                "command": "",
+                "countdownEnabled": true,
+                "enabled": true,
+                "keybind": ""
             }
         ],
         "showHeader": true,
