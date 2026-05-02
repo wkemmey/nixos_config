@@ -24,6 +24,8 @@
 - what else from windows install?
 - bluetooth headphones
 - connect to ntfs hard drives
+- godot & vscode plugins, mcp?
+- plymouth start up graphics--maria?
 
 - create rust directory merger project
 
@@ -203,3 +205,85 @@ but for now, once we move to other machine, let's try maestro instead of dropbox
 make sure the style guide is applied to all files
 
 i want to make it so only a few wallpapers are stored in my nixos config, but noctalia looks in my dropbox folder if it's present. this is so the repo doesn't get polluted with hundreds of large files, and so not all my wallpaper choices are public.  the ones in the repo are just there if the dropbox isn't ready yet, or someone else is using my repo
+
+
+
+
+
+
+for project with maria:
+
+Since you are a programmer and want to mentor your friend in **VS Code** using **GitHub Copilot**, you should aim for a stack that minimizes "boilerplate friction" while still teaching the mental model of how the web works.
+
+For 2026, the best "Vibe Coding" stack for a beginner on Linux is **Python + FastAPI + SQLite + Tailwind CSS**.
+
+### Why this stack?
+
+* **FastAPI > Flask:** Copilot is *much* better at FastAPI because the **Type Hints** give the AI clear context. In Flask, Copilot often guesses what's in a request; in FastAPI, it *knows* because of Pydantic models.
+* **SQLite:** It’s just a file. No `sudo apt install postgres` or managing services. It’s perfect for a beginner's mental model: "The data is in this file."
+* **Tailwind via CDN:** No NPM, no Webpack, no build steps. You just drop a `<script>` tag in the HTML and start "vibing" with CSS classes.
+
+---
+
+### The Setup (Inside VS Code)
+
+#### 1. The Essential Extensions
+
+Make sure these are installed to give your friend the best feedback loop:
+
+* **GitHub Copilot & Copilot Chat:** The "brains."
+* **SQLite Viewer:** Allows your friend to click the `.db` file and see the tables visually inside VS Code.
+* **Python (Microsoft):** For linting and environment management.
+
+#### 2. The Project Structure
+
+Keep it dead simple. One file for logic, one folder for templates.
+
+```text
+my-vibe-app/
+├── main.py          # The Backend & API
+├── database.db      # The SQLite file (auto-generated)
+└── templates/
+    └── index.html   # The Frontend (Jinja2 + Tailwind)
+
+```
+
+---
+
+### How to "Vibe Code" this together
+
+Since you're the mentor, guide them to use **Copilot Chat (Ctrl+Shift+I)** to generate the "scaffold."
+
+**The Starter Prompt:**
+
+> "I want to build a dynamic website using FastAPI, SQLite (SQLAlchemy), and Jinja2 templates. Create a simple 'Wishlist' app where I can add items and descriptions. Use Tailwind CSS for the UI via CDN. Keep everything in a simple structure."
+
+#### Why this is great for a non-programmer:
+
+1. **Readability:** FastAPI code looks like plain English (`@app.get("/")`).
+2. **Instant Docs:** Tell them to go to `localhost:8000/docs`. Their eyes will light up when they see the interactive API explorer that FastAPI builds automatically.
+3. **The "CSS Vibe":** Because you’re using Tailwind, they can tell Copilot: *"Make the cards look like glassmorphism with a purple glow,"* and it will just work without them touching a `.css` file.
+
+### One "Pro" Tip for Linux
+
+Since you're on Linux, show them **`uv`**. It’s the 2026 standard for Python tooling (fast, single-binary).
+Instead of teaching them `venv` and `pip`, just run:
+`uv run main.py`
+It will handle the environment and dependencies automatically in the background.
+
+---
+
+**Would you like me to generate a one-file "Starter Template" for this stack that you can paste into VS Code right now?**
+
+
+
+
+
+need to get dropbox working, or change to maestral
+set up plymouth (try again to get rid of errors first)
+set up godot, plus godot vscode extensions
+create devenv for godot
+update rust devenv
+set noctalia to change wallpaper only, not call hook
+set fuzzel to change theme, one of which is material via mutagen (old hook), set hot key, maybe include mutagen styles (like fruit salad)
+just include a few wallpapers in git repo, but discover wallpapers on disk in dropbox if there

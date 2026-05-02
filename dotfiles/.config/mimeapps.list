@@ -9,6 +9,7 @@ application/x-extension-shtml=firefox.desktop
 application/xhtml+xml=firefox.desktop
 application/x-extension-xhtml=firefox.desktop
 application/x-extension-xht=firefox.desktop
+application/octet-stream=gimp.desktop
 
 [Added Associations]
 text/html=firefox.desktop
@@ -22,3 +23,7 @@ application/xhtml+xml=firefox.desktop
 application/x-extension-xhtml=firefox.desktop
 application/x-extension-xht=firefox.desktop
 image/png=org.gnome.eog.desktop;
+image/jpeg=org.gnome.eog.desktop;
+image/gif=org.gnome.eog.desktop;
+text/plain=org.gnome.gedit.desktop;
+application/octet-stream=gimp.desktop;
