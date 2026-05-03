@@ -279,7 +279,6 @@ It will handle the environment and dependencies automatically in the background.
 
 
 
-need to get dropbox working, or change to maestral
 set up plymouth (try again to get rid of errors first)
 set up godot, plus godot vscode extensions
 create devenv for godot

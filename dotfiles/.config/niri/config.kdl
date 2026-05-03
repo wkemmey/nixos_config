@@ -165,7 +165,7 @@ binds {
     Mod+S { spawn "obs"; }
     Mod+E { spawn "thunar"; }
     Mod+Ctrl+V { spawn "virt-manager"; }
-    Mod+Ctrl+E { spawn "emopicker9000"; }
+    Mod+Ctrl+E { spawn "emopicker"; }
     Mod+Shift+E { spawn "noctalia-shell" "ipc" "call" "launcher" "emoji"; }
 
     // noctalia controls

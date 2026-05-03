@@ -101,7 +101,7 @@
                     "hideUnoccupied": false,
                     "iconScale": 0.8,
                     "id": "Workspace",
-                    "labelMode": "index",
+                    "labelMode": "index+name",
                     "occupiedColor": "secondary",
                     "pillSize": 0.6,
                     "showApplications": false,
@@ -203,17 +203,6 @@
                     "id": "Volume",
                     "middleClickCommand": "pwvucontrol || pavucontrol",
                     "textColor": "none"
-                },
-                {
-                    "blacklist": [
-                    ],
-                    "chevronColor": "none",
-                    "colorizeIcons": false,
-                    "drawerEnabled": false,
-                    "hidePassive": false,
-                    "id": "Tray",
-                    "pinned": [
-                    ]
                 },
                 {
                     "colorizeDistroLogo": false,
