@@ -60,7 +60,7 @@
 
     # productivity and utilities
     _1password-gui # password manager (for user)
-    dropbox # cloud storage and file sync (for user)
+    dropbox-cli # cloud storage and file sync (for user)
 
     # web browsers
     firefox # mozilla firefox browser (for user, set as default for xdg)

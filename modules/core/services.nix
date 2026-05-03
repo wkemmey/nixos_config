@@ -73,4 +73,23 @@
     wantedBy = [ "graphical-session.target" ];
   };
 
+  # dropbox
+  systemd.user.services.dropbox = {
+    description = "Dropbox";
+    wantedBy = [ "graphical-session.target" ];
+    environment = {
+      QT_PLUGIN_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtPluginPrefix;
+      QML2_IMPORT_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtQmlPrefix;
+      QT_QPA_PLATFORM = "wayland";
+    };
+    serviceConfig = {
+      ExecStart = "${pkgs.dropbox}/bin/dropbox";
+      ExecReload = "${pkgs.coreutils}/bin/kill -HUP $MAINPID";
+      KillMode = "control-group"; # upstream recommends process
+      Restart = "on-failure";
+      PrivateTmp = true;
+      ProtectSystem = "full";
+      Nice = 10;
+    };
+  };
 }
