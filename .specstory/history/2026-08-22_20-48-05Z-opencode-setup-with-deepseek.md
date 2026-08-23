@@ -2925,3 +2925,252 @@ You can now add DeepSeek manually inside OpenCode:
 3. Pick your model: /models
 
 Note: the only issue reported is a VS Code trust warning for loading the remote JSON schema URL, not a syntax error in the file.
+
+---
+
+_**User (2026-08-23 04:09:27Z)**_
+
+i successfully used opencode once, then exited to change directories, upon restarting it failed.  maybe i messed up the config file?  here's the output:  Performing one time database migration, may take a few minutes...
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 100% complete     1/1
+Database migration complete.
+Error: 4 of 5 requests failed: Unexpected server error. Check server logs for details.
+Affected startup requests: config.providers, provider.list, app.agents, config.get
+    at vO (/$bunfs/root/chunk-bad1634v.js:470:117)
+    at <anonymous> (/$bunfs/root/chunk-bad1634v.js:470:5550)
+    at processTicksAndRejections (native:7:39)
+
+---
+
+_**Agent (copilot/auto)**_
+
+I’m going to verify the current OpenCode config files and then reproduce the startup failure with debug logging so we can pinpoint whether this is a bad config entry or a provider/auth issue.
+
+_**Agent (copilot/auto)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file"><details>
+<summary>Tool use: **read_file**</summary>
+
+Read `opencode.jsonc`
+
+**Input:**
+
+- endLine: `260`
+- filePath: `/home/whit/nixos_config/dotfiles/.config/opencode/opencode.jsonc`
+- startLine: `1`
+
+**Result:**
+
+```
+{
+  "$schema": "https://opencode.ai/config.json",
+  "shell": "fish",
+  "share": "manual",
+  "permission": {
+    "edit": "ask",
+    "bash": "ask"
+  }  
+  "model": "deepseek/deepseek-v4-pro",
+  "small_model": "deepseek/deepseek-v4-flash"
+}
+```
+</details></tool-use>
+
+_**Agent (copilot/auto)**_
+
+<tool-use data-tool-type="search" data-tool-name="file_search"><details>
+<summary>Tool use: **file_search**</summary>
+
+Searched for files matching `**/opencode.json*`, 1 match
+
+**Input:**
+
+- query: `**/opencode.json*`
+
+**Result:**
+
+```
+1 total result
+/home/whit/nixos_config/dotfiles/.config/opencode/opencode.jsonc
+```
+</details></tool-use>
+
+_**Agent (copilot/auto)**_
+
+<tool-use data-tool-type="search" data-tool-name="file_search"><details>
+<summary>Tool use: **file_search**</summary>
+
+Searched for files matching `**/tui.json*`, no matches
+
+**Input:**
+
+- query: `**/tui.json*`
+
+**Result:**
+
+```
+No files found
+```
+</details></tool-use>
+
+_**Agent (copilot/auto)**_
+
+<tool-use data-tool-type="search" data-tool-name="file_search"><details>
+<summary>Tool use: **file_search**</summary>
+
+Searched for files matching `**/.opencode/**`, no matches
+
+**Input:**
+
+- query: `**/.opencode/**`
+
+**Result:**
+
+```
+No files found
+```
+</details></tool-use>
+
+_**Agent (copilot/auto)**_
+
+I found a syntax issue in the file you edited: the JSONC is missing a comma before the model keys, which would break startup config parsing. I’m fixing that now and then I’ll verify with OpenCode debug output.
+
+_**Agent (copilot/auto)**_
+
+<tool-use data-tool-type="write" data-tool-name="textEditGroup"><details>
+<summary>Edit: **opencode.jsonc**</summary>
+
+@@ lines 1-13 @@
+
+```
+{
+  "$schema": "https://opencode.ai/config.json",
+  "shell": "fish",
+  "share": "manual",
+  "permission": {
+    "edit": "ask",
+    "bash": "ask"
+  },
+  "model": "deepseek/deepseek-v4-pro",
+  "small_model": "deepseek/deepseek-v4-flash"
+}
+
+```
+</details></tool-use>
+
+_**Agent (copilot/auto)**_
+
+<tool-use data-tool-type="generic" data-tool-name="run_in_terminal"><details>
+<summary>Tool use: **run_in_terminal**</summary>
+
+Running ` if command \-v opencode >/dev/null 2>&1; then opencode debug config | head \-n...`
+
+Validate opencode can parse and resolve config after syntax fix
+
+```bash
+cd /home/whit/nixos_config && if command -v opencode >/dev/null 2>&1; then opencode debug config | head -n 120; else nix shell nixpkgs#opencode -c opencode debug config | head -n 120; fi
+```
+
+**Result:**
+
+```
+Note: The tool simplified the command to ` if command -v opencode >/dev/null 2>&1; then opencode debug config | head -n 120; else nix shell nixpkgs#opencode -c opencode debug config | head -n 120; fi` (terminal ID=6c2a2c38-f857-4e82-aaff-4ea16812de14). This is the output of running that command instead:
+Performing one time database migration, may take a few minutes...
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 100% complete     1/1
+Database migration complete.
+{
+  "$schema": "https://opencode.ai/config.json",
+  "shell": "fish",
+  "share": "manual",
+  "permission": {
+    "edit": "ask",
+    "bash": "ask"
+  },
+  "model": "deepseek/deepseek-v4-pro",
+  "small_model": "deepseek/deepseek-v4-flash",
+  "agent": {},
+  "mode": {},
+  "plugin": [],
+  "command": {},
+  "username": "whit"
+}
+```
+</details></tool-use>
+
+_**Agent (copilot/auto)**_
+
+<tool-use data-tool-type="generic" data-tool-name="run_in_terminal"><details>
+<summary>Tool use: **run_in_terminal**</summary>
+
+Running ` if command \-v opencode >/dev/null 2>&1; then opencode models deepseek \-\-refr...`
+
+Check DeepSeek model identifiers availability after config fix
+
+```bash
+cd /home/whit/nixos_config && if command -v opencode >/dev/null 2>&1; then opencode models deepseek --refresh | head -n 40; else nix shell nixpkgs#opencode -c opencode models deepseek --refresh | head -n 40; fi
+```
+
+**Result:**
+
+```
+Note: The tool simplified the command to ` if command -v opencode >/dev/null 2>&1; then opencode models deepseek --refresh | head -n 40; else nix shell nixpkgs#opencode -c opencode models deepseek --refresh | head -n 40; fi` (terminal ID=2c21ae2a-3617-4633-b93b-3f9e5d07a3fd). This is the output of running that command instead:
+Performing one time database migration, may take a few minutes...
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 100% complete     1/1
+Database migration complete.
+Models cache refreshed
+deepseek/deepseek-chat
+deepseek/deepseek-reasoner
+deepseek/deepseek-v4-flash
+deepseek/deepseek-v4-flash-vision-exp
+deepseek/deepseek-v4-pro
+```
+</details></tool-use>
+
+_**Agent (copilot/auto)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file"><details>
+<summary>Tool use: **read_file**</summary>
+
+Read `opencode.jsonc`
+
+**Input:**
+
+- endLine: `120`
+- filePath: `/home/whit/nixos_config/dotfiles/.config/opencode/opencode.jsonc`
+- startLine: `1`
+
+**Result:**
+
+```
+{
+  "$schema": "https://opencode.ai/config.json",
+  "shell": "fish",
+  "share": "manual",
+  "permission": {
+    "edit": "ask",
+    "bash": "ask"
+  },
+  "model": "deepseek/deepseek-v4-pro",
+  "small_model": "deepseek/deepseek-v4-flash"
+}
+```
+</details></tool-use>
+
+_**Agent (copilot/auto)**_
+
+Root cause found and fixed: your OpenCode config had invalid JSONC.
+
+I corrected `dotfiles/.config/opencode/opencode.jsonc` by adding the missing comma after the permission block.
+
+What I verified after the fix:
+1. OpenCode now parses config successfully with debug output.
+2. DeepSeek provider models resolve correctly.
+3. Your selected models are valid:
+- deepseek/deepseek-v4-pro
+- deepseek/deepseek-v4-flash
+
+The migration message is normal; it is not the failure.
+
+If you still hit startup errors in a specific directory, run these and share output:
+1. opencode debug config
+2. opencode auth list
+3. opencode --print-logs
