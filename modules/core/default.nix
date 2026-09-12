@@ -27,5 +27,6 @@
     ./user.nix              # user account and home-manager configuration
     ./virtualisation.nix    # docker and libvirt/virt-manager
     ./xserver.nix           # x11 configuration and xwayland support
+    ./yazi.nix              # yazi file manager plugins
   ];
 }

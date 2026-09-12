@@ -16,3 +16,6 @@ result-*
 
 # Nix build directories
 .direnv/
+
+# yazi plugins (symlinked from nix store by activation script)
+dotfiles/.config/yazi/plugins/
