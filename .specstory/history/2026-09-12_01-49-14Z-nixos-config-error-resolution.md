@@ -1769,3 +1769,95 @@ The update command showed:
 - new Noctalia revision: 9f35ead435feaa3cc6bcfc6585433abc9ae4db17
 
 That confirms a dependency bump happened, and I should have checked with you first.
+
+---
+
+_**User (2026-09-12 02:59:26Z)**_
+
+can you briefly describe what changed?  ❯ nix flake update                                                            nixos_config  main 
+warning: updating lock file "/home/whit/nixos_config/flake.lock":
+• Updated input 'helium-browser':
+    'github:fpletz/flake/a2157938dc675064473cf3086943fd3432ab2a05?narHash=sha256-amFpnsNLZhrO54yIXe%2Bh/eZYAoZZx00iXbOXDuyoaYI%3D' (2026-08-17)
+  → 'github:fpletz/flake/a467066f1937d7fe53e69b3fea11f054be264a9c?narHash=sha256-OpSTh7t9JYC8TG5ZGdr/rSNlAKe2iU8BfEl52MyK4M4%3D' (2026-09-10)
+• Removed input 'helium-browser/ff-ultima'
+• Updated input 'helium-browser/flake-parts':
+    'github:hercules-ci/flake-parts/427bf4bd9435fdf21321c8cc628c24efc14c0f7a?narHash=sha256-4dtXQk/NMePegK/nWp5NSeuZKLATItOq61lpEvmXqGw%3D' (2026-08-01)
+  → 'github:hercules-ci/flake-parts/31729ca8cbdb4fa927b34e5f4353e6a83f39e993?narHash=sha256-glZLQlzIn1fXH6PazR2iUmTo7kzzyYSshrWhLS9TqCU%3D' (2026-09-03)
+• Added input 'helium-browser/flexfox':
+    'git+https://github.com/yuuqilin/FlexFox.git?ref=refs/heads/main&rev=708dcbcb4879a8a2b966aa5cbfadd77f2815a8b0' (2026-09-07)
+• Updated input 'helium-browser/git-hooks':
+    'github:cachix/git-hooks.nix/43b3c1ab9d40fb1dbb008f451988a91e375825e9?narHash=sha256-ReRHaLgr/uVqdD8afFSn%2BmyXIfpHeOhP0yYe0TJqAA8%3D' (2026-07-17)
+  → 'github:cachix/git-hooks.nix/27555e2624241fb116b49095df4caaee85a25691?narHash=sha256-nt%2BlUqYVpc9Y6JeMd2WmXzCDojasdadKo0mWcluvY2Y%3D' (2026-09-01)
+• Updated input 'helium-browser/home-manager':
+    'github:nix-community/home-manager/353742587cbaf079b3caee743115d037bc51fea6?narHash=sha256-MTGMFlLDTklsXhCp4r5GXB4VAVadPdalXLvUjd/K7h0%3D' (2026-08-17)
+  → 'github:nix-community/home-manager/150f9ce4ddd41544ea42eb9d6043a75bd615fa24?narHash=sha256-S%2Boyh2YSP9V5bSjWbbK0N7GxdxxMwgBfUOtUdVcAWc4%3D' (2026-09-10)
+• Updated input 'helium-browser/nix-index-database':
+    'github:nix-community/nix-index-database/c7962dc97b45129df8d751bedaf37beb5a17706e?narHash=sha256-IM5CYtf86W4w8eUPpKcY/LpdHElmVBtJhaKnoTKxZEA%3D' (2026-08-16)
+  → 'github:nix-community/nix-index-database/116ad1c2adb642405ef8916f6a94c8626f971344?narHash=sha256-amGSoDobwmp4CFvCn841ws2iuitus%2BHUJdD/gKgsrJA%3D' (2026-09-06)
+• Updated input 'helium-browser/nixos-anywhere':
+    'github:nix-community/nixos-anywhere/4cf3b82df8422f82657ae98c3b8374a5fd74f9a1?narHash=sha256-9b0hAKM8UtNsm4lD3aySuXPjPpSibh6yfYEcNvr4fU0%3D' (2026-08-12)
+  → 'github:nix-community/nixos-anywhere/9df41112343713520ba071674cf8e45e91c25845?narHash=sha256-ooFA%2B3//Y9bpyFjVwTvPegsWngEoQ0pGj%2B2DJ5cVyJ0%3D' (2026-09-09)
+• Updated input 'helium-browser/nixos-anywhere/nix-vm-test':
+    'github:numtide/nix-vm-test/1a587212d2ac8b669c6c32499015f996506b6ba5?narHash=sha256-cq4YfNFGYzp0NItZP8tEC7xUI8OSgY4fj75AU/NSaPM%3D' (2026-07-05)
+  → 'github:numtide/nix-vm-test/c8781a0ea2d8417506fff7722eae5a6316461212?narHash=sha256-9QqhmaLVsPhKdMSBaWKjDqeGRn8G4ov4cVuZ6JFwXbo%3D' (2026-08-14)
+• Updated input 'helium-browser/nixos-anywhere/nixos-images':
+    'github:nix-community/nixos-images/b1ad9c218b7bab0a5165d66152fda1e967bc9b93?narHash=sha256-CkLQW9XvHD9imDkt4sau/89u2AeVkyzdADDK0QU7yHc%3D' (2026-08-06)
+  → 'github:nix-community/nixos-images/82517d9a537aad897a6bc872f511c19bbe8bdf03?narHash=sha256-njqRK/q34pSB9ueddXANIRDx0btXPSsAUFFf8mSO840%3D' (2026-09-03)
+• Updated input 'helium-browser/nixvim':
+    'github:nix-community/nixvim/8704f5ec5b2c500720fc65197e4edd49414b31a4?narHash=sha256-YoR5OFSUk5F/K1xWikfPcd27bSAt8x5ZVAqBZ/khEys%3D' (2026-08-17)
+  → 'github:nix-community/nixvim/16baff93297c63b6d4c497f00ffcf0b844b06fc6?narHash=sha256-gN3OnYgJwCK0HX01dQGWusnirJuVHE9WigmSqOnyuCE%3D' (2026-09-10)
+• Updated input 'helium-browser/openwrt-imagebuilder':
+    'github:Astro/nix-openwrt-imagebuilder/c704c2faae3a1132c5f5672d8edee127bfec0a6b?narHash=sha256-y1jJt6cw8UykCt%2BCa8UgK%2BUA2Y1PS62FexYmu%2BzFANc%3D' (2026-08-17)
+  → 'github:Astro/nix-openwrt-imagebuilder/3d894bd634291a61baea270e1c8541661d9d94e1?narHash=sha256-NEy6L06zNGPgVuVYkh0%2BzE6TnTq/NFD3fQ8CyYxxwLM%3D' (2026-09-10)
+• Updated input 'helium-browser/sops-nix':
+    'github:Mic92/sops-nix/a8627b21b9107c5711c96b84f32a9a4b3d45295f?narHash=sha256-gkig4nPi1CWc4Z50GBsjE4ygSE7hMpl/TwID2an2Cck%3D' (2026-08-13)
+  → 'github:Mic92/sops-nix/13616fff713a9f94055c66f15687ebdc17a335df?narHash=sha256-4GuMPW90JSxXWDPUB9M%2B1m7fYbe3H0apOd86/zBQ2Kw%3D' (2026-09-09)
+• Updated input 'helium-browser/stylix':
+    'github:nix-community/stylix/1e6ccadeda179d96728b4a9f20fc9d4dcf6b6059?narHash=sha256-F93yabBSW2TpxKYMcArQOnFuCqBgAdbfZsdl0w5Pojg%3D' (2026-08-12)
+  → 'github:nix-community/stylix/5e3809851f486e7fc7e84b40f174c74b60ecc784?narHash=sha256-DkkJSBOXWV/mja5Vy8az5g1KpZlsbUwlmH0BsQhowaQ%3D' (2026-08-26)
+• Updated input 'home-manager':
+    'github:nix-community/home-manager/65258d5c65a250189fde2e35f490d15e064c4c62?narHash=sha256-Sxu1NLTD/Ern6hFGLlZmtKCSct3YQXZI/lls8RE1XeM%3D' (2026-08-22)
+  → 'github:nix-community/home-manager/fd0956c99c41ae3c13a73a638f1f7e963aebc4ab?narHash=sha256-sPpQFVaFTDqO/4vvCAhuAhqTgqN/ygu%2B9eJcs5eB0js%3D' (2026-09-05)
+• Updated input 'nixpkgs':
+    'github:nixos/nixpkgs/5880666fd9eb563038431edb35c2d0aa595884e6?narHash=sha256-OURZPknrTjQrlNyxPdqzyqmU/81Wes1CUP/Ft1Rv/YI%3D' (2026-08-20)
+  → 'github:nixos/nixpkgs/21a67dc470149f337cecafbe965d8d252a390518?narHash=sha256-ugpsyk3NM2s87vXfUiIIiibbJ4Pp0JPS5p/3mfs%2Bq%2Bc%3D' (2026-09-11)
+• Updated input 'quickshell':
+    'github:outfoxxed/quickshell/1a4716cde794a59928d9d9fc15f2afc7a95de360?narHash=sha256-CLX2Zp5i5BuLbOxNOkwRd9YY84IOrACNxBV79o9/F9Y%3D' (2026-08-21)
+  → 'github:outfoxxed/quickshell/2d3b3e9c70ef380dff751b61d334dc88df016c29?narHash=sha256-6SUZyyALo19heYPa/Xmu2H4zV%2BwvdfVX4fTcqbgHRnI%3D' (2026-08-29)
+
+---
+
+_**Agent (copilot/auto)**_
+
+## What changed
+
+This was a broad flake refresh, not just a Noctalia bump.
+
+The output shows the lockfile in `flake.lock` was updated across several inputs, including:
+
+- helium-browser
+- home-manager
+- nixpkgs
+- quickshell
+
+and also some nested sub-inputs under helium-browser.
+
+### In plain English
+It pulled newer revisions of those flake dependencies from their upstream repos, which means:
+
+- newer package versions may be available
+- transitive dependency graphs changed
+- one input was removed and another added in the helium-browser flake
+- some upstream projects moved to newer commits dated September 2026
+
+### Example of the scope
+It changed things like:
+
+- home-manager from an Aug 2026 revision to a Sep 2026 revision
+- nixpkgs from Aug 2026 to Sep 2026
+- quickshell from Aug 2026 to Aug 2026 newer commit
+- helium-browser gained a new sub-input called flexfox and dropped an old one
+
+So this was a full dependency update to the flake graph, not a one-line config tweak.
+
+> The important point is: this is a dependency change, and it should be approved before being applied.
