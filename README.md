@@ -119,6 +119,20 @@ pywalfox install
 **Automatic updates:**
 Firefox will now automatically re-theme whenever you change wallpapers in Noctalia - no manual intervention needed.
 
+**Noctalia GUI tweaks -> dotfiles workflow:**
+Noctalia now keeps live GUI overrides in `~/.local/state/noctalia/settings.toml` (higher precedence than `~/.config/noctalia/config.toml`).
+If you want your GUI changes committed back to your declarative config:
+
+```bash
+# Export merged active config (base + GUI overrides)
+noctalia config export > ~/.config/noctalia/config.toml
+
+# After committing config.toml, clear GUI override layer
+rm ~/.local/state/noctalia/settings.toml
+```
+
+Recommended loop: tweak in GUI -> export -> commit `dotfiles/.config/noctalia/config.toml` -> remove `settings.toml`.
+
 **Customization:**
 - Click the Pywalfox icon → Settings for extensive theme customization options
 - Edit the color template at `dotfiles/.config/matugen/templates/pywalfox.json`
