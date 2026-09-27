@@ -50,4 +50,5 @@ unit    = "fahrenheit"
 # ── Hooks ──────────────────────────────────────────────────────────────────────
 
 [hooks]
-wallpaper_changed = "~/.config/matugen/wallpaper-hook.sh"
+# temporarily disabled while validating native Noctalia VS Code theming
+# wallpaper_changed = "~/.config/matugen/wallpaper-hook.sh"
