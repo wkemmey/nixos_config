@@ -138,17 +138,7 @@ Recommended loop: tweak in GUI -> export -> commit `dotfiles/.config/noctalia/co
 - Edit the color template at `dotfiles/.config/matugen/templates/pywalfox.json`
 - Enable custom CSS in Pywalfox settings for advanced theming (requires enabling `toolkit.legacyUserProfileCustomizations.stylesheets` in `about:config`)
 
-### 5. Install VS Code Extensions (Manual)
-
-Some VS Code extensions aren't available in nixpkgs and must be installed through the VS Code UI:
-
-1. Open VS Code (Ctrl+Shift+X to open Extensions panel)
-2. Search for and install:
-   - **SpecStory** - Automatically logs GitHub Copilot chat history (save, export, search conversations)
-
-Extensions installed via the UI are stored in `~/.vscode/extensions/` and coexist with Nix-managed extensions.
-
-### 6. Customize Variables
+### 5. Customize Variables
 
 Review and update other settings in `hosts/<hostname>/variables.nix`:
 - Enable optional features (gaming support, communication apps, etc.)

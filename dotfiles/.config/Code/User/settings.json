@@ -34,7 +34,5 @@
     "**/.cargo/git/checkouts/**/*.rs": true,
     "**/lib/rustlib/src/rust/library/**/*.rs": true
   },
-  "specstory.cloudSync.enabled": "never",
-  "specstory.helpUsImprove": false,
   "workbench.colorTheme": "NoctaliaTheme"
 }

@@ -8064,3 +8064,410 @@ sudo nixos-rebuild switch --flake .#whit2020
 ```
 
 Then reopen VS Code and confirm the theme is active.
+
+---
+
+_**User (2026-09-27 01:33:22Z)**_
+
+Let's remove the specstory vscode extension and everything in the project related to it
+
+---
+
+_**Agent (copilot/auto)**_
+
+I’m removing the Specstory extension and checking whether there are any repo references or settings that need to be cleaned up with it.
+
+_**Agent (copilot/auto)**_
+
+<tool-use data-tool-type="search" data-tool-name="grep_search"><details>
+<summary>Tool use: **grep_search**</summary>
+
+Searched for text `specstory|Specstory` (`**/{**/*,.*}`), 153 results
+
+**Input:**
+
+- includeIgnoredFiles: `true`
+- includePattern: `{**/*,.*}`
+- isRegexp: `false`
+- maxResults: `200`
+- query: `specstory|Specstory`
+
+**Result:**
+
+```
+153 matches<match path="/home/whit/nixos_config/README.md" line=147>
+   - **SpecStory** - Automatically logs GitHub Copilot chat history (save, export, search conversations)
+</match>
+<match path="/home/whit/nixos_config/.specstory/cli/config.toml" line=1>
+# SpecStory CLI Configuration
+</match>
+<match path="/home/whit/nixos_config/.specstory/cli/config.toml" line=3>
+# This is the project-level config file for SpecStory CLI.
+</match>
+<match path="/home/whit/nixos_config/.specstory/cli/config.toml" line=7>
+# For more information, see: https://docs.specstory.com/integrations/terminal-coding-agents/usage
+</match>
+<match path="/home/whit/nixos_config/.specstory/cli/config.toml" line=14>
+# Default: ./.specstory/history (relative to the project directory)
+</match>
+<match path="/home/whit/nixos_config/.specstory/cli/config.toml" line=15>
+# output_dir = "~/.specstory/history" # equivalent to --output-dir "~/.specstory/history"
+</match>
+<match path="/home/whit/nixos_config/.specstory/cli/config.toml" line=15>
+# output_dir = "~/.specstory/history" # equivalent to --output-dir "~/.specstory/history"
+</match>
+<match path="/home/whit/nixos_config/.specstory/cli/config.toml" line=21>
+# Sync session data to SpecStory Cloud. (default: true, when logged in to SpecStory Cloud)
+</match>
+<match path="/home/whit/nixos_config/.specstory/cli/config.toml" line=21>
+# Sync session data to SpecStory Cloud. (default: true, when logged in to SpecStory Cloud)
+</match>
+<match path="/home/whit/nixos_config/.specstory/cli/config.toml" line=25>
+# Write logs to .specstory/debug/debug.log (default: false)
+</match>
+<match path="/home/whit/nixos_config/.specstory/cli/config.toml" line=32>
+# Default: ./.specstory/debug (relative to the project directory)
+</match>
+<match path="/home/whit/nixos_config/.specstory/cli/config.toml" line=33>
+# debug_dir = "~/.specstory/debug" # equivalent to --debug-dir "~/.specstory/debug"
+</match>
+<match path="/home/whit/nixos_config/.specstory/cli/config.toml" line=33>
+# debu
+… (output truncated)
+```
+</details></tool-use>
+
+_**Agent (copilot/auto)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file"><details>
+<summary>Tool use: **read_file**</summary>
+
+Read `settings.json`
+
+**Input:**
+
+- endLine: `200`
+- filePath: `/home/whit/nixos_config/dotfiles/.config/Code/User/settings.json`
+- startLine: `1`
+
+**Result:**
+
+```
+{
+  "chat.editor.fontFamily": "JetBrains Mono",
+  "chat.editor.fontSize": 16,
+  "chat.fontFamily": "Montserrat",
+  "debug.console.fontFamily": "JetBrains Mono",
+  "debug.console.fontSize": 16,
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
+  "editor.fontSize": 16,
+  "editor.codeLensFontStyle": "italic",
+  "editor.inlineSuggest.fontFamily": "JetBrains Mono",
+  "editor.inlayHints.fontSize": 11,
+  "editor.minimap.sectionHeaderFontSize": 10,
+  "markdown.preview.fontFamily": "Montserrat",
+  "markdown.preview.fontSize": 16,
+  "notebook.markup.fontFamily": "Montserrat",
+  "scm.inputFontFamily": "JetBrains Mono",
+  "scm.inputFontSize": 15,
+  "screencastMode.fontSize": 64,
+  "terminal.integrated.fontSize": 16,
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "update.mode": "none",
+  "terminal.integrated.defaultProfile.linux": "bash",
+  "terminal.integrated.profiles.linux": {
+    "bash": {
+      "path": "/run/current-system/sw/bin/bash"
+    }
+  },
+  "terminal.integrated.automationProfile.linux": {
+    "path": "/run/current-system/sw/bin/bash"
+  },
+  "files.readonlyInclude": {
+    "**/.cargo/registry/src/**/*.rs": true,
+    "**/.cargo/git/checkouts/**/*.rs": true,
+    "**/lib/rustlib/src/rust/library/**/*.rs": true
+  },
+  "specstory.cloudSync.enabled": "never",
+  "specstory.helpUsImprove": false,
+  "workbench.colorTheme": "NoctaliaTheme"
+}
+```
+</details></tool-use>
+
+_**Agent (copilot/auto)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file"><details>
+<summary>Tool use: **read_file**</summary>
+
+Read `vscode.nix`
+
+**Input:**
+
+- endLine: `220`
+- filePath: `/home/whit/nixos_config/modules/home/vscode.nix`
+- startLine: `1`
+
+**Result:**
+
+```
+{ pkgs, ... }: {
+  nixpkgs.config.allowUnfree = true;
+
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscode;
+
+    # extensions managed by nix (declarative, reproducible)
+    # settings managed via dotfiles (easier to edit frequently)
+    profiles.default.extensions = with pkgs.vscode-extensions; [
+      github.copilot
+      github.copilot-chat
+      jeff-hykin.better-nix-syntax
+      rust-lang.rust-analyzer
+      vadimcn.vscode-lldb
+      tamasfe.even-better-toml
+      usernamehw.errorlens
+      mkhl.direnv
+    ] ++ [
+      (pkgs.vscode-utils.extensionFromVscodeMarketplace {
+        name = "noctaliatheme";
+        publisher = "Noctalia";
+        version = "0.0.5";
+        sha256 = "sha256-aTSk3yYkBw5GrD0CbRL2wo3SlBffzBTDe1pZoZa1URQ=";
+      })
+    ];
+  };
+}
+```
+</details></tool-use>
+
+_**Agent (copilot/auto)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file"><details>
+<summary>Tool use: **read_file**</summary>
+
+Read `README.md`, lines 120 to 175
+
+**Input:**
+
+- endLine: `175`
+- filePath: `/home/whit/nixos_config/README.md`
+- startLine: `120`
+
+**Result:**
+
+````
+Firefox will now automatically re-theme whenever you change wallpapers in Noctalia - no manual intervention needed.
+
+**Noctalia GUI tweaks -> dotfiles workflow:**
+Noctalia now keeps live GUI overrides in `~/.local/state/noctalia/settings.toml` (higher precedence than `~/.config/noctalia/config.toml`).
+If you want your GUI changes committed back to your declarative config:
+
+```bash
+# Export merged active config (base + GUI overrides)
+noctalia config export > ~/.config/noctalia/config.toml
+
+# After committing config.toml, clear GUI override layer
+rm ~/.local/state/noctalia/settings.toml
+```
+
+Recommended loop: tweak in GUI -> export -> commit `dotfiles/.config/noctalia/config.toml` -> remove `settings.toml`.
+
+**Customization:**
+- Click the Pywalfox icon → Settings for extensive theme customization options
+- Edit the color template at `dotfiles/.config/matugen/templates/pywalfox.json`
+- Enable custom CSS in Pywalfox settings for advanced theming (requires enabling `toolkit.legacyUserProfileCustomizations.stylesheets` in `about:config`)
+
+### 5. Install VS Code Extensions (Manual)
+
+Some VS Code extensions aren't available in nixpkgs and must be installed through the VS Code UI:
+
+1. Open VS Code (Ctrl+Shift+X to open Extensions panel)
+2. Search for and install:
+   - **SpecStory** - Automatically logs GitHub Copilot chat history (save, export, search conversations)
+
+Extensions installed via the UI are stored in `~/.vscode/extensions/` and coexist with Nix-managed extensions.
+
+### 6. Customize Variables
+
+Review and update other settings in `hosts/<hostname>/variables.nix`:
+- Enable optional features (gaming support, communication apps, etc.)
+- Set your preferred browser and terminal
+- Configure startup applications
+- Change wallpaper path
+
+After making changes, rebuild with `nxr`.
+
+### 7. SSH Keys (Optional)
+
+If you need SSH access to remote systems or for Git over SSH:
+
+```bash
+ssh-keygen -t ed25519 -C "your.email@example.com"
+cat ~/.ssh/id_ed25519.pub  # Copy this to GitHu
+… (output truncated)
+````
+</details></tool-use>
+
+_**Agent (copilot/auto)**_
+
+<tool-use data-tool-type="read" data-tool-name="read_file"><details>
+<summary>Tool use: **read_file**</summary>
+
+Read `settings.json`
+
+**Input:**
+
+- endLine: `80`
+- filePath: `/home/whit/nixos_config/.vscode/settings.json`
+- startLine: `1`
+
+**Result:**
+
+```
+{
+    "specstory.cloudSync.enabled": "never"
+}
+```
+</details></tool-use>
+
+_**Agent (copilot/auto)**_
+
+<tool-use data-tool-type="generic" data-tool-name="multi_replace_string_in_file"><details>
+<summary>Tool use: **multi_replace_string_in_file**</summary>
+
+Replacing 24 lines with 10 lines in `settings.json`, `settings.json`, `README.md`
+
+**Input:**
+
+- explanation: `Remove SpecStory references from the repo-managed VS Code settings and the README while keeping the rest of the config intact.`
+- replacements:
+
+```
+[
+  {
+    "filePath": "/home/whit/nixos_config/dotfiles/.config/Code/User/settings.json",
+    "newString": "  \"files.readonlyInclude\": {\n    \"**/.cargo/registry/src/**/*.rs\": true,\n    \"**/.cargo/git/checkouts/**/*.rs\": true,\n    \"**/lib/rustlib/src/rust/library/**/*.rs\": true\n  },\n  \"workbench.colorTheme\": \"NoctaliaTheme\"\n}",
+    "oldString": "  \"files.readonlyInclude\": {\n    \"**/.cargo/registry/src/**/*.rs\": true,\n    \"**/.cargo/git/checkouts/**/*.rs\": true,\n    \"**/lib/rustlib/src/rust/library/**/*.rs\": true\n  },\n  \"specstory.cloudSync.enabled\": \"never\",\n  \"specstory.helpUsImprove\": false,\n  \"workbench.colorTheme\": \"NoctaliaTheme\"\n}"
+  },
+  {
+    "filePath": "/home/whit/nixos_config/.vscode/settings.json",
+    "newString": "",
+    "oldString": "{\n    \"specstory.cloudSync.enabled\": \"never\"\n}"
+  },
+  {
+    "filePath": "/home/whit/nixos_config/README.md",
+    "newString": "### 5. Customize Variables\n",
+    "oldString": "### 5. Install VS Code Extensions (Manual)\n\nSome VS Code extensions aren't available in nixpkgs and must be installed through the VS Code UI:\n\n1. Open VS Code (Ctrl+Shift+X to open Extensions panel)\n2. Search for and install:\n   - **SpecStory** - Automatically logs GitHub Copilot chat history (save, export, search conversations)\n\nExtensions installed via the UI are stored in `~/.vscode/extensions/` and coexist with Nix-managed extensions.\n\n### 6. Customize Variables\n"
+  }
+]
+```
+
+
+**Result:**
+
+```
+The following files were successfully edited:
+/home/whit/nixos_config/dotfiles/.config/Code/User/settings.json
+/home/whit/nixos_config/.vscode/settings.json
+/home/whit/nixos_config/README.md
+```
+</details></tool-use>
+
+_**Agent (copilot/auto)**_
+
+<tool-use data-tool-type="write" data-tool-name="textEditGroup"><details>
+<summary>Edit: **settings.json**</summary>
+
+@@ lines 37-39 @@ (deleted)
+</details></tool-use>
+
+_**Agent (copilot/auto)**_
+
+
+```
+
+```
+
+
+_**Agent (copilot/auto)**_
+
+<tool-use data-tool-type="write" data-tool-name="textEditGroup"><details>
+<summary>Edit: **settings.json**</summary>
+
+@@ lines 1-3 @@ (deleted)
+</details></tool-use>
+
+_**Agent (copilot/auto)**_
+
+
+```
+
+```
+
+
+_**Agent (copilot/auto)**_
+
+<tool-use data-tool-type="write" data-tool-name="textEditGroup"><details>
+<summary>Edit: **README.md**</summary>
+
+@@ lines 141-151 @@ (deleted)
+</details></tool-use>
+
+_**Agent (copilot/auto)**_
+
+<tool-use data-tool-type="generic" data-tool-name="run_in_terminal"><details>
+<summary>Tool use: **run_in_terminal**</summary>
+
+Running ` rm \-rf .specstory && git \-\-no\-pager status \-\-short | sed \-n '1,80p'`
+
+Remove the project-local SpecStory history directory and confirm the repo is left without any remaining SpecStory artifacts or settings references.
+
+```bash
+cd /home/whit/nixos_config && rm -rf .specstory && git --no-pager status --short | sed -n '1,80p'
+```
+
+**Result:**
+
+```
+Note: The tool simplified the command to ` rm -rf .specstory && git --no-pager status --short | sed -n '1,80p'` (terminal ID=2cdb2fd5-6610-44dc-8f3b-07451ab489cf). This is the output of running that command instead:
+ D .specstory/.gitignore
+ D .specstory/cli/config.toml
+ D .specstory/history/2025-12-06_01-36-04Z-updating-copilot-instructions-for-nix
+os-configuration.md
+ D .specstory/history/2025-12-06_01-36-04Z-updating-copilot-instructions-for.md
+ D .specstory/history/2025-12-06_01-36Z-updating-copilot-instructions-for-nixos-
+configuration.md
+ D .specstory/history/2026-08-22_18-49-26Z-nixos-26-05-noctalia.md
+ D .specstory/history/2026-08-22_19-55-08Z-check-config-files-for.md
+ D .specstory/history/2026-08-22_20-48-05Z-opencode-setup-with-deepseek.md
+ D .specstory/history/2026-09-12_01-49-14Z-nixos-config-error-resolution.md
+ D .specstory/history/2026-09-13_03-23-25Z-noctalia-settings-changes-issue.md
+ D .specstory/statistics.json
+ M .vscode/settings.json
+ M README.md
+ M dotfiles/.config/Code/User/settings.json
+```
+</details></tool-use>
+
+_**Agent (copilot/auto)**_
+
+## ✅ SpecStory has been removed
+
+I cleaned out the repo-side SpecStory artifacts and settings references:
+
+- removed the project-local SpecStory directory
+- removed the `specstory.*` entries from the repo-managed VS Code settings
+- removed the README section that told people to install SpecStory manually
+- left the Noctalia theme setup intact
+
+Files updated:
+- `dotfiles/.config/Code/User/settings.json`
+- `.vscode/settings.json`
+- `README.md`
+
+I also verified the repo status afterward; only the expected SpecStory deletions and the config changes remain.
+
+> If you want, I can also help clean up any leftover user-level VS Code extension install outside the repo, but the project-managed pieces are now removed.
