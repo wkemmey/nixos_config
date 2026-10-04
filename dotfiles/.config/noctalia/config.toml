@@ -63,7 +63,7 @@ margin_edge = 2
 radius = 12
 
 [hooks]
-colors_changed = ["~/.config/matugen/wallpaper-hook.sh"]
+colors_changed = ["~/.config/matugen/colors-hook.sh"]
 
 [idle]
 behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
@@ -180,6 +180,10 @@ mode = "dark"
 pure_black_dark = true
 source = "builtin"
 wallpaper_scheme = "m3-content"
+
+[theme.templates.user.matugen_current]
+input_path = "$XDG_CONFIG_HOME/noctalia/templates/colors_for_matugen.json"
+output_path = "$XDG_CONFIG_HOME/matugen/schemes/current.json"
 
 [wallpaper]
 directory = "/home/whit/nixos_config/wallpapers"

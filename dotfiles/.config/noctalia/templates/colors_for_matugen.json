@@ -1,0 +1,32 @@
+{
+  "colors": {
+<* for name, value in colors *>
+<* if not {{ loop.first }} *>
+,
+<* endif *>
+    "{{ name }}": {
+      "dark": {
+        "hex": "{{ value.dark.hex }}",
+        "hex_stripped": "{{ value.dark.hex_stripped }}",
+        "red": "{{ value.dark.red }}",
+        "green": "{{ value.dark.green }}",
+        "blue": "{{ value.dark.blue }}"
+      },
+      "default": {
+        "hex": "{{ value.default.hex }}",
+        "hex_stripped": "{{ value.default.hex_stripped }}",
+        "red": "{{ value.default.red }}",
+        "green": "{{ value.default.green }}",
+        "blue": "{{ value.default.blue }}"
+      },
+      "light": {
+        "hex": "{{ value.light.hex }}",
+        "hex_stripped": "{{ value.light.hex_stripped }}",
+        "red": "{{ value.light.red }}",
+        "green": "{{ value.light.green }}",
+        "blue": "{{ value.light.blue }}"
+      }
+    }
+<* endfor *>
+  }
+}
