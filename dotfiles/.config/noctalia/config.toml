@@ -186,7 +186,7 @@ input_path = "$XDG_CONFIG_HOME/noctalia/templates/colors_for_matugen.json"
 output_path = "$XDG_CONFIG_HOME/matugen/schemes/current.json"
 
 [wallpaper]
-directory = "/home/whit/nixos_config/wallpapers"
+directory = "/home/whit/.cache/wallpaper"
 
     [wallpaper.default]
     path = "/home/whit/nixos_config/wallpapers/current_resolution/aenami_timeless_3840x2160.png"

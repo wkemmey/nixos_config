@@ -6,6 +6,8 @@
   # monitor resolution is used for wallpaper selection
   # need a new plan if we ever have multiple monitors with different resolutions
   monitorResolution = "3840x2160";
+  # preferred wallpaper root; if this directory is missing, repo wallpapers are used
+  wallpaperDirectory = "/home/whit/Dropbox/computers/wallpaper";
   # for nvidia prime support (update if using nvidia-laptop profile; unused otherwise)
   # run 'lspci | grep VGA' to find your actual gpu ids
   intelID = "PCI:0:2:0";

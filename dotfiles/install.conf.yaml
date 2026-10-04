@@ -43,3 +43,14 @@
     ~/.config/matugen: .config/matugen
     ~/.aider.conf.yml: .aider.conf.yml
     ~/.bashrc: .bashrc
+    ~/.cache/wallpaper:
+      path: ${WALLPAPER_ROOT}/${MONITOR_RESOLUTION}/*
+      glob: true
+      create: true
+      relink: true
+      force: true
+    ~/.cache/wallpaper/more:
+      path: ${WALLPAPER_ROOT}
+      create: true
+      relink: true
+      force: true
