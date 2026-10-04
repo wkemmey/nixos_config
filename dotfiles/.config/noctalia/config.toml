@@ -1,3 +1,6 @@
+[accessibility]
+ui_scale = 1.2
+
 [bar.main]
 capsule = true
 center = [ "group:g1" ]
@@ -59,6 +62,9 @@ launcher_position = "start"
 margin_edge = 2
 radius = 12
 
+[hooks]
+colors_changed = ["~/.config/matugen/wallpaper-hook.sh"]
+
 [idle]
 behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
 
@@ -76,6 +82,9 @@ behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
     action = "screen_off"
     enabled = false
     timeout = 660.0
+
+[location]
+address = "Fredericksburg, VA"
 
 [lockscreen]
 blur_intensity = 0.0
@@ -117,7 +126,11 @@ widget_order = [ "lockscreen-login-box@HDMI-A-1" ]
         show_weather = true
 
 [notification]
-background_opacity = 0.99999997764825821
+background_opacity = 1.0
+
+[shell]
+corner_radius_scale = 0.5
+font_family = "JetBrainsMono Nerd Font"
 
 [[shell.session.actions]]
 action = "lock"
@@ -181,7 +194,7 @@ directory = "/home/whit/nixos_config/wallpapers"
     path = "/home/whit/nixos_config/wallpapers/current_resolution/aenami_timeless_3840x2160.png"
 
 [weather]
-unit = "imperial"
+unit = "fahrenheit"
 
 [widget.clock]
 format = " %H:%M  %a  %d %b"
