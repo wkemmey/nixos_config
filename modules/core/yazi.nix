@@ -18,10 +18,12 @@ in
   ];
 
   # symlink nixpkgs-managed yazi plugins into the dotbot-managed config dir
-  system.activationScripts.yaziPlugins = ''
-    ${pkgs.sudo}/bin/sudo -u ${username} bash -c '
-      mkdir -p /home/${username}/.config/yazi/plugins
-      ${linkPlugins}
-    '
-  '';
+  # disabled: ~/.config/yazi is symlinked to dotfiles, causing permission issues
+  # TODO: migrate to home-manager yazi plugin configuration if needed
+  # system.activationScripts.yaziPlugins = ''
+  #   ${pkgs.sudo}/bin/sudo -u ${username} bash -c '
+  #     mkdir -p /home/${username}/.config/yazi/plugins
+  #     ${linkPlugins}
+  #   '
+  # '';
 }
