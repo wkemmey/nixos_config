@@ -41,6 +41,7 @@
     ~/.config/obs-studio/global.ini: .config/obs-studio/global.ini
     ~/.config/Thunar/uca.xml: .config/Thunar/uca.xml
     ~/.config/matugen: .config/matugen
+    ~/.mozilla/native-messaging-hosts/pywalfox.json: .mozilla/native-messaging-hosts/pywalfox.json
     ~/.aider.conf.yml: .aider.conf.yml
     ~/.bashrc: .bashrc
     ~/.cache/wallpaper:

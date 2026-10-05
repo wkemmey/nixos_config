@@ -293,3 +293,6 @@ sonos
 
 
 set location in noctalia config via variables?  maybe not because managing dotfiles separately
+
+nicer login screen
+download more wallpapers and maybe remove some really low res ones
