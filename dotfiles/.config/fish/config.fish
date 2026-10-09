@@ -1,13 +1,6 @@
 # disable fish greeting
 set fish_greeting
 
-# remove this once i'm sure i don't need it
-# fix PATH order - ensure wrappers come before system bins
-# this works around a nixos fish integration bug where PATH order gets scrambled
-# remove all instances of /run/wrappers/bin first, then prepend it
-#set -l cleaned_path (string match -v /run/wrappers/bin $PATH)
-#set -gx PATH /run/wrappers/bin $cleaned_path
-
 # disable terminal capability query timeout warnings
 set -g fish_query_timeout 0
 
