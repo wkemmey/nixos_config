@@ -17,8 +17,8 @@ in {
       WALLPAPER_ROOT="/home/${username}/nixos_config/wallpapers"
     fi
 
-    # run dotbot as the user to create symlinks in home directory
-    ${pkgs.sudo}/bin/sudo -u ${username} \
+    # use the NixOS sudo wrapper so PAM helpers resolve correctly at activation time
+    /run/wrappers/bin/sudo -u ${username} \
       env MONITOR_RESOLUTION="${monitorResolution}" WALLPAPER_ROOT="$WALLPAPER_ROOT" \
       ${pkgs.dotbot}/bin/dotbot \
       -d /home/${username}/nixos_config/dotfiles \
