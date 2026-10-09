@@ -72,6 +72,30 @@
       }
     }
 ,
+    "hover": {
+      "dark": {
+        "hex": "#343f44",
+        "hex_stripped": "343f44",
+        "red": "52",
+        "green": "63",
+        "blue": "68"
+      },
+      "default": {
+        "hex": "#343f44",
+        "hex_stripped": "343f44",
+        "red": "52",
+        "green": "63",
+        "blue": "68"
+      },
+      "light": {
+        "hex": "#ebe7d3",
+        "hex_stripped": "ebe7d3",
+        "red": "235",
+        "green": "231",
+        "blue": "211"
+      }
+    }
+,
     "inverse_on_surface": {
       "dark": {
         "hex": "#242728",
@@ -213,6 +237,30 @@
         "red": "74",
         "green": "4",
         "blue": "3"
+      }
+    }
+,
+    "on_hover": {
+      "dark": {
+        "hex": "#d3c6aa",
+        "hex_stripped": "d3c6aa",
+        "red": "211",
+        "green": "198",
+        "blue": "170"
+      },
+      "default": {
+        "hex": "#d3c6aa",
+        "hex_stripped": "d3c6aa",
+        "red": "211",
+        "green": "198",
+        "blue": "170"
+      },
+      "light": {
+        "hex": "#5c6a72",
+        "hex_stripped": "5c6a72",
+        "red": "92",
+        "green": "106",
+        "blue": "114"
       }
     }
 ,

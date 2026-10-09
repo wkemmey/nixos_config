@@ -189,7 +189,7 @@ output_path = "$XDG_CONFIG_HOME/matugen/schemes/current.json"
 directory = "~/.cache/wallpaper"
 
 [weather]
-unit = "fahrenheit"
+unit = "imperial"
 
 [widget.clock]
 format = " %H:%M  %a  %d %b"
