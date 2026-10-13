@@ -155,7 +155,9 @@ in
           read -p "This will remove all but the current generation. Continue (y/N)? " -n 1 -r
           echo
           if [[ $REPLY =~ ^[Yy]$ ]]; then
-            nh clean all -v
+            nix-collect-garbage --delete-old
+            sudo nix-collect-garbage -d
+            sudo /run/current-system/bin/switch-to-configuration boot
           else
             echo "Cleanup cancelled."
           fi
@@ -163,7 +165,9 @@ in
           read -p "This will keep the last $keep_count generations. Continue (y/N)? " -n 1 -r
           echo
           if [[ $REPLY =~ ^[Yy]$ ]]; then
-            nh clean all -k "$keep_count" -v
+            nix-collect-garbage --delete-old
+            sudo nix-env --profile /nix/var/nix/profiles/system --delete-generations "+$keep_count"
+            sudo /run/current-system/bin/switch-to-configuration boot
           else
             echo "Cleanup cancelled."
           fi
