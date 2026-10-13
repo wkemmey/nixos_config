@@ -27,3 +27,4 @@ image/jpeg=org.gnome.eog.desktop;
 image/gif=org.gnome.eog.desktop;
 text/plain=org.gnome.gedit.desktop;
 application/octet-stream=gimp.desktop;
+image/webp=org.gnome.eog.desktop;

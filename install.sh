@@ -60,6 +60,10 @@ fi
 print_success "All dependencies found"
 echo ""
 
+# Detect installer directory name for nixosConfigDir default
+installer_dir=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
+default_nixos_config_dir=$(basename "$installer_dir")
+
 # Get hostname
 print_header "Hostname Configuration"
 echo -e "Suggested names: my-desktop, nixos-laptop, gaming-rig"
@@ -86,6 +90,14 @@ current_user=$(echo $USER)
 read -p "Enter username [$current_user]: " username
 username=${username:-$current_user}
 print_success "Username: $username"
+echo ""
+
+# Get nixos config directory name
+print_header "Repository Directory"
+echo -e "${BLUE}This should match the directory name where this config repo lives under your home folder.${NC}"
+read -p "Enter nixosConfigDir [$default_nixos_config_dir]: " nixos_config_dir
+nixos_config_dir=${nixos_config_dir:-$default_nixos_config_dir}
+print_success "nixosConfigDir: $nixos_config_dir"
 echo ""
 
 # Get timezone
@@ -182,6 +194,7 @@ echo ""
 print_header "Configuration Summary"
 echo -e "  Hostname:      ${GREEN}$hostname${NC}"
 echo -e "  Username:      ${GREEN}$username${NC}"
+echo -e "  Repo Dir:      ${GREEN}$nixos_config_dir${NC}"
 echo -e "  Timezone:      ${GREEN}$timezone${NC}"
 echo -e "  Keyboard:      ${GREEN}$keyboard${NC}"
 echo -e "  GPU Profile:   ${GREEN}$profile${NC}"
@@ -224,6 +237,7 @@ cat > "hosts/$hostname/variables.nix" << EOF
 
   # System Configuration
   timeZone = "$timezone";
+  nixosConfigDir = "$nixos_config_dir";
 
   # Monitor Settings (update after installation for your displays)
   extraMonitorSettings = ''
@@ -432,7 +446,7 @@ read -p "Ready to build? [Y/n]: " build_confirm
 if [[ $build_confirm =~ ^[Nn]$ ]]; then
   echo ""
   print_info "You can build manually later with:"
-  echo -e "  ${GREEN}sudo nixos-rebuild switch --flake ~/nixos_config#$hostname${NC}"
+  echo -e "  ${GREEN}sudo nixos-rebuild switch --flake ~/$nixos_config_dir#$hostname${NC}"
   exit 0
 fi
 
@@ -445,10 +459,10 @@ if sudo nixos-rebuild switch --flake .#"$hostname"; then
   print_success "System has been installed!"
   echo ""
   echo -e "${BLUE}What's next:${NC}"
-  echo -e "  1. Your configuration is in: ${GREEN}~/nixos_config/hosts/$hostname/${NC}"
+  echo -e "  1. Your configuration is in: ${GREEN}~/$nixos_config_dir/hosts/$hostname/${NC}"
   echo -e "  2. Available profiles: amd, intel, nvidia, nvidia-laptop, vm"
-  echo -e "  3. Customize: ${GREEN}~/nixos_config/hosts/$hostname/variables.nix${NC}"
-  echo -e "  4. Rebuild: ${GREEN}sudo nixos-rebuild switch --flake ~/nixos_config#$hostname${NC}"
+  echo -e "  3. Customize: ${GREEN}~/$nixos_config_dir/hosts/$hostname/variables.nix${NC}"
+  echo -e "  4. Rebuild: ${GREEN}sudo nixos-rebuild switch --flake ~/$nixos_config_dir#$hostname${NC}"
   echo ""
   echo -e "${YELLOW}Tip: Update your monitor settings in variables.nix for optimal display${NC}"
   echo ""
@@ -473,7 +487,7 @@ else
   print_error "Build failed"
   echo ""
   echo -e "${YELLOW}To retry manually:${NC}"
-  echo -e "  ${GREEN}cd ~/nixos_config${NC}"
+  echo -e "  ${GREEN}cd ~/$nixos_config_dir${NC}"
   echo -e "  ${GREEN}sudo nixos-rebuild switch --flake .#$hostname${NC}"
   exit 1
 fi

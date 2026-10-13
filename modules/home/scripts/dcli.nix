@@ -6,13 +6,15 @@
   ...
 }: let
   backupFilesString = pkgs.lib.strings.concatStringsSep " " backupFiles;
+  variables = import ../../../hosts/${host}/variables.nix;
+  nixosConfigDir = variables.nixosConfigDir or "nixos_config";
 in
   pkgs.writeShellScriptBin "dcli" ''
     #!${pkgs.bash}/bin/bash
     set -euo pipefail
 
     # --- Configuration ---
-    PROJECT="nixos_config"
+    PROJECT="${nixosConfigDir}"
     HOST="${host}"
     PROFILE="${profile}"
     BACKUP_FILES_STR="${backupFilesString}"

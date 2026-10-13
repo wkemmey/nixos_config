@@ -1,4 +1,7 @@
 {
+  # the name of this repo; should be in /home/${username}/
+  nixosConfigDir = "nixos_config";
+  
   # user info
   userFullName = "Whit Kemmey";
 
