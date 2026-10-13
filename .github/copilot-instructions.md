@@ -73,7 +73,6 @@ This is a flake-based NixOS configuration system with modular architecture, home
 - `install.sh` - Interactive installer (generates hardware-config, creates host files)
 - `modules/core/user.nix` - User creation + home-manager integration point
 - `modules/home/default.nix` - Home-manager module index
-- `modules/core/nh.nix` - NH helper tool configuration for easier rebuilds
 
 ## Testing & Validation
 - **No formal test suite** - validation is through `nixos-rebuild` build success
