@@ -7,18 +7,13 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flake-utils.url = "github:numtide/flake-utils";
-    quickshell = {
-      url = "github:outfoxxed/quickshell";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { nixpkgs, flake-utils, ... }@inputs:
+  outputs = { nixpkgs, ... }@inputs:
     let
       system = "x86_64-linux";
 
@@ -58,38 +53,5 @@
         };
 
       };
-
-      # Flutter development environment
-#      devShells = flake-utils.lib.eachDefaultSystem (
-#        system:
-#        let
-#          pkgs = import nixpkgs {
-#            inherit system;
-#            config = {
-#              android_sdk.accept_license = true;
-#              allowUnfree = true;
-#            };
-#          };
-#          buildToolsVersion = "33.0.2";
-#          androidComposition = pkgs.androidenv.composeAndroidPackages {
-#            buildToolsVersions = [ buildToolsVersion ];
-#            platformVersions = [ "33" ];
-#            abiVersions = [ "arm64-v8a" ];
-#          };
-#          androidSdk = androidComposition.androidsdk;
-#        in
-#        {
-#          default =
-#            with pkgs;
-#            mkShell rec {
-#              ANDROID_SDK_ROOT = "${androidSdk}/libexec/android-sdk";
-#              buildInputs = [
-#                flutter
-#                androidSdk
-#                jdk11
-#              ];
-#            };
-#        }
-#      );
     };
 }
