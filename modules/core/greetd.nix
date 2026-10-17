@@ -8,8 +8,8 @@
 
     settings = {
       default_session = {
-        user = username;
-        command = "${pkgs.tuigreet}/bin/tuigreet --time --cmd niri-session"; 
+        user = "greeter";
+        command = "${pkgs.noctalia-greeter}/bin/noctalia-greeter-session -- --session Niri --user ${username}";
       };
     };
   };

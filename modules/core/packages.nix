@@ -81,7 +81,6 @@
 
     # system utilities
     libnotify # desktop notification support (used by emopicker9000, niri-gaming-mode, note-from-clipboard scripts)
-    tuigreet # login manager (used by greetd.nix as display manager)
     xwayland-satellite # xwayland support outside compositor (used by niri.nix for x11 app support)
 
     # development tools
