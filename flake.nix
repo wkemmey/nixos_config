@@ -16,10 +16,6 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    helium-browser = {
-      url = "github:fpletz/flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = { nixpkgs, flake-utils, ... }@inputs:
@@ -40,7 +36,6 @@
             host = hostname;
             inherit profile;
             inherit username;
-            helium-browser = inputs.helium-browser.packages.${system}.helium-browser;
           };
           modules = [
             ./profiles/${profile}
