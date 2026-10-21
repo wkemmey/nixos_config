@@ -63,7 +63,8 @@ margin_edge = 2
 radius = 12
 
 [hooks]
-colors_changed = ["~/.config/matugen/colors-hook.sh"]
+colors_changed = ["~/.config/matugen/colors-hook.sh", "noctalia msg greeter-sync"]
+wallpaper_changed = ["noctalia msg greeter-sync"]
 
 [idle]
 behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]

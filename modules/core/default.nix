@@ -8,7 +8,7 @@
     ./dotbot.nix            # dotfile symlink manager
     ./fonts.nix             # system font configuration
     ./gaming-support.nix    # gaming: controllers, gamescope, protonup-qt
-    ./greetd.nix            # login manager for niri
+    ./login.nix             # login manager
     ./hardware.nix          # hardware support: bluetooth, sound, power management
     ./network.nix           # network configuration and firewall
     ./nfs.nix               # network file system support

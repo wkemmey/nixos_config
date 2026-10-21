@@ -626,25 +626,25 @@
 ,
     "outline_variant": {
       "dark": {
-        "hex": "#1d4854",
-        "hex_stripped": "1d4854",
-        "red": "29",
-        "green": "72",
-        "blue": "84"
+        "hex": "#0c5c70",
+        "hex_stripped": "0c5c70",
+        "red": "12",
+        "green": "92",
+        "blue": "112"
       },
       "default": {
-        "hex": "#1d4854",
-        "hex_stripped": "1d4854",
-        "red": "29",
-        "green": "72",
-        "blue": "84"
+        "hex": "#0c5c70",
+        "hex_stripped": "0c5c70",
+        "red": "12",
+        "green": "92",
+        "blue": "112"
       },
       "light": {
-        "hex": "#b9b19b",
-        "hex_stripped": "b9b19b",
-        "red": "185",
-        "green": "177",
-        "blue": "155"
+        "hex": "#dfd4b1",
+        "hex_stripped": "dfd4b1",
+        "red": "223",
+        "green": "212",
+        "blue": "177"
       }
     }
 ,
