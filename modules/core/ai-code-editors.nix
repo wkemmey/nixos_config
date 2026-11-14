@@ -1,9 +1,15 @@
-{ config, lib, pkgs, host, ... }:
+{ config, lib, pkgs, host, inputs, ... }:
 let
   inherit (import ../../hosts/${host}/variables.nix) enableAiCodeEditors;
 in
 {
   config = lib.mkIf enableAiCodeEditors {
+    nixpkgs.overlays = [
+      (final: prev: {
+        opencode = inputs.unstable.legacyPackages.${prev.system}.opencode;
+      })
+    ];
+
     nixpkgs.config.allowUnfreePredicate =
       pkg:
       builtins.elem (lib.getName pkg) [
