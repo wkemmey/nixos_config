@@ -31,7 +31,53 @@
     { "action": "shell", "resource": "which *",     "effect": "allow" },
     { "action": "shell", "resource": "grep *",      "effect": "allow" },
     { "action": "shell", "resource": "rg *",        "effect": "allow" },
-    { "action": "shell", "resource": "find *",      "effect": "allow" },
+
+    // NixOS / system inspection (all read-only).
+    { "action": "shell", "resource": "systemctl *status *",            "effect": "allow" },
+    { "action": "shell", "resource": "systemctl *list-units *",        "effect": "allow" },
+    { "action": "shell", "resource": "systemctl *list-unit-files *",   "effect": "allow" },
+    { "action": "shell", "resource": "systemctl *cat *",               "effect": "allow" },
+    { "action": "shell", "resource": "systemctl *show *",              "effect": "allow" },
+    { "action": "shell", "resource": "systemctl *is-enabled *",        "effect": "allow" },
+    { "action": "shell", "resource": "systemctl *is-active *",         "effect": "allow" },
+    { "action": "shell", "resource": "systemctl *is-failed *",         "effect": "allow" },
+    { "action": "shell", "resource": "systemctl *show-environment *",  "effect": "allow" },
+    { "action": "shell", "resource": "systemctl *list-dependencies *", "effect": "allow" },
+    { "action": "shell", "resource": "journalctl *",                   "effect": "allow" },
+    { "action": "shell", "resource": "pgrep *",                        "effect": "allow" },
+    { "action": "shell", "resource": "ps *",                           "effect": "allow" },
+    { "action": "shell", "resource": "free *",                         "effect": "allow" },
+    { "action": "shell", "resource": "df *",                           "effect": "allow" },
+    { "action": "shell", "resource": "du *",                           "effect": "allow" },
+    { "action": "shell", "resource": "lsblk *",                        "effect": "allow" },
+    { "action": "shell", "resource": "findmnt *",                      "effect": "allow" },
+    { "action": "shell", "resource": "lsusb *",                        "effect": "allow" },
+    { "action": "shell", "resource": "lspci *",                        "effect": "allow" },
+    { "action": "shell", "resource": "nproc *",                        "effect": "allow" },
+    { "action": "shell", "resource": "uptime *",                       "effect": "allow" },
+
+    // Text processing (read-only, used constantly in pipes).
+    { "action": "shell", "resource": "jq *",     "effect": "allow" },
+    { "action": "shell", "resource": "sed *",    "effect": "allow" },
+    { "action": "shell", "resource": "awk *",    "effect": "allow" },
+    { "action": "shell", "resource": "head *",   "effect": "allow" },
+    { "action": "shell", "resource": "tail *",   "effect": "allow" },
+    { "action": "shell", "resource": "wc *",     "effect": "allow" },
+    { "action": "shell", "resource": "sort *",   "effect": "allow" },
+    { "action": "shell", "resource": "uniq *",   "effect": "allow" },
+    { "action": "shell", "resource": "cut *",    "effect": "allow" },
+    { "action": "shell", "resource": "tr *",     "effect": "allow" },
+    { "action": "shell", "resource": "column *", "effect": "allow" },
+
+    // `find` is fine for listing, but block its destructive flags.
+    { "action": "shell", "resource": "find *",            "effect": "allow" },
+    { "action": "shell", "resource": "find * -delete *",  "effect": "deny" },
+    { "action": "shell", "resource": "find * -exec *",    "effect": "deny" },
+    { "action": "shell", "resource": "find * -execdir *", "effect": "deny" },
+
+    // Dropbox CLI status (read-only).
+    { "action": "shell", "resource": "dropbox status *",     "effect": "allow" },
+    { "action": "shell", "resource": "dropbox filestatus *", "effect": "allow" },
 
     // Irreversibly destructive: block outright. Delete these lines if you'd
     // rather just be asked instead.
