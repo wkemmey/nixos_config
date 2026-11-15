@@ -78,8 +78,9 @@ behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
 
     [idle.behavior.screen-off]
     action = "screen_off"
-    enabled = false
-    timeout = 660.0
+    enabled = true
+    timeout = 0
+    locked_timeout = 600.0
 
 [location]
 address = "Fredericksburg, VA"
