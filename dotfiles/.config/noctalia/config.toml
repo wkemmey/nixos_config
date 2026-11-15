@@ -129,6 +129,9 @@ background_opacity = 1.0
 corner_radius_scale = 0.5
 font_family = "JetBrainsMono Nerd Font"
 
+[shell.greeter_sync]
+auto_sync = true
+
 [[shell.session.actions]]
 action = "lock"
 countdown_seconds = 0.0
@@ -181,6 +184,9 @@ wallpaper_scheme = "m3-content"
 [theme.templates.user.matugen_current]
 input_path = "$XDG_CONFIG_HOME/noctalia/templates/colors_for_matugen.json"
 output_path = "$XDG_CONFIG_HOME/matugen/schemes/current.json"
+
+[hooks]
+colors_changed = "~/.config/matugen/colors-hook.sh"
 
 [wallpaper]
 directory = "~/.cache/wallpaper"
