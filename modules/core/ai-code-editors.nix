@@ -6,7 +6,7 @@ in
   config = lib.mkIf enableAiCodeEditors {
     nixpkgs.overlays = [
       (final: prev: {
-        opencode = inputs.unstable.legacyPackages.${prev.system}.opencode;
+        opencode = inputs.unstable.legacyPackages.${prev.stdenv.hostPlatform.system}.opencode;
       })
     ];
 
