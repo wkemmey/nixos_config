@@ -415,7 +415,7 @@ environment {
   TERMINAL "foot"
   XCURSOR_THEME "Bibata-Modern-Ice"
   XCURSOR_SIZE "24"
-  GTK_THEME "Adwaita:dark"
+  GTK_THEME "adw-gtk3-dark"
 
   // nvidia gaming optimizations
   __GL_GSYNC_ALLOWED "1"
