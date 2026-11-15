@@ -2,6 +2,7 @@
 ui_scale = 1.2
 
 [bar.main]
+background_opacity = 0.0
 capsule = true
 center = [ "group:g1" ]
 end = [ "group:g2" ]
