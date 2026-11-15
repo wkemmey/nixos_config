@@ -296,3 +296,6 @@ set location in noctalia config via variables?  maybe not because managing dotfi
 
 nicer login screen
 download more wallpapers and maybe remove some really low res ones
+
+
+is it possible to remove all the generated color files from my repo, so i don't get a bunch of changed files just by changing wallpaper?  be careful not to break the initial install--might need to run matugen hooks upon install to generate the missing color files.
