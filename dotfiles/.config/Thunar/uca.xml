@@ -17,7 +17,7 @@
 	<name>Set as Noctalia Wallpaper</name>
 	<submenu></submenu>
 	<unique-id>1764990281362950-2</unique-id>
-	<command>noctalia msg wallpaper-set "%f"</command>
+	<command>noctalia msg wallpaper-set %f</command>
 	<description>Set this image as the Noctalia wallpaper</description>
 	<range></range>
 	<image-files/>
