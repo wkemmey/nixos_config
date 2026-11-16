@@ -1,7 +1,7 @@
 disableStartupPopups: true
 git:
   commit:
-    signOff: true
+    signOff: false
   parseEmoji: true
 gui:
   nerdFontsVersion: '3'

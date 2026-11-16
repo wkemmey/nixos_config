@@ -115,3 +115,20 @@ abbr -a grv "git remote -v"
 abbr -a gstash "git stash"
 abbr -a gs "git status -sb"
 abbr -a gwhoami "echo \"user.name:\" (git config user.name) && echo \"user.email:\" (git config user.email)"
+
+# launch a dev workspace: lazygit (left), opencode (middle), yazi (right)
+function dev -a project
+  set -q project[1]; or set project $PWD
+
+  # resolve the argument via zoxide if it isn't an existing directory
+  if not test -d "$project"
+    set -l resolved (zoxide query "$project" 2>/dev/null)
+    test -n "$resolved"; and set project "$resolved"
+  end
+
+  foot lazygit -p $project &
+  sleep 0.4
+  foot opencode $project &
+  sleep 0.4
+  foot yazi $project &
+end
