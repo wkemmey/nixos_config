@@ -1,0 +1,6 @@
+{
+  "keybinds": {
+    "model.cycle_recent": "ctrl+m",
+    "model.cycle_recent_reverse": "ctrl+shift+m"
+  }
+}

@@ -37,6 +37,7 @@
     ~/.config/tealdeer/config.toml: .config/tealdeer/config.toml
     ~/.config/helix/config.toml: .config/helix/config.toml
     ~/.config/opencode/opencode.jsonc: .config/opencode/opencode.jsonc
+    ~/.config/opencode/cli.json: .config/opencode/cli.json
     ~/.config/fuzzel/fuzzel.ini: .config/fuzzel/fuzzel.ini
     ~/.config/obs-studio/global.ini: .config/obs-studio/global.ini
     ~/.config/Thunar/uca.xml: .config/Thunar/uca.xml
