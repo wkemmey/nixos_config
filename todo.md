@@ -299,3 +299,8 @@ download more wallpapers and maybe remove some really low res ones
 
 
 is it possible to remove all the generated color files from my repo, so i don't get a bunch of changed files just by changing wallpaper?  be careful not to break the initial install--might need to run matugen hooks upon install to generate the missing color files.
+
+
+what google chrome config needs to be saved in the repo?  how do i theme it?
+
+is browsers-extra.nix really needed anymore if we just add google-chrome to packages?
