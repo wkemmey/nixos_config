@@ -13,6 +13,7 @@
     ./network.nix           # network configuration and firewall
     ./nfs.nix               # network file system support
     ./niri.nix              # niri wayland compositor configuration
+    ./obsidian.nix          # obsidian vault git backup timer
     ./packages.nix          # core system packages
     ./printing.nix          # printing and scanning support
     ./productivity.nix      # productivity apps: obsidian, quickemu

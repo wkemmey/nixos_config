@@ -29,6 +29,15 @@
   enablePrint = true;
   enableThunar = true;
 
+  # obsidian vault git backup (systemd timer in modules/core/obsidian.nix)
+  # set to the absolute path of the vault to back up to GitHub; leave empty to
+  # disable the timer.
+  #
+  # IMPORTANT: run this on only ONE machine that holds the vault - git is a
+  # single-writer backup here, so two machines pushing to the same branch
+  # would conflict with each other.
+  obsidianVaultDir = "/home/whit/obsidian/whit";
+
   # optional features (disabled for faster initial install)
   # you can enable these later by setting to true and rebuilding
   enableGamingSupport = true;        # gaming controllers, gamescope, protonup-qt
