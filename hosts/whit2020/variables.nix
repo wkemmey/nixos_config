@@ -42,7 +42,7 @@
   # you can enable these later by setting to true and rebuilding
   enableGamingSupport = true;        # gaming controllers, gamescope, protonup-qt
   enableSyncthing = false;           # syncthing file synchronization
-  enableCommunicationApps = false;   # discord, teams, zoom, telegram
+  enableCommunicationApps = true;    # discord, teams, zoom, telegram
   enableProductivityApps = true;     # obsidian, quickemu
   enableAiCodeEditors = true;        # claude-code, gemini-cli, cursor, opencode, aider
 }

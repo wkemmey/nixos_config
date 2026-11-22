@@ -28,7 +28,7 @@ in
       url = "https://music.youtube.com";
       icon = ./webapp-icons/youtube-music.png;
       wmClass = "YouTubeMusic";
-      categories = [ "Audio","AudioVideo" ];
+      categories = [ "Audio" "AudioVideo" ];
     };
 
     discord = webapp {

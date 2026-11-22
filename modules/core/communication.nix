@@ -5,7 +5,7 @@ in
 {
   config = lib.mkIf enableCommunicationApps {
     environment.systemPackages = with pkgs; [
-      zoom-us # video meetings
+      slack # team chat
       #vesktop # discord alternative
     ];
   };
