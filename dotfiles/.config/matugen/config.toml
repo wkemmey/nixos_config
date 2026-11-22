@@ -38,5 +38,8 @@ youtube-music = { input_path = "~/.config/matugen/templates/youtube-music.css", 
 # helix theming
 helix = { input_path = "~/.config/matugen/templates/helix.toml", output_path = "~/.config/helix/themes/matugen.toml" }
 
+# obsidian theming
+obsidian = { input_path = "~/.config/matugen/templates/obsidian.css", output_path = "~/obsidian/whit/.obsidian/snippets/matugen.css" }
+
 # cava visualizer
 #cava = { input_path = "~/.config/matugen/templates/cava.conf", output_path = "~/.config/cava/themes/matugen" }
