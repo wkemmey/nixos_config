@@ -56,7 +56,6 @@
 
     # media applications
     picard # music metadata editor and cover art downloader (for user)
-    pear-desktop # youtube music client (for user)
 
     # productivity and utilities
     _1password-gui # password manager (for user)

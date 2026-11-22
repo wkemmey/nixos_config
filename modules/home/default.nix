@@ -5,6 +5,7 @@
     ./virtmanager.nix
     ./vscode.nix
     ./obs-studio.nix
+    ./webapp.nix
     ./scripts
   ];
 
