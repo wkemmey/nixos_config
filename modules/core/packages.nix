@@ -98,6 +98,7 @@
 
     # text editors
     helix # modal text editor (for user)
+    inputs.unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.opencode # terminal ai coding agent (unstable)
 
     # rust development tools
     #rustup # rust toolchain manager (for user)
