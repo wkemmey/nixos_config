@@ -2,7 +2,6 @@
 {
   imports = [
     ./boot.nix             # bootloader and kernel configuration
-    ./communication.nix    # communication apps: discord, teams, zoom, telegram
     ./dotbot.nix           # dotfile symlink manager
     ./fonts.nix            # system font configuration
     ./gaming-support.nix   # gaming: controllers, gamescope, protonup-qt
@@ -14,7 +13,6 @@
     ./obsidian.nix         # obsidian vault git backup timer
     ./packages.nix         # core system packages
     ./printing.nix         # printing and scanning support
-    ./productivity.nix     # productivity apps: obsidian, quickemu
     ./security.nix         # security settings: polkit, gnome-keyring
     ./services.nix         # system services: dbus, gnome services
     ./starship.nix         # starship prompt configuration
