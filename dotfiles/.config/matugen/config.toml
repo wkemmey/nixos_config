@@ -30,7 +30,7 @@ pywalfox = { input_path = "~/.config/matugen/templates/pywalfox.json", output_pa
 
 # gtk theming
 gtk3 = { input_path = "~/.config/matugen/templates/gtk-colors.css", output_path = "~/.config/gtk-3.0/colors.css" }
-gtk4 = { input_path = "~/.config/matugen/templates/gtk-colors.css", output_path = "~/.config/gtk-4.0/colors.css", post_hook = "sh -c 'THEME=$(gsettings get org.gnome.desktop.interface gtk-theme); gsettings set org.gnome.desktop.interface gtk-theme \"\"; gsettings set org.gnome.desktop.interface gtk-theme $THEME'" }
+gtk4 = { input_path = "~/.config/matugen/templates/gtk-colors.css", output_path = "~/.config/gtk-4.0/colors.css", post_hook = "sh $HOME/.config/matugen/gtk-reload.sh" }
 
 # youtube music theming
 youtube-music = { input_path = "~/.config/matugen/templates/youtube-music.css", output_path = "~/.config/YouTube Music/matugen-theme.css" }
