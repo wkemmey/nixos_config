@@ -2,7 +2,6 @@
 {
   imports = [
     ./boot.nix             # bootloader and kernel configuration
-    ./browsers-extra.nix   # additional browsers beyond firefox
     ./communication.nix    # communication apps: discord, teams, zoom, telegram
     ./dotbot.nix           # dotfile symlink manager
     ./fonts.nix            # system font configuration
