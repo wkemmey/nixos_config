@@ -1,5 +1,9 @@
-{ pkgs, ... }: {
-  # niri wayland compositor configuration
-  programs.niri.package = pkgs.niri;
-  services.displayManager.sessionPackages = [ pkgs.niri ];
+{ ... }: {
+  programs.niri.enable = true;
+
+  # niri-specific portal config: screen sharing through the gnome portal
+  xdg.portal.config.niri = {
+    "org.freedesktop.impl.portal.Screenshot" = [ "gnome" ];
+    "org.freedesktop.impl.portal.ScreenCast" = [ "gnome" ];
+  };
 }

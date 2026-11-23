@@ -143,7 +143,6 @@
     tealdeer # tldr client
     yazi # terminal file manager
     zoxide # smart directory jumper
-    niri # wayland compositor
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default # noctalia shell
     
     # wayland utilities
