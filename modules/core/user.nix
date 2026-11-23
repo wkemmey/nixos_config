@@ -35,14 +35,12 @@ in
     isNormalUser = true;
     description = "${userFullName}";
     extraGroups = [
-      "adbusers"
       "docker"
       "libvirtd" # for virtmanager
       "lp"
       "networkmanager"
       "scanner"
       "wheel" # sudo access
-      "vboxusers" # for virtualbox
     ];
     # use fish as default shell
     shell = pkgs.fish;
