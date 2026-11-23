@@ -1,10 +1,11 @@
-{ pkgs, ... }: {
+{ pkgs, lib, host, ... }:
+let
+  inherit (import ../../hosts/${host}/variables.nix) enableVirtualisation;
+in
+lib.mkIf enableVirtualisation {
   # only enable either docker or podman -- not both
   virtualisation = {
-    docker = {
-      enable = true;
-    };
-
+    docker.enable = true;
     podman.enable = false;
 
     libvirtd = {
@@ -28,14 +29,10 @@
       ];
     };
 
-    # kernel modules for better vm performance
     spiceUSBRedirection.enable = true;
   };
 
-  programs = {
-    virt-manager.enable = true;
-    dconf.enable = true; # required for virt-manager settings
-  };
+  programs.virt-manager.enable = true;
 
   environment.systemPackages = with pkgs; [
     virt-viewer # view virtual machines
@@ -53,16 +50,11 @@
     mesa # opengl support for vms
   ];
 
-  # enable necessary kernel modules for vm performance
-  boot.kernelModules = ["kvm-amd" "kvm-intel" "vfio-pci"];
+  # kvm kernel modules (loads the right one for the cpu)
+  boot.kernelModules = ["kvm-amd" "kvm-intel"];
 
-  # add boot kernel parameters for better graphics support
-  boot.kernelParams = [
-    "intel_iommu=on"
-    "iommu=pt"
-  ];
-
-  # create default iso and vm directories with correct permissions
+  # note: gpu/device passthrough (vfio) is not configured. to add it later,
+  # enable iommu (amd_iommu/intel_iommu) and the vfio-pci kernel module.
   systemd.tmpfiles.rules = [
     "d /var/lib/libvirt/isos 0755 qemu-libvirtd kvm -"
     "d /var/lib/libvirt/images 0755 qemu-libvirtd kvm -"

@@ -39,6 +39,7 @@
 
   # optional features (disabled for faster initial install)
   # you can enable these later by setting to true and rebuilding
-  enableGamingSupport = true;    # gaming controllers, gamescope, protonup-qt
-  enableSyncthing = false;       # syncthing file synchronization
+  enableGamingSupport = true;     # gaming controllers, gamescope, protonup-qt
+  enableSyncthing = false;        # syncthing file synchronization
+  enableVirtualisation = true;    # docker, libvirtd, virt-manager
 }
