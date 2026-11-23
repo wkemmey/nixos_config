@@ -16,7 +16,6 @@
     ./security.nix         # security settings: polkit, gnome-keyring
     ./services.nix         # system services: dbus, gnome services
     ./starship.nix         # starship prompt configuration
-    ./steam.nix            # steam gaming platform
     ./syncthing.nix        # file synchronization service
     ./system.nix           # core system settings: locale, timezone
     ./thunar.nix           # thunar file manager
