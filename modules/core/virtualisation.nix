@@ -62,12 +62,6 @@
     "iommu=pt"
   ];
 
-  # enable opengl support
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-
   # create default iso and vm directories with correct permissions
   systemd.tmpfiles.rules = [
     "d /var/lib/libvirt/isos 0755 qemu-libvirtd kvm -"

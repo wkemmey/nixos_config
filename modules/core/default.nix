@@ -4,7 +4,7 @@
     ./boot.nix             # bootloader and kernel configuration
     ./dotbot.nix           # dotfile symlink manager
     ./fonts.nix            # system font configuration
-    ./gaming-support.nix   # gaming: controllers, gamescope, protonup-qt
+    ./gaming.nix           # gaming: launchers, controllers, gamescope
     ./login.nix            # login manager
     ./hardware.nix         # hardware support: bluetooth, sound, power management
     ./network.nix          # network configuration and firewall
