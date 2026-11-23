@@ -7,8 +7,8 @@
     openssh.enable = true; # enable ssh
     blueman.enable = true; # bluetooth support
     tumbler.enable = true; # image/video preview
-    gnome.gnome-keyring.enable = true;
-    upower.enable = true; # power management (required for battery monitoring TODO this was required for dms, is it still needed for noctalia?)
+    gnome.gnome-keyring.enable = true; # secret storage (general desktop service)
+    upower.enable = true; # power management / battery monitoring
 
     smartd = { # monitors health of hard drives and ssds
       enable =
