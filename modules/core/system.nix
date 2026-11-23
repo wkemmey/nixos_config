@@ -12,8 +12,8 @@ in
         "flakes"
       ];
       substituters = [
-        "https://cache.nixos.org"  # default nixos binary cache
-        "https://devenv.cachix.org" # pre-built devenv packages (avoids building from source)
+        "https://cache.nixos.org"    # default nixos binary cache
+        "https://devenv.cachix.org"  # pre-built devenv packages (avoids building from source)
       ];
       trusted-public-keys = [
         "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
@@ -34,9 +34,7 @@ in
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-  environment.variables = {
-  };
-  
+
   # force electron apps (vscode, etc.) to use native wayland rendering
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
@@ -44,18 +42,7 @@ in
     # note: auto is typically safer than wayland directly
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
   };
-  
+
   console.keyMap = "${consoleKeyMap}";
-
   system.stateVersion = "25.11"; # do not change!
-
-  # enable nix-ld for running unpackaged programs like adb
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [
-    # common libraries needed for android tools
-    #stdenv.cc.cc.lib
-    #zlib
-    #openssl
-    #libGL
-  ];
 }
