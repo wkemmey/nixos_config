@@ -41,5 +41,5 @@
   # you can enable these later by setting to true and rebuilding
   enableGamingSupport = true;     # gaming controllers, gamescope, protonup-qt
   enableSyncthing = false;        # syncthing file synchronization
-  enableVirtualisation = true;    # docker, libvirtd, virt-manager
+  enableVirtualisation = false;    # docker, libvirtd, virt-manager
 }
