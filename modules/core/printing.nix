@@ -22,6 +22,7 @@ in {
   hardware.sane = {
     enable = enablePrint;
     extraBackends = [ pkgs.sane-airscan ]; # network scanner support
+    disabledDefaultBackends = [ "escl" ]; # airscan has its own escl backend
   };
   
   # add scanner utilities

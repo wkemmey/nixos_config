@@ -304,3 +304,5 @@ is it possible to remove all the generated color files from my repo, so i don't 
 what google chrome config needs to be saved in the repo?  how do i theme it?
 
 is browsers-extra.nix really needed anymore if we just add google-chrome to packages?
+
+should i make poweronboot false for laptops?

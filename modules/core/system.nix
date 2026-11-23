@@ -47,12 +47,6 @@ in
   
   console.keyMap = "${consoleKeyMap}";
 
-  # graphics: enable 32-bit opengl/vulkan libraries (needed for steam and 32-bit games)
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-
   system.stateVersion = "25.11"; # do not change!
 
   # enable nix-ld for running unpackaged programs like adb
