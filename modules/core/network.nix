@@ -1,23 +1,14 @@
-{ pkgs, host, options, ... }: {
+{ pkgs, host, ... }: {
   networking = {
     hostName = "${host}";
     networkmanager.enable = true;
-    timeServers = options.networking.timeServers.default ++ ["pool.ntp.org"];
     firewall = {
       enable = true;
       allowedTCPPorts = [
-        22
-        80
-        443
-        17500
-        59010
-        59011
-        8080
+        17500 # dropbox lan sync
       ];
       allowedUDPPorts = [
-        17500
-        59010
-        59011
+        17500 # dropbox lan sync
       ];
     };
   };
