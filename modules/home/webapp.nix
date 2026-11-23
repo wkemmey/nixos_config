@@ -38,5 +38,29 @@ in
       wmClass = "Discord";
       categories = [ "Utility" ];
     };
+
+    netflix = webapp {
+      name = "Netflix";
+      url = "https://www.netflix.com";
+      icon = ./webapp-icons/netflix.png;
+      wmClass = "Netflix";
+      categories = [ "AudioVideo" ];
+    };
+
+    paramount-plus = webapp {
+      name = "Paramount Plus";
+      url = "https://www.paramountplus.com";
+      icon = ./webapp-icons/paramount-plus.png;
+      wmClass = "ParamountPlus";
+      categories = [ "AudioVideo" ];
+    };
+
+    prime-video = webapp {
+      name = "Prime Video";
+      url = "https://www.primevideo.com";
+      icon = ./webapp-icons/amazon-prime-video.png;
+      wmClass = "PrimeVideo";
+      categories = [ "AudioVideo" ];
+    };
   };
 }
