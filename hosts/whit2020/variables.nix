@@ -27,7 +27,6 @@
   # core features
   enableNFS = false;
   enablePrint = true;
-  enableThunar = true;
 
   # obsidian vault git backup (systemd timer in modules/core/obsidian.nix)
   # set to the absolute path of the vault to back up to GitHub; leave empty to

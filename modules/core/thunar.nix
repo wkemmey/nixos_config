@@ -1,10 +1,7 @@
-{ host, pkgs, ... }: 
-let
-  inherit (import ../../hosts/${host}/variables.nix) enableThunar;
-in {
+{ pkgs, ... }: {
   programs = {
     thunar = {
-      enable = enableThunar;
+      enable = true;
       plugins = with pkgs; [
         thunar-archive-plugin
         thunar-volman
@@ -12,6 +9,6 @@ in {
     };
   };
   environment.systemPackages = with pkgs; [
-    ffmpegthumbnailer # Need For Video / Image Preview
+    ffmpegthumbnailer # video thumbnails (used by tumbler)
   ];
 }
