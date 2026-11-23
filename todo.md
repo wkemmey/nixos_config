@@ -306,3 +306,40 @@ what google chrome config needs to be saved in the repo?  how do i theme it?
 is browsers-extra.nix really needed anymore if we just add google-chrome to packages?
 
 should i make poweronboot false for laptops?
+
+Enable Hardware Acceleration in NixOS
+
+    If you have an NVIDIA GPU:
+    Enable NVIDIA's VA-API translation layer (nvidia-vaapi-driver) so browsers and media players can hardware-decode AV1/HEVC/VP9 streams:
+    Nix
+
+    { pkgs, ... }:
+    {
+      hardware.graphics = {
+        enable = true;
+        extraPackages = with pkgs; [
+          nvidia-vaapi-driver
+        ];
+      };
+      environment.sessionVariables = {
+        NVD_BACKEND = "direct";
+        MOZ_DISABLE_RDD_SANDBOX = "1"; # Needed for Firefox hardware decode on NVIDIA
+      };
+    }
+
+    If you have an Intel or AMD GPU:
+    Enable VA-API drivers (intel-media-driver for newer Intel or mesa for AMD):
+    Nix
+
+    { pkgs, ... }:
+    {
+      hardware.graphics = {
+        enable = true;
+        extraPackages = with pkgs; [
+          intel-media-driver # For Intel Broadwell (Gen 8) and newer
+          libvdpau-va-gl
+        ];
+      };
+    }
+
+    

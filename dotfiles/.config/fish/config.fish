@@ -34,8 +34,6 @@ if test -f $HOME/.fishrc-personal
   source $HOME/.fishrc-personal
 end
 
-# initialize starship prompt
-starship init fish | source
 
 # initialize zoxide (smart cd)
 zoxide init fish --cmd cd | source

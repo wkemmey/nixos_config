@@ -95,8 +95,6 @@
 
     # development environment tools
     devenv # declarative development environments (for user)
-    direnv # automatic environment switching (for user)
-    nix-direnv # fast direnv evaluation for nix (for user)
 
     # nix language tools
     nixfmt # nix code formatter (for user)
@@ -150,10 +148,6 @@
     udiskie # usb drive automounter
     matugen # material you color generator for theming
     
-    # xdg desktop portal (for screen sharing, file pickers, etc)
-    xdg-desktop-portal
-    xdg-desktop-portal-gtk
-    xdg-desktop-portal-gnome
 
     # cursor and icon themes
     bibata-cursors
@@ -167,6 +161,4 @@
     fishPlugins.sponge
   ];
 
-  # enable fish shell system-wide for vendor completions
-  programs.fish.enable = true;
 }
