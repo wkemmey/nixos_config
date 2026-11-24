@@ -21,6 +21,5 @@
     ./thunar.nix           # thunar file manager
     ./user.nix             # user account and home-manager configuration
     ./virtualisation.nix   # docker and libvirt/virt-manager
-    ./yazi.nix             # yazi file manager plugins
   ];
 }

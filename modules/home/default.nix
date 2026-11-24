@@ -6,6 +6,7 @@
     ./vscode.nix
     ./obs-studio.nix
     ./webapp.nix
+    ./yazi.nix
     ./scripts
   ];
 

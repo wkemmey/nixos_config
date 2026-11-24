@@ -130,3 +130,13 @@ function dev -a project
   sleep 0.4
   foot yazi $project &
 end
+
+# yazi cd-on-exit wrapper: type yy, pick a dir, cd there on exit
+function yy
+  set -l tmp (mktemp -t "yazi-cwd.XXXXX")
+  command yazi $argv --cwd-file="$tmp"
+  if read cwd < "$tmp"; and [ -n "$cwd" ]; and [ "$cwd" != "$PWD" ]
+    builtin cd -- "$cwd"
+  end
+  rm -f -- "$tmp"
+end

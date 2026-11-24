@@ -36,6 +36,7 @@
     file-roller # archive manager gui (for user)
     unrar # rar archive support (for user)
     unzip # zip archive support (for user)
+    p7zip # 7z/rar archive support (yazi archive preview)
 
     # text editors
     gedit # simple graphical text editor (for user)
@@ -43,9 +44,10 @@
     # image and graphics
     eog # image viewer (for user)
     gimp # advanced photo editor (for user)
+    imagemagick # image toolkit (yazi preview for avif/heic/jxl/svg)
 
     # audio and video
-    ffmpeg # video/audio encoding and editing (for user)
+    ffmpeg # video/audio encoding and editing (for user; yazi video preview)
     mpv # versatile video player (for user)
     pavucontrol # audio level and device control (for user)
     playerctl # media player control through scripts (for user)
@@ -76,11 +78,11 @@
 
     # terminal utilities and tools
     cmatrix # matrix movie effect (for user)
-    jq # json processor (used by matugen vscode color merge script)
+    jq # json processor (used by matugen vscode color merge script; yazi json preview)
     killall # kill all instances of a program (for user)
     nitch # minimal fetch utility (for user)
     onefetch # git repository information display (for user)
-    ripgrep # fast grep alternative (for user)
+    ripgrep # fast grep alternative (for user; yazi 'S' search)
     socat # socket utility (used by screenshootin script)
 
     # system utilities
@@ -115,15 +117,16 @@
     gtk3 # gtk3 library (system dependency for gtk apps)
     gtk4 # gtk4 library (system dependency for gtk apps)
     pkg-config # package configuration tool (build-time dependency for compiling software)
+    poppler-utils # pdf rendering tools (yazi pdf preview)
 
     # file sharing
     localsend # local network file sharing (for user)
 
     # packages for dotfiles-managed configs
-    chafa # image to terminal graphics converter (for fastfetch)
     fastfetch # system info
+    fd # find alternative (for yazi 's' search)
     foot # terminal emulator
-    fzf # fuzzy finder
+    fzf # fuzzy finder (shell + yazi 'z' jump)
     gh # github cli
     git # version control
     lazygit # git tui
@@ -137,8 +140,7 @@
     cava # audio visualizer
     eza # modern ls replacement
     tealdeer # tldr client
-    yazi # terminal file manager
-    zoxide # smart directory jumper
+    zoxide # smart directory jumper (shell cd + yazi 'Z' jump)
     inputs.noctalia.packages.${pkgs.stdenv.hostPlatform.system}.default # noctalia shell
     
     # wayland utilities

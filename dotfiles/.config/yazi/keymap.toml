@@ -714,16 +714,6 @@ on = "<C-s>"
 run = "escape --search"
 
 [[mgr.keymap]]
-desc = "Jump to a directory via zoxide"
-on = "z"
-run = "plugin zoxide"
-
-[[mgr.keymap]]
-desc = "Jump to a file/directory via fzf"
-on = "Z"
-run = "plugin fzf"
-
-[[mgr.keymap]]
 desc = "Linemode: size"
 on = ["m", "s"]
 run = "linemode size"

@@ -25,7 +25,11 @@
     ~/.config/gtk-3.0/gtk.css: .config/gtk-3.0/gtk.css
     ~/.config/gtk-4.0/settings.ini: .config/gtk-4.0/settings.ini
     ~/.config/gtk-4.0/gtk.css: .config/gtk-4.0/gtk.css
-    ~/.config/yazi: .config/yazi
+    ~/.config/yazi/yazi.toml: .config/yazi/yazi.toml
+    ~/.config/yazi/keymap.toml: .config/yazi/keymap.toml
+    ~/.config/yazi/theme.toml: .config/yazi/theme.toml
+    ~/.config/yazi/init.lua: .config/yazi/init.lua
+    ~/.config/yazi/flavors: .config/yazi/flavors
     ~/.config/noctalia: .config/noctalia
     ~/.config/starship.toml: .config/starship.toml
     ~/.config/bat/config: .config/bat/config
