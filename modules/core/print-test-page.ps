@@ -1,0 +1,95 @@
+%!PS-Adobe-3.0
+%%BoundingBox: 0 0 612 792
+%%Title: Print Head Maintenance Test Page
+%%Creator: nixos_config
+%%Pages: 1
+%%EndComments
+
+% Weekly print-head maintenance page for the Epson ET-4850 (4-color CMYK).
+% Solid CMYK + secondary blocks and a grayscale ramp exercise every ink
+% channel; fine lines reveal clogged nozzles (missing line = clogged head).
+
+/Helvetica-Bold findfont 20 scalefont setfont
+54 732 moveto (Epson ET-4850 - Print Head Maintenance) show
+
+/Helvetica findfont 11 scalefont setfont
+54 712 moveto (Weekly test page - exercises cyan, magenta, yellow, black) show
+54 698 moveto (Streaky blocks or missing lines = clogged nozzles: run nozzle check + clean) show
+
+% --- primary CMYK blocks (120 x 110 pts each) ---
+1 0 0 0 setcmykcolor        % cyan
+54 560 120 110 rectfill
+0 1 0 0 setcmykcolor        % magenta
+182 560 120 110 rectfill
+0 0 1 0 setcmykcolor        % yellow
+310 560 120 110 rectfill
+0 0 0 1 setcmykcolor        % black
+438 560 120 110 rectfill
+
+/Helvetica findfont 10 scalefont setfont
+0 0 0 0 setcmykcolor
+54 548 moveto (Cyan) show
+182 548 moveto (Magenta) show
+310 548 moveto (Yellow) show
+438 548 moveto (Black) show
+
+% --- secondary colors ---
+0 1 1 0 setcmykcolor        % red
+54 410 120 110 rectfill
+1 0 1 0 setcmykcolor        % green
+182 410 120 110 rectfill
+1 1 0 0 setcmykcolor        % blue
+310 410 120 110 rectfill
+0 0 0 0.5 setcmykcolor      % 50% gray
+438 410 120 110 rectfill
+
+0 0 0 0 setcmykcolor
+54 398 moveto (Red) show
+182 398 moveto (Green) show
+310 398 moveto (Blue) show
+438 398 moveto (50% Gray) show
+
+% --- grayscale ramp (8 steps) ---
+/Helvetica findfont 10 scalefont setfont
+0 0 0 0 setcmykcolor
+54 360 moveto (Grayscale ramp:) show
+
+0 0 0 0 setcmykcolor 54 310 63 40 rectfill
+0 0 0 0.14 setcmykcolor 117 310 63 40 rectfill
+0 0 0 0.29 setcmykcolor 180 310 63 40 rectfill
+0 0 0 0.43 setcmykcolor 243 310 63 40 rectfill
+0 0 0 0.57 setcmykcolor 306 310 63 40 rectfill
+0 0 0 0.71 setcmykcolor 369 310 63 40 rectfill
+0 0 0 0.86 setcmykcolor 432 310 63 40 rectfill
+0 0 0 1 setcmykcolor 495 310 63 40 rectfill
+
+% --- fine lines (nozzle check) ---
+/Helvetica findfont 10 scalefont setfont
+0 0 0 0 setcmykcolor
+54 270 moveto (Fine lines - missing lines indicate clogged nozzles:) show
+
+0.5 setlinewidth
+
+0 0 0 1 setcmykcolor
+54 246 moveto 204 246 lineto stroke
+54 240 moveto 204 240 lineto stroke
+
+1 0 0 0 setcmykcolor
+54 228 moveto 204 228 lineto stroke
+54 222 moveto 204 222 lineto stroke
+
+0 1 0 0 setcmykcolor
+54 210 moveto 204 210 lineto stroke
+54 204 moveto 204 204 lineto stroke
+
+0 0 1 0 setcmykcolor
+54 192 moveto 204 192 lineto stroke
+54 186 moveto 204 186 lineto stroke
+
+% --- footer ---
+/Helvetica findfont 9 scalefont setfont
+0 0 0 0 setcmykcolor
+54 60 moveto (Weekly print-head maintenance page - uses a small amount of ink) show
+
+showpage
+%%EOF

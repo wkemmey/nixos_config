@@ -41,4 +41,8 @@
   enableGamingSupport = true;     # gaming controllers, gamescope, protonup-qt
   enableSyncthing = false;        # syncthing file synchronization
   enableVirtualisation = false;    # docker, libvirtd, virt-manager
+  # weekly print-head maintenance (systemd timer in modules/core/print-test.nix)
+  # prints a full-color test page once a week to keep inkjet heads from drying.
+  # run on only ONE machine that has the printer (requires enablePrint = true).
+  enablePrintMaintenance = true;  # weekly print test page (keep heads from drying)
 }

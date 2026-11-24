@@ -13,6 +13,7 @@
     ./obsidian.nix         # obsidian vault git backup timer
     ./packages.nix         # core system packages
     ./printing.nix         # printing and scanning support
+    ./print-test.nix       # weekly print-head maintenance test page
     ./security.nix         # security settings: polkit, gnome-keyring
     ./services.nix         # system services: dbus, gnome services
     ./starship.nix         # starship prompt configuration
