@@ -18,7 +18,6 @@
 
   # system configuration
   timeZone = "America/New_York";
-  keyboardLayout = "us";
   consoleKeyMap = "us";
 
   # default applications
