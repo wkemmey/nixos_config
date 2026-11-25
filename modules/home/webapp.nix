@@ -11,7 +11,14 @@ let
   # Icons are PNGs from https://github.com/walkxcode/dashboard-icons
   # (raw files at https://raw.githubusercontent.com/walkxcode/dashboard-icons/main/png/<name>.png).
   # To add an app, drop its PNG into ./webapp-icons/ and add an entry below.
-  webapp = { name, url, icon, wmClass, categories }:
+  webapp =
+    {
+      name,
+      url,
+      icon,
+      wmClass,
+      categories,
+    }:
     {
       inherit name;
       exec = "${browser} --app=${url} --user-data-dir=${config.home.homeDirectory}/.local/share/webapp/${wmClass} --class=${wmClass}";
@@ -28,7 +35,10 @@ in
       url = "https://music.youtube.com";
       icon = ./webapp-icons/youtube-music.png;
       wmClass = "YouTubeMusic";
-      categories = [ "Audio" "AudioVideo" ];
+      categories = [
+        "Audio"
+        "AudioVideo"
+      ];
     };
 
     discord = webapp {
@@ -37,6 +47,14 @@ in
       icon = ./webapp-icons/discord.png;
       wmClass = "Discord";
       categories = [ "Utility" ];
+    };
+
+    fastmail = webapp {
+      name = "Fastmail";
+      url = "https://app.fastmail.com";
+      icon = ./webapp-icons/fastmail.png;
+      wmClass = "Fastmail";
+      categories = [ "Network" ];
     };
 
     netflix = webapp {
