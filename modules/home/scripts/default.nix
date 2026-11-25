@@ -8,6 +8,7 @@
 {
   home.packages = [
     (import ./emopicker.nix { inherit pkgs; })
+    (import ./open-apps.nix { inherit pkgs; })
     (import ./cheatsheet.nix { inherit pkgs; })
     (import ./nvidia-offload.nix { inherit pkgs; })
     (import ./hm-find.nix { inherit pkgs; })

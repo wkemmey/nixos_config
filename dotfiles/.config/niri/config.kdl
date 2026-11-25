@@ -158,6 +158,7 @@ binds {
     Mod+E { spawn "thunar"; }
     Mod+Ctrl+E { spawn "emopicker"; }
     Mod+Shift+E { spawn "noctalia" "msg" "panel-toggle" "launcher" "/emo"; }
+    Mod+A { spawn "open-apps"; } // fastmail, obsidian, slack, youtube-music
 
     // noctalia controls
     // mod+Comma { spawn "noctalia" "msg" "settings-toggle"; }

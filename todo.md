@@ -201,7 +201,6 @@ This video provides a visual walkthrough of setting up cross-compilation for var
 
 make sure the style guide is applied to all files
 
-i want to make it so only a few wallpapers are stored in my nixos config, but noctalia looks in my dropbox folder if it's present. this is so the repo doesn't get polluted with hundreds of large files, and so not all my wallpaper choices are public.  the ones in the repo are just there if the dropbox isn't ready yet, or someone else is using my repo
 
 
 
@@ -280,9 +279,7 @@ set up plymouth (try again to get rid of errors first)
 set up godot, plus godot vscode extensions
 create devenv for godot
 update rust devenv
-set noctalia to change wallpaper only, not call hook
-set fuzzel to change theme, one of which is material via mutagen (old hook), set hot key, maybe include mutagen styles (like fruit salad)
-just include a few wallpapers in git repo, but discover wallpapers on disk in dropbox if there
+
 name workspaces
 start some apps every time--obsidian youtube music email
 sonos
@@ -296,6 +293,7 @@ download more wallpapers and maybe remove some really low res ones
 
 
 is it possible to remove all the generated color files from my repo, so i don't get a bunch of changed files just by changing wallpaper?  be careful not to break the initial install--might need to run matugen hooks upon install to generate the missing color files.
+make some sensible niri bindings based around the jkli keys, and make helix use those too
 
 
 what google chrome config needs to be saved in the repo?  how do i theme it?
