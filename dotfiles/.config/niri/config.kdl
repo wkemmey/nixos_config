@@ -146,6 +146,7 @@ binds {
     // system & overview
     Mod+O repeat=false { toggle-overview; }
     Mod+Shift+Slash { spawn "cheatsheet"; }
+    Mod+Escape { spawn "noctalia" "msg" "panel-toggle" "session"; }
     Mod+Shift+Q { quit; }
 
     // application launchers - C, HJKL, O, P, Q, R, W already used
