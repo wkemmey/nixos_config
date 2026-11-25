@@ -65,7 +65,7 @@ layout {
     default-column-width { proportion 0.5; }
 
     border {
-        on
+        off
         width 1
         active-color "#cba6f7"
         inactive-color "#45475a"
@@ -73,8 +73,8 @@ layout {
     }
 
     focus-ring {
-        off
-        width 3
+        on
+        width 4
         active-color   "#808080"
         inactive-color "#505050"
     }
