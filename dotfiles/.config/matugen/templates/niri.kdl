@@ -2,14 +2,12 @@
 
 layout {
     border {
-        width 2
         active-color   "{{colors.primary.default.hex}}"
         inactive-color "{{colors.outline.default.hex}}"
         urgent-color   "{{colors.error.default.hex}}"
     }
     
     focus-ring {
-        width 3
         active-color   "{{ colors.primary.default.hex }}"
         inactive-color "{{ colors.outline_variant.default.hex }}"
     }

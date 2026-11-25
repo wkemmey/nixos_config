@@ -65,7 +65,8 @@ layout {
     default-column-width { proportion 0.5; }
 
     border {
-        width 2
+        on
+        width 1
         active-color "#cba6f7"
         inactive-color "#45475a"
         urgent-color "#f5c2e7"
@@ -87,11 +88,6 @@ layout {
 
     struts {
     }
-}
-
-/-layer-rule {
-    match namespace="^quickshell$"
-    place-within-backdrop true
 }
 
 overview {
@@ -149,22 +145,17 @@ animations {
 binds {
     // system & overview
     Mod+O repeat=false { toggle-overview; }
-    Mod+Shift+Slash { show-hotkey-overlay; }
+    Mod+Shift+Slash { spawn "cheatsheet"; }
     Mod+Shift+Q { quit; }
 
-    // application launchers - C, HJKL, O, P, Q, R, V, W already used
+    // application launchers - C, HJKL, O, P, Q, R, W already used
     Mod+T { spawn "foot"; }
     Mod+Return { spawn "foot"; }
-    // mod+Y { spawn "fuzzel"; }
     Mod+Space { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
-    Mod+Shift+Ctrl+C { spawn "foot" "claude"; }
     Mod+B { spawn "obsidian"; }
     Mod+F { spawn "firefox"; }
-    Mod+D { spawn "vesktop"; }
-    Mod+G { spawn "steam"; }
     Mod+S { spawn "obs"; }
     Mod+E { spawn "thunar"; }
-    Mod+Ctrl+V { spawn "virt-manager"; }
     Mod+Ctrl+E { spawn "emopicker"; }
     Mod+Shift+E { spawn "noctalia" "msg" "panel-toggle" "launcher" "/emo"; }
 
@@ -173,10 +164,6 @@ binds {
     // mod+Alt+S { spawn "noctalia" "msg" "settings-toggle"; }
     // mod+Shift+C { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
     Mod+Z { spawn "noctalia" "msg" "session" "lock"; }
-
-    // keyboard brightness controls
-    XF86KbdBrightnessUp allow-when-locked=true { spawn "kbdbrite.sh" "up"; }
-    XF86KbdBrightnessDown allow-when-locked=true { spawn "kbdbrite.sh" "down"; }
 
     // window management
     Mod+Q repeat=false { close-window; }
@@ -305,17 +292,8 @@ binds {
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
 
-    // ignis screen recording
-    Mod+Alt+Shift+S { spawn "ignis" "run-command" "recorder-record-screen"; }
-    Mod+Alt+Shift+R { spawn "ignis" "run-command" "recorder-record-region"; }
-    Mod+Alt+Shift+W { spawn "ignis" "run-command" "recorder-record-portal"; }
-
     // system controls
-    Mod+Escape { spawn "ignis" "open-window" "PowerMenu"; }
     Mod+Alt+P { power-off-monitors; }
-
-    // clipboard history
-    Mod+V { spawn-sh "cliphist list | fuzzel --dmenu | cliphist decode | wl-copy"; }
 
     // color picker
     Mod+C { spawn-sh "niri msg pick-color | grep 'Hex:' | cut -d' ' -f2 | wl-copy"; }
@@ -342,7 +320,7 @@ window-rule {
 
 // opacity rules for specific applications
 window-rule {
-    match app-id=r#"^(foot|thunar|org\.telegram\.desktop|discord|vesktop|org\.gnome\.Nautilus|nemo)$"#
+    match app-id=r#"^(foot|thunar)$"#
     opacity 0.9
 }
 
@@ -351,12 +329,6 @@ window-rule {
     match app-id=r#"firefox$"# title="^Picture-in-Picture$"
     open-floating true
 }
-
-// launch vesktop and telegram on DP-3 monitor
-//window-rule {
-//    match app-id=r#"^(vesktop|org\.telegram\.desktop)$"#
-//    open-on-output "DP-3"
-//}
 
 // obs always opens at full width
 window-rule {
@@ -378,9 +350,9 @@ window-rule {
     default-column-width { proportion 1.0; }
 }
 
-// web apps and steam opacity
+// steam opacity
 window-rule {
-    match app-id=r#"^(steam|chrome-app\.restream\.io__home-Default|chrome-claude\.ai__new-Default|chrome-github\.com__-Default|chrome-gitlab\.com__theblackdon_black-don-os-Default|chrome-mail\.proton\.me__u_0_inbox-Default|chrome-meet\.google\.com__-Default|chrome-messages\.google\.com__web_u_1_conversations-Default|chrome-web\.descript\.com__-Default)$"#
+    match app-id=r#"^steam$"#
     opacity 0.95
 }
 
@@ -397,11 +369,8 @@ window-rule {
 ////////////////////////////////////////////////////////////////////////////////
 
 
-spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
 spawn-at-startup "noctalia"
 spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
-spawn-at-startup "vesktop"
-spawn-at-startup "Telegram"
 
 
 environment {
@@ -423,10 +392,6 @@ environment {
   PROTON_ENABLE_NVAPI "1"
   PROTON_HIDE_NVIDIA_GPU "0"
   PROTON_ENABLE_NGX_UPDATER "1"
-}
-
-hotkey-overlay {
-    skip-at-startup
 }
 
 prefer-no-csd

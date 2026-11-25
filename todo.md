@@ -1,6 +1,5 @@
 # TODO
 
-- [ ] Print test page once a week
 - [ ] keyboard command to shutdown
 - microphone not working
 - 1password
@@ -198,9 +197,7 @@ rustflags = ["-C", "target-feature=+crt-static"]
 This video provides a visual walkthrough of setting up cross-compilation for various platforms including Windows, which can help clarify the workflow.
 
 
-consider replacing dropbox with https://www.hetzner.com/storage/storage-share/ and cryptomator
 
-but for now, once we move to other machine, let's try maestro instead of dropbox
 
 make sure the style guide is applied to all files
 
@@ -342,4 +339,3 @@ Enable Hardware Acceleration in NixOS
       };
     }
 
-    
