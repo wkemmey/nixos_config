@@ -23,8 +23,8 @@ pkgs.writeShellScriptBin "open-apps" ''
   ${pkgs.niri}/bin/niri msg action spawn -- gtk-launch fastmail
   ${pkgs.coreutils}/bin/sleep 1
   ${pkgs.niri}/bin/niri msg action spawn -- obsidian
-  ${pkgs.coreutils}/bin/sleep 1
+  ${pkgs.coreutils}/bin/sleep 2
   ${pkgs.niri}/bin/niri msg action spawn -- slack
-  ${pkgs.coreutils}/bin/sleep 1
+  ${pkgs.coreutils}/bin/sleep 2
   ${pkgs.niri}/bin/niri msg action spawn -- gtk-launch youtube-music
 ''

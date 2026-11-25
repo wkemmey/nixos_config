@@ -10,6 +10,7 @@ application/xhtml+xml=firefox.desktop
 application/x-extension-xhtml=firefox.desktop
 application/x-extension-xht=firefox.desktop
 application/octet-stream=gimp.desktop
+x-scheme-handler/slack=slack.desktop
 
 [Added Associations]
 text/html=firefox.desktop
