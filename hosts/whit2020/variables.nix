@@ -5,12 +5,13 @@
   # user info
   userFullName = "Whit Kemmey";
 
-  # hardware configuration
   # monitor resolution is used for wallpaper selection
   # need a new plan if we ever have multiple monitors with different resolutions
   monitorResolution = "3840x2160";
-  # preferred wallpaper root; if this directory is missing, repo wallpapers are used
+
+  # preferred wallpaper root; if this directory is missing or "", default wallpapers are used
   wallpaperDirectory = "/home/whit/Dropbox/computers/wallpaper";
+
   # for nvidia prime support (update if using nvidia-laptop profile; unused otherwise)
   # run 'lspci | grep VGA' to find your actual gpu ids
   intelID = "PCI:0:2:0";
@@ -23,10 +24,6 @@
   # default applications
   defaultShell = "fish";
 
-  # core features
-  enableNFS = false;
-  enablePrint = true;
-
   # obsidian vault git backup (systemd timer in modules/core/obsidian.nix)
   # set to the absolute path of the vault to back up to GitHub; leave empty to
   # disable the timer.
@@ -36,11 +33,13 @@
   # would conflict with each other.
   obsidianVaultDir = "/home/whit/obsidian/whit";
 
-  # optional features (disabled for faster initial install)
-  # you can enable these later by setting to true and rebuilding
+  # optional features
+  enableNFS = false;
+  enablePrint = true;
   enableGamingSupport = true;     # gaming controllers, gamescope, protonup-qt
   enableSyncthing = false;        # syncthing file synchronization
-  enableVirtualisation = false;    # docker, libvirtd, virt-manager
+  enableVirtualisation = false;   # docker, libvirtd, virt-manager
+  
   # weekly print-head maintenance (systemd timer in modules/core/print-test.nix)
   # prints a full-color test page once a week to keep inkjet heads from drying.
   # run on only ONE machine that has the printer (requires enablePrint = true).
