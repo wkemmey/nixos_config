@@ -124,11 +124,11 @@ function dev -a project
     test -n "$resolved"; and set project "$resolved"
   end
 
-  foot lazygit -p $project &
+  foot lazygit -p $project 2>/dev/null &
   sleep 0.4
-  foot opencode $project &
+  foot opencode $project 2>/dev/null &
   sleep 0.4
-  foot yazi $project &
+  foot yazi $project 2>/dev/null &
 end
 
 # yazi cd-on-exit wrapper: type yy, pick a dir, cd there on exit
