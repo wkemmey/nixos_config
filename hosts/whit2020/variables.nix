@@ -12,6 +12,9 @@
   # preferred wallpaper root; if this directory is missing or "", default wallpapers are used
   wallpaperDirectory = "/home/whit/Dropbox/computers/wallpaper";
 
+  # nordvpn configuration files (contain sensitive info; do not commit to git)
+  vpnConfigDirectory = "/home/whit/Dropbox/computers/nordvpn";
+
   # for nvidia prime support (update if using nvidia-laptop profile; unused otherwise)
   # run 'lspci | grep VGA' to find your actual gpu ids
   intelID = "PCI:0:2:0";
@@ -34,6 +37,7 @@
   obsidianVaultDir = "/home/whit/obsidian/whit";
 
   # optional features
+  enableVPN = true;               # nordvpn via wireguard; requires nordvpn subscription
   enableNFS = false;
   enablePrint = true;
   enableGamingSupport = true;     # gaming controllers, gamescope, protonup-qt
