@@ -158,8 +158,8 @@ lib.mkIf (variables.enableVPN or false) {
     pkgs.curl # verify + speed tests
   ];
 
-  # let wg-quick manage DNS via resolvconf (NordVPN's DNS, avoids leaks)
-  networking.resolvconf.enable = true;
+  # systemd-resolved so wg-quick can route DNS through the tunnel (avoids leaks)
+  services.resolved.enable = true;
 
   # shared state dir, owned by the user so both root (boot service) and the
   # user's shell can read/write the last-connected server
@@ -183,7 +183,10 @@ lib.mkIf (variables.enableVPN or false) {
   # auto-connect at boot (to the last-used server, or first ashburn)
   systemd.services.nordvpn = {
     description = "NordVPN (NordLynx) auto-connect";
-    after = [ "network-online.target" ];
+    after = [
+      "network-online.target"
+      "systemd-resolved.service"
+    ];
     wants = [ "network-online.target" ];
     wantedBy = [ "multi-user.target" ];
     path = with pkgs; [
