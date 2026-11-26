@@ -50,7 +50,7 @@ let
           echo "error: no config for '$server'" >&2
           exit 1
         fi
-        if [ -f "$iface_file" ] && [ "$(cat "$iface_file")" = "$server" ] && ${wg} show "$server" >/dev/null 2>&1; then
+        if [ -f "$iface_file" ] && [ "$(cat "$iface_file")" = "$server" ] && [ -d "/sys/class/net/$server" ]; then
           echo "Already connected to $server"
           exit 0
         fi
@@ -78,7 +78,7 @@ let
       status)
         if [ -f "$iface_file" ]; then
           server="$(cat "$iface_file")"
-          if ${wg} show "$server" >/dev/null 2>&1; then
+          if [ -d "/sys/class/net/$server" ]; then
             echo "Connected to $server"
           else
             rm -f "$iface_file"
