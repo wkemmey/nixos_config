@@ -1,30 +1,20 @@
 # TODO
 
-- microphone not working
+- once the next version of niri releases, consider setting up press and release options for mod+v
+  to enable push-to-talk
 
-- get steam working
 - setup AGENTS.md
-- check each file in /etc/profiles/per-user/whit/bin -- do i want it?
-- ensure xbox controller is working
 - nordvpn
 - mtg arena
 - distrobox
-- slack app
 - what else from windows install?
 - bluetooth headphones
 - connect to ntfs hard drives
 - godot & vscode plugins, mcp?
-- plymouth start up graphics--maria?
-
-- create rust directory merger project
-
-- dev shell for python, ruby, ruby on rails, rust
-
 
 
  ---
 
- i need to theme firefox and everything else
 
 
  do i want to use any of the templates from the matugen themes github
