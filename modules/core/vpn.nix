@@ -25,7 +25,7 @@ let
 
     # wg-quick needs root; when run by the user (not the boot service) use sudo
     SUDO=""
-    [ "$(id -u)" -ne 0 ] && SUDO="sudo"
+    [ "$(id -u)" -ne 0 ] && SUDO="/run/wrappers/bin/sudo"
 
     servers() {
       ls "$conf_dir"/*.conf 2>/dev/null \
@@ -50,7 +50,7 @@ let
           echo "error: no config for '$server'" >&2
           exit 1
         fi
-        if [ -f "$iface_file" ] && [ "$(cat "$iface_file")" = "$server" ]; then
+        if [ -f "$iface_file" ] && [ "$(cat "$iface_file")" = "$server" ] && ${wg} show "$server" >/dev/null 2>&1; then
           echo "Already connected to $server"
           exit 0
         fi
@@ -81,7 +81,8 @@ let
           if ${wg} show "$server" >/dev/null 2>&1; then
             echo "Connected to $server"
           else
-            echo "Not connected (stale state for $server)"
+            rm -f "$iface_file"
+            echo "Not connected"
           fi
         else
           echo "Not connected"
@@ -195,11 +196,12 @@ lib.mkIf (variables.enableVPN or false) {
       gnugrep
       gnused
       gawk
-      sudo
     ];
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
+      User = username;
+      Group = "users";
     };
     script = "${vpnScript}/bin/vpn on";
   };
