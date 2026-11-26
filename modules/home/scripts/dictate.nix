@@ -9,6 +9,9 @@ in
 pkgs.writeShellScriptBin "dictate" ''
   set -eu
 
+  # "enter" = append a Return keystroke after typing (used by Mod+V)
+  mode="''${1:-}"
+
   dir="''${XDG_RUNTIME_DIR:-/tmp}/dictate"
   mkdir -p "$dir"
   wav="$dir/recording.wav"
@@ -35,6 +38,9 @@ pkgs.writeShellScriptBin "dictate" ''
 
     if [ -n "$text" ]; then
       ${pkgs.wtype}/bin/wtype "$text"
+      if [ "$mode" = "enter" ]; then
+        ${pkgs.wtype}/bin/wtype -k Return
+      fi
       ${pkgs.libnotify}/bin/notify-send -t 2000 "Dictation" "Typed" &
     else
       ${pkgs.libnotify}/bin/notify-send -t 2500 "Dictation" "No speech detected" &

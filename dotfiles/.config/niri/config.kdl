@@ -149,8 +149,10 @@ binds {
     Mod+Escape { spawn "noctalia" "msg" "panel-toggle" "session"; }
     Mod+Shift+Q { quit; }
 
-    // voice dictation: press Mod+V to start, press again to stop + type
-    Mod+V { spawn "dictate"; }
+    // voice dictation: press to start, press again to stop + type.
+    // Mod+V appends an Enter (submit); Mod+Ctrl+V does not.
+    Mod+V { spawn "dictate" "enter"; }
+    Mod+Ctrl+V { spawn "dictate" "noenter"; }
 
     // application launchers - C, HJKL, O, P, Q, R, W already used
     Mod+T { spawn "foot"; }
