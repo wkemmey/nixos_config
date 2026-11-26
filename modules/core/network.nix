@@ -4,6 +4,9 @@
     networkmanager.enable = true;
     firewall = {
       enable = true;
+      # wg-quick full-tunnel: the reverse-path check would drop the WireGuard
+      # handshake reply (reverse lookup routes via the tunnel table)
+      checkReversePath = "loose";
       allowedTCPPorts = [
         17500 # dropbox lan sync
       ];
