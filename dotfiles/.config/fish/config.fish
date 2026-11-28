@@ -124,10 +124,11 @@ function dev -a project
     test -n "$resolved"; and set project "$resolved"
   end
 
+  cd $project
   foot lazygit -p $project 2>/dev/null &
-  sleep 0.4
+  sleep 0.5
   foot opencode $project 2>/dev/null &
-  sleep 0.4
+  sleep 0.5
   foot yazi $project 2>/dev/null &
 end
 
