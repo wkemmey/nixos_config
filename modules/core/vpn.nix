@@ -8,143 +8,294 @@
 }:
 let
   variables = import ../../hosts/${host}/variables.nix;
+  # directory holding nordlynx.key (your NordLynx private key, nothing else)
   confDir = variables.vpnConfigDirectory or "";
-  wg = "${pkgs.wireguard-tools}/bin/wg";
-  wgQuick = "${pkgs.wireguard-tools}/bin/wg-quick";
-  curl = "${pkgs.curl}/bin/curl";
-  awk = "${pkgs.gawk}/bin/awk";
   stateDir = "/var/lib/nordvpn";
+
+  # The script must run as root: `sudo vpn on us` (password required), or from
+  # the boot service. There is deliberately no NOPASSWD rule. Since it runs as
+  # root:
+  #   - PATH is fixed here (sudo keeps the caller's PATH otherwise)
+  #   - the key is validated before it is written into the config
+  #   - the config (/etc/wireguard) and state (/var/lib) are root-owned
+  #   - arguments are only ever used as data (jq --arg), never as code or paths
+  safePath = lib.makeBinPath (
+    with pkgs;
+    [
+      coreutils
+      gnugrep
+      gawk
+      curl
+      jq
+      iproute2
+      wireguard-tools
+      systemd
+    ]
+  ) + ":/run/current-system/sw/bin";
 
   vpnScript = pkgs.writeShellScriptBin "vpn" ''
     set -euo pipefail
+    export PATH="${safePath}"
 
-    conf_dir="${confDir}"
+    key_file="${confDir}/nordlynx.key"
     state_dir="${stateDir}"
-    last_file="$state_dir/last-server"
-    iface_file="$state_dir/iface"
+    iface="nordlynx"
+    conf="/etc/wireguard/$iface.conf"       # generated; holds the private key (0600)
+    last_file="$state_dir/last-country"     # argument of the last `vpn on`
+    current_file="$state_dir/current"       # description of the connected server
+    nord_dns="103.86.96.100"
+    api_url="https://api.nordvpn.com/v1"
 
-    # wg-quick needs root; when run by the user (not the boot service) use sudo
-    SUDO=""
-    [ "$(id -u)" -ne 0 ] && SUDO="/run/wrappers/bin/sudo"
-
-    servers() {
-      ls "$conf_dir"/*.conf 2>/dev/null \
-        | xargs -r -n1 basename \
-        | sed 's/\.conf$//' \
-        | sort
+    usage() {
+      echo "Usage: vpn <command> [args]"
+      echo
+      echo "Commands:"
+      echo "  on [country]   connect to the best (nearest, least loaded) NordVPN server"
+      echo "                 in a country, e.g. 'vpn on us', 'vpn on bahamas', 'vpn on gb'."
+      echo "                 With no country: reuse the last one, or the best server overall."
+      echo "  off            disconnect"
+      echo "  boot           like 'on', but first look up the country you are physically in"
+      echo "                 (while disconnected) and use that; used by the boot service"
+      echo "  status         show whether connected, and to which server"
+      echo "  verify         check the tunnel: handshake, Nord sees us as protected,"
+      echo "                 DNS goes through the tunnel, no IPv6 leak"
+      echo "  help           show this help"
     }
 
     cmd="''${1:-status}"
+    case "$cmd" in
+      help|-h|--help) usage; exit 0 ;;
+    esac
+
+    if [ "$(id -u)" -ne 0 ]; then
+      echo "error: must run as root: sudo vpn $cmd" >&2
+      exit 1
+    fi
     shift || true
 
-    case "$cmd" in
-      on)
-        if [ $# -gt 0 ]; then
-          server="$1"
-        elif [ -f "$last_file" ]; then
-          server="$(cat "$last_file")"
+    # write a file, replacing anything already there
+    put() {
+      rm -f "$1"
+      printf '%s\n' "$2" > "$1"
+    }
+
+    api() {
+      curl -q -sf --max-time 20 --retry 5 --retry-delay 2 --retry-all-errors "$@"
+    }
+
+    is_up() {
+      [ -d "/sys/class/net/$iface" ]
+    }
+
+    # seconds since the last handshake (empty if there has been none)
+    handshake_age() {
+      ts="$(wg show "$iface" latest-handshakes 2>/dev/null | awk 'NR==1 {print $2}')"
+      if [ -n "$ts" ] && [ "$ts" -gt 0 ]; then
+        echo $(( $(date +%s) - ts ))
+      fi
+    }
+
+    disconnect() {
+      if is_up; then
+        if [ -f "$conf" ]; then
+          wg-quick down "$conf" >/dev/null 2>&1 || true
         else
-          server="$(ls "$conf_dir"/ashburn*.conf 2>/dev/null | xargs -r -n1 basename | sed 's/\.conf$//' | head -1)"
+          ip link delete dev "$iface" 2>/dev/null || true
         fi
-        if [ -z "$server" ] || [ ! -f "$conf_dir/$server.conf" ]; then
-          echo "error: no config for '$server'" >&2
+      fi
+      rm -f "$current_file"
+    }
+
+    # country name or ISO code -> Nord country id
+    country_id() {
+      q="$(printf '%s' "$1" | tr '[:upper:]_-' '[:lower:]  ')"
+      case "$q" in
+        uk) q="gb" ;;
+        usa) q="us" ;;
+      esac
+      api "$api_url/servers/countries" \
+        | jq -r --arg q "$q" \
+            'map(select((.name | ascii_downcase) == $q or (.code | ascii_downcase) == $q)) | .[0].id // empty'
+    }
+
+    case "$cmd" in
+      on|boot)
+        if [ "$cmd" = boot ]; then
+          # Connect to the country we are physically in. Must look it up while
+          # disconnected, or Nord would report the VPN exit's country.
+          disconnect
+          country="$(api "$api_url/helpers/ips/insights" | jq -r '.country_code // empty' 2>/dev/null || true)"
+          if ! [[ "$country" =~ ^[A-Z]{2}$ ]]; then
+            # lookup failed: fall back to the last country, if any
+            country=""
+            [ -f "$last_file" ] && country="$(cat "$last_file")"
+          fi
+        elif [ $# -gt 0 ]; then
+          country="$1"
+        elif [ -f "$last_file" ]; then
+          country="$(cat "$last_file")"
+          if is_up; then
+            echo "Already connected: $(cat "$current_file" 2>/dev/null || echo "$iface")"
+            exit 0
+          fi
+        else
+          country=""
+        fi
+        if [ -n "$country" ] && ! [[ "$country" =~ ^[A-Za-z][A-Za-z\ _-]{0,39}$ ]]; then
+          echo "error: invalid country '$country'" >&2
           exit 1
         fi
-        if [ -f "$iface_file" ] && [ "$(cat "$iface_file")" = "$server" ] && [ -d "/sys/class/net/$server" ]; then
-          echo "Already connected to $server"
-          exit 0
+
+        if [ ! -r "$key_file" ]; then
+          echo "error: cannot read $key_file" >&2
+          exit 1
         fi
-        if [ -f "$iface_file" ]; then
-          $SUDO ${wgQuick} down "$conf_dir/$(cat "$iface_file").conf" >/dev/null 2>&1 || true
+        privkey="$(tr -d '[:space:]' < "$key_file")"
+        # strict format check: it is written into a config that root will run
+        if ! [[ "$privkey" =~ ^[A-Za-z0-9+/]{43}=$ ]]; then
+          echo "error: $key_file does not look like a WireGuard key" >&2
+          exit 1
         fi
-        $SUDO ${wgQuick} up "$conf_dir/$server.conf"
-        echo "$server" > "$last_file"
-        echo "$server" > "$iface_file"
-        echo "Connected to $server"
+
+        # Disconnect first so Nord picks the server for our real location
+        disconnect
+
+        filter=""
+        if [ -n "$country" ]; then
+          id="$(country_id "$country" || true)"
+          if ! [[ "$id" =~ ^[0-9]+$ ]]; then
+            echo "error: unknown country '$country'" >&2
+            exit 1
+          fi
+          filter="&filters%5Bcountry_id%5D=$id"
+        fi
+
+        # Nord ranks recommendations by distance and load; take the top one
+        rec="$(api "$api_url/servers/recommendations?limit=1&filters%5Bservers.status%5D=online&filters%5Bservers_technologies%5D=35$filter" || true)"
+        line="$(printf '%s' "$rec" | jq -r '
+          .[0] // empty
+          | [ .hostname,
+              .station,
+              (.technologies[] | select(.id == 35) | .metadata[] | select(.name == "public_key") | .value),
+              (.locations[0].country.city.name // "unknown"),
+              (.locations[0].country.name // "unknown") ]
+          | join("|")' 2>/dev/null || true)"
+        if [ -z "$line" ]; then
+          echo "error: no WireGuard server available (API unreachable or no match)" >&2
+          exit 1
+        fi
+        IFS="|" read -r hostname endpoint pubkey city cname <<< "$line"
+        # these come from the network and end up in a config root will run
+        if ! [[ "$endpoint" =~ ^[0-9]{1,3}(\.[0-9]{1,3}){3}$ ]] \
+          || ! [[ "$pubkey" =~ ^[A-Za-z0-9+/]{43}=$ ]]; then
+          echo "error: unexpected server data for '$hostname'" >&2
+          exit 1
+        fi
+
+        rm -f "$conf"
+        (
+          umask 077
+          printf '[Interface]\nPrivateKey = %s\nAddress = 10.5.0.2/32\nDNS = %s, 103.86.99.100\n\n[Peer]\nPublicKey = %s\nAllowedIPs = 0.0.0.0/0, ::/0\nEndpoint = %s:51820\nPersistentKeepalive = 25\n' \
+            "$privkey" "$nord_dns" "$pubkey" "$endpoint" > "$conf"
+        )
+
+        if ! wg-quick up "$conf" >/dev/null; then
+          echo "error: wg-quick failed to bring up $iface" >&2
+          exit 1
+        fi
+
+        # make sure the server actually answered
+        age=""
+        for _ in 1 2 3 4 5 6 7 8 9 10; do
+          age="$(handshake_age || true)"
+          [ -n "$age" ] && break
+          sleep 1
+        done
+        if [ -z "$age" ]; then
+          wg-quick down "$conf" >/dev/null 2>&1 || true
+          echo "error: no handshake with $hostname ($endpoint); disconnected" >&2
+          exit 1
+        fi
+
+        put "$last_file" "$country"
+        put "$current_file" "$hostname - $city, $cname ($endpoint)"
+        echo "Connected to $hostname - $city, $cname"
         ;;
       off)
-        if [ -f "$iface_file" ]; then
-          server="$(cat "$iface_file")"
-          $SUDO ${wgQuick} down "$conf_dir/$server.conf"
-          rm -f "$iface_file"
-          echo "Disconnected from $server"
+        if is_up; then
+          desc="$(cat "$current_file" 2>/dev/null || echo "$iface")"
+          disconnect
+          echo "Disconnected from $desc"
         else
+          rm -f "$current_file"
           echo "Not connected"
         fi
         ;;
-      list)
-        servers
-        ;;
       status)
-        if [ -f "$iface_file" ]; then
-          server="$(cat "$iface_file")"
-          if [ -d "/sys/class/net/$server" ]; then
-            echo "Connected to $server"
+        if is_up; then
+          age="$(handshake_age || true)"
+          echo "Connected to $(cat "$current_file" 2>/dev/null || echo "$iface")"
+          if [ -n "$age" ]; then
+            echo "Last handshake: ''${age}s ago"
           else
-            rm -f "$iface_file"
-            echo "Not connected"
+            echo "Last handshake: none yet"
           fi
         else
+          rm -f "$current_file"
           echo "Not connected"
         fi
         ;;
       verify)
-        ip="$(${curl} -s --max-time 10 https://ipinfo.io/ip || true)"
-        echo "Public IP: ''${ip:-unknown}"
-        ;;
-      speed)
-        filter="''${1:-}"
-        names="$(servers | grep "^$filter" || true)"
-        if [ -z "$names" ]; then
-          echo "no servers match '$filter'" >&2
+        bad=0
+        ok()   { echo "  ok    $*"; }
+        fail() { echo "  FAIL  $*"; bad=1; }
+
+        if ! is_up; then
+          echo "  FAIL  not connected"
           exit 1
         fi
-        had=""
-        if [ -f "$iface_file" ]; then
-          had="$(cat "$iface_file")"
-        fi
-        best=""
-        best_bps=0
-        for server in $names; do
-          if ! $SUDO ${wgQuick} up "$conf_dir/$server.conf" >/dev/null 2>&1; then
-            echo "  $server: failed to connect"
-            continue
-          fi
-          bps="$(${curl} -o /dev/null -s --max-time 30 -w '%{speed_download}' \
-            'https://speed.cloudflare.com/__down?bytes=25000000' 2>/dev/null || echo 0)"
-          $SUDO ${wgQuick} down "$conf_dir/$server.conf" >/dev/null 2>&1
-          mbps="$(${awk} -v b="$bps" 'BEGIN { printf "%.1f", b*8/1000000 }')"
-          echo "  $server: $mbps Mbit/s"
-          if [ "$(${awk} -v a="$bps" -v b="$best_bps" 'BEGIN { print (a>b)?1:0 }')" = "1" ]; then
-            best="$server"
-            best_bps="$bps"
-          fi
-        done
-        if [ -n "$had" ]; then
-          $SUDO ${wgQuick} up "$conf_dir/$had.conf" >/dev/null 2>&1
-          echo "$had" > "$iface_file"
-          echo "Reconnected to $had"
-        elif [ -n "$best" ]; then
-          $SUDO ${wgQuick} up "$conf_dir/$best.conf" >/dev/null 2>&1
-          echo "$best" > "$iface_file"
-          echo "$best" > "$last_file"
-          echo "Connected to fastest: $best"
-        fi
-        ;;
-      help|-h|--help)
-        echo "Usage: vpn <command> [args]"
-        echo
-        echo "Commands:"
-        echo "  on [name]      connect to a server (last-used or first ashburn if none)"
-        echo "  off            disconnect"
-        echo "  list           list available servers"
-        echo "  status         show connection state and current server"
-        echo "  verify         print your public IP (should be a NordVPN address)"
-        echo "  speed [filter] test download speed of servers starting with <filter>,"
-        echo "                 then connect to the fastest"
-        echo "  help           show this help"
-        ;;
+        ok "interface $iface is up ($(cat "$current_file" 2>/dev/null || true))"
 
+        # 1. the server is answering (handshakes renew about every 2 minutes)
+        age="$(handshake_age || true)"
+        if [ -n "$age" ] && [ "$age" -lt 180 ]; then
+          ok "handshake ''${age}s ago"
+        else
+          fail "no recent handshake (''${age:-none})"
+        fi
+
+        # 2. Nord itself sees our traffic arriving from one of its servers
+        info="$(api "$api_url/helpers/ips/insights" || true)"
+        if [ "$(printf '%s' "$info" | jq -r '.protected' 2>/dev/null || true)" = "true" ]; then
+          ok "Nord reports protected: $(printf '%s' "$info" | jq -r '"\(.ip) (\(.city), \(.country))"')"
+        else
+          fail "Nord does not report this connection as protected (ip: $(printf '%s' "$info" | jq -r '.ip // "unknown"' 2>/dev/null))"
+        fi
+
+        # 3. DNS queries go through the tunnel
+        dns="$(resolvectl dns "$iface" 2>/dev/null || true)"
+        domains="$(resolvectl domain "$iface" 2>/dev/null || true)"
+        if printf '%s' "$dns" | grep -q "$nord_dns" && printf '%s' "$domains" | grep -q '~\.'; then
+          ok "DNS routed through the tunnel ($nord_dns)"
+        else
+          fail "DNS is not routed through the tunnel"
+        fi
+
+        # 4. IPv6 cannot bypass the tunnel (it is routed into it and dropped)
+        v6="$(ip -6 route get 2606:4700:4700::1111 2>&1 || true)"
+        if printf '%s' "$v6" | grep -q "dev $iface" || ! printf '%s' "$v6" | grep -q ' dev '; then
+          ok "no IPv6 leak"
+        else
+          fail "IPv6 traffic bypasses the tunnel"
+        fi
+
+        if [ "$bad" -eq 0 ]; then
+          echo "VPN is working"
+        else
+          echo "VPN has problems"
+          exit 1
+        fi
+        ;;
       *)
         echo "unknown command: $cmd (run: vpn help)" >&2
         exit 1
@@ -156,32 +307,22 @@ lib.mkIf (variables.enableVPN or false) {
   environment.systemPackages = [
     vpnScript
     pkgs.wireguard-tools # wg + wg-quick
-    pkgs.curl # verify + speed tests
+    pkgs.curl
+    pkgs.jq
   ];
 
   # systemd-resolved so wg-quick can route DNS through the tunnel (avoids leaks)
   services.resolved.enable = true;
 
-  # shared state dir, owned by the user so both root (boot service) and the
-  # user's shell can read/write the last-connected server
+  # root-owned: generated config (holds the private key) and last-used country.
+  # (also fixes ownership of the state dir created by older versions)
   systemd.tmpfiles.rules = [
-    "d ${stateDir} 0755 ${username} users -"
+    "d /etc/wireguard 0700 root root -"
+    "d ${stateDir} 0755 root root -"
   ];
 
-  # passwordless sudo for wg-quick so `vpn on/off/speed` don't prompt
-  security.sudo.extraRules = [
-    {
-      users = [ username ];
-      commands = [
-        {
-          command = "${pkgs.wireguard-tools}/bin/wg-quick";
-          options = [ "NOPASSWD" ];
-        }
-      ];
-    }
-  ];
-
-  # auto-connect at boot (to the last-used server, or first ashburn)
+  # auto-connect at boot (to the country we are physically in; that country
+  # then becomes the default for `vpn on` for the rest of the session)
   systemd.services.nordvpn = {
     description = "NordVPN (NordLynx) auto-connect";
     after = [
@@ -190,19 +331,10 @@ lib.mkIf (variables.enableVPN or false) {
     ];
     wants = [ "network-online.target" ];
     wantedBy = [ "multi-user.target" ];
-    path = with pkgs; [
-      coreutils
-      findutils
-      gnugrep
-      gnused
-      gawk
-    ];
     serviceConfig = {
       Type = "oneshot";
       RemainAfterExit = true;
-      User = username;
-      Group = "users";
     };
-    script = "${vpnScript}/bin/vpn on";
+    script = "${vpnScript}/bin/vpn boot";
   };
 }
