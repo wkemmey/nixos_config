@@ -19,19 +19,21 @@ let
   #   - the key is validated before it is written into the config
   #   - the config (/etc/wireguard) and state (/var/lib) are root-owned
   #   - arguments are only ever used as data (jq --arg), never as code or paths
-  safePath = lib.makeBinPath (
-    with pkgs;
-    [
-      coreutils
-      gnugrep
-      gawk
-      curl
-      jq
-      iproute2
-      wireguard-tools
-      systemd
-    ]
-  ) + ":/run/current-system/sw/bin";
+  safePath =
+    lib.makeBinPath (
+      with pkgs;
+      [
+        coreutils
+        gnugrep
+        gawk
+        curl
+        jq
+        iproute2
+        wireguard-tools
+        systemd
+      ]
+    )
+    + ":/run/current-system/sw/bin";
 
   vpnScript = pkgs.writeShellScriptBin "vpn" ''
     set -euo pipefail
@@ -157,8 +159,11 @@ let
           exit 1
         fi
 
-        # Disconnect first so Nord picks the server for our real location
-        disconnect
+        # `on` disconnects here so Nord picks the server for our real location.
+        # The `boot` path already disconnected above (before the country lookup).
+        if [ "$cmd" = on ]; then
+          disconnect
+        fi
 
         filter=""
         if [ -n "$country" ]; then
